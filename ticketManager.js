@@ -2,7 +2,6 @@ class TicketManager {
   #precioBaseDeGanancia = 0.15;
   #id = 1;
 
-
   constructor() {
     this.eventos = [];
   }
@@ -10,6 +9,7 @@ class TicketManager {
   getEventos() {
     return this.eventos;
   }
+
   agregarEvento(nombre, lugar, precio, capacidad, fecha) {
     let evento = {
     }
@@ -20,6 +20,7 @@ class TicketManager {
     evento.capacidad = capacidad ?? 50;
     evento.fecha = fecha ?? new Date().toLocaleDateString();
     evento.participantes = [];
+    
     this.eventos.push(evento);
   }
 }
