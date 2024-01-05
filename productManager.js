@@ -39,13 +39,10 @@ class ProductManager {
   // getProductById
   getProductById(id) {
     const productFound = this.products.find(product => product.id === id);
-    productFound ?
-      console.log(productFound)
-      :
-      console.log('Product not found')
+    return productFound ??
+      `Product with id '${id}' not found`
   }
 }
-
 
 // Testing => Descomentar el siguiente bloque para ejecutar el test 
 
