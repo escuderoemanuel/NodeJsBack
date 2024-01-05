@@ -5,21 +5,17 @@ class ProductManager {
     this.products = [];
   }
 
-  // getProducts
-  getProducts() {
-    return this.products;
-  }
-
   // addProduct
   addProduct(title, description, price, thumbnail, code, stock) {
-    const product = {}
-    product.id = this.#id++;
-    product.title = title;
-    product.description = description;
-    product.price = price;
-    product.thumbnail = thumbnail;
-    product.code = code;
-    product.stock = stock;
+    const product = {
+      id: this.#id++,
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+    }
 
     if (!title || !description || !price || !thumbnail || !code || !stock) {
       console.log('All fields are required');
@@ -32,22 +28,26 @@ class ProductManager {
     }
 
     this.products.push(product);
+    console.log('Product added successfully!')
+  }
+
+  // getProducts
+  getProducts() {
+    return this.products;
   }
 
   // getProductById
   getProductById(id) {
-    const product = this.products.find(product => product.id === id);
-    if (!product) {
-      console.log('Product not found');
-      //return;
-    }
-    else {
-      return product;
-    }
+    const productFound = this.products.find(product => product.id === id);
+    productFound ?
+      console.log(productFound)
+      :
+      console.log('Product not found')
   }
 }
 
-// Test
+
+// Testing
 const manager = new ProductManager();
 
 console.log(manager.getProducts())
@@ -62,4 +62,5 @@ console.log(manager.getProducts())
 
 console.log('manager.getProductById(id)')
 
-console.log(manager.getProductById(4))
+console.log(manager.getProductById(1))
+console.log(manager.getProductById(5))
