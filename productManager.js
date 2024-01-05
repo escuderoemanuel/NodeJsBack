@@ -47,8 +47,9 @@ class ProductManager {
 }
 
 
-// Testing
-const manager = new ProductManager();
+// Testing => Descomentar el siguiente bloque para ejecutar el test 
+
+/* const manager = new ProductManager();
 
 console.log(manager.getProducts())
 
@@ -63,4 +64,4 @@ console.log(manager.getProducts())
 console.log('manager.getProductById(id)')
 
 console.log(manager.getProductById(1))
-console.log(manager.getProductById(5))
+console.log(manager.getProductById(5)) */
