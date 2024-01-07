@@ -22,6 +22,8 @@ class ProductManager {
       return;
     }
 
+    // Next condition also works with the 'find' method
+    // 'find' return the OBJECT and 'some' return a BOOLEAN
     if (this.products.some(product => product.code === code)) {
       console.log('The product CODE already exists');
       return;
