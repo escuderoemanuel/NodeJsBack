@@ -1,15 +1,19 @@
-/* const info = {
-  contenidoStr: (contenido del archivo leído en formato string)
-  contenidoObj: (contenido del archivo leído en formato objeto)
-  size: (tamaño del archivo en bytes)
-} */
+/* npm init -y para crear el './package.json' */
+
+// Para manejar los files system
 const fs = require('fs/promises');
 
+// Variables
+const fileName = './package.json';
+const newFile = './info.json';
+const unicode = 'utf-8'
 
-async function readPackageJson() {
+
+// Función async para leer el archivo package.json y crear el objeto info.
+const readPackageJson = async () => {
   try {
     // Leer el contenido del archivo package.json
-    const contenidoStr = await fs.readFile('package.json', 'utf-8');
+    const contenidoStr = await fs.readFile(fileName, unicode);
     const contenidoObj = JSON.parse(contenidoStr);
 
     // Crear el objeto info
@@ -23,7 +27,7 @@ async function readPackageJson() {
     console.log(info);
 
     // Guardar el objeto info en un archivo llamado info.json
-    await fs.writeFile('info.json', JSON.stringify(info, null, 2), 'utf-8');
+    await fs.writeFile(newFile, JSON.stringify(info), unicode);
 
   } catch (error) {
     throw new Error(`Error al procesar el archivo package.json: ${error.message}`);
@@ -32,5 +36,5 @@ async function readPackageJson() {
 
 // Llamar a la función async
 readPackageJson()
-  .then(() => console.log('Operación completada exitosamente.'))
-  .catch((error) => console.error(`Error: ${error.message}`));
+  .then(() => console.log('Operación completada exitosamente.')) // Para testear que la función se completó
+  .catch((error) => console.error(`Error: ${error.message}`)); // Para testear si se lanzó un error

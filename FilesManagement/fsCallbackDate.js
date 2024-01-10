@@ -2,8 +2,9 @@
 const fs = require('fs');
 const fileName = 'fsCallBackDate.txt'
 const fileFormat = 'utf-8'
+const date = `Current Date: ${new Date().toLocaleString()}`
 
-fs.writeFile(fileName, `Current Date: ${new Date()}`, (error) => {
+fs.writeFile(fileName, date, (error) => {
   if (error) return console.log('Error writin the Current Date')
   //console.log('Current Date successfully written to file')
 
