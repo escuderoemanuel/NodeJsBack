@@ -1,6 +1,6 @@
 //! Consigna
 
-//? Realizar una clase de nombre “ProductManager”, el cual permitirá trabajar con múltiples productos. Éste debe poder agregar, consultar, modificar y eliminar un producto y manejarlo en persistencia de archivos (basado en entregable 1).
+//? Realizar una clase de nombre “ProductManager”, el cual permitirá trabajar con múltiples productos. Éste debe poder agregar, consultar, modificar y eliminar un producto y manejarlo en persistencia de archivos (basado en entregable 1). 
 
 //! Aspectos a incluir
 
@@ -23,26 +23,18 @@
 //! Archivo de javascript con el nombre ProductManager.js
 
 
-const fs = require('fs/promises');
-
-const unicode = 'utf-8'
-const file = './products.json';
+const fs = require('fs').promises;
+const encoding = 'utf-8'
 
 
-// Realizar una clase de nombre “ProductManager”
 class ProductManager {
 
-
-  constructor() {
-    // Debe contar con una variable this.path, el cual se inicializará desde el constructor y debe recibir la ruta a trabajar desde el momento de generar su instancia.
-    this.path = file;
-    // id (se debe incrementar automáticamente, no enviarse desde el cuerpo)
-    this.id = 1;
-    // permitirá trabajar con múltiples productos
+  constructor(filePath) {
+    this.path = filePath;
     this.products = [];
+    this.id = 1;
   }
 
-  // Debe tener un método addProduct el cual debe recibir un objeto con el formato previamente especificado (title, description, price, thumbnail, code, stock), asignarle un id autoincrementable y guardarlo en el arreglo
   async addProduct(title, description, price, thumbnail, code, stock) {
 
     if (!title || !description || !price || !thumbnail || !code || !stock) {
@@ -68,84 +60,102 @@ class ProductManager {
     this.products.push(product);
 
     try {
-      await fs.writeFile(this.path, JSON.stringify(this.products, null, 2), unicode);
+      await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), encoding);
       console.log('Product added successfully');
     } catch (error) {
       console.log(`Error writing to file: ${error}`);
     }
   }
 
-  // Consultar todos los Productos
   async getProducts() {
     try {
-      const data = fs.promises.readFile(this.path, unicode);
+      const data = await fs.readFile(this.path, encoding);
       this.products = JSON.parse(data);
       return this.products;
+
     } catch (error) {
-      console.log(`Error reading file: ${error}`);
+      console.log(`Error reading file: ${error.message}`);
       return [];
     }
+
   }
 
-  // Consultar Producto por Id
   async getProductById(id) {
     try {
-      const productFound = this.products.find(product => product.id === id);
-      return productFound
+      const data = await fs.readFile(this.path, encoding);
+      const products = JSON.parse(data);
+      const product = products.find(product => product.id === id);
+      if (product) {
+        console.log(`Product with id '${id}' found:`);
+        console.log(product);
+        return product;
+      } else {
+        console.log(`Product with id '${id}' not found`);
+        return null;
+      }
+
     } catch (error) {
       console.log(`Product with id '${id}' not found`)
     }
   }
 
-  // Modificar Producto
   async updateProduct(id, updatedProduct) {
+    try {
+      const data = await fs.readFileSync(this.path, encoding);
+      const products = JSON.parse(data);
+      const productIndex = products.findIndex(product => product.id === id);
+      if (productIndex !== -1) {
+        products[productIndex] = { ...products[productIndex], ...updatedProduct };
+        await fs.writeFileSync(this.path, JSON.stringify(products, null, 2), encoding);
+        console.log('Product updated successfully');
+        return products[productIndex];
+      } else {
+        console.log(`Product with id '${id}' not found`);
+        return null;
+      }
+
+    } catch (error) {
+      console.log(`Error:  ${error.message}`)
+    }
+  }
+
+
+  async deleteProduct(id) {
     try {
       const productIndex = this.products.findIndex(product => product.id === id);
       if (productIndex !== -1) {
-        this.products[productIndex] = { ...this.products[productIndex], ...updatedProduct };
-        await fs.writeFile(this.path, JSON.stringify(this.products, null, 2), unicode);
-        console.log('Product updated successfully');
-        return this.products[productIndex];
+        this.products.splice(productIndex, 1);
+        await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), encoding);
+        console.log(`Product with id '${id}' deleted successfully`);
+        return this.products;
       } else {
         console.log(`Product with id '${id}' not found`);
         return null;
       }
     } catch (error) {
-      console.log(`Error updating product: ${error}`);
+      console.log(`Error deleting product: ${error.message}`);
       return null;
-    }
-  }
-
-  // Eliminar Producto
-  async deleteProduct(id) {
-    try {
-      const productIndex = this.products.findIndex(product => product.id === id);
-      this.products.splice(productIndex, 1);
-      await fs.writeFile(file, JSON.stringify(this.products));
-      return this.products;
-    } catch (error) {
-      console.log(`Product with id '${id}' not found`);
-      return;
     }
   }
 }
 
-// Testing => Descomentar el siguiente bloque para ejecutar el test 
+const manager = new ProductManager('./products.json');
+manager.getProducts();
 
-const manager = new ProductManager();
+/* Testing
+Se creará una instancia de la clase “ProductManager”
+Se llamará “getProducts” recién creada la instancia, debe devolver un arreglo vacío []
+Se llamará al método “addProduct” con los campos:
+title: “producto prueba”
+description:”Este es un producto prueba”
+price:200,
+thumbnail:”Sin imagen”
+code:”abc123”,
+stock:25
+El objeto debe agregarse satisfactoriamente con un id generado automáticamente SIN REPETIRSE
+Se llamará el método “getProducts” nuevamente, esta vez debe aparecer el producto recién agregado
+Se llamará al método “getProductById” y se corroborará que devuelva el producto con el id especificado, en caso de no existir, debe arrojar un error.
+Se llamará al método “updateProduct” y se intentará cambiar un campo de algún producto, se evaluará que no se elimine el id y que sí se haya hecho la actualización.
+Se llamará al método “deleteProduct”, se evaluará que realmente se elimine el producto o que arroje un error en caso de no existir.
 
-console.log(manager.products)
-console.log(manager.getProducts())
-
-/* manager.addProduct('Producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25);
-
-console.log(manager.getProducts())
-
-manager.addProduct('Producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25);
-
-console.log(manager.getProducts())
-
-console.log('manager.getProductById(id)')
-
-console.log(manager.getProductById(1))
-console.log(manager.getProductById(5)) */
+*/

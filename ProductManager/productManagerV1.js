@@ -23,7 +23,7 @@ class ProductManager {
     }
 
     // Next condition also works with the 'find' method
-    // 'find' return the OBJECT and 'some' return a BOOLEAN
+    // 'find' return the OBJECT or undefined and 'some' return a BOOLEAN
     if (this.products.some(product => product.code === code)) {
       console.log('The product CODE already exists');
       return;
@@ -48,7 +48,8 @@ class ProductManager {
 
 // Testing => Descomentar el siguiente bloque para ejecutar el test 
 
-/* const manager = new ProductManager();
+/* 
+const manager = new ProductManager();
 
 console.log(manager.getProducts())
 
@@ -63,4 +64,5 @@ console.log(manager.getProducts())
 console.log('manager.getProductById(id)')
 
 console.log(manager.getProductById(1))
-console.log(manager.getProductById(5)) */
+console.log(manager.getProductById(5)) 
+*/
