@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "John",
+    "Lastname": "Doe",
+    "Age": 30,
+    "Course": "Backend Development"
+  },
+  {
+    "Name": "Saul",
+    "Lastname": "Hudson",
+    "Age": 58,
+    "Course": "Backend Development"
+  },
+  {
+    "Name": "Rachel",
+    "Lastname": "McAdams",
+    "Age": 45,
+    "Course": "Backend Development"
+  }
+]

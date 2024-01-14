@@ -67,9 +67,6 @@ calculate();
 
 
 
-
-
-
 async function calcular() {
   try {
 

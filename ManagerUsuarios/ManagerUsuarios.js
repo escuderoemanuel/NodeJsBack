@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 
 const file = './usuarios.json';
-const unicode = 'utf-8';
+const encoding = 'utf-8';
 
 class ManagerUsuarios {
   constructor() {
@@ -19,7 +19,7 @@ class ManagerUsuarios {
   }
   async consultarUsuarios() {
     try {
-      const data = await fs.readFile(file, unicode);
+      const data = await fs.readFile(file, encoding);
       this.usuarios = JSON.parse(data);
       return this.usuarios;
     } catch (error) {
