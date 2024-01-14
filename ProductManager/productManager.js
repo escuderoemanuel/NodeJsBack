@@ -23,7 +23,8 @@
 //! Archivo de javascript con el nombre ProductManager.js
 
 
-const fs = require('fs').promises;
+//const fs = require('fs').promises;
+const fs = require('fs');
 const encoding = 'utf-8'
 
 
@@ -35,106 +36,20 @@ class ProductManager {
     this.id = 1;
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
-
-    if (!title || !description || !price || !thumbnail || !code || !stock) {
-      console.log('All fields are required');
-      return;
-    }
-
-    if (this.products.some(product => product.code === code)) {
-      console.log('The product CODE already exists');
-      return;
-    }
-
-    const product = {
-      id: this.id++,
-      title,
-      description,
-      price,
-      thumbnail,
-      code,
-      stock,
-    }
-
-    this.products.push(product);
-
-    try {
-      await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), encoding);
-      console.log('Product added successfully');
-    } catch (error) {
-      console.log(`Error writing to file: ${error}`);
-    }
-  }
-
   async getProducts() {
+    let info = {}
     try {
+      if (!fs.existsSync(this.path)) {
+        //throw new Error('File not found');
+        await fs.promises.writeFile(this.path, JSON.stringify(this.products));
+        console.log('Created file')
+      }
       const data = await fs.readFile(this.path, encoding);
-      this.products = JSON.parse(data);
-      return this.products;
+      info = JSON.parse(data);
+      await fs.promises.writeFile(this.path, JSON.stringify(this.products));
 
     } catch (error) {
-      console.log(`Error reading file: ${error.message}`);
-      return [];
-    }
-
-  }
-
-  async getProductById(id) {
-    try {
-      const data = await fs.readFile(this.path, encoding);
-      const products = JSON.parse(data);
-      const product = products.find(product => product.id === id);
-      if (product) {
-        console.log(`Product with id '${id}' found:`);
-        console.log(product);
-        return product;
-      } else {
-        console.log(`Product with id '${id}' not found`);
-        return null;
-      }
-
-    } catch (error) {
-      console.log(`Product with id '${id}' not found`)
-    }
-  }
-
-  async updateProduct(id, updatedProduct) {
-    try {
-      const data = await fs.readFileSync(this.path, encoding);
-      const products = JSON.parse(data);
-      const productIndex = products.findIndex(product => product.id === id);
-      if (productIndex !== -1) {
-        products[productIndex] = { ...products[productIndex], ...updatedProduct };
-        await fs.writeFileSync(this.path, JSON.stringify(products, null, 2), encoding);
-        console.log('Product updated successfully');
-        return products[productIndex];
-      } else {
-        console.log(`Product with id '${id}' not found`);
-        return null;
-      }
-
-    } catch (error) {
-      console.log(`Error:  ${error.message}`)
-    }
-  }
-
-
-  async deleteProduct(id) {
-    try {
-      const productIndex = this.products.findIndex(product => product.id === id);
-      if (productIndex !== -1) {
-        this.products.splice(productIndex, 1);
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), encoding);
-        console.log(`Product with id '${id}' deleted successfully`);
-        return this.products;
-      } else {
-        console.log(`Product with id '${id}' not found`);
-        return null;
-      }
-    } catch (error) {
-      console.log(`Error deleting product: ${error.message}`);
-      return null;
+      console.log(`Error: ${error}`);
     }
   }
 }
