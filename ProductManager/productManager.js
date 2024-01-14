@@ -36,20 +36,26 @@ class ProductManager {
     this.id = 1;
   }
 
+  // Function to read or create the Json File
   async getProducts() {
     let info = {}
-    try {
-      if (!fs.existsSync(this.path)) {
-        //throw new Error('File not found');
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products));
-        console.log('Created file')
-      }
-      const data = await fs.readFile(this.path, encoding);
-      info = JSON.parse(data);
-      await fs.promises.writeFile(this.path, JSON.stringify(this.products));
 
+    try {
+      // If file doesn't exist, create it
+      if (!fs.existsSync(this.path)) {
+        await fs.promises.writeFile(this.path, '[]', encoding);
+        console.log(this.products)
+        return this.products;
+      }
+
+      // If file exists, read it
+      const data = await fs.promises.readFile(this.path, encoding);
+      // Transform 'string' to a 'js object'
+      info = JSON.parse(data);
+      console.log(info)
+      return info;
     } catch (error) {
-      console.log(`Error: ${error}`);
+      console.log(`Error: ${error.message}`);
     }
   }
 }
