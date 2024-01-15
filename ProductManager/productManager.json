@@ -16,14 +16,5 @@
     "thumbnail": "Sin imagen",
     "code": "AABB",
     "stock": 25
-  },
-  {
-    "id": 3,
-    "title": "AAAA",
-    "description": "Este es un producto de prueba",
-    "price": 75.66,
-    "thumbnail": "Sin imagen",
-    "code": "FFBB",
-    "stock": 25
   }
 ]

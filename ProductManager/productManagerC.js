@@ -15,7 +15,7 @@ class ProductManager {
         await fs.promises.writeFile(this.path, '[]', encoding)
       }
     } catch (error) {
-      console.log(`Error: ${error.message}`)
+      console.error(`Error: ${error.message}`)
     }
   }
 
@@ -30,7 +30,7 @@ class ProductManager {
         return this.products;
       }
     } catch (error) {
-      console.log(`Error: ${error.message}`)
+      console.error(`Error: ${error.message}`)
     }
     return this.products;
   }
@@ -42,7 +42,8 @@ class ProductManager {
       const info = await JSON.parse(data);
 
       if (info.find(prod => prod.code === code)) {
-        console.log('El producto ya existe');
+        throw new Error('El producto ya existe');
+        //console.log('El producto ya existe');
       } else {
         const id = info.length > 0 ? info[info.length - 1].id + 1 : 1;
         const product = {
@@ -60,7 +61,7 @@ class ProductManager {
         await fs.promises.writeFile(this.path, JSON.stringify(info, null, 2), encoding);
       }
     } catch (error) {
-      console.log(`Error: ${error.message}`);
+      console.error(`Error: ${error.message}`);
     }
   }
 
@@ -79,7 +80,7 @@ class ProductManager {
         console.log('Producto no encontrado');
       }
     } catch (error) {
-      console.log(`Error: ${error.message}`);
+      console.error(`Error: ${error.message}`);
     }
 
   }
@@ -112,26 +113,38 @@ class ProductManager {
 
         // After to update the field => transform the object in json string
         await fs.promises.writeFile(this.path, JSON.stringify(info, null, 2), encoding);
-        console.log(`The product with 'id:${id}' has been modified!`)
+        console.log(`The product with 'id:${id}' has been modified!\n`, info[productIndex])
 
       } else {
         throw new Error('Product not found!')
       }
     } catch (error) {
-      console.log(`Error sale por aca: ${error.message}`);
+      console.error(`Error: ${error.message}`);
     }
   }
 
 
 
+  // Debe tener un método deleteProduct, el cual debe recibir un id y debe eliminar el producto que tenga ese id en el archivo
+  async deleteProduct(id) {
+    try {
+      const data = await fs.promises.readFile(this.path, encoding);
+      const info = await JSON.parse(data);
 
+      const productIndex = info.findIndex(product => product.id === id);
 
+      if (productIndex !== -1) {
+        info.splice(productIndex, 1);
+        await fs.promises.writeFile(this.path, JSON.stringify(info, null, 2), encoding);
+        console.log(`The product with 'id:${id}' has been deleted!`)
+      } else {
+        throw new Error('Product to delete not found!')
+      }
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+    }
 
-
-
-
-
-  //? Debe tener un método deleteProduct, el cual debe recibir un id y debe eliminar el producto que tenga ese id en el archivo
+  }
 
 }
 
@@ -159,7 +172,15 @@ const test = async () => {
   await manager.getProductById(2)
 
   // 5
-  await manager.updateProduct(3, { tite: "AAAA" })
+  await manager.updateProduct(3, { invalidFieldTest: "AAAA" })
+  await manager.updateProduct(3, { title: "AAAA" })
+
+  // 6
+  await manager.deleteProduct(5)
+  await manager.deleteProduct(3)
+
+  // 7
+  await manager.getProducts()
 
 }
 
