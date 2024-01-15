@@ -16,14 +16,13 @@ const main = async () => {
 
   const allCurrentObjects = await contenedor.getAll();
   console.log(allCurrentObjects);
-  /**
-     * [
-        { title: 'Regla', price: 75.66, id: 1 },
-        { title: 'Lapicera', price: 100, id: 3 }
-        ]
-    */
+  /* [
+    { title: 'Regla', price: 75.66, id: 1 },
+    { title: 'Lapicera', price: 100, id: 3 }
+  ] */
 
-  //await contenedor.deleteAll();
+
+  await contenedor.deleteAll();
 };
 
 main();

@@ -48,8 +48,8 @@ class ProductManager {
 
 // Testing => Descomentar el siguiente bloque para ejecutar el test 
 
-/* 
-const manager = new ProductManager();
+
+/* const manager = new ProductManager();
 
 console.log(manager.getProducts())
 
@@ -57,7 +57,7 @@ manager.addProduct('Producto prueba', 'Este es un producto de prueba', 200, 'Sin
 
 console.log(manager.getProducts())
 
-manager.addProduct('Producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25);
+manager.addProduct('Producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'ab123', 25);
 
 console.log(manager.getProducts())
 
@@ -65,4 +65,4 @@ console.log('manager.getProductById(id)')
 
 console.log(manager.getProductById(1))
 console.log(manager.getProductById(5)) 
-*/
+ */
