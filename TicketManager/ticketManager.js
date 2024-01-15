@@ -20,7 +20,7 @@ class TicketManager {
     evento.capacidad = capacidad ?? 50;
     evento.fecha = fecha ?? new Date().toLocaleDateString();
     evento.participantes = [];
-    
+
     this.eventos.push(evento);
   }
 }
