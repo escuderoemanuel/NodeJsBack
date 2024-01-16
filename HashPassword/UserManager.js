@@ -8,8 +8,21 @@ const secret = 'abc123';
 
 class UserManager {
 
+  async getUsers() {
+    if (!fs.existsSync(path)) {
+      await fs.promises.writeFile(path, '[]')
+    }
+
+    const data = await fs.promises.readFile(path, encoding)
+    const users = JSON.parse(data)
+
+    return users;
+  }
+
   async createUser(user) {
-    const users = []
+
+    const users = await this.getUsers();
+
     const hashedPassword = crypto.createHmac('sha256', secret).update(user.password).digest('hex');
 
     user.password = hashedPassword;
