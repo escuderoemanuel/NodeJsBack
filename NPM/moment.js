@@ -4,4 +4,11 @@
 
 const moment = require('moment');
 
-console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
+const today = moment()
+const birthday = moment('2024-06-20')
+
+const daysToMyBirthday = birthday.diff(today, 'days')
+const message = `My birthday is ${daysToMyBirthday} days away...!`
+
+console.log(message);
+//console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
