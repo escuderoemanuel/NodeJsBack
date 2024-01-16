@@ -8,7 +8,7 @@
 let object = {}
 
 for (let i = 0; i < 10000; i++) {
-  let aleatoryNumber = Math.floor(Math.random() * 20 + 1)
+  let aleatoryNumber = Math.floor(Math.random() * 20 + 1) // 20 max number 1 min number
   if (!object[aleatoryNumber]) {
     object[aleatoryNumber] = 1
   } else {
