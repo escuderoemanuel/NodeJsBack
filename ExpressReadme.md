@@ -17,11 +17,23 @@
 # IN FILE PROJECT
 
 * To use Express:
-    - Syntax before EC6: `const express = require('express');`
-    - Syntax after EC6: `import express from 'express';`
-        - It's necessary to add `"type": "module"` in pachage.json file
+    - Syntax before EC6: 
+      ```
+      const express = require('express');
+      ```
+    - Syntax after EC6: 
+      ```
+      import express from 'express';
+      ```
+      - It's necessary to add in pachage.json file: 
+        ```
+        "type": "module"
+        ``` 
   
-* Define constant for express: `const server = express();`
+* Define constant for express: 
+  ```
+  const server = express();
+  ```
 
 * Call to server on port 8080:
   ```
