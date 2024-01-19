@@ -15,10 +15,22 @@ const users = [
 ];
 
 
+// Search by id
+server.get('/', (req, res) => {
+  let result = users;
+  const gender = req.query.gender;
+  if (gender) {
+    result = result.filter(user => user.gender === gender)
+  }
+  res.send({ users: result })
+})
+
+
 // Return all users
 server.get('/', (req, res) => {
   res.send({ users })
 })
+
 
 
 
@@ -38,6 +50,7 @@ server.get('/:userId', (req, res) => {
   }
   res.send({ user: user })
 })
+
 
 
 server.listen(3000, () => {
