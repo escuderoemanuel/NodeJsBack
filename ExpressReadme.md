@@ -35,6 +35,11 @@
   const server = express();
   ```
 
+* This way the server will be able to read complex data:
+  ```
+  server.use(express.urlencoded({ extended: true }))
+  ```
+
 * Call to server on port 8080:
   ```
   server.listen(8080, () => {
@@ -77,6 +82,14 @@
       ```
       server.get('/params/:name/:lastname', (req, res) => {const { name, lastname } = req.params;
       res.send(`<h2>Hello ${name} ${lastname}</h2>`);
+      })
+      ```
+
+      - Example: _http://localhost:3000/query?name=Jane&lastname=Doe_
+      ```
+      server.get('/query', (req, res) => {
+        const consults = req.query;
+        res.send(consults)
       })
       ```
 
