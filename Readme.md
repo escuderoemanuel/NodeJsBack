@@ -1,4 +1,4 @@
-# Multi-Repo (NodeJs Express Nodemon)
+# Mono Repo (NodeJs Express Nodemon)
 
 
 ## About the Repo
