@@ -8,11 +8,16 @@
 
 const moment = require('moment');
 
-const today = moment();
-const birth = moment('1986-06-20');
-if (birth.isValid()) {
-  const daysLived = today.diff(born, 'days');
-  console.log(`It's been '${daysLived}' since you were born!`);
-} else {
-  console.log(`Invalid date`)
-};
+const ageCalculator = () => {
+  const today = moment();
+  const birth = moment('1986-06-20');
+
+  if (birth.isValid()) {
+    const daysLived = today.diff(birth, 'days');
+    console.log(`It's been '${daysLived}' days since you were born!`);
+  } else {
+    console.log(`Invalid date`)
+  };
+}
+
+ageCalculator();
