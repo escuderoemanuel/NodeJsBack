@@ -20,12 +20,13 @@ server.get('/api/frase', (req, res) => {
 
 // GET 
 // localhost:8080/api/palabras/1
-server.get('/api/palabras/:pos', (req, res) => {
+server.get('/api/palabras/:pos?', (req, res) => {
 
   if (!req.params.pos) {
-    return res.status(404).send({
+    res.status(400).send({
       status: 'error', messagge: 'No se ha introducido ningún valor'
     })
+    return
   }
 
   let pos = parseInt(req.params.pos);
@@ -44,6 +45,14 @@ server.get('/api/palabras/:pos', (req, res) => {
     })
   }
 })
+
+//POST
+// localhost:8080/api/palabras
+server.post('/api/palabras', (req, res) => {
+
+})
+
+
 
 // Run Server
 server.listen(port, () => {
