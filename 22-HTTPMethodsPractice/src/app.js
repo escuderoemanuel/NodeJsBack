@@ -98,23 +98,37 @@ server.put('/api/palabras/:pos?', (req, res) => {
 
 // DELETE
 // localhost:8080/api/palabras/2
-server.delete('/api/palabras/:pos', (req, res) => {
-  let pos = parseInt(req.params.pos)
-  pos -= 1
+server.delete('/api/palabras/:pos?', (req, res) => {
+  //let pos = req.params.pos;
+  let pos = parseInt(req.params.pos);
+
+  if (!req.params.pos) {
+    return res.status(400).send({
+      status: 'error',
+      message: 'No se ha introducido ningún valor'
+    })
+  }
 
   const palabras = frase.split(' ')
-  palabras.splice(pos, 1)
-  const palabra = palabras[pos]
-  frase = palabras.join(' ')
 
-  res.send({
-    status: 'success',
-    eliminada: palabra,
-    frase
-  })
+  if (pos > 0 && pos <= palabras.length) {
+    pos -= 1 // Because the array position start in 0
+    const palabra = palabras[pos]
+    palabras.splice(pos, 1)
+    frase = palabras.join(' ')
+
+    res.send({
+      status: 'success',
+      eliminada: palabra,
+      frase_actualizada: frase
+    })
+  } else {
+    return res.status(404).send({
+      status: 'error',
+      message: 'No existe la palabra'
+    })
+  }
 })
-
-
 
 // Run Server
 server.listen(port, () => {
