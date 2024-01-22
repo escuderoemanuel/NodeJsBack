@@ -50,6 +50,68 @@ server.get('/api/palabras/:pos?', (req, res) => {
 // localhost:8080/api/palabras
 server.post('/api/palabras', (req, res) => {
 
+  const palabra = req.body.palabra;
+
+  if (palabra) {
+    frase = `${frase} ${palabra}`
+
+    const palabras = frase.split(' ')
+    const pos = palabras.length
+    // Lo mismo que -> const palabras = frase.split(' ').length
+
+    res.send({
+      agregada: palabra,
+      pos: pos
+    })
+  } else {
+    res.status(400).send({
+      status: 'error', messagge: 'No se agregó ninguna palabra'
+    })
+  }
+})
+
+//PUT
+// localhost:8080/api/palabras/3
+server.put('/api/palabras/:pos?', (req, res) => {
+
+  let pos = parseInt(req.params.pos)
+  pos -= 1
+  const palabra = req.body.palabra;
+  const palabras = frase.split(' ');
+
+  if (pos && pos < palabras.length && palabra) {
+    let anterior = palabras[pos];
+    palabras[pos] = palabra;
+
+    frase = palabras.join(' ');
+
+    res.send({
+      actualizada: palabra,
+      anterior: anterior
+    })
+  } else {
+    res.status(400).send({
+      error: 'error', messagge: 'No existe la posicion o falta la palabra nueva'
+    })
+  }
+})
+
+// DELETE
+// localhost:8080/api/palabras/2
+server.delete('/api/palabras/:pos', (req, res) => {
+  let pos = parseInt(req.params.pos)
+  pos -= 1
+
+  const palabras = frase.split(' ')
+  palabras.splice(pos, 1)
+  const palabra = palabras[pos]
+  frase = palabras.join(' ')
+
+  res.send({
+    status: 'success',
+    eliminada: palabra,
+    frase
+  })
 })
 
 
