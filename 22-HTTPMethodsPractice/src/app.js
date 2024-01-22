@@ -19,17 +19,30 @@ server.get('/api/frase', (req, res) => {
 })
 
 // GET 
-// localhost:8080/api/palabras/inicial
-server.get('api/palabras/:pos', (req, res) => {
-  const buscada = req.params.pos;
+// localhost:8080/api/palabras/1
+server.get('/api/palabras/:pos', (req, res) => {
 
-  if (frase.includes(buscada)) {
-    return res.status(404), send({
+  if (!req.params.pos) {
+    return res.status(404).send({
+      status: 'error', messagge: 'No se ha introducido ningún valor'
+    })
+  }
+
+  let pos = parseInt(req.params.pos);
+
+  if (pos === 1 || pos === 2) {
+
+    pos -= 1;
+
+    const palabras = frase.split(' ');
+    const buscada = palabras[pos]
+
+    res.send({ status: 'success', buscada: buscada })
+  } else {
+    res.status(404).send({
       status: 'error', messagge: 'La palabra buscada no existe en la frase'
     })
   }
-  res.send({ status: 'success', buscada: palabra })
-
 })
 
 // Run Server
