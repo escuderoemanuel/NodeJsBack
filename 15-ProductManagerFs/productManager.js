@@ -65,7 +65,7 @@ class ProductManager {
 
         // Save the updated data in the file.
         await fs.promises.writeFile(this.path, JSON.stringify(parsedData, null, 2), encoding);
-        console.log('Product added successfully!');
+        console.info('Product added successfully!');
       }
     } catch (error) {
       console.error(`Error: ${error.message}`);
