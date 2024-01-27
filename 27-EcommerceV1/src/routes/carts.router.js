@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { upload } = require('../middlewares/multer');
 
+//cartsManager = new CartsManager('./src/carts.json');
+
 const router = Router();
 
 const carts = []

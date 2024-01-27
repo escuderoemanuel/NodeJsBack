@@ -1,15 +1,43 @@
-
 const { Router } = require('express');
+const ProductManager = require('../ProductManager');
 //const { upload } = require('../middlewares/multer');
 
 
+// Manager
+manager = new ProductManager(`${__dirname}/products.json`);
+
 const router = Router();
 
-const products = [];
 
-router.get('/', (req, res) => {
+// Deberá traer todos los productos de la base de datos, incluyendo la limitación ?limit
+router.get('/', async (req, res) => {
+  let products = await manager.getProducts();
+  // Límite string parseado a number
+  const limit = parseInt(req.query.limit);
+  if (limit) {
+    products = products.slice(0, limit);
+  }
   res.send({ products: products });
 })
+
+router.get('/:pid', async (req, res) => {
+  const pid = parseInt(req.params.pid);
+  const product = await manager.getProductById(pid);
+  res.send({ product: product });
+})
+
+router.post('/', async (req, res) => {
+  try {
+    const { title, description, price, thumbnails, code, stock, status, category } = req.body;
+
+    const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, status, category);
+
+    res.send({ status: 'success', product: newProduct });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
 
 /* router.post('/', (req, res) => {
   const product = req.body;
