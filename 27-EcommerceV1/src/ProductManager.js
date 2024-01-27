@@ -24,7 +24,7 @@ class ProductManager {
       return this.products;
 
     } catch (error) {
-      console.error(`Error: ${error.message}`)
+      throw new Error(error.message)
     }
   }
 
@@ -38,7 +38,6 @@ class ProductManager {
       // Read the file, parse the data and save the data in the const parsedData.
       const data = await fs.promises.readFile(this.path, encoding);
       const parsedData = await JSON.parse(data);
-      let errors = [];
 
       // Verify if all the fields are filled.
       if (!title || !description || !price || !code || !stock || !category || !status) {
@@ -68,10 +67,10 @@ class ProductManager {
 
         // Save the updated data in the file.
         await fs.promises.writeFile(this.path, JSON.stringify(parsedData, null, 2), encoding);
-        //console.log('Product added successfully!');
+        return product;
       }
     } catch (error) {
-      throw error(`Error: ${error.message}`);
+      throw new Error(error.message);
     }
   }
 
@@ -85,23 +84,22 @@ class ProductManager {
       const product = parsedData.find(product => product.id === id);
 
       if (product) {
-        //console.log(`Product with id:${id} found:\n`, product);
         return product;
       } else {
-        //console.log(`Product with id:${id} not found.`);
+        throw new Error(`Product with id ${id} not found.`);
       }
     } catch (error) {
-      console.error(`Error: ${error.message}`);
+      throw new Error(error.message);
     }
   }
 
   async updateProduct(id, field) {
     try {
       // Array of fields that can be modified. (Without this validation you could add new fields)
-      const validFields = ['title', 'description', 'price', 'thumbnail', 'code', 'stock'];
+      const validFields = ['title', 'description', 'price', 'thumbnails', 'code', 'stock', 'status', 'category'];
 
       // Verify if the field is valid
-      if (typeof field !== 'object' || Object.keys(field).length === 0 || !Object.keys(field).some(key => validFields.includes(key))) {
+      if (typeof field !== 'object' || Object.keys(field).length === 0 || !Object.keys(field).every(key => validFields.includes(key))) {
         throw new Error('The product cannot be modified. Invalid field.');
       }
 
@@ -123,13 +121,13 @@ class ProductManager {
 
         // After to update the field => transform the object in json string
         await fs.promises.writeFile(this.path, JSON.stringify(parsedData, null, 2), encoding);
-        //console.log(`The product with 'id:${id}' has been modified successfully!`)
-
+        // To return the updated product and show it if is neccesary
+        return parsedData[productIndex]
       } else {
-        throw new Error(`Product with id${id} not found.`)
+        throw new Error(`Product with id '${id}' not found.`)
       }
     } catch (error) {
-      console.error(`Error: ${error.message}`);
+      throw new Error(error.message);
     }
   }
 
@@ -147,12 +145,12 @@ class ProductManager {
         parsedData.splice(productIndex, 1);
         // After to delete the product => transform the object in json string.
         await fs.promises.writeFile(this.path, JSON.stringify(parsedData, null, 2), encoding);
-        //console.log(`The product with id:${id} has been deleted successfully!`)
+
       } else {
-        throw new Error(`Product to delete with id:${id} not found!`)
+        throw new Error(`Product to delete with id '${id}' not found!`)
       }
     } catch (error) {
-      console.error(`Error: ${error.message}`);
+      throw new Error(error.message);
     }
   }
 }

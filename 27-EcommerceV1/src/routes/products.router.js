@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const ProductManager = require('../ProductManager');
-//const { upload } = require('../middlewares/multer');
 
 
 // Manager
@@ -20,43 +19,52 @@ router.get('/', async (req, res) => {
   res.send({ products: products });
 })
 
+// Deberá traer sólo el producto con el id proporcionado
 router.get('/:pid', async (req, res) => {
   const pid = parseInt(req.params.pid);
   const product = await manager.getProductById(pid);
   res.send({ product: product });
 })
 
+// Deberá agregar un nuevo producto
 router.post('/', async (req, res) => {
   try {
     const { title, description, price, thumbnails, code, stock, status, category } = req.body;
 
+    // Save the new product in a constant in case it is neccesary to use it
     const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, status, category);
 
-    res.send({ status: 'success', product: newProduct });
+    res.send({ status: 'success', message: 'Product succesfully created' });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 });
 
+// Deberá actualizar un producto existente con el id proporcionado.
+router.put('/:pid', async (req, res) => {
+  try {
+    const id = parseInt(req.params.pid);
+    const updatedFields = req.body;
 
-/* router.post('/', (req, res) => {
-  const product = req.body;
-  product.id = products.length + 1;
-  product.image = req.file.filename;
-  product.timestamp = new Date().toLocaleString();
-  product.stock = Math.floor(Math.random() * (100 - 1) + 1);
-  product.code = Math.floor(Math.random() * (999999 - 100000) + 100000);
-  product.status = true;
-  product.category = product.category.toLowerCase();
-  product.description = product.description.toLowerCase();
-  product.title = product.title.toLowerCase();
+    // Save the new product in a constant in case it is neccesary to use it
+    const updatedProduct = await manager.updateProduct(id, updatedFields);
 
-  products.push(product);
-  res.send({
-    status: 'success',
-    message: 'Product added successfully',
-    products: products,
-  });
-}) */
+    res.send({ status: 'success', message: 'Product succesfully updated' });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+})
+
+// Deberá eliminar un producto existente con el id proporcionado.
+router.delete('/:pid', async (req, res) => {
+  try {
+    const id = parseInt(req.params.pid);
+    await manager.deleteProduct(id);
+
+    res.send({ status: 'success', message: 'Product deleted successfully' });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+})
 
 module.exports = router;

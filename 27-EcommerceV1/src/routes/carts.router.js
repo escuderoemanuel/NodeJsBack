@@ -1,28 +1,32 @@
 const { Router } = require('express');
-const { upload } = require('../middlewares/multer');
+const CartsManager = require('../CartManager');
 
-//cartsManager = new CartsManager('./src/carts.json');
+// Manager
+manager = new CartsManager(`${__dirname}/carts.json`);
 
 const router = Router();
 
-const carts = []
 
-
+// Deberá listar todos los carritos.
 router.get('/', (req, res) => {
-  res.json({ carts: carts });
+  try {
+    res.json({ carts: carts });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 })
 
-/* router.post('/', upload.single('image'), (req, res) => {
-  const { body, file } = req;
-  const { title, price, thumbnail } = body;
-  const product = {
-    title,
-    price,
-    thumbnail: file.path
+
+// Deberá listar los productos que pertenezcan al carrito con el parámetro *'cid'* proporcionados.
+router.get('/:cid', async (req, res) => {
+  try {
+    const cid = parseInt(req.params.cid);
+    const cart = await manager.getCartById(cid);
+    res.send({ status: 'success', cart: cart });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
   }
-  carts.push(product);
-  res.json(product);
-}) */
+})
 
 
 
