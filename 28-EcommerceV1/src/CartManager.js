@@ -1,5 +1,4 @@
 const fs = require('fs');
-const ProductManager = require('./ProductManager');
 
 const encoding = 'utf8';
 
@@ -10,18 +9,21 @@ class CartManager {
     this.carts = [];
   }
 
-  async addCart(products) {
+  // Deberá agregar un nuevo carrito al archivo JSON
+  async addCart() {
     try {
       if (!fs.existsSync(this.path)) {
         await fs.promises.writeFile(this.path, '[]', encoding);
       }
+
+      const products = []
 
       const data = await fs.promises.readFile(this.path, encoding);
       const parsedData = JSON.parse(data);
 
       const id = parsedData.length > 0 ? parsedData[parsedData.length - 1].id + 1 : 1;
       // Add new cart to the Carts
-      const newCart = { id, products: products || [] };
+      const newCart = { id, products };
 
 
       parsedData.push(newCart);
@@ -67,44 +69,44 @@ class CartManager {
     }
   }
 
-  // Deberá agregar el producto al arreglo “products” del carrito seleccionado
+  // Deberá agregar el producto al arreglo “products” del carrito seleccionado '/:cid/product/:pid'
   async addProductToCart(cid, pid) {
     try {
-      const data = await fs.promises.readFile(this.path, encoding);
-      const parsedData = await JSON.parse(data);
+
+      // Read carts.json file.
+      const cartsData = await fs.promises.readFile(this.path, encoding);
+      const cartsParsedData = await JSON.parse(cartsData);
 
       // Find the cart with the specified id.
-      const cart = parsedData.find(cart => cart.id === cid);
+      const cart = cartsParsedData.find(cart => cart.id === cid);
 
-      /* // Read the products json file.
-      const productInProducts = await fs.promises.readFile('./files/products.json', encoding)
-      const parsedProducts = await JSON.parse(productInProducts)
-
-      // Find if product exist in the products json file
-      const product = parsedProducts.find(product => product.id === pid)
-
-      // If product not exist throw error.
-      if (!product) {
-        throw new Error(`Product with id '${pid}' not found!`)
-      } */
-
-      // If cart exist...
-      /*  const productInProducts = await ProductManager.getProductById(pid) */
+      //
       if (cart) {
 
+        // Read products.json file.
+        const productsData = await fs.promises.readFile(`${__dirname}/files/products.json`, encoding);
+        const productsParsedData = JSON.parse(productsData);
+
+        // Find the cart with the specified id in products.json file!
+        const productInProducts = productsParsedData.find(product => product.id === pid);
+
+        if (!productInProducts) {
+          throw new Error(`Product with id '${pid}' does not exist in the product list!`)
+        }
+
         // Find in the cart, the product with the specified id.
-        const product = cart.products.find(product => product.id === pid);
+        const productInCart = cart.products.find(product => product.id === pid);
 
         // If the product already exist in the cart...
-        if (product) {
-          product.quantity++;
+        if (productInCart) {
+          productInCart.quantity++;
 
           // If the product not exist in the cart ...
         } else {
           cart.products.push({ id: pid, quantity: 1 });
         }
 
-        await fs.promises.writeFile(this.path, JSON.stringify(parsedData, null, 2), encoding);
+        await fs.promises.writeFile(this.path, JSON.stringify(cartsParsedData, null, 2), encoding);
         return cart;
       } else {
         throw new Error(`Cart with id '${cid}' not found!`)
@@ -114,7 +116,7 @@ class CartManager {
       throw new Error(error.message)
     }
   }
-
 }
 
+// Exportación para utilizar en el app.js
 module.exports = CartManager;

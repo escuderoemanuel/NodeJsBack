@@ -73,7 +73,7 @@ class ProductManager {
     }
   }
 
-  static async getProductById(id) {
+  async getProductById(id) {
     try {
       // Read the file, parse the data and save the data in the const parsedData.
       const data = await fs.promises.readFile(this.path, encoding);
