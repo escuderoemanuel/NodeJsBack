@@ -20,7 +20,6 @@ class ProductManager {
       // Read the file, parse the data and save the data in the object.
       const data = await fs.promises.readFile(this.path, encoding)
       this.products = await JSON.parse(data)
-      //console.log('All products found:\n', this.products)
       return this.products;
 
     } catch (error) {
@@ -74,7 +73,7 @@ class ProductManager {
     }
   }
 
-  async getProductById(id) {
+  static async getProductById(id) {
     try {
       // Read the file, parse the data and save the data in the const parsedData.
       const data = await fs.promises.readFile(this.path, encoding);

@@ -3,27 +3,35 @@ const ProductManager = require('../ProductManager');
 
 
 // Manager
-manager = new ProductManager(`${__dirname}/products.json`);
+const manager = new ProductManager(`${__dirname}/../files/products.json`);
 
 const router = Router();
 
 
 // Deberá traer todos los productos de la base de datos, incluyendo la limitación ?limit
 router.get('/', async (req, res) => {
-  let products = await manager.getProducts();
-  // Límite string parseado a number
-  const limit = parseInt(req.query.limit);
-  if (limit) {
-    products = products.slice(0, limit);
+  try {
+    let products = await manager.getProducts();
+    // Límite string parseado a number
+    const limit = parseInt(req.query.limit);
+    if (limit) {
+      products = products.slice(0, limit);
+    }
+    res.send({ products: products });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
-  res.send({ products: products });
 })
 
 // Deberá traer sólo el producto con el id proporcionado
 router.get('/:pid', async (req, res) => {
-  const pid = parseInt(req.params.pid);
-  const product = await manager.getProductById(pid);
-  res.send({ product: product });
+  try {
+    const pid = parseInt(req.params.pid);
+    const product = await manager.getProductById(pid);
+    res.send({ product: product });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 })
 
 // Deberá agregar un nuevo producto
