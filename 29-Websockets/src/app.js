@@ -27,7 +27,8 @@ const server = app.listen(port, () => {
 
 // Socket Settings
 let chatMessages = [];
-const io = new Server(server);
+const io = new Server(server); // Server instance (needs HTTP server instance)
+
 
 io.on('connection', (socket) => {
   console.log('New client connected');

@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat, sans-serif;
+}
+
+body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1,
+h2 {
+    margin: 2rem 0;
+}
+
+form {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+label {
+    width: 100px;
+    margin-right: 50px;
+}
+
+input {
+    height: 35px;
+    width: 300px;
+    border-radius: 4px;
+    padding: .5rem;
+}
+
+button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    width: 300px;
+}
+
+ul {
+    margin-bottom: 2rem;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

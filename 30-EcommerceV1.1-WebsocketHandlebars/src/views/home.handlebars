@@ -1,13 +1,23 @@
-<h1>Hi, stupid!</h1>
+<h1>View Home Handlebars!</h1>
 
 <h2>Product List</h2>
+
+
 <ul>
-  
+  {{#each products}}
+  <h4>Product {{id}}</h4>
+  <li>id: {{id}}</li>
+  <li>title: {{title}}</li>
+  <li>description: {{description}}</li>
+  <li>price: {{price}}</li>
+  <li>thumbnails: {{thumbnails}}</li>
+  <li>code: {{code}}</li>
+  <li>stock: {{stock}}</li>
+  <li>status: {{status}}</li>
+  <li>category: {{category}}</li>
+  <br />
+  {{/each}}
 </ul>
-
-
-
-
 
 
 
