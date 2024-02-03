@@ -31,17 +31,19 @@ btnCreateProduct.addEventListener('click', (e) => {
 
 socket.on('newProductAdded', (newProduct) => {
   const productList = document.getElementById('products');
-  const newProductItem = document.createElement('li');
+  const newProductItem = document.createElement('ul');
   newProductItem.innerHTML =
     `
-    <p>Title: ${newProduct.title}</p> 
-    <p>Description: ${newProduct.description}</p>
-    <p>Price: ${newProduct.price}</p>
-    <p>Thumbnails: ${newProduct.thumbnails}</p>
-    <p>Code: ${newProduct.code}</p>
-    <p>Stock: ${newProduct.stock}</p>
-    <p>Status: ${newProduct.status}</p>
-    <p>Category: ${newProduct.category}</p>
+    <h4>Product ${newProduct.id}</h4>
+    <li>id: ${newProduct.id}</li>    
+    <li>title: ${newProduct.title}</li> 
+    <li>description: ${newProduct.description}</li>
+    <li>price: ${newProduct.price}</li>
+    <li>thumbnails: ${newProduct.thumbnails}</li>
+    <li>code: ${newProduct.code}</li>
+    <li>stock: ${newProduct.stock}</li>
+    <li>status: ${newProduct.status}</li>
+    <li>category: ${newProduct.category}</li>
     <button id='btnDelete'>Delete product</button>
     `;
   productList.appendChild(newProductItem);
