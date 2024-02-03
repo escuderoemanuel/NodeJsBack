@@ -1,6 +1,27 @@
+<h2>Product List Real Time Websocket</h2>
+
+<ul id='products'>
+  {{#each products}}
+  <h4>Product {{this.id}}</h4>
+  <li>id: {{this.id}}</li>
+  <li>title: {{this.title}}</li>
+  <li>description: {{this.description}}</li>
+  <li>price: {{this.price}}</li>
+  <li>thumbnails: {{this.thumbnails}}</li>
+  <li>code: {{this.code}}</li>
+  <li>stock: {{this.stock}}</li>
+  <li>status: {{this.status}}</li>
+  <li>category: {{this.category}}</li>
+  <button id='btnDelete{{this.id}}'>Delete product</button>
+  <br />
+  {{/each}}
+</ul>
+
+
+{{!-- FORM --}}
 <h2>Create Product</h2>
 
-<form action="/api/realTimeProducts" method='POST'>
+<form action="/api/products" method='POST' id='formAddProduct'>
   <div>
     <label for="title">Title: </label>
     <input type="text" name='title' id='title'>
@@ -33,30 +54,12 @@
     <label for="category">Category: </label>
     <input type="text" name='category' id='category'>
   </div>
-  <button type='submit' id='btnCreateProduct' onclick='createProduct'>
+  <button type='submit' id='btnCreateProduct'>
     Create Product
   </button>
 
 </form>
 
-<h2>Product List Real Time Websocket</h2>
-
-<ul id='products'>
-  {{#each products}}
-  <h4>Product {{id}}</h4>
-  <li>id: {{id}}</li>
-  <li>title: {{title}}</li>
-  <li>description: {{description}}</li>
-  <li>price: {{price}}</li>
-  <li>thumbnails: {{thumbnails}}</li>
-  <li>code: {{code}}</li>
-  <li>stock: {{stock}}</li>
-  <li>status: {{status}}</li>
-  <li>category: {{category}}</li>
-  <button id='btnDelete'>Delete product</button>
-  <br />
-  {{/each}}
-</ul>
 
 
 

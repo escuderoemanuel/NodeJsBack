@@ -155,5 +155,16 @@
     "stock": 110,
     "status": true,
     "category": "Category"
+  },
+  {
+    "id": 13,
+    "title": "Title Test",
+    "description": "Description Test",
+    "price": "123",
+    "thumbnails": "Without Image",
+    "code": "test001",
+    "stock": "10",
+    "status": "Status true",
+    "category": "Category Test"
   }
 ]
