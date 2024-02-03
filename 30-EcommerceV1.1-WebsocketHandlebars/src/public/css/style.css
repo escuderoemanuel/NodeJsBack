@@ -49,6 +49,22 @@ button {
     padding: 0.5rem;
     border-radius: 4px;
     width: 300px;
+    cursor: pointer;
+    transition: all ease 100ms;
+}
+
+button:hover {
+    background-color: lawngreen;
+}
+
+button:active {
+    background-color: rgb(100, 201, 0);
+
+    transform: scale(0.95);
+}
+
+#btnDelete {
+    margin-bottom: 1rem;
 }
 
 ul {

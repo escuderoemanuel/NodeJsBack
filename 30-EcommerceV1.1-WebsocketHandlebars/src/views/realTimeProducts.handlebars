@@ -1,6 +1,6 @@
 <h2>Create Product</h2>
 
-<form action="submit">
+<form action="/api/realTimeProducts" method='POST'>
   <div>
     <label for="title">Title: </label>
     <input type="text" name='title' id='title'>
@@ -33,7 +33,7 @@
     <label for="category">Category: </label>
     <input type="text" name='category' id='category'>
   </div>
-  <button type='submit' id='btnCreateProduct'>
+  <button type='submit' id='btnCreateProduct' onclick='createProduct'>
     Create Product
   </button>
 
@@ -41,7 +41,7 @@
 
 <h2>Product List Real Time Websocket</h2>
 
-<ul>
+<ul id='products'>
   {{#each products}}
   <h4>Product {{id}}</h4>
   <li>id: {{id}}</li>
@@ -53,6 +53,7 @@
   <li>stock: {{stock}}</li>
   <li>status: {{status}}</li>
   <li>category: {{category}}</li>
+  <button id='btnDelete'>Delete product</button>
   <br />
   {{/each}}
 </ul>

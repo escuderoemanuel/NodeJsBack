@@ -13,8 +13,8 @@ const app = express();
 // Import Routes
 const cartsRouter = require('./routes/carts.router.js');
 const productsRouter = require('./routes/products.router.js');
-const realtimeproductsRouter = require('./routes/realtimeproducts.router');
-
+const realtimeproductsRouter = require('./routes/realtimeproducts.router.js');
+const homeRouter = require('./routes/home.router.js');
 
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
@@ -22,16 +22,16 @@ app.use(express.static(`${__dirname}/public`))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Routes
-app.use('/api/carts', cartsRouter)
-app.use('/api/products', productsRouter)
-app.use('/api/realtimeproducts', realtimeproductsRouter)
-app.use('/', realtimeproductsRouter)
-
 // Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
+
+// Routes
+app.use('/api/carts', cartsRouter)
+app.use('/api/products', productsRouter)
+app.use('/api/realtimeproducts', realtimeproductsRouter)
+app.use('/api/home', homeRouter)
 
 // Server
 const server = app.listen(port, () => {
@@ -46,8 +46,10 @@ io.on('connection', (socket) => {
 
   console.log(('Client connected...'))
 
-
-  // Aqui debería ir el envío de los productos?
+  socket.on('newProductAdded', (newProduct) => {
+    console.log('newProduct:', newProduct)
+    io.emit('newProductAdded', newProduct)
+  })
 
 
   socket.on('disconnect', () => {

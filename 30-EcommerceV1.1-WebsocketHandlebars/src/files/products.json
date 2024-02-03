@@ -129,5 +129,31 @@
     "stock": 115,
     "status": true,
     "category": "Technology"
+  },
+  {
+    "id": 11,
+    "title": "Test Product X",
+    "description": "This is a test product",
+    "price": 110,
+    "thumbnails": [
+      "Without Image"
+    ],
+    "code": "xxx8",
+    "stock": 110,
+    "status": true,
+    "category": "Category"
+  },
+  {
+    "id": 12,
+    "title": "Test Product X",
+    "description": "This is a test product",
+    "price": 110,
+    "thumbnails": [
+      "Without Image"
+    ],
+    "code": "xxx9",
+    "stock": 110,
+    "status": true,
+    "category": "Category"
   }
 ]
