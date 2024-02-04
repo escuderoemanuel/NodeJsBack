@@ -15,8 +15,10 @@ productList.addEventListener('click', async (e) => {
       const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
       })
-      const { product } = await response.json();
-      socket.emit('delete-product', product);
+      // Este es el objeto del producto que estoy eliminando
+      const { payload } = await response.json();
+      // Aqui paso el producto al server
+      socket.emit('delete-product', payload);
 
     } catch (error) {
       console.log(error);
@@ -59,9 +61,8 @@ formAddProduct.addEventListener('submit', async (e) => {
 
 
 
-socket.on('update-products', (data) => {
-  console.log('Update en index.js', data)
-  /* productList.innerHTML = ''
+socket.on('update-products', data => {
+  productList.innerHTML = ''
   data.forEach(product => {
     const productItem = document.createElement('li')
     productItem.classList.add('product');
@@ -79,5 +80,5 @@ socket.on('update-products', (data) => {
     <button class='btnDelete' id='btnDelete${product.id}' data-id='btnDelete'>Delete Product</button>
     `;
     productList.appendChild(productItem)
-  }) */
+  })
 })

@@ -49,9 +49,9 @@ io.on('connection', (socket) => {
 
   // Escucha el evento 'delete-product'
   socket.on('delete-product', (data) => {
-    console.log('Deleted: ', data)
-
-    io.emit('update-products', data);
+    console.log('Deleted: ', data.productToDelete)
+    const products = data.products;
+    io.emit('update-products', products);
   })
 
   socket.on('add-product', ({ newProduct, products }) => {

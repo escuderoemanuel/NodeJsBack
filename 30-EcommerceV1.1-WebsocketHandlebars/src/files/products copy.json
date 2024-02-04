@@ -1,5 +1,58 @@
 [
   {
+    "id": 1,
+    "title": "Test Product 1",
+    "description": "This is a test product",
+    "price": 200,
+    "thumbnails": [
+      "Without Image",
+      "Other Image"
+    ],
+    "code": "abc123",
+    "stock": 25,
+    "status": true,
+    "category": "Technology"
+  },
+  {
+    "id": 2,
+    "title": "Test Product 2",
+    "description": "This is a test product",
+    "price": 300,
+    "thumbnails": [
+      "Without Image"
+    ],
+    "code": "abc456",
+    "stock": 35,
+    "status": true,
+    "category": "Technology"
+  },
+  {
+    "id": 3,
+    "title": "Test Product 3",
+    "description": "This is a test product",
+    "price": 400,
+    "thumbnails": [
+      "Without Image"
+    ],
+    "code": "abc789",
+    "stock": 45,
+    "status": true,
+    "category": "Technology"
+  },
+  {
+    "id": 4,
+    "title": "Test Product 4",
+    "description": "This is a test product",
+    "price": 500,
+    "thumbnails": [
+      "Without Image"
+    ],
+    "code": "abc012",
+    "stock": 55,
+    "status": true,
+    "category": "Technology"
+  },
+  {
     "id": 5,
     "title": "Test Product 5",
     "description": "This is a test product",

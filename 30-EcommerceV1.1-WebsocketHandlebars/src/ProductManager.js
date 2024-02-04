@@ -1,5 +1,6 @@
 // fs will allow us to access operations for files
 const fs = require('fs');
+const { c } = require('tar');
 
 const encoding = 'utf-8';
 

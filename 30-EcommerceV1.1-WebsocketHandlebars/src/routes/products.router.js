@@ -39,8 +39,9 @@ router.post('/', async (req, res) => {
     const { title, description, price, thumbnails, code, stock, status, category } = req.body;
 
     const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, status, category);
+    const products = await manager.getProducts();
 
-    res.send({ status: 'success', payload: newProduct });
+    res.send({ status: 'success', payload: { newProduct, products } });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
@@ -66,8 +67,9 @@ router.delete('/:pid', async (req, res) => {
     const id = parseInt(req.params.pid);
     const productToDelete = await manager.getProductById(id);
     await manager.deleteProduct(id);
+    const products = await manager.getProducts();
 
-    res.send({ status: 'success', payload: productToDelete });
+    res.send({ status: 'success', payload: { productToDelete, products } });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
