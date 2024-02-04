@@ -46,11 +46,19 @@ io.on('connection', (socket) => {
 
   console.log(('Client connected...'))
 
-  socket.on('newProductAdded', (newProduct) => {
-    console.log('newProduct:', newProduct)
-    io.emit('newProductAdded', newProduct)
-  })
-
+  // Escucha el evento 'delete-product'
+  socket.on('delete-product', async (productId) => {
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: 'delete',
+      });
+      const { products } = await response.json();
+      // Emitir evento 'delete-product' con los productos actualizados
+      io.emit('delete-product', products);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   socket.on('disconnect', () => {
     console.log('Client disconnected...')

@@ -2,25 +2,27 @@
 
 <ul id='products'>
   {{#each products}}
-  <h4>Product {{this.id}}</h4>
-  <li>id: {{this.id}}</li>
-  <li>title: {{this.title}}</li>
-  <li>description: {{this.description}}</li>
-  <li>price: {{this.price}}</li>
-  <li>thumbnails: {{this.thumbnails}}</li>
-  <li>code: {{this.code}}</li>
-  <li>stock: {{this.stock}}</li>
-  <li>status: {{this.status}}</li>
-  <li>category: {{this.category}}</li>
-  <button id='btnDelete{{this.id}}'>Delete product</button>
+  <div class='product'>
+    <h4>Product {{this.id}}</h4>
+    <li>id: {{this.id}}</li>
+    <li>title: {{this.title}}</li>
+    <li>description: {{this.description}}</li>
+    <li>price: {{this.price}}</li>
+    <li>thumbnails: {{this.thumbnails}}</li>
+    <li>code: {{this.code}}</li>
+    <li>stock: {{this.stock}}</li>
+    <li>status: {{this.status}}</li>
+    <li>category: {{this.category}}</li>
+    <button class='btnDelete' id='btnDelete{{this.id}}' data-id='btnDelete'>Delete Product</button>
+  </div>
   <br />
   {{/each}}
 </ul>
 
 
 {{!-- FORM --}}
-<h2>Create Product</h2>
 
+<h2>Create Product</h2>
 <form action="/api/products" method='POST' id='formAddProduct'>
   <div>
     <label for="title">Title: </label>

@@ -166,5 +166,16 @@
     "stock": "10",
     "status": "Status true",
     "category": "Category Test"
+  },
+  {
+    "id": 15,
+    "title": "asx",
+    "description": "asx",
+    "price": "123",
+    "thumbnails": "as",
+    "code": "ascsss",
+    "stock": "2",
+    "status": "as",
+    "category": "asd"
   }
 ]

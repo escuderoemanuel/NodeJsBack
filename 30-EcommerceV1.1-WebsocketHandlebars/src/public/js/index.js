@@ -1,7 +1,7 @@
 const socket = io();
 
 // Form
-const formAddProduct = getElementById('formAddProduct');
+const formAddProduct = document.getElementById('formAddProduct');
 /* const title = document.getElementById('title');
 const description = document.getElementById('description');
 const price = document.getElementById('price');
@@ -11,31 +11,37 @@ const stock = document.getElementById('stock');
 const status = document.getElementById('status');
 const category = document.getElementById('category');
 const btnCreateProduct = document.getElementById('btnCreateProduct');
-const btnDeleteProduct = document.getElementById('btnDelete'); */
-
+*/
+// Obtener todos los botones de eliminar productos
+const btnDeleteProduct = document.querySelectorAll('.btnDelete');
 // ul
 const productList = document.getElementById('products');
 
 
+//! Función para Eliminar un producto de la base de datos y enviarlo a todos los clientes conectados.
 
-productList.addEventListener('click', async (e) => {
-  if (e.target.getAttribute('id') === 'btnDelete') {
-    const productId = e.target.parentElement.children[0].innerText.slice(8, 12);
+btnDeleteProduct.forEach(button => {
+  button.addEventListener('click', async (e) => {
+    console.log('Delete Disparado');
+    // Obtener el productId del atributo data-id
+    const productId = e.target.getAttribute('id').slice(9);
+    console.log('productId:', productId)
     try {
       const response = await fetch(`/api/products/${productId}`, {
-        method: 'DELETE'
-      })
-      const { products } = await response.json()
-      socket.emit('delete-product', { productId, products });
+        method: 'delete',
+      });
+      const { products } = await response.json();
+      socket.emit('delete-product', productId); // Solo enviamos el ID del producto
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  });
 });
 
+
+// Agrego un producto a la base de datos y lo envio a todos los clientes conectados.
 formAddProduct.addEventListener('submit', async (e) => {
   e.preventDefault()
-
   const newProduct = {};
   const formData = new FormData(formAddProduct)
   formData.forEach((value, key) => {
@@ -56,7 +62,9 @@ formAddProduct.addEventListener('submit', async (e) => {
   socket.emit('new-product', { products });
 })
 
-socket.on('add-products', data => {
+
+/* 
+socket.on('update-products', data => {
   productList.innerHTML = ''
   data.forEach(product => {
     const productItem = document.createElement('li');
@@ -72,26 +80,5 @@ socket.on('add-products', data => {
         </div>`;
     productList.appendChild(productItem);
   })
-})
-
-/* 
-
-socket.on('newProductAdded', (newProduct) => {
-  const productList = document.getElementById('products');
-  const newProductItem = document.createElement('ul');
-  newProductItem.innerHTML =
-    `
-    <h4>Product ${newProduct.id}</h4>
-    <li>id: ${newProduct.id}</li>    
-    <li>title: ${newProduct.title}</li> 
-    <li>description: ${newProduct.description}</li>
-    <li>price: ${newProduct.price}</li>
-    <li>thumbnails: ${newProduct.thumbnails}</li>
-    <li>code: ${newProduct.code}</li>
-    <li>stock: ${newProduct.stock}</li>
-    <li>status: ${newProduct.status}</li>
-    <li>category: ${newProduct.category}</li>
-    <button id='btnDelete'>Delete product</button>
-    `;
-  productList.appendChild(newProductItem);
 }) */
+
