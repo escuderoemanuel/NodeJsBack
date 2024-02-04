@@ -23,8 +23,8 @@
 
   {{!-- FORM --}}
 
-  <h2>Create Product</h2>
-  <form action="/api/products" method='POST' id='formAddProduct'>
+  <h2>Create a New Product 👇</h2>
+  <form action="/api/products" method='POST' id='formAddProduct' class='form'>
     <div>
       <label for="title">Title: </label>
       <input type="text" name='title' id='title'>
@@ -60,6 +60,7 @@
     <button type='submit' id='btnCreateProduct'>
       Create Product
     </button>
+    <p class='errorMessage'>{{error}}</p>
 
   </form>
 

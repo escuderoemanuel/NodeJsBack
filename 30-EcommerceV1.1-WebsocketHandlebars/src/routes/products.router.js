@@ -17,7 +17,8 @@ router.get('/', async (req, res) => {
     }
     res.send({ status: 'success', payload: products });
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(400).send({ error: error.message });
+
   }
 })
 
@@ -46,7 +47,8 @@ router.post('/', async (req, res) => {
     res.send({ status: 'success', products });
 
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    console.log(error);
+    res.status(400).send({ error: error.message });
   }
 });
 

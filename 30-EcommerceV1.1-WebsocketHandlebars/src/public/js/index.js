@@ -48,14 +48,28 @@ formAddProduct.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify(newProduct)
     })
-    // espera que el servidor responda con la lista actualizada
+
+    if (!response.ok) {
+      const errorMessage = await response.json();
+      // Mostrar el mensaje de error en el formulario
+      document.querySelector('.errorMessage').textContent = errorMessage.error;
+      return;
+    }
+
+    // Restablecer el formulario y eliminar el mensaje de error
+    formAddProduct.reset();
+    document.querySelector('.errorMessage').textContent = '';
+
+    // Espera que el server responda con la lista actualizada.
     const { products } = await response.json()
 
-    // envia la lista actualizada a todos los clientes conectados.
+    // Envía la lista actualizada al server.
     socket.emit('add-product', { newProduct, products });
   } catch (error) {
     console.log(error)
-
+    const errorMessage = await response.json();
+    // Mostrar el mensaje de error en el formulario
+    document.querySelector('.errorMessage').textContent = errorMessage.error;
   }
 })
 
