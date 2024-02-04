@@ -1,44 +1,5 @@
 [
   {
-    "id": 5,
-    "title": "Test Product 5",
-    "description": "This is a test product",
-    "price": 600,
-    "thumbnails": [
-      "Without Image"
-    ],
-    "code": "abc345",
-    "stock": 65,
-    "status": true,
-    "category": "Technology"
-  },
-  {
-    "id": 6,
-    "title": "Test Product 6",
-    "description": "This is a test product",
-    "price": 700,
-    "thumbnails": [
-      "Without Image"
-    ],
-    "code": "abc678",
-    "stock": 75,
-    "status": true,
-    "category": "Technology"
-  },
-  {
-    "id": 7,
-    "title": "Test Product 7",
-    "description": "This is a test product",
-    "price": 800,
-    "thumbnails": [
-      "Without Image"
-    ],
-    "code": "abc901",
-    "stock": 85,
-    "status": true,
-    "category": "Technology"
-  },
-  {
     "id": 8,
     "title": "Test Product 8",
     "description": "This is a test product",
@@ -76,5 +37,109 @@
     "stock": 115,
     "status": true,
     "category": "Technology"
+  },
+  {
+    "id": 11,
+    "title": "987",
+    "description": "98",
+    "price": "987",
+    "thumbnails": [
+      null
+    ],
+    "code": "987",
+    "stock": "98",
+    "status": "98",
+    "category": "98"
+  },
+  {
+    "id": 12,
+    "title": "09",
+    "description": "09",
+    "price": "09",
+    "thumbnails": [
+      null
+    ],
+    "code": "09",
+    "stock": "09",
+    "status": "09",
+    "category": "09"
+  },
+  {
+    "id": 13,
+    "title": "546",
+    "description": "546",
+    "price": "54",
+    "thumbnails": [
+      null
+    ],
+    "code": "345",
+    "stock": "345",
+    "status": "354",
+    "category": "543"
+  },
+  {
+    "id": 14,
+    "title": "'089",
+    "description": "'0",
+    "price": "8",
+    "thumbnails": [
+      null
+    ],
+    "code": "908",
+    "stock": "098",
+    "status": "09",
+    "category": "098"
+  },
+  {
+    "id": 15,
+    "title": "asxGFD",
+    "description": "GFD",
+    "price": "6",
+    "thumbnails": [
+      null
+    ],
+    "code": "67",
+    "stock": "6",
+    "status": "HGF",
+    "category": "HGF"
+  },
+  {
+    "id": 16,
+    "title": "sdc",
+    "description": "sdc",
+    "price": "1",
+    "thumbnails": [
+      null
+    ],
+    "code": "c",
+    "stock": "1",
+    "status": "c",
+    "category": "c"
+  },
+  {
+    "id": 17,
+    "title": "lkn",
+    "description": "98",
+    "price": "98",
+    "thumbnails": [
+      null
+    ],
+    "code": "98",
+    "stock": "98",
+    "status": "98",
+    "category": "98"
+  },
+  {
+    "id": 18,
+    "title": "ahora si",
+    "description": "ahora si",
+    "price": "1000",
+    "thumbnails": [
+      null
+    ],
+    "code": "ahorasi",
+    "stock": "109",
+    "status": "ahora si",
+    "category": "ahora si"
   }
 ]

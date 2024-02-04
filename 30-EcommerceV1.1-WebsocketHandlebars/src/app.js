@@ -32,7 +32,7 @@ app.set('view engine', 'handlebars');
 app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/realtimeproducts', realTimeProducts)
-app.use('/api/home', homeRouter)
+app.use('/', homeRouter)
 
 // Server
 const server = app.listen(port, () => {
@@ -49,13 +49,17 @@ io.on('connection', (socket) => {
 
   // Escucha el evento 'delete-product'
   socket.on('delete-product', (data) => {
-    console.log('Deleted: ', data.productToDelete)
     const products = data.products;
     io.emit('update-products', products);
   })
 
-  socket.on('add-product', ({ newProduct, products }) => {
-    console.log('Added: ', newProduct.title)
+
+
+
+
+  socket.on('add-product', (data) => {
+    console.log('payload: ', data.products)
+    const products = data.products;
     io.emit('update-products', products)
   })
 

@@ -39,11 +39,14 @@ router.post('/', async (req, res) => {
     const { title, description, price, thumbnails, code, stock, status, category } = req.body;
 
     const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, status, category);
+    //    await manager.addProduct(req.body);
+
     const products = await manager.getProducts();
 
-    res.send({ status: 'success', payload: { newProduct, products } });
+    res.send({ status: 'success', products });
+
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 });
 
