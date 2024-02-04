@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Montserrat, sans-serif;
+    background-color: #222222;
+    color: whitesmoke;
 }
 
 body {
@@ -11,6 +13,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1,
@@ -23,6 +31,9 @@ form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    padding: 1rem;
+    border: 3px solid rgb(245, 245, 245);
+    border-radius: 8px;
 }
 
 div {
@@ -42,6 +53,9 @@ input {
     width: 300px;
     border-radius: 4px;
     padding: .5rem;
+    background-color: rgb(245, 245, 245);
+    color: #222222;
+    border: none
 }
 
 button {
@@ -73,5 +87,24 @@ button:active {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 2px solid rgb(0, 106, 255)
+    justify-content: space-between;
+    border: 2px solid white;
+    margin: .5rem;
+    width: 300px;
+    height: 350px;
+    background-color: rgb(245, 245, 245);
+}
+
+.product p,
+h4 {
+    background-color: rgb(245, 245, 245);
+    color: #161616;
+
+}
+
+#products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

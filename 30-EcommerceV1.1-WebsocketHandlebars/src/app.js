@@ -14,7 +14,7 @@ const app = express();
 // Import Routes
 const cartsRouter = require('./routes/carts.router.js');
 const productsRouter = require('./routes/products.router.js');
-const realtimeproductsRouter = require('./routes/realtimeproducts.router.js');
+const realTimeProducts = require('./routes/realtimeproducts.router.js');
 const homeRouter = require('./routes/home.router.js');
 
 // Public Folder
@@ -31,7 +31,7 @@ app.set('view engine', 'handlebars');
 // Routes
 app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
-app.use('/api/realtimeproducts', realtimeproductsRouter)
+app.use('/api/realtimeproducts', realTimeProducts)
 app.use('/api/home', homeRouter)
 
 // Server
@@ -45,27 +45,27 @@ const io = new Server(server);
 
 io.on('connection', (socket) => {
 
-  console.log(('User connected...'))
+  console.log('User connected...')
 
   // Escucha el evento 'delete-product'
   socket.on('delete-product', (data) => {
-    console.log('Deleted: ', data.productId)
-    io.emit('update-products', data.products)
+    console.log('Deleted: ', data)
+
+    io.emit('update-products', data);
   })
 
   socket.on('add-product', ({ newProduct, products }) => {
-    console.log('Added: ', newProduct.id)
+    console.log('Added: ', newProduct.title)
     io.emit('update-products', products)
   })
 
-
-
   socket.on('disconnect', () => {
-    console.log('Client disconnected...')
+    console.log(`User ${socket.id} disconnected...`)
   })
 
 })
 
+//! Esta pasando que no estoy recibiendo el array de productos en el socket.on, entonces no se hace correctamente el update porque no le estoy pasando la lista de productos nueva
 
 
 
