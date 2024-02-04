@@ -6,6 +6,7 @@ const handlebars = require('express-handlebars');
 
 // Express
 const express = require('express');
+
 const port = 8080;
 const serverMessage = `Server is running on port ${port}`;
 const app = express();
@@ -44,21 +45,20 @@ const io = new Server(server);
 
 io.on('connection', (socket) => {
 
-  console.log(('Client connected...'))
+  console.log(('User connected...'))
 
   // Escucha el evento 'delete-product'
-  socket.on('delete-product', async (productId) => {
-    try {
-      const response = await fetch(`/api/products/${productId}`, {
-        method: 'delete',
-      });
-      const { products } = await response.json();
-      // Emitir evento 'delete-product' con los productos actualizados
-      io.emit('delete-product', products);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  socket.on('delete-product', (data) => {
+    console.log('Deleted: ', data.productId)
+    io.emit('update-products', data.products)
+  })
+
+  socket.on('add-product', ({ newProduct, products }) => {
+    console.log('Added: ', newProduct.id)
+    io.emit('update-products', products)
+  })
+
+
 
   socket.on('disconnect', () => {
     console.log('Client disconnected...')

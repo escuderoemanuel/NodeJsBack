@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 
 
 // Deberá agregar un nuevo producto
-router.post('/', async (req, res) => {
+/* router.post('/', async (req, res) => {
   try {
     const newProduct = await manager.addProduct(req.body.title, req.body.description, req.body.price, req.body.thumbnails, req.body.code, req.body.stock, req.body.status, req.body.category);
     products.push(newProduct);
@@ -39,5 +39,5 @@ router.post('/', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 });
-
+ */
 module.exports = router;
