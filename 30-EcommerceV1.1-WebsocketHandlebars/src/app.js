@@ -53,10 +53,6 @@ io.on('connection', (socket) => {
     io.emit('update-products', products);
   })
 
-
-
-
-
   socket.on('add-product', (data) => {
     console.log('payload: ', data.products)
     const products = data.products;
@@ -68,8 +64,5 @@ io.on('connection', (socket) => {
   })
 
 })
-
-//! Esta pasando que no estoy recibiendo el array de productos en el socket.on, entonces no se hace correctamente el update porque no le estoy pasando la lista de productos nueva
-
 
 
