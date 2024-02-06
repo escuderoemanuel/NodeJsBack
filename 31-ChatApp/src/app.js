@@ -48,9 +48,11 @@ io.on('connection', (socket) => {
   })
 
   // Recive Event: user authenticated
-  socket.on('authenticated', () => {
+  socket.on('authenticated', ({ username }) => {
     // Send Event with the messages in the array: for this client-socket!
     socket.emit('messages', { messages });
+    // Send Event: for all users except the one connecting!
+    socket.broadcast.emit('newUserConnected', { newUsername: username });
   })
 
 

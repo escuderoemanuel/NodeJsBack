@@ -14,6 +14,7 @@ chatBox.addEventListener("keyup", (e) => {
       socket.emit("userMessage", {
         username: username,
         message: e.target.value,
+        date: new Date().toLocaleTimeString(),
       });
       e.target.value = "";
     }
@@ -26,10 +27,23 @@ socket.on("messages", ({ messages }) => {
   if (!username) return;
   messagesLog.innerHTML = '';
   messages.forEach(message => {
-    messagesLog.innerHTML += `<p><strong>${message.username}:</strong> ${message.message}</p>`;
+    messagesLog.innerHTML += `<p><strong>[${message.date}] ${message.username}:</strong> ${message.message}</p>`;
   })
   messagesLog.scrollTop = messagesLog.scrollHeight;
 })
+
+// Socket New User Connected
+socket.on("newUserConnected", ({ newUsername }) => {
+  if (!username) return;
+  // Alert New User Connected
+  Swal.fire({
+    text: `🔔 ${newUsername} has joined the chat! `,
+    toast: true,
+    position: 'top-right',
+    time: 2000
+  })
+})
+
 
 
 // Login
@@ -48,7 +62,7 @@ Swal.fire({
   usernameFront.innerHTML = `User: ${username}`;
   socket.emit("newUser", username);
   // Send Event Auth
-  socket.emit("authenticated");
+  socket.emit("authenticated", { username });
 });
 
 
