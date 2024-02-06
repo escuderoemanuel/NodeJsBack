@@ -5,43 +5,58 @@ const viewsRouter = require('./routes/views.router');
 const PORT = 8080;
 const sererMessage = `Server is running on port ${PORT}`;
 
-// Express
+//! Express
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Public Folder
+//! Public Folder
 app.use(express.static(`${__dirname}/public`));
 
-// Handlebars
+//! Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
 
-// Routes
+//! Routes
 app.use('/', viewsRouter);
 
-// Express
+//! Express
 const httpServer = app.listen(PORT, () => {
   console.log(sererMessage)
 })
 
-// Socket io
+//! Socket io
 const io = new Server(httpServer);
 
+// Array for messages received from the client
 let messages = [];
 
-
+// Event 'new connection'
 io.on('connection', (socket) => {
   console.log(`User with id:${socket.id} connected...`);
 
+  //! Chat Events
+
+  // Recive Event: message received from the client
   socket.on('userMessage', (messageData) => {
+    // Save message received in the array of messages
     messages.push(messageData);
-    io.emit('serverMessages', { messages: messages });
+    // Send Event: for all clients-sockets!
+    io.emit('messages', { messages });
   })
+
+  // Recive Event: user authenticated
+  socket.on('authenticated', () => {
+    // Send Event with the messages in the array: for this client-socket!
+    socket.emit('messages', { messages });
+  })
+
+
+
+  // Recive Event: disconnect
   socket.on('disconnect', () => {
     console.log(`User with id:${socket.id} disconnected...`);
   })
-
 })

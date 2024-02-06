@@ -1,15 +1,16 @@
 const socket = io();
 let username;
 
-// Elements
+//! Elements
 const usernameFront = document.getElementById('usernameFront')
 const chatBox = document.getElementById("chatBox");
 const messagesLog = document.getElementById("messagesLog");
 
-// Events
+//! Events & Socket Events
 chatBox.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
     if (chatBox.value.trim().length > 0) {
+      // Send Event: user data
       socket.emit("userMessage", {
         username: username,
         message: e.target.value,
@@ -19,8 +20,10 @@ chatBox.addEventListener("keyup", (e) => {
   }
 })
 
-// Sockets Events
-socket.on("serverMessages", ({ messages }) => {
+
+// Recive Event: new messages
+socket.on("messages", ({ messages }) => {
+  if (!username) return;
   messagesLog.innerHTML = '';
   messages.forEach(message => {
     messagesLog.innerHTML += `<p><strong>${message.username}:</strong> ${message.message}</p>`;
@@ -44,6 +47,8 @@ Swal.fire({
   username = result.value;
   usernameFront.innerHTML = `User: ${username}`;
   socket.emit("newUser", username);
+  // Send Event Auth
+  socket.emit("authenticated");
 });
 
 
