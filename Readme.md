@@ -6,6 +6,8 @@
 - Nodemon
 - Express
 - Handlebars
+- DotEnv
+- Mailing
 
 ## About the Repo
 
