@@ -1,6 +1,7 @@
 class TicketManager {
+  // Static Variables
   #precioBaseDeGanancia = 0.15;
-  #id = 1;
+  #id = 0;
 
   constructor() {
     this.eventos = [];
@@ -11,9 +12,10 @@ class TicketManager {
   }
 
   agregarEvento(nombre, lugar, precio, capacidad, fecha) {
-    let evento = {
-    }
-    evento.id = this.#id++;
+
+    let evento = {}
+
+    evento.id = ++this.#id;
     evento.nombre = nombre;
     evento.lugar = lugar;
     evento.precio = precio + this.#precioBaseDeGanancia;
@@ -26,6 +28,7 @@ class TicketManager {
 }
 
 const manager = new TicketManager();
+
 manager.agregarEvento("evento 1", "lugar 1", 1000);
 manager.agregarEvento("evento 2", "lugar 2", 454, 500, '3/2/2024');
 console.log(manager.getEventos());

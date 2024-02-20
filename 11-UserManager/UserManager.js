@@ -11,8 +11,7 @@ class UserManager {
   async createUser(object) {
     this.users.push(object);
     try {
-
-      await fs.promises.writeFile(file, JSON.stringify(this.users));
+      await fs.promises.writeFile(file, JSON.stringify(this.users), null, 2);
     } catch (error) {
       console.log(`Error: ${error}`)
     }
