@@ -1,7 +1,12 @@
 <h1>
-  Users:
+  USERS
 </h1>
 {{!-- users viene del nombre que le damos en views.router --}}
 {{#each users}}
-<p>{{this.name}}</p>
+<ul>
+  <li>Name: {{this.firstName}} {{this.lastName}}</li>
+  <li>Gender: {{this.gender}}</li>
+  <li>Email: {{this.email}}</li>
+  <li>Courses: {{this.courses}}</li>
+</ul>
 {{/each}}

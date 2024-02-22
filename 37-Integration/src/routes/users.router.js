@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const Users = require('../dao/fileManagers/usersFileManager');
+const Users = require('../dao/dbManagers/usersDbManager');
 
 const router = Router();
 

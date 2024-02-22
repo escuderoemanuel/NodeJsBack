@@ -1,4 +1,4 @@
-const UserModel = require('../models/user.model');
+const UserModel = require('../../models/user.model');
 
 class UsersManager {
   constructor() {
@@ -6,7 +6,7 @@ class UsersManager {
   }
 
   async getAll() {
-    let users = await UserModel.find().lean();
+    let users = await UserModel.find().lean(); // lean() transforma cada documento en objeto js
     return users;
   }
 
