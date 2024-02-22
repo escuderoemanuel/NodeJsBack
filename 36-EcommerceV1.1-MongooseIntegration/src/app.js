@@ -1,3 +1,17 @@
+// Atlas DB Connection
+require('dotenv').config();
+const USER = process.env.USER;
+const PASSWORD = process.env.PASSWORD;
+
+const mongoose = require('mongoose');
+
+/* DB Connection */
+mongoose.connect(`mongodb+srv://${USER}:${PASSWORD}@mongodbcluster.piysuzj.mongodb.net/ecommerce`)
+  .then(() => {
+    console.log('Connected Succesfully')
+  })
+
+
 // Solamente traemos Server de io
 const { Server } = require('socket.io');
 

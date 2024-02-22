@@ -1,8 +1,8 @@
 const express = require('express');
-const ProductManager = require('../ProductManager');
+const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
 
 // Manager
-const manager = new ProductManager(`${__dirname}/../files/products.json`);
+const manager = new ProductsDbManager();
 
 const router = express.Router();
 
