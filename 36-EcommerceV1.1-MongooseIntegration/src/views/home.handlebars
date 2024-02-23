@@ -8,8 +8,8 @@
   <ul id='products'>
     {{#each products}}
     <li class='product'>
-      <h4>Product {{this.id}}</h4>
-      <p>id: {{this.id}}</p>
+      <h4 class='productTitle'>{{this.title}}</h4>
+      <p>id: {{this._id}}</p>
       <p>title: {{this.title}}</p>
       <p>description: {{this.description}}</p>
       <p>price: {{this.price}}</p>

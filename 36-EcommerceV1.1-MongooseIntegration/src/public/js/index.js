@@ -81,8 +81,8 @@ socket.on('update-products', data => {
     const productItem = document.createElement('li')
     productItem.classList.add('product');
     productItem.innerHTML = `
-    <h4>Product ${product.id}</h4>
-    <p>id: ${product.id}</p>
+    <h4>Product ${product.title}</h4>
+    <p>id: ${product._id}</p>
     <p>title: ${product.title}</p>
     <p>description: ${product.description}</p>
     <p>price: ${product.price}</p>

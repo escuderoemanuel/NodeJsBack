@@ -30,6 +30,7 @@ const cartsRouter = require('./routes/carts.router.js');
 const productsRouter = require('./routes/products.router.js');
 const realTimeProducts = require('./routes/realtimeproducts.router.js');
 const homeRouter = require('./routes/home.router.js');
+const messagesRouter = require('./routes/messages.router.js');
 
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
@@ -45,6 +46,7 @@ app.set('view engine', 'handlebars');
 // Routes
 app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
+app.use('/api/messages', messagesRouter)
 app.use('/api/realtimeproducts', realTimeProducts)
 app.use('/', homeRouter)
 
@@ -57,10 +59,14 @@ const server = app.listen(port, () => {
 
 const io = new Server(server);
 
+let messages = [];
+
+
 io.on('connection', (socket) => {
 
   console.log('User connected...')
 
+  //! Products Events
   // Escucha el evento 'delete-product'
   socket.on('delete-product', (data) => {
     const products = data.products;
@@ -73,6 +79,29 @@ io.on('connection', (socket) => {
     io.emit('update-products', products)
   })
 
+
+  //! Carts Events
+
+
+  //! Messages Events
+  // Recive Event: message received from the client
+  socket.on('userMessage', (messageData) => {
+    // Save message received in the array of messages
+    messages.push(messageData);
+    // Send Event: for all clients-sockets!
+    io.emit('messages', { messages });
+  })
+
+  // Recive Event: user authenticated
+  socket.on('authenticated', ({ username }) => {
+    // Send Event with the messages in the array: for this client-socket!
+    socket.emit('messages', { messages });
+    // Send Event: for all users except the one connecting!
+    socket.broadcast.emit('newUserConnected', { newUsername: username });
+  })
+
+
+  //! Connection Finished
   socket.on('disconnect', () => {
     console.log(`User ${socket.id} disconnected...`)
   })

@@ -36,62 +36,23 @@ h2 {
 }
 
 
-/*? FOOTER */
-.footer {
-    font-size: 0.82em;
-    font-weight: light;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
-    margin: 4rem 0rem 1rem;
-}
-
-.footer:before {
-    content: '';
-    display: block;
-    width: 90%;
-    height: 1px;
-    background-color: whitesmoke;
-}
-
-.footerContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .5rem;
-}
-
-.footerContainer p {
-    font-weight: light;
-    margin-right: 15px;
-}
-
-.logoDev {
-    width: 26px;
-    height: auto;
-    transition: all ease 200ms;
-}
-
-.logoDev:hover {
-    transform: rotate(5deg) scale(1.05);
-}
-
-
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+}
+
+content {
+    flex: 1
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
 /*? FORM */
@@ -183,9 +144,70 @@ h4 {
 
 }
 
+.productTitle {
+    text-transform: uppercase;
+}
+
 #products {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+/*? CHAT VIEW */
+.chatView div {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.messagesLog {
+    margin: 2rem 0;
+    line-height: 1.5;
+}
+
+/*? FOOTER */
+.footer {
+    font-size: 0.82em;
+    font-weight: light;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem 0rem 1rem;
+    margin-top: auto;
+}
+
+.footer:before {
+    content: '';
+    display: block;
+    width: 90%;
+    height: 1px;
+    background-color: whitesmoke;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+}
+
+.footerContainer p {
+    font-weight: light;
+    margin-right: 15px;
+}
+
+.logoDev {
+    width: 26px;
+    height: auto;
+    transition: all ease 200ms;
+}
+
+.logoDev:hover {
+    transform: rotate(5deg) scale(1.05);
 }

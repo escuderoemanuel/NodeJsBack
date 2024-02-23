@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const productsSchema = new mongoose.Schema({
+
   title: {
     type: String,
     required: true,
@@ -24,7 +25,6 @@ const productsSchema = new mongoose.Schema({
   stock: {
     type: Number,
     required: true,
-    default: 0
   },
   category: {
     type: String,
@@ -32,7 +32,8 @@ const productsSchema = new mongoose.Schema({
   },
   status: {
     type: Boolean,
-    default: true
+    default: true,
+    required: true
   }
 })
 

@@ -14,11 +14,11 @@ class ProductsDbManager {
     }
   }
 
-
   async addProduct(title, description, price, thumbnails, code, stock, status, category) {
+
     try {
 
-      const products = await ProductsModel.create({ title, description, price, thumbnails, code, stock, status, category })
+      const products = await this.getProducts();
 
       // Verify if all the fields are filled.
       if (!title || !description || !price || !code || !stock || !category || !status) {
@@ -29,10 +29,8 @@ class ProductsDbManager {
       if (products.find(prod => prod.code === code)) {
         throw new Error('The product code already exists.');
       } else {
-        // If the product code does not exist, decleare the id variable, check the number of existing ids and add 1 to the last one and assign it to the new product
-        const id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-        const product = {
-          id,
+        // If the product code does not exist, create the new product
+        const product = await ProductsModel.create({
           title,
           description,
           price,
@@ -41,7 +39,7 @@ class ProductsDbManager {
           stock,
           status,
           category,
-        };
+        });
 
         // Add the new product to the products array.
         products.push(product);
