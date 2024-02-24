@@ -52,10 +52,10 @@ class ProductsDbManager {
 
   async getProductById(id) {
     try {
-      const products = await ProductsModel.find().lean();
+      const products = await ProductsModel.findOne({ _id: id }).lean();
 
       // Find the product with the specified id.
-      const product = products.find(product => product.id === id);
+      const product = products.find(product => product._id === id);
 
       if (product) {
         return product;
@@ -80,7 +80,7 @@ class ProductsDbManager {
       const products = await ProductsModel.find().lean();
 
       // Find the index position of the product to update
-      const productIndex = products.findIndex(product => product.id === id);
+      const productIndex = products.findIndex(product => product._id === id);
 
       // If product index id valid
       if (productIndex !== -1) {
@@ -102,10 +102,10 @@ class ProductsDbManager {
 
   async deleteProduct(id) {
     try {
-      const products = await ProductsModel.find().lean();
+      const products = await ProductsModel.findOne({ _id: id }).lean();
 
       // Find the index position of the product to delete. If the product is not found, it will return -1.
-      const productIndex = products.findIndex(product => product.id === id);
+      const productIndex = products.findIndex(product => product._id === id);
 
       if (productIndex !== -1) {
         // Delete 1 product, from the specified productIndex

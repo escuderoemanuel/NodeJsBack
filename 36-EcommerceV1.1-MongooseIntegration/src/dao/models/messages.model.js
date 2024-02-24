@@ -8,9 +8,13 @@ const messagesSchema = new mongoose.Schema({
   message: {
     type: String,
     require: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   }
 })
 
 // collection 'messages' + schema
-const messagesModel = mongoose.model('messages', messagesSchema);
-module.exports = messagesModel;
+const MessagesModel = mongoose.model('messages', messagesSchema);
+module.exports = MessagesModel;

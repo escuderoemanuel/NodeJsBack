@@ -7,6 +7,7 @@ class MessagesDbManager {
 
   async init() {
     try {
+      //await MessagesModel.createCollection();
       await MessagesModel.createCollection();
     } catch (error) {
       throw new Error(error.message);

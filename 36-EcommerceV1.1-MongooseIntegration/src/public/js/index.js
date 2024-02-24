@@ -73,8 +73,6 @@ formAddProduct.addEventListener('submit', async (e) => {
   }
 })
 
-
-
 socket.on('update-products', data => {
   productList.innerHTML = ''
   data.forEach(product => {
@@ -91,7 +89,7 @@ socket.on('update-products', data => {
     <p>stock: ${product.stock}</p>
     <p>status: ${product.status}</p>
     <p>category: ${product.category}</p>
-    <button class='btnDelete' id='btnDelete${product.id}' data-id='btnDelete'>Delete Product</button>
+    <button class='btnDelete' id='btnDelete${product._id}' data-id='btnDelete'>Delete Product</button>
     `;
     productList.appendChild(productItem)
   })

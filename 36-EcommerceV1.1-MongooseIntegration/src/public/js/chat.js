@@ -21,6 +21,26 @@ chatBox.addEventListener("keyup", (e) => {
   }
 })
 
+/* Enviar Mensajes a Atlas */
+const newMessage = {};
+async function sendMessage() {
+  newMessage.username = username;
+  newMessage.message = chatBox.value;
+  newMessage.date = new Date().toLocaleTimeString();
+  console.log(newMessage);
+  chatBox.value = '';
+  // Send Event: new message to Atlas DB
+  socket.emit("newMessage", newMessage);
+  // Send Event: new message to Mongo DB
+  await fetch('/api/messages', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ newMessage })
+  })
+  console.log('newMessage', newMessage)
+}
 
 // Recive Event: new messages
 socket.on("messages", ({ messages }) => {

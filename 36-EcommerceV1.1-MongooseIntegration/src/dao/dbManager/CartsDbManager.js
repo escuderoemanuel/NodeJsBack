@@ -1,4 +1,5 @@
 const fs = require('fs');
+const CartsModel = require('../models/carts.model');
 
 const encoding = 'utf8';
 
@@ -7,6 +8,11 @@ class CartManager {
   constructor(path) {
     this.path = path;
     this.carts = [];
+  }
+
+  async getItems() {
+    const items = await CartsModel.find().lean();
+    return items;
   }
 
   // Deberá agregar un nuevo carrito al archivo JSON
