@@ -23,7 +23,7 @@ socket.on('update-products', data => {
       <p>stock: ${product.stock}</p>
       <p>category: ${product.category}</p>
       <p>status: ${product.status}</p>
-      <button class='btnDelete' id="btnDelete'${product._id}'"
+      <button class='btnDelete' id="btnDelete${product._id}"
       data-id='btnDelete'>Delete Product</button>
           `;
     productList.appendChild(productItem)
