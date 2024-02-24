@@ -25,7 +25,6 @@ router.get('/', async (req, res) => {
 // Deberá traer sólo el producto con el id proporcionado
 router.get('/:pid', async (req, res) => {
   try {
-
     // const products = await manager.getProducts();
     // console.log('pid', pid);
     // const product = products.find(product => product._id == pid);
@@ -59,7 +58,8 @@ router.post('/', async (req, res) => {
 // Deberá actualizar un producto existente con el id proporcionado.
 router.put('/:pid', async (req, res) => {
   try {
-    const id = parseInt(req.params.pid);
+    const id = req.params.pid;
+    console.log('PUT ID', id)
     const updatedFields = req.body;
 
     const updatedProduct = await manager.updateProduct(id, updatedFields);
