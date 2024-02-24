@@ -25,9 +25,13 @@ router.get('/', async (req, res) => {
 // Deberá traer sólo el producto con el id proporcionado
 router.get('/:pid', async (req, res) => {
   try {
-    const pid = parseInt(req.params.pid);
-    const product = await manager.getProductById(pid);
 
+    // const products = await manager.getProducts();
+    // console.log('pid', pid);
+    // const product = products.find(product => product._id == pid);
+    // console.log('product', product);
+    const pid = req.params.pid;
+    const product = await manager.getProductById(pid);
     res.send({ status: 'success', payload: product });
   } catch (error) {
     res.status(400).send({ error: error.message });

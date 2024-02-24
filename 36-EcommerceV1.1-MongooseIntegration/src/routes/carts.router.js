@@ -40,7 +40,6 @@ router.get('/:cid', async (req, res) => {
       return { product: product.id, quantity: product.quantity };
     })
 
-
     //const products = cart.products;
     res.send({ id, products: products });
   } catch (error) {

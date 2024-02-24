@@ -65,14 +65,14 @@ io.on('connection', (socket) => {
   console.log('User connected...')
 
   //! Products Events
-  // Escucha el evento 'delete-product'
+  // Listen for the 'delete-product' event
   socket.on('delete-product', (data) => {
-    const products = data.products;
-    io.emit('update-products', products);
+    const product = data.products;
+    // Send the products to update
+    io.emit('update-products', product);
   })
 
   socket.on('add-product', (data) => {
-    console.log('payload: ', data.products)
     const products = data.products;
     io.emit('update-products', products)
   })

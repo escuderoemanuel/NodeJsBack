@@ -1,16 +1,53 @@
-const fs = require('fs');
 const CartsModel = require('../models/carts.model');
 
-const encoding = 'utf8';
 
 class CartManager {
 
-  constructor(path) {
-    this.path = path;
-    this.carts = [];
+  //! ADD
+  async addCart() {
+    const cart = { items: [] }
+    try {
+      await CartsModel.create(cart);
+    } catch (error) {
+      throw new Error(error.message)
+    }
   }
 
-  async getItems() {
+  //! GET BY ID
+  async getCartById(id) {
+    try {
+      const cart = await CartsModel.findOne({ _id: id }).lean();
+      return cart;
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
+  //! ADD ITEM
+  async addProductToCart(cid, pid) {
+    try {
+      //      const cart = await this.getCartById(cid);
+      const cart = await CartsModel.findOne({ _id: id }).lean();
+
+
+      const product = cart.items.find(item => item.product === pid);
+      if (product) {
+        product.quantity++;
+      } else {
+        cart.items.push({ product: pid, quantity: 1 });
+      }
+      await CartsModel.updateOne({ _id: cid }, cart);
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
+  /*  constructor(path) {
+     this.path = path;
+     this.carts = [];
+   } */
+
+  /* async getItems() {
     const items = await CartsModel.find().lean();
     return items;
   }
@@ -121,7 +158,7 @@ class CartManager {
     } catch (error) {
       throw new Error(error.message)
     }
-  }
+  } */
 }
 
 // Exportación para utilizar en el app.js

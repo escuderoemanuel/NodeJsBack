@@ -14,7 +14,7 @@
       <p>stock: {{this.stock}}</p>
       <p>status: {{this.status}}</p>
       <p>category: {{this.category}}</p>
-      <button class='btnDelete' id='btnDelete{{this.id}}' data-id='btnDelete'>Delete Product
+      <button class='btnDelete' id="btnDelete'{{this._id}}''" data-id='btnDelete'>Delete Product
       </button>
     </li>
     {{/each}}
@@ -72,4 +72,4 @@
 
 {{!-- Para tener acceso a socket.io --}}
 <script src='/socket.io/socket.io.js'></script>
-<script src='/js/index.js'></script>
+<script src='/js/products.js'></script>

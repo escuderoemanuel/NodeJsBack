@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 
 const cartsSchema = new mongoose.Schema({
-  
-  
   items: {
-  type: [{
-    item: Number,
-    quantity: Number,
-  }],
-  default: []
-}
+    type: [{
+      item: String,
+      quantity: Number,
+    }],
+    default: []
+  }
 
 })
 
