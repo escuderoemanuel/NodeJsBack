@@ -73,12 +73,12 @@ router.put('/:pid', async (req, res) => {
 // Deberá eliminar un producto existente con el id proporcionado.
 router.delete('/:pid', async (req, res) => {
   try {
-    const id = parseInt(req.params.pid);
+    const id = req.params.pid;
     const productToDelete = await manager.getProductById(id);
     await manager.deleteProduct(id);
     const products = await manager.getProducts();
 
-    res.send({ status: 'success', payload: { productToDelete, products } });
+    res.send({ status: 'success', payload: { productToDelete } });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }

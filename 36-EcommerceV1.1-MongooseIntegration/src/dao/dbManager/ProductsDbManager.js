@@ -27,9 +27,7 @@ class ProductsDbManager {
   //! GET BY ID
   async getProductById(id) {
     try {
-      const product = await ProductsModel.findOne({ _id: id }).lean();
-      console.log('product', product)
-      console.log('id', id)
+      const product = await ProductsModel.findOne({ _id: id });
       return product;
     } catch (error) {
       throw new Error(error.message)
