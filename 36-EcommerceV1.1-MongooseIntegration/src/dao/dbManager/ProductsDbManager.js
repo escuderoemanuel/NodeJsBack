@@ -8,7 +8,7 @@ class ProductsDbManager {
   //! ADD
   async addProduct(product) {
     try {
-      await ProductsModel.create(product);
+      await ProductsModel.create(product)
     } catch (error) {
       throw new Error(error.message)
     }

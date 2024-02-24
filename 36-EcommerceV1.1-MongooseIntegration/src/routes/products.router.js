@@ -40,13 +40,13 @@ router.get('/:pid', async (req, res) => {
 // Deberá agregar un nuevo producto
 router.post('/', async (req, res) => {
   try {
-    const { title, description, price, thumbnails, code, stock, status, category } = req.body;
+    await manager.addProduct(req.body);
+    // const { title, description, price, thumbnails, code, stock, category, status } = req.body;
 
-    const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, status, category);
-    //    await manager.addProduct(req.body);
+    // const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, category, status);
+    // await manager.addProduct(req.body);
 
     const products = await manager.getProducts();
-
     res.send({ status: 'success', products });
 
   } catch (error) {
