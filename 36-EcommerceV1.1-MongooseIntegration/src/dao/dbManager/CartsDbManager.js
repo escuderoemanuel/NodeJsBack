@@ -1,12 +1,14 @@
 const CartsModel = require('../models/carts.model');
+const ProductsDbManager = require('./ProductsDbManager');
 
+const productManager = new ProductsDbManager();
 
 class CartManager {
 
   //! ADD
   async addCart() {
-    const cart = { items: [] }
     try {
+      const cart = { items: [] }
       await CartsModel.create(cart);
     } catch (error) {
       throw new Error(error.message)
@@ -16,7 +18,7 @@ class CartManager {
   //! GET BY ID
   async getCartById(id) {
     try {
-      const cart = await CartsModel.findOne({ _id: id }).lean();
+      const cart = await CartsModel.findOne({ _id: id })
       return cart;
     } catch (error) {
       throw new Error(error.message)
@@ -26,17 +28,21 @@ class CartManager {
   //! ADD ITEM
   async addProductToCart(cid, pid) {
     try {
-      //      const cart = await this.getCartById(cid);
-      const cart = await CartsModel.findOne({ _id: id }).lean();
+      //const cart = await CartsModel.findOne({ _id: id });
+      // Busca el cart que necesito
+      const cart = await this.getCartById(cid);
 
+      // Busca el producto dentro del cart y lo incrementa en 1 si ya existe, sino lo agrega al cart.items.push({ product: pid, quantity: 1 });
+      const productIndex = cart.items.findIndex(i => i.product === pid);
+      if (productIndex >= 0) {
+        cart.items[productIndex].quantity++;
 
-      const product = cart.items.find(item => item.product === pid);
-      if (product) {
-        product.quantity++;
       } else {
         cart.items.push({ product: pid, quantity: 1 });
       }
+
       await CartsModel.updateOne({ _id: cid }, cart);
+
     } catch (error) {
       throw new Error(error.message)
     }

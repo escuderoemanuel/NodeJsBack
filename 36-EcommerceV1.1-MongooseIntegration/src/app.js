@@ -66,10 +66,18 @@ io.on('connection', (socket) => {
 
   //! Products Events
   // Listen for the 'delete-product' event
+  //socket.on('delete-product', (data) => {
+  //console.log('data', data)
+  //const products = data.products;
+  //console.log('products', products)
+
+  // Send the products to update
+  //io.emit('update-products', products);
+  //})
+
   socket.on('delete-product', (data) => {
     const product = data.products;
-    // Send the products to update
-    io.emit('update-products', product);
+    io.emit('update-products', product)
   })
 
   socket.on('add-product', (data) => {
@@ -81,15 +89,18 @@ io.on('connection', (socket) => {
   //! Carts Events
 
 
+
+
+
   //! Messages Events
-  // Recive Event: user authenticated
+  /* // Recive Event: user authenticated
   socket.on('authenticated', ({ username }) => {
     // Send Event with the messages in the array: for this client-socket!
     socket.emit('messages', { messages });
     // Send Event: for all users except the one connecting!
     socket.broadcast.emit('newUserConnected', { newUsername: username });
   })
-
+  
   // Recive Event: message received from the client
   socket.on('userMessage', (messageData) => {
     const data = messageData;
@@ -99,10 +110,10 @@ io.on('connection', (socket) => {
     messages.push(messageData);
     //messages.push(data);
     console.log('messages: ', messages)
-
+  
     // Send Event: for all clients-sockets!
     io.emit('messages', { messages });
-  })
+  }) */
 
 
   //! Connection Finished

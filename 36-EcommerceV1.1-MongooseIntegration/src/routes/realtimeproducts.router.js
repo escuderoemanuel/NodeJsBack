@@ -8,7 +8,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const products = await manager.getProducts(req.query.limit)
+    //const products = await manager.getProducts(req.query.limit)
+    const products = await manager.getProducts()
     res.render('realTimeProducts', {
       products,
       layout: 'main'
@@ -20,4 +21,3 @@ router.get('/', async (req, res) => {
 
 module.exports = router;
 
-//! Los lee bien, los agrega mal, revisar!
