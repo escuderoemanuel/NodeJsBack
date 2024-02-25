@@ -1,60 +1,43 @@
 const socket = io();
-let username;
+let user;
 
 //! Elements
 const usernameFront = document.getElementById('usernameFront')
-const chatBox = document.getElementById("chatBox");
+const messageInput = document.getElementById("messageInput");
 const messagesLog = document.getElementById("messagesLog");
 
 //! Events & Socket Events
-chatBox.addEventListener("keyup", (e) => {
+// SOCKET ON => Recive Event: new messages
+socket.on("messages", ({ messages }) => {
+  if (!user) return;
+  messagesLog.innerHTML = '';
+  messages.forEach(message => {
+    messagesLog.innerHTML += `<p>[${message.date}] <strong>${message.user}:</strong> ${message.message}</p>`;
+  })
+  messagesLog.scrollTop = messagesLog.scrollHeight;
+})
+
+///SOCKET EMIT => Enviar Usuario a Atlas
+messageInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
-    if (chatBox.value.trim().length > 0) {
+    if (messageInput.value.trim().length > 0) {
       // Send Event: user data
       socket.emit("userMessage", {
-        username: username,
+        user: user,
         message: e.target.value,
-        date: new Date().toLocaleTimeString(),
+        date: new Date().toLocaleDateString(),
+
       });
       e.target.value = "";
     }
   }
 })
 
-/* Enviar Mensajes a Atlas */
-const newMessage = {};
-async function sendMessage() {
-  newMessage.username = username;
-  newMessage.message = chatBox.value;
-  newMessage.date = new Date().toLocaleTimeString();
-  console.log(newMessage);
-  chatBox.value = '';
-  // Send Event: new message to Atlas DB
-  socket.emit("newMessage", newMessage);
-  // Send Event: new message to Mongo DB
-  await fetch('/api/messages', {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ newMessage })
-  })
-  console.log('newMessage', newMessage)
-}
 
-// Recive Event: new messages
-socket.on("messages", ({ messages }) => {
-  if (!username) return;
-  messagesLog.innerHTML = '';
-  messages.forEach(message => {
-    messagesLog.innerHTML += `<p><strong>[${message.date}] ${message.username}:</strong> ${message.message}</p>`;
-  })
-  messagesLog.scrollTop = messagesLog.scrollHeight;
-})
 
 // Socket New User Connected
 socket.on("newUserConnected", ({ newUsername }) => {
-  if (!username) return;
+  if (!user) return;
   // Alert New User Connected
   Swal.fire({
     color: "#eee",
@@ -73,20 +56,15 @@ Swal.fire({
   background: "#222",
   radius: 2,
   title: "👋 Hey, welcome! 😉",
-  text: "Enter your Username 👇",
-  input: "text",
-  allowOutsideClick: false,
-  inputValidator: (value) => {
-    if (!value) {
-      return "You need to write your Username!😠";
-    }
-  }
+  text: "Enter your email 👇",
+  input: "email",
+  allowOutsideClick: false
 }).then((result) => {
-  username = result.value;
-  usernameFront.innerHTML = `User: ${username}`;
-  socket.emit("newUser", username);
+  user = result.value;
+  usernameFront.innerHTML = `User: ${user}`;
+  socket.emit("newUser", user);
   // Send Event Auth
-  socket.emit("authenticated", { username });
+  socket.emit("authenticated", { user });
 });
 
 

@@ -12,4 +12,9 @@ router.get('/', async (req, res) => {
   res.render('home', { products });
 });
 
+// Ruta para el chat
+router.get('/chat', (req, res) => {
+  res.render('chat', {});
+})
+
 module.exports = router;
