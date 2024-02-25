@@ -67,7 +67,7 @@ Swal.fire({
   allowOutsideClick: false
 }).then((result) => {
   user = result.value;
-  usernameFront.innerHTML = `User: ${user}`;
+  usernameFront.innerHTML = `${user}`;
   socket.emit("newUser", user);
   // Send Event Auth
   socket.emit("authenticated", { user });
