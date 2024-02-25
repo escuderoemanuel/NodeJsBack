@@ -7,15 +7,7 @@ const messageInput = document.getElementById("messageInput");
 const messagesLog = document.getElementById("messagesLog");
 
 //! Events & Socket Events
-// SOCKET ON => Recive Event: new messages
-socket.on("messages", ({ messages }) => {
-  if (!user) return;
-  messagesLog.innerHTML = '';
-  messages.forEach(message => {
-    messagesLog.innerHTML += `<p>[${message.date}] <strong>${message.user}:</strong> ${message.message}</p>`;
-  })
-  messagesLog.scrollTop = messagesLog.scrollHeight;
-})
+
 
 ///SOCKET EMIT => Enviar Usuario a Atlas
 messageInput.addEventListener("keyup", (e) => {
@@ -25,7 +17,7 @@ messageInput.addEventListener("keyup", (e) => {
       socket.emit("userMessage", {
         user: user,
         message: e.target.value,
-        date: new Date().toLocaleDateString(),
+        date: new Date().toLocaleString(),
 
       });
       e.target.value = "";
@@ -33,7 +25,21 @@ messageInput.addEventListener("keyup", (e) => {
   }
 })
 
-
+// SOCKET ON => Recive Event: new messages
+socket.on("messages", ({ messages }) => {
+  if (!user) return;
+  messagesLog.innerHTML = '';
+  messages.forEach(message => {
+    messagesLog.innerHTML += `
+    <p class='messageContainer'>
+    <span class='messageInfo'>${message.date} ${message.user}</span>
+    
+    <span class='userMessage'>${message.message}</span>
+    </p>
+    `;
+  })
+  messagesLog.scrollTop = messagesLog.scrollHeight;
+})
 
 // Socket New User Connected
 socket.on("newUserConnected", ({ newUsername }) => {

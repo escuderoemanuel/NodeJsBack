@@ -1,10 +1,14 @@
-<main class='chatView'>
+<section class='chatView'>
 
-  <h1>Chat View</h1>
-  <p id='usernameFront'></p>
+  <div class='headerChat'>
+    <h1>Chat View
+      <img class='iconChat' src='../images/chatIcon.png' alt="Chat Icon">
+    </h1>
+  </div>
+  <p id='usernameFront' class='usernameFront'></p>
 
   <div>
-    <input class='messageInput' id='messageInput' type="text">
+    <input class='messageInput' id='messageInput' type="text" placeholder='Enter your message...'>
     <p class='messagesLog' id='messagesLog'></p>
   </div>
 
@@ -17,4 +21,4 @@
   <script src='/socket.io/socket.io.js'></script>
   <script src='/js/chat.js'></script>
 
-</main>
+</section>
