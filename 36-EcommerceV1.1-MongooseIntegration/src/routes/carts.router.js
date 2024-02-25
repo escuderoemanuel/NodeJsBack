@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-
 // Deberá listar los productos que pertenezcan al carrito con el cid proporcionado
 router.get('/:cid', async (req, res) => {
   try {
@@ -66,6 +65,5 @@ router.post('/:cid/product/:pid', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 })
-
 
 module.exports = router;

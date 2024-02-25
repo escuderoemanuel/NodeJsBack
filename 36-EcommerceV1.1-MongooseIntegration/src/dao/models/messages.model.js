@@ -6,8 +6,7 @@ const messagesSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-  }
-  ,
+  },
   date: {
     type: String,
   }

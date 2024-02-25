@@ -8,7 +8,6 @@ const messagesLog = document.getElementById("messagesLog");
 
 //! Events & Socket Events
 
-
 ///SOCKET EMIT => Enviar Usuario a Atlas
 messageInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
@@ -42,16 +41,17 @@ socket.on("messages", ({ messages }) => {
 })
 
 // Socket New User Connected
-socket.on("newUserConnected", ({ newUsername }) => {
+socket.on("newUserConnected", ({ user }) => {
   if (!user) return;
   // Alert New User Connected
   Swal.fire({
     color: "#eee",
-    text: `🔔 ${newUsername} has joined the chat!`,
+    text: `🔔 ${user} has joined the chat!`,
     toast: true,
     position: 'top-right',
-    time: 2000,
+    timer: 2000,
     background: "#222",
+    confirmButtonColor: "#43c09e",
   })
 })
 
@@ -64,6 +64,7 @@ Swal.fire({
   title: "👋 Hey, welcome! 😉",
   text: "Enter your email 👇",
   input: "email",
+  confirmButtonColor: "#43c09e",
   allowOutsideClick: false
 }).then((result) => {
   user = result.value;

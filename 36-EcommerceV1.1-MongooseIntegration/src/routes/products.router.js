@@ -18,17 +18,12 @@ router.get('/', async (req, res) => {
     res.send({ status: 'success', payload: products });
   } catch (error) {
     res.status(400).send({ error: error.message });
-
   }
 })
 
 // Deberá traer sólo el producto con el id proporcionado
 router.get('/:pid', async (req, res) => {
   try {
-    // const products = await manager.getProducts();
-    // console.log('pid', pid);
-    // const product = products.find(product => product._id == pid);
-    // console.log('product', product);
     const pid = req.params.pid;
     const product = await manager.getProductById(pid);
     res.send({ status: 'success', payload: product });
@@ -41,10 +36,6 @@ router.get('/:pid', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     await manager.addProduct(req.body);
-    // const { title, description, price, thumbnails, code, stock, category, status } = req.body;
-
-    // const newProduct = await manager.addProduct(title, description, price, thumbnails, code, stock, category, status);
-    // await manager.addProduct(req.body);
 
     const products = await manager.getProducts();
     res.send({ status: 'success', products });

@@ -1,10 +1,7 @@
 const { Router } = require('express');
 const MessagesModel = require('../dao/models/messages.model');
-//const MessagesDbManager = require('../dao/dbManager/MessageDbManager');
 
 // Manager
-//const manager = new MessagesDbManager();
-
 const router = Router();
 
 router.post('/', async (req, res) => {
@@ -32,19 +29,5 @@ router.get('/', async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 })
-
-/* router.get('/', async (req, res) => {
-  try {
-    //const messages = await manager.getMessages()
-    const messages = await MessagesModel.find().lean()
-    res.render('chat', {
-      messages,
-      layout: 'main'
-    })
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-}); */
-
 
 module.exports = router;

@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    //const products = await manager.getProducts(req.query.limit)
     const products = await manager.getProducts()
     res.render('realTimeProducts', {
       products,
