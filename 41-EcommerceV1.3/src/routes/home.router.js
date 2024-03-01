@@ -7,7 +7,7 @@ const router = Router();
 
 // Ruta para la página de inicio
 router.get('/', async (req, res) => {
-  const products = await manager.getProducts();
+  const products = await manager.getProducts(req.query);
   // Renderiza la vista home.handlebars y pasa los datos de los productos
   res.render('home', { products });
 });

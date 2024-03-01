@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const products = await manager.getProducts()
+    const products = await manager.getProducts(req.query)
     res.render('realTimeProducts', {
       products,
       layout: 'main'

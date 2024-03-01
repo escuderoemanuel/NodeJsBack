@@ -7,7 +7,7 @@ const PASSWORD = process.env.PASSWORD;
 const mongoose = require('mongoose');
 mongoose.connect(`mongodb+srv://${USER}:${PASSWORD}@mongodbcluster.piysuzj.mongodb.net/ecommerce`)
   .then(() => {
-    console.log('Connected Succesfully')
+    console.log('DB Connected Succesfully')
   })
 
 // Solamente traemos Server de io
@@ -59,7 +59,7 @@ const io = new Server(server);
 
 io.on('connection', async (socket) => {
 
-  console.log('User connected...')
+  console.log('Connected User Socket...')
 
   //! Products Events
   socket.on('delete-product', (data) => {

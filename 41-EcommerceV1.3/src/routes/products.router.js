@@ -7,10 +7,19 @@ const manager = new ProductsDbManager();
 const router = Router();
 
 // Deberá traer todos los productos de la base de datos, incluyendo la limitación ?limit
+/* router.get('/', async (req, res) => {
+  try {
+    let products = await manager.getProducts(req.query);
+
+    res.send({ status: 'success', payload: products });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+}) */
 router.get('/', async (req, res) => {
   try {
-    let products = await manager.getProducts();
-    
+    let products = await manager.getProducts(req);
+
     res.send({ status: 'success', payload: products });
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -33,7 +42,7 @@ router.post('/', async (req, res) => {
   try {
     await manager.addProduct(req.body);
 
-    const products = await manager.getProducts();
+    const products = await manager.getProducts(req.query);
     res.send({ status: 'success', products });
 
   } catch (error) {
@@ -63,7 +72,7 @@ router.delete('/:pid', async (req, res) => {
     const id = req.params.pid;
     const productToDelete = await manager.getProductById(id);
     await manager.deleteProduct(id);
-    const products = await manager.getProducts();
+    const products = await manager.getProducts(req.query);
     res.send({ status: 'success', payload: { productToDelete, products } });
   } catch (error) {
     res.status(400).send({ status: 'error', message: error.message });
