@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const studentSchema = new mongoose.Schema({
   first_name: String,
@@ -8,7 +9,7 @@ const studentSchema = new mongoose.Schema({
   grade: Number,
   group: String
 })
-
+studentSchema.plugin(mongoosePaginate)
 const studentModel = mongoose.model('students', studentSchema);
 
 module.exports = studentModel;
