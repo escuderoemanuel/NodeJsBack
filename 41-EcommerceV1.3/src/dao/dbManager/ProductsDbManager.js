@@ -15,22 +15,18 @@ class ProductsDbManager {
   async getProducts(req) {
     console.log('req.query', req.query)
     try {
-      let products = await ProductsModel.find().lean();
+      let { limit, page, filter, sort } = req.query
+      let options = {}
 
       // Límite string parseado a number
-      let limit = parseInt(req.query.limit);
-      if (limit) {
-        products = products.slice(0, limit);
-      } else {
-        limit = 10;
-      }
+      limit = parseInt(req.query.limit);
 
       // Filtro 'page' parseado a number
-      let page = parseInt(req.query.page);
+      page = parseInt(req.query.page);
       page ? page = page : page = 1;
 
       // Filtro 'sort' string (asc o desc)
-      let sort;
+      sort;
       if (req.query.sort === 'asc') {
         sort = 1;
       } else if (req.query.sort === 'desc') {
@@ -38,11 +34,11 @@ class ProductsDbManager {
       }
 
       // Filtro 'filter' string (title o category)
-      let filter = {};
+      filter = {};
       if (req.query.filter) {
         // $option: 'i' para que no distinga mayúsculas de minúsculas
         filter = {
-          $or: [{ title: { $regex: req.query.title, $options: 'i' } }, { category: { $regex: req.query.category, $options: 'i' } }]
+          $or: [{ title: { $regex: req.query.filter, $options: 'i' } }, { category: { $regex: req.query.filter, $options: 'i' } }]
         }
       }
 
@@ -51,13 +47,17 @@ class ProductsDbManager {
       console.log('sort', sort)
       console.log('filter', req.query.filter)
 
-      const options = {
-        sort: { price: sort || null },
-        page: page || 1,
+      options = {
         limit: limit || 10,
+        page: page || 1,
+        sort: { price: sort || null },
         lean: true,
       };
 
+      console.log('options', options)
+
+      //let products = await ProductsModel.find().lean();
+      let products = await ProductsModel.paginate(filter, options);
 
       return products;
     } catch (error) {
@@ -65,48 +65,6 @@ class ProductsDbManager {
       // throw new Error(error.message)
     }
   }
-  /*  async getProducts(req) {
-     console.log('req', req)
-     try {
-       // Filtro 'limit' string parseado a number
-       const limit = parseInt(req.query.limit);
-       limit ? limit = limit : limit = 10;
- 
-       // Filtro 'page' parseado a number
-       const page = parseInt(req.query.page);
-       page ? page = page : page = 1;
- 
-       // Filtro 'sort' string (asc o desc)
-       let sort;
-       if (req.query.sort === 'asc') {
-         sort = 1;
-       } else if (req.query.sort === 'desc') {
-         sort = -1;
-       } else {
-         sort = null;
-       }
- 
-       // Filtro 'filter' string (title o category)
-       const filter = {};
-       if (req.query.filter) {
-         // $option: 'i' para que no distinga mayúsculas de minúsculas
-         filter.$or = [{ title: { $regex: req.query.filter, $options: 'i' } }, { category: { $regex: req.query.filter, $options: 'i' } }];
-       }
- 
-       const options = {
-         sort: { price: sort || null },
-         page: page || 1,
-         limit: limit || 10,
-         lean: true,
-       };
- 
-       const products = await ProductsModel.paginate(filter, options);
-       return products;
-     } catch (error) {
-       console.error(error)
-       //throw new Error('Error', error.message)
-     }
-   } */
 
   //! GET BY ID
   async getProductById(id) {
