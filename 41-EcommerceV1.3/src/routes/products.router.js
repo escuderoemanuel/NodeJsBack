@@ -19,8 +19,8 @@ const router = Router();
 router.get('/', async (req, res) => {
   try {
     let products = await manager.getProducts(req);
-
-    res.send({ status: 'success', payload: products });
+    res.render('products', products)
+    // res.send(products);
   } catch (error) {
     res.status(400).send({ error: error.message });
   }

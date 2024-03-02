@@ -303,3 +303,34 @@ h4 {
 .logoDev:hover {
   transform: rotate(5deg) scale(1.05);
 }
+
+/*? Products  */
+.btnPagesContainer {
+  min-width: 200px;
+  display: flex;
+}
+
+.btnPage {
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #464646;
+  border: #43c09e 2px solid;
+  color: 'whitesmoke';
+  margin: auto;
+  padding: .5rem 1rem;
+  cursor: pointer;
+}
+
+.btnPageDisable {
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #464646;
+  border: #464646 2px solid;
+  color: 'whitesmoke';
+  margin: auto;
+  padding: .5rem 1rem;
+}
+
+.btnPagesContainer a {
+  text-decoration: none;
+}

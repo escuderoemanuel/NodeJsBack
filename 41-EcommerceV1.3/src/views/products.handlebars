@@ -1,0 +1,51 @@
+<main class='products'>
+
+  <h1>View Products Handlebars!</h1>
+
+  <h2>Product List</h2>
+
+  <ul id='products'>
+    {{#each products}}
+    <li class='product'>
+      <h4 class='productTitle'>Title {{this.title}}</h4>
+      <p>id: {{this._id}}</p>
+      <p>title: {{this.title}}</p>
+      <p>description: {{this.description}}</p>
+      <p>price: {{this.price}}</p>
+      <p>thumbnails: {{this.thumbnails}}</p>
+      <p>code: {{this.code}}</p>
+      <p>stock: {{this.stock}}</p>
+      <p>category: {{this.category}}</p>
+      <p>status: {{this.status}}</p>
+
+    </li>
+    {{/each}}
+  </ul>
+
+  <div class='btnPagesContainer'>
+    {{#if paginateData.hasPrevPage}}
+    <btn class='btnPage'>
+      <a href='/api/products?page={{prevPage}}'>Prev</a>
+    </btn>
+    {{else}}
+    <btn class='btnPageDisable' disabled>
+      <a href='/api/products?page={{prevPage}}'>Prev</a>
+    </btn>
+    {{/if}}
+
+    {{#if paginateData.hasNextPage}}
+    <btn class='btnPage'>
+      <a href='/api/products?page={{nextPage}}'>Next</a>
+    </btn>
+    {{else}}
+    <btn class='btnPageDisable' disabled>
+      <a href='/api/products?page={{nextPage}}'>Next</a>
+    </btn>
+    {{/if}}
+  </div>
+
+</main>
+
+{{!-- Para tener acceso a socket.io --}}
+<script src=' /socket.io/socket.io.js'></script>
+<script src='/js/products.js'></script>

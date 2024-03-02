@@ -12,8 +12,8 @@ class ProductsDbManager {
   }
 
   //! GET
-  async getProducts(req) {
-    console.log('req.query', req.query)
+  async getProducts(req, res) {
+    // console.log('req.query', req.query)
     try {
       let { limit, page, filter, sort } = req.query
       let options = {}
@@ -50,19 +50,46 @@ class ProductsDbManager {
       options = {
         limit: limit || 10,
         page: page || 1,
-        sort: { price: sort || null },
         lean: true,
       };
 
+      // Si hay un sort, lo agrego a 'options'
+      if (req.query.sort) {
+        options.sort = { price: sort }
+      }
+
+
+
       console.log('options', options)
 
-      //let products = await ProductsModel.find().lean();
       let products = await ProductsModel.paginate(filter, options);
 
-      return products;
+      let queryParameters = {};
+      if (filter) queryParameters.query = filter
+      if (sort) queryParameters.sort = sort
+      if (limit) queryParameters.limit = limit
+
+      let paginateData = {
+        status: 'success',
+        payload: products.docs,
+        totalPages: products.totalPages,
+        prevPage: products.prevPage,
+        nextPage: products.nextPage,
+        page: products.page,
+        hasPrevPage: products.hasPrevPage,
+        hasNextPage: products.hasNextPage,
+        /* prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}` : null,
+        nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}` : null */
+        prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}&${new URLSearchParams(queryParameters)}` : null,
+        nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}&${new URLSearchParams(queryParameters)}` : null
+      }
+      console.log('paginateData:', paginateData)
+      //res.render(products, ...rest);
+      return { paginateData, products: paginateData.payload };
     } catch (error) {
       console.log('ERROR', error)
-      // throw new Error(error.message)
+      // res.status(400).send({ error: error.message });
+      throw new Error(error.message)
     }
   }
 
