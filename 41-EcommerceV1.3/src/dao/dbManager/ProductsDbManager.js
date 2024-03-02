@@ -13,26 +13,21 @@ class ProductsDbManager {
 
   //! GET
   async getProducts(req, res) {
-    // console.log('req.query', req.query)
     try {
+      // Obtengo los parámetros de consulta
       let { limit, page, filter, sort } = req.query
-      let options = {}
 
-      // Límite string parseado a number
+      //? Filtros de búsqueda
+      // Filtro 'limit' string parseado a number
       limit = parseInt(req.query.limit);
-
       // Filtro 'page' parseado a number
       page = parseInt(req.query.page);
-      page ? page = page : page = 1;
-
       // Filtro 'sort' string (asc o desc)
-      sort;
       if (req.query.sort === 'asc') {
         sort = 1;
       } else if (req.query.sort === 'desc') {
         sort = -1;
       }
-
       // Filtro 'filter' string (title o category)
       filter = {};
       if (req.query.filter) {
@@ -42,33 +37,35 @@ class ProductsDbManager {
         }
       }
 
-      console.log('limit', limit)
-      console.log('page', page)
-      console.log('sort', sort)
-      console.log('filter', req.query.filter)
-
-      options = {
+      //? Paginación
+      let options = {
         limit: limit || 10,
         page: page || 1,
         lean: true,
       };
 
-      // Si hay un sort, lo agrego a 'options'
+      // Si hay un sort, lo agrego a 'options', sino no
+      // Utilizo un segundo parámetro de ordenamiento para el caso en el que haya más productos con el mismo precio!
       if (req.query.sort) {
-        options.sort = { price: sort }
+        options.sort = { price: sort, title: 1 }
       }
 
-
-
-      console.log('options', options)
-
+      // Ejecuto la consulta pasando filter (si hay), más options
       let products = await ProductsModel.paginate(filter, options);
 
-      let queryParameters = {};
-      if (filter) queryParameters.query = filter
-      if (sort) queryParameters.sort = sort
-      if (limit) queryParameters.limit = limit
+      // Creo un objeto para almacenar los parámetros de consulta de la url, para armar los links 'prev' y 'next'
+      let urlQueryParams = {};
+      if (req.query.filter) urlQueryParams.filter = req.query.filter;
+      if (req.query.sort) urlQueryParams.sort = req.query.sort;
+      if (req.query.limit) urlQueryParams.limit = req.query.limit;
 
+      // Creo enlaces de paginación
+      // GPT Tip => URLSearchParams: permite crear un string con los parámetros de consulta de la url.
+      const urlPrevLink = `/api/products?${new URLSearchParams(urlQueryParams).toString()}&page=${products.prevPage}`;
+
+      const urlNextLink = `/api/products?${new URLSearchParams(urlQueryParams).toString()}&page=${products.nextPage}`;
+
+      // Creo un objeto para almacenar los datos de paginación y los productos para enviarlos al front.
       let paginateData = {
         status: 'success',
         payload: products.docs,
@@ -78,20 +75,20 @@ class ProductsDbManager {
         page: products.page,
         hasPrevPage: products.hasPrevPage,
         hasNextPage: products.hasNextPage,
-        /* prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}` : null,
-        nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}` : null */
-        prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}&${new URLSearchParams(queryParameters)}` : null,
-        nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}&${new URLSearchParams(queryParameters)}` : null
-      }
-      console.log('paginateData:', paginateData)
-      //res.render(products, ...rest);
-      return { paginateData, products: paginateData.payload };
+        prevLink: products.hasPrevPage ? urlPrevLink : null,
+        nextLink: products.hasNextPage ? urlNextLink : null,
+      };
+
+      // console.log('paginateData:', paginateData)
+      // return { paginateData, products: paginateData.payload };
+      //! Si mando esto, devuelve paginateData, pero no renderiza
+      res.send(paginateData);
     } catch (error) {
-      console.log('ERROR', error)
-      // res.status(400).send({ error: error.message });
       throw new Error(error.message)
     }
   }
+
+
 
   //! GET BY ID
   async getProductById(id) {

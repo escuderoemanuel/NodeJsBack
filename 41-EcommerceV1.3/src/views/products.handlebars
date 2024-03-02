@@ -7,7 +7,7 @@
   <ul id='products'>
     {{#each products}}
     <li class='product'>
-      <h4 class='productTitle'>Title {{this.title}}</h4>
+      <h4 class='productTitle'>{{this.title}}</h4>
       <p>id: {{this._id}}</p>
       <p>title: {{this.title}}</p>
       <p>description: {{this.description}}</p>
@@ -24,23 +24,16 @@
 
   <div class='btnPagesContainer'>
     {{#if paginateData.hasPrevPage}}
-    <btn class='btnPage'>
-      <a href='/api/products?page={{prevPage}}'>Prev</a>
-    </btn>
+    <button class='btnPage' onclick="window.location.href='{{paginateData.prevLink}}'">Prev</button>
     {{else}}
-    <btn class='btnPageDisable' disabled>
-      <a href='/api/products?page={{prevPage}}'>Prev</a>
-    </btn>
+    <button class='btnPageDisabled' disabled>Prev</button>
     {{/if}}
 
     {{#if paginateData.hasNextPage}}
-    <btn class='btnPage'>
-      <a href='/api/products?page={{nextPage}}'>Next</a>
-    </btn>
+    <button class='btnPage' onclick="window.location.href='{{paginateData.nextLink}}'">Next
+    </button>
     {{else}}
-    <btn class='btnPageDisable' disabled>
-      <a href='/api/products?page={{nextPage}}'>Next</a>
-    </btn>
+    <button class='btnPageDisabled' disabled>Next</button>
     {{/if}}
   </div>
 

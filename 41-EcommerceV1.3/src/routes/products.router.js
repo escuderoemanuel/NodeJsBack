@@ -6,20 +6,14 @@ const manager = new ProductsDbManager();
 
 const router = Router();
 
-// Deberá traer todos los productos de la base de datos, incluyendo la limitación ?limit
-/* router.get('/', async (req, res) => {
-  try {
-    let products = await manager.getProducts(req.query);
+// Deberá traer todos los productos de la base de datos, incluyendo opcionalmente limit, page, sort, filter (Example: http://localhost:8080/api/products?limit=2&page=1&sort=desc&filter=iphone)
 
-    res.send({ status: 'success', payload: products });
-  } catch (error) {
-    res.status(400).send({ error: error.message });
-  }
-}) */
 router.get('/', async (req, res) => {
   try {
-    let products = await manager.getProducts(req);
-    res.render('products', products)
+    let products = await manager.getProducts(req, res);
+    const product = products.payload;
+    //res.render('products', products);
+    res.render('products', product);
     // res.send(products);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -42,7 +36,7 @@ router.post('/', async (req, res) => {
   try {
     await manager.addProduct(req.body);
 
-    const products = await manager.getProducts(req.query);
+    const products = await manager.getProducts(req, res);
     res.send({ status: 'success', products });
 
   } catch (error) {
@@ -72,7 +66,7 @@ router.delete('/:pid', async (req, res) => {
     const id = req.params.pid;
     const productToDelete = await manager.getProductById(id);
     await manager.deleteProduct(id);
-    const products = await manager.getProducts(req.query);
+    const products = await manager.getProducts(req, res);
     res.send({ status: 'success', payload: { productToDelete, products } });
   } catch (error) {
     res.status(400).send({ status: 'error', message: error.message });

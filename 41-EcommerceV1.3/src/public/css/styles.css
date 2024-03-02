@@ -308,6 +308,7 @@ h4 {
 .btnPagesContainer {
   min-width: 200px;
   display: flex;
+  gap: 20px;
 }
 
 .btnPage {
@@ -321,7 +322,15 @@ h4 {
   cursor: pointer;
 }
 
-.btnPageDisable {
+.btnPage:hover {
+  background-color: #535353;
+}
+
+.btnPage:active {
+  background-color: #464646;
+}
+
+.btnPageDisabled {
   border-radius: 5px;
   text-decoration: none;
   background-color: #464646;
@@ -329,8 +338,13 @@ h4 {
   color: 'whitesmoke';
   margin: auto;
   padding: .5rem 1rem;
+  cursor: auto;
 }
 
-.btnPagesContainer a {
-  text-decoration: none;
+.btnPageDisabled:hover {
+  background-color: #464646;
+}
+
+.btnPageDisabled:active {
+  transform: none;
 }
