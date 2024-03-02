@@ -80,10 +80,12 @@ class ProductsDbManager {
       };
 
       // console.log('paginateData:', paginateData)
-      // return { paginateData, products: paginateData.payload };
+      return { paginateData, products: paginateData.payload };
       //! Si mando esto, devuelve paginateData, pero no renderiza
-      res.send(paginateData);
+      res.send({ status: 'success', paginateData, products });
+
     } catch (error) {
+      console.log(error)
       throw new Error(error.message)
     }
   }

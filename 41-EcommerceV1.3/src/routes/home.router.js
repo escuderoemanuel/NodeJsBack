@@ -10,11 +10,14 @@ const router = Router();
 // Ruta para la página de inicio
 router.get('/', async (req, res) => {
   try {
-    const result = await manager.getProducts(req, res);
-    console.log('result', result);
-    //const products = result.payload;
-    // Renderiza la vista home.handlebars y pasa los datos de los productos
-    res.render('home', result);
+    let result = await manager.getProducts(req, res);
+    let paginateData = result.paginateData
+    // Esto es para darle mejor formato al json en el navegador (personalmente prefiero la extensión de navegador 'JSON Viewer Pro')
+    res.setHeader('Content-Type', 'application/json');
+    // Devuelve el objeto paginateData
+    res.send(JSON.stringify(paginateData, null, 2));
+
+
   } catch (error) {
     console.log('Error', error.message)
   }

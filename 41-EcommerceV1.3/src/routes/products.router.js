@@ -10,13 +10,16 @@ const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    let products = await manager.getProducts(req, res);
-    const product = products.payload;
+    let paginateData = await manager.getProducts(req, res);
+    //console.log('result', paginateData)
+    //const products = paginateData.payload;
+    //console.log('products', products);
     //res.render('products', products);
-    res.render('products', product);
+    res.render('products', paginateData);
     // res.send(products);
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    console.log(error.message)
+    //res.status(400).send({ error: error.message });
   }
 })
 

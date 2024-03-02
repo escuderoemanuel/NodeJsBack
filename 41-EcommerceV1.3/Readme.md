@@ -2,23 +2,23 @@
 
 ## Objetivos generales
 
-- Contarás con Mongo como sistema de persistencia principal
+✅ Contarás con Mongo como sistema de persistencia principal
 - Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
 
 ## Objetivos específicos
 
-- Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
+✅ Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
 - Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
 
 ## Se debe entregar
 
-- Con base en nuestra implementación actual de productos, modificar el método GET / para que cumpla con los siguientes puntos:
-  - Deberá poder recibir por query params un limit (opcional), una page (opcional), un sort (opcional) y un query (opcional)
-  - 'limit' permitirá devolver sólo el número de elementos solicitados al momento de la petición, en caso de no recibir limit, éste será de 10.
-  - 'page' permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1.
-  - 'query' el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general.
-  - 'sort': asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento.
-  - El método GET deberá devolver un objeto con el siguiente formato:
+✅ Con base en nuestra implementación actual de productos, modificar el método GET / para que cumpla con los siguientes puntos:
+  ✅ Deberá poder recibir por query params un limit (opcional), una page (opcional), un sort (opcional) y un query (opcional)
+    ✅ 'limit' permitirá devolver sólo el número de elementos solicitados al momento de la petición, en caso de no recibir limit, éste será de 10.
+    ✅ 'page' permitirá devolver la página que queremos buscar, en caso de no recibir page, ésta será de 1.
+    ✅ 'query' el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general.
+    ✅ 'sort': asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento.
+  ✅ El método GET deberá devolver un objeto con el siguiente formato:
   ```js
     {
       status: success/error
@@ -33,7 +33,7 @@
       nextLink: Link directo a la página siguiente (null si hasNextPage=false)
       }
   ```
-  - Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
+  ✅ Se deberá poder buscar productos por _'CATEGORY'_ o por _'TITLE'_, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.
   
   - Además, agregar al router de carts los siguientes endpoints:
     - DELETE: api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado.
@@ -49,10 +49,10 @@
   
 ## Formato
 
-- Link al repositorio de Github, sin la carpeta de node_modules
+✅ Link al repositorio de Github, sin la carpeta de node_modules
 
 ## Sugerencias
 
-- Permitir comentarios en el archivo
-- La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
-- Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido.
+✅ Permitir comentarios en el archivo
+✅ La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
+✅ Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido.
