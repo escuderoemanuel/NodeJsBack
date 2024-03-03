@@ -1,4 +1,4 @@
-<main class='products'>
+<section class='products'>
 
   <h1>View Products Handlebars!</h1>
 
@@ -17,7 +17,7 @@
       <p>stock: {{this.stock}}</p>
       <p>category: {{this.category}}</p>
       <p>status: {{this.status}}</p>
-
+      <button class='btnAddToCart'>Add to Cart</button>
     </li>
     {{/each}}
   </ul>
@@ -37,7 +37,7 @@
     {{/if}}
   </div>
 
-</main>
+</section>
 
 {{!-- Para tener acceso a socket.io --}}
 <script src=' /socket.io/socket.io.js'></script>

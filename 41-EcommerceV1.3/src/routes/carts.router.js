@@ -35,13 +35,14 @@ router.get('/:cid', async (req, res) => {
   try {
     const id = req.params.cid;
     const cart = await cartManager.getCartById(id);
-
-    //const products = cart.products;
-    res.send({ status: 'success', items: cart.items });
+    console.log('cart', cart);
+    console.log('cart.products', cart.products);
+    res.render('carts', { cartId: cart._id, products: cart.products }); // Pasar los datos necesarios a la plantilla
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 })
+
 
 // Deberá agregar el producto al arreglo “products” del carrito seleccionado
 router.post('/:cid/product/:pid', async (req, res) => {
@@ -104,7 +105,7 @@ router.put('/:cid', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 })
-// PUT: api/carts/:cid/products/:pid deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
+// Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
 router.put('/:cid/products/:pid', async (req, res) => {
   try {
     const cid = req.params.cid;
@@ -123,6 +124,25 @@ router.put('/:cid/products/:pid', async (req, res) => {
       res.send({
         status: 'success',
         message: 'Product quantity updated successfully'
+      })
+    }
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+})
+
+// DELETE: api/carts/:cid deberá eliminar todos los productos del carrito
+router.delete('/:cid', async (req, res) => {
+  try {
+    const cid = req.params.cid;
+    const cart = await cartManager.getCartById(cid);
+    if (!cart) {
+      res.status(400).send('Cart does not exist')
+    } else {
+      cartManager.deleteAllProductsFromCart(cid);
+      res.send({
+        status: 'success',
+        message: 'All products deleted successfully'
       })
     }
   } catch (error) {

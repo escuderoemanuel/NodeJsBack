@@ -1,0 +1,20 @@
+<section class='products'>
+  <h1>View Cart Handlebars!</h1>
+  <h4 class='productTitle'>Cart ID: {{cartId}}</h4>
+  <ul id='products'>
+    {{#each products}}
+    <li class='product'>
+      <p>id: {{cart.products.product._id}}</p>
+      <p>Quantity: {{cart.products.product.quantity}}</p>
+      <p>title: {{this.product.title}}</p>
+      <p>description: {{this.description}}</p>
+      <p>price: {{this.products.product.price}}</p>
+      <p>thumbnails: {{this.thumbnails}}</p>
+      <p>code: {{this.code}}</p>
+      <p>stock: {{this.stock}}</p>
+      <p>category: {{this.category}}</p>
+      <p>status: {{this.status}}</p>
+    </li>
+    {{/each}}
+  </ul>
+</section>

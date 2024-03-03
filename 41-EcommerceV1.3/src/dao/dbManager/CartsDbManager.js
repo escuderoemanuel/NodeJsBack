@@ -5,7 +5,7 @@ class CartManager {
   //! ADD CART
   async addCart() {
     try {
-      const cart = { items: [] }
+      const cart = { products: [] }
       await CartsModel.create(cart);
     } catch (error) {
       throw new Error(error.message)
@@ -39,12 +39,12 @@ class CartManager {
       const cart = await this.getCartById(cid);
 
       // Busca el producto dentro del cart y lo incrementa en 1 si ya existe, sino lo agrega al cart
-      const productIndex = cart.items.findIndex(i => i.product === pid);
+      const productIndex = cart.products.findIndex(i => i.product === pid);
       if (productIndex >= 0) {
-        cart.items[productIndex].quantity++;
+        cart.products[productIndex].quantity++;
 
       } else {
-        cart.items.push({ product: pid, quantity: 1 });
+        cart.products.push({ product: pid, quantity: 1 });
       }
 
       await CartsModel.updateOne({ _id: cid }, cart);
@@ -58,9 +58,9 @@ class CartManager {
   async deleteProductFromCart(cid, pid) {
     try {
       const cart = await this.getCartById(cid);
-      const productIndex = cart.items.findIndex(i => i.product === pid);
+      const productIndex = cart.products.findIndex(i => i.product === pid);
       if (productIndex >= 0) {
-        cart.items.splice(productIndex, 1);
+        cart.products.splice(productIndex, 1);
         await CartsModel.updateOne({ _id: cid }, cart);
       }
     } catch (error) {
@@ -73,7 +73,7 @@ class CartManager {
   async updateProductsFromCart(cid, products) {
     try {
       const cart = await this.getCartById(cid);
-      cart.items = products;
+      cart.products = products;
       await CartsModel.updateOne({ _id: cid }, cart);
     } catch (error) {
       throw new Error(error.message)
@@ -85,14 +85,14 @@ class CartManager {
   async updateProductQuantityFromCart(cid, pid, quantity) {
     try {
       const cart = await this.getCartById(cid);
-      const productIndex = cart.items.findIndex(i => i.product === pid);
-      
+      const productIndex = cart.products.findIndex(i => i.product === pid);
+
       if (productIndex >= 0) {
         // Si el producto ya está en el carrito, actualizo la cantidad
-        cart.items[productIndex].quantity = quantity;
+        cart.products[productIndex].quantity = quantity;
       } else {
         // Si el producto no está en el carrito, lo agrego con la cantidad especificada
-        cart.items.push({ product: pid, quantity: quantity });
+        cart.products.push({ product: pid, quantity: quantity });
       }
       await CartsModel.updateOne({ _id: cid }, cart);
     } catch (error) {
@@ -101,6 +101,17 @@ class CartManager {
     return;
   }
 
+  //! DELETE: api/carts/:cid deberá eliminar todos los productos del carrito
+  async deleteAllProductsFromCart(cid) {
+    try {
+      const cart = await this.getCartById(cid);
+      cart.products = [];
+      await CartsModel.updateOne({ _id: cid }, cart);
+    } catch (error) {
+      throw new Error(error.message)
+    }
+    return;  // Devuelve un objeto vacío para indicar que la operación se realizó correctamente.
+  }
 }
 
 // Exportación para utilizar en el app.js

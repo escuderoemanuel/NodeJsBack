@@ -49,7 +49,9 @@ content {
   flex: 1
 }
 
-main {
+main,
+.carts,
+.products {
   display: flex;
   flex-direction: column;
   align-items: center;

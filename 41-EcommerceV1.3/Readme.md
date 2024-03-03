@@ -3,12 +3,12 @@
 ## Objetivos generales
 
 ✅ Contarás con Mongo como sistema de persistencia principal
-- Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
+✅ Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.
 
 ## Objetivos específicos
 
 ✅ Profesionalizar las consultas de productos con filtros, paginación y ordenamientos
-- Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
+✅ Profesionalizar la gestión de carrito para implementar los últimos conceptos vistos.
 
 ## Se debe entregar
 
@@ -39,12 +39,12 @@
     ✅ DELETE: api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado.
     ✅ PUT: api/carts/:cid deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
     ✅ PUT: api/carts/:cid/products/:pid deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
-    - DELETE: api/carts/:cid deberá eliminar todos los productos del carrito 
-    - Esta vez, para el modelo de Carts, en su propiedad products, el id de cada producto generado dentro del array tiene que hacer referencia al modelo de Products. Modificar la ruta /:cid para que al traer todos los productos, los traiga completos mediante un “populate”. De esta manera almacenamos sólo el Id, pero al solicitarlo podemos desglosar los productos asociados.
+    ✅ DELETE: api/carts/:cid deberá eliminar todos los productos del carrito 
+    ✅ Esta vez, para el modelo de Carts, en su propiedad products, el id de cada producto generado dentro del array tiene que hacer referencia al modelo de Products. Modificar la ruta /:cid para que al traer todos los productos, los traiga completos mediante un “populate”. De esta manera almacenamos sólo el Id, pero al solicitarlo podemos desglosar los productos asociados.
   
-  - Crear una vista en el router de views ‘/products’ para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de dos formas:
-  - Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. Además de un botón para agregar al carrito.
-  - Contar con el botón de “agregar al carrito” directamente, sin necesidad de abrir una página adicional con los detalles del producto.
+  ✅ Crear una vista en el router de views ‘/products’ para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de dos formas:
+  ❌ Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. Además de un botón para agregar al carrito.
+  ✅ Contar con el botón de “agregar al carrito” directamente, sin necesidad de abrir una página adicional con los detalles del producto.
   - Además, agregar una vista en ‘/carts/:cid (cartId) para visualizar un carrito específico, donde se deberán listar SOLO los productos que pertenezcan a dicho carrito. 
   
 ## Formato
