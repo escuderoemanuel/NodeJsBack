@@ -69,7 +69,7 @@ class CartManager {
     return;
   }
 
-  //! PUT PRODUCTS FROM CART: api/carts/:cid deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+  //! UPDATE PRODUCTS FROM CART
   async updateProductsFromCart(cid, products) {
     try {
       const cart = await this.getCartById(cid);
@@ -80,6 +80,27 @@ class CartManager {
     }
     return;
   }
+
+  //! UPDATE PRODUCT QUANTITY FROM CART
+  async updateProductQuantityFromCart(cid, pid, quantity) {
+    try {
+      const cart = await this.getCartById(cid);
+      const productIndex = cart.items.findIndex(i => i.product === pid);
+      
+      if (productIndex >= 0) {
+        // Si el producto ya está en el carrito, actualizo la cantidad
+        cart.items[productIndex].quantity = quantity;
+      } else {
+        // Si el producto no está en el carrito, lo agrego con la cantidad especificada
+        cart.items.push({ product: pid, quantity: quantity });
+      }
+      await CartsModel.updateOne({ _id: cid }, cart);
+    } catch (error) {
+      throw new Error(error.message)
+    }
+    return;
+  }
+
 }
 
 // Exportación para utilizar en el app.js

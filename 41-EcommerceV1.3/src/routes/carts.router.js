@@ -104,5 +104,31 @@ router.put('/:cid', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 })
+// PUT: api/carts/:cid/products/:pid deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
+router.put('/:cid/products/:pid', async (req, res) => {
+  try {
+    const cid = req.params.cid;
+    const pid = req.params.pid;
+    const quantity = req.body.quantity;
+    const cart = await cartManager.getCartById(cid);
+    const product = await productManager.getProductById(pid);
+    if (!cart) {
+      res.status(400).send('Cart does not exist')
+    }
+    if (!product) {
+      res.status(400).send('Product does not exist')
+
+    } else {
+      cartManager.updateProductQuantityFromCart(cid, pid, quantity);
+      res.send({
+        status: 'success',
+        message: 'Product quantity updated successfully'
+      })
+    }
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+})
+
 
 module.exports = router;
