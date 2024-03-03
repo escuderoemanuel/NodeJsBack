@@ -15,7 +15,7 @@ class CartManager {
   //! GET ALL CARTS
   async getCarts() {
     try {
-      const carts = await CartsModel.find();
+      const carts = await CartsModel.find().lean();
       return carts;
     } catch (error) {
       throw new Error(error.message)
@@ -25,7 +25,7 @@ class CartManager {
   //! GET CART BY ID
   async getCartById(id) {
     try {
-      const cart = await CartsModel.findOne({ _id: id })
+      const cart = await CartsModel.findOne({ _id: id }).lean()
       return cart;
     } catch (error) {
       throw new Error(error.message)
@@ -110,7 +110,7 @@ class CartManager {
     } catch (error) {
       throw new Error(error.message)
     }
-    return;  // Devuelve un objeto vacío para indicar que la operación se realizó correctamente.
+    return;
   }
 }
 

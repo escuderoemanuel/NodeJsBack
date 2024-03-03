@@ -58,6 +58,20 @@ main,
   margin-bottom: 2rem;
 }
 
+/*? CARTS VIEW */
+.carts h1 {
+  margin-bottom: 1rem;
+}
+
+.cartTitle {
+  text-transform: uppercase;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+  background-color: rgb(0, 106, 255);
+  margin-bottom: 2rem;
+}
+
+
 /*? FORM */
 
 form {
@@ -125,41 +139,83 @@ button:active {
 
 /*? CARD PRODUCT  */
 
-.product {
-  padding: 1rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  border: 3px solid rgb(0, 106, 255);
-  margin: .5rem;
-  width: 300px;
-  height: 300px;
-  font-size: .8rem;
-  background-color: rgb(245, 245, 245);
+/* Title View */
+.viewTitle {
+  margin-bottom: 2rem;
 }
 
-.product p,
-h4 {
-  background-color: rgb(245, 245, 245);
-  color: #161616;
-
-}
-
-.productTitle {
-  text-transform: uppercase;
-}
-
-#products {
+/* Contenedor de las CARDS */
+.productsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-/*? CHAT VIEW */
+/* Container General */
+.productsContainer {
+  background-color: red;
+}
 
+/* Card */
+.product {
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  line-height: 16px;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgb(0, 106, 255);
+  margin: .5rem;
+  max-width: 350px;
+  min-height: 460px;
+  font-size: .8rem;
+  background-color: rgb(245, 245, 245);
+  overflow: hidden;
+}
+
+/* el title */
+.productTitle {
+  color: #222222;
+  text-transform: uppercase;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* el div productDataContainer */
+.productDataContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-wrap: wrap;
+}
+
+.productDataContainer p {
+  color: #464646;
+
+}
+
+.product p span {
+  color: #222222;
+  font-weight: bolder;
+}
+
+.linkThumbnail {
+  color: #464646;
+  cursor: pointer;
+}
+
+.btnAddToCart {
+  margin-top: auto;
+}
+
+
+/*? CHAT VIEW */
 .chatView {
   background-color: rgba(255, 255, 255, .1);
   padding: 1rem;
@@ -308,6 +364,7 @@ h4 {
 
 /*? Products  */
 .btnPagesContainer {
+  margin-top: 2rem;
   min-width: 200px;
   display: flex;
   gap: 20px;

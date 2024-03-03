@@ -1,19 +1,19 @@
-<section class='products'>
+<section class='carts'>
   <h1>View Cart Handlebars!</h1>
-  <h4 class='productTitle'>Cart ID: {{cartId}}</h4>
+  <h4 class='cartTitle'>Cart ID: {{cartId}}</h4>
   <ul id='products'>
     {{#each products}}
     <li class='product'>
-      <p>id: {{cart.products.product._id}}</p>
-      <p>Quantity: {{cart.products.product.quantity}}</p>
-      <p>title: {{this.product.title}}</p>
-      <p>description: {{this.description}}</p>
-      <p>price: {{this.products.product.price}}</p>
-      <p>thumbnails: {{this.thumbnails}}</p>
-      <p>code: {{this.code}}</p>
-      <p>stock: {{this.stock}}</p>
-      <p>category: {{this.category}}</p>
-      <p>status: {{this.status}}</p>
+      <p> <span>Id:</span> {{this._id}}</p>
+      <p> <span>Quantity:</span> {{this.quantity}}</p>
+      <p> <span>Title:</span> {{this.product.title}}</p>
+      <p> <span>Description:</span> {{this.product.description}}</p>
+      <p> <span>Price:</span> {{this.product.price}}</p>
+      <p> <span>Thumbnails:</span> {{this.product.thumbnails}}</p>
+      <p> <span>Code:</span> {{this.product.code}}</p>
+      <p> <span>Stock:</span> {{this.product.stock}}</p>
+      <p> <span>Category:</span> {{this.product.category}}</p>
+      <p> <span>Status:</span> {{this.product.status}}</p>
     </li>
     {{/each}}
   </ul>

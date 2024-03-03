@@ -30,18 +30,49 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Deberá listar los productos que pertenezcan al carrito con el cid proporcionado
+// Deberá listar los productos que pertenezcan al carrito con el cid proporcionado, dando acceso a los datos del cart y de las propiedades de los productos que contenga.
 router.get('/:cid', async (req, res) => {
   try {
-    const id = req.params.cid;
-    const cart = await cartManager.getCartById(id);
-    console.log('cart', cart);
-    console.log('cart.products', cart.products);
-    res.render('carts', { cartId: cart._id, products: cart.products }); // Pasar los datos necesarios a la plantilla
+    const cid = req.params.cid;
+    const cart = await cartManager.getCartById(cid);
+    if (!cart) {
+      res.status(400).send('Cart does not exist')
+    } else {
+      const products = cart.products
+
+      //res.send(cart);
+      res.render('carts', { cartId: cart._id, products });
+    }
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 })
+
+
+
+
+
+/* router.get('/:cid', async (req, res) => {
+  try {
+    const id = req.params.cid;
+    const cart = await cartManager.getCartById(id);
+    // console.log('cart', cart);
+    //const products = cart.products
+    // Hacer un map, para tener los products en un array
+    const products = cart.products.map(product => product)
+    //const products = cart.products.map(product => product._id )
+
+    //const product1 = products[1]
+    //console.log('cart.products', cart.products);
+    console.log('cart.products', products);
+    // console.log('productTitle', products[0].title);
+    res.render('carts', { cartId: cart._id, products });
+    // res.render('carts', cart); // Pasar los datos necesarios a la plantilla
+    //res.send({ status: 'success', products });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+}) */
 
 
 // Deberá agregar el producto al arreglo “products” del carrito seleccionado
