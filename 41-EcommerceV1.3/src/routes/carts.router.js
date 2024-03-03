@@ -66,4 +66,43 @@ router.post('/:cid/product/:pid', async (req, res) => {
   }
 })
 
+// Deberá eliminar del carrito el producto seleccionado
+router.delete('/:cid/product/:pid', async (req, res) => {
+  try {
+    const cid = req.params.cid;
+    const pid = req.params.pid;
+
+    const cart = await cartManager.getCartById(cid);
+    const product = await productManager.getProductById(pid);
+    if (!cart) {
+      res.status(400).send('Cart does not exist')
+    }
+    if (!product) {
+      res.status(400).send('Product does not exist')
+
+    } else {
+      cartManager.deleteProductFromCart(cid, pid);
+      res.send({ status: 'success' });
+    }
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+})
+
+// Deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
+router.put('/:cid', async (req, res) => {
+  try {
+    const cid = req.params.cid;
+    const cart = await cartManager.getCartById(cid);
+    if (!cart) {
+      res.status(400).send('Cart does not exist')
+    } else {
+      cartManager.updateProductsFromCart(cid, req.body);
+      res.send({ status: 'success' });
+    }
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+})
+
 module.exports = router;
