@@ -12,6 +12,17 @@ class ProductsDbManager {
   }
 
   //! GET
+  async getRealTimeProducts() {
+    try {
+      const realTimeProducts = await ProductsModel.find().lean();
+      //console.log('getRealTimeProducts', realTimeProducts)
+      return realTimeProducts;
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
+  //! GET
   async getProducts(req, res) {
     try {
       // Obtengo los parámetros de consulta
@@ -78,11 +89,8 @@ class ProductsDbManager {
         prevLink: products.hasPrevPage ? urlPrevLink : null,
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
-
-      // console.log('paginateData:', paginateData)
-      return { paginateData, products: paginateData.payload };
-      //! Si mando esto, devuelve paginateData, pero no renderiza
-      res.send({ status: 'success', paginateData, products });
+      // console.log('products', products)
+      return { paginateData, products: paginateData.payload, realTimeProducts: products.docs };
 
     } catch (error) {
       console.log(error)
@@ -95,7 +103,7 @@ class ProductsDbManager {
   //! GET BY ID
   async getProductById(id) {
     try {
-      const product = await ProductsModel.findOne({ _id: id });
+      const product = await ProductsModel.findOne({ _id: id }).lean();
       return product;
     } catch (error) {
       throw new Error(error.message)

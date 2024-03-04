@@ -7,19 +7,12 @@ const manager = new ProductsDbManager();
 const router = Router();
 
 // Deberá traer todos los productos de la base de datos, incluyendo opcionalmente limit, page, sort, filter (Example: http://localhost:8080/api/products?limit=2&page=1&sort=desc&filter=iphone)
-
 router.get('/', async (req, res) => {
   try {
     let paginateData = await manager.getProducts(req, res);
-    //console.log('result', paginateData)
-    //const products = paginateData.payload;
-    //console.log('products', products);
-    //res.render('products', products);
     res.render('products', paginateData);
-    // res.send(products);
   } catch (error) {
-    console.log(error.message)
-    //res.status(400).send({ error: error.message });
+    res.status(400).send({ error: error.message });
   }
 })
 

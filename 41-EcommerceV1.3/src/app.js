@@ -25,7 +25,7 @@ const app = express();
 // Import Routes
 const cartsRouter = require('./routes/carts.router.js');
 const productsRouter = require('./routes/products.router.js');
-const realTimeProducts = require('./routes/realtimeproducts.router.js');
+const realtimeproducts = require('./routes/realtimeproducts.router.js');
 const homeRouter = require('./routes/home.router.js');
 const chatRouter = require('./routes/chat.router.js');
 const MessagesModel = require('./dao/models/messages.model.js');
@@ -46,7 +46,7 @@ app.set('view engine', 'handlebars');
 app.use('/api/carts', cartsRouter) // Ok!
 app.use('/api/products', productsRouter) // Ok!
 app.use('/api/chat', chatRouter) // Ok!
-app.use('/api/realtimeproducts', realTimeProducts) // Ok!
+app.use('/api/realtimeproducts', realtimeproducts) // Ok!
 app.use('/', homeRouter) // Ok!
 
 // Server

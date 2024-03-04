@@ -6,7 +6,6 @@ const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
 const manager = new ProductsDbManager();
 const router = Router();
 
-
 // Ruta para la página de inicio
 router.get('/', async (req, res) => {
   try {
@@ -16,7 +15,6 @@ router.get('/', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     // Devuelve el objeto paginateData
     res.send(JSON.stringify(paginateData, null, 2));
-
 
   } catch (error) {
     console.log('Error', error.message)
