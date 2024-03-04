@@ -1,14 +1,14 @@
 const socket = io();
 
 // ul (cardContainer)
-const productList = document.getElementById('products');
+const productList = document.getElementById('realtimeproducts');
 // form
 const formAddProduct = document.getElementById('formAddProduct');
 
 
 //! Recibo la lista actualizada de productos y la renderizo en el cliente.
 socket.on('update-products', products => {
-  const productList = document.getElementById('products');
+  const productList = document.getElementById('realtimeproducts');
   productList.innerHTML = ''; // Limpiar la lista antes de agregar productos actualizados
   products.forEach(product => {
     const productItem = document.createElement('li');
@@ -28,12 +28,11 @@ socket.on('update-products', products => {
         <p> <span>category:</span> ${product.category}</p>
         <p> <span>status:</span> ${product.status}</p>
       </div>
-      <button class='btnAddToCart'>Add to Cart</button>
+      <button class='btnDelete' id="btnDelete${product._id}" data-id='btnDelete'>Delete Product</button>
     `;
     productList.appendChild(productItem);
   });
 });
-
 
 
 
@@ -47,6 +46,7 @@ productList.addEventListener('click', async (e) => {
       })
       // Este es el objeto del producto que estoy eliminando
       const { payload } = await response.json();
+      console.log('apretando delete en socketdelete btn', await response.json())
       // Aqui paso el producto al server
       socket.emit('delete-product', payload);
 

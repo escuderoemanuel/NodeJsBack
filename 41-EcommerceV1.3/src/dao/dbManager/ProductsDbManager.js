@@ -12,17 +12,6 @@ class ProductsDbManager {
   }
 
   //! GET
-  async getRealTimeProducts() {
-    try {
-      const realTimeProducts = await ProductsModel.find().lean();
-      //console.log('getRealTimeProducts', realTimeProducts)
-      return realTimeProducts;
-    } catch (error) {
-      throw new Error(error.message)
-    }
-  }
-
-  //! GET
   async getProducts(req, res) {
     try {
       // Obtengo los parámetros de consulta
@@ -70,11 +59,16 @@ class ProductsDbManager {
       if (req.query.sort) urlQueryParams.sort = req.query.sort;
       if (req.query.limit) urlQueryParams.limit = req.query.limit;
 
-      // Creo enlaces de paginación
-      // GPT Tip => URLSearchParams: permite crear un string con los parámetros de consulta de la url.
-      const urlPrevLink = `/api/products?${new URLSearchParams(urlQueryParams).toString()}&page=${products.prevPage}`;
 
-      const urlNextLink = `/api/products?${new URLSearchParams(urlQueryParams).toString()}&page=${products.nextPage}`;
+      // Obtiene la URL base dinámicamente desde el front
+      const baseUrl = req.baseUrl;
+
+      // Creo los links para la paginación
+      // GPT Tip => URLSearchParams: permite crear un string con los parámetros de consulta de la url.
+      const urlPrevLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.prevPage}`;
+
+      const urlNextLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.nextPage}`;
+
 
       // Creo un objeto para almacenar los datos de paginación y los productos para enviarlos al front.
       let paginateData = {
@@ -89,8 +83,9 @@ class ProductsDbManager {
         prevLink: products.hasPrevPage ? urlPrevLink : null,
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
+
       // console.log('products', products)
-      return { paginateData, products: paginateData.payload, realTimeProducts: products.docs };
+      return { paginateData, products: paginateData.payload };
 
     } catch (error) {
       console.log(error)
@@ -127,6 +122,7 @@ class ProductsDbManager {
       throw new Error(error.message)
     }
   }
+
 }
 
 module.exports = ProductsDbManager;

@@ -63,12 +63,12 @@ io.on('connection', async (socket) => {
 
   //! Products Events
   socket.on('delete-product', (data) => {
-    const product = data.products;
-    io.emit('update-products', product)
+    const products = data.products.paginateData.payload;
+    io.emit('update-products', products)
   })
 
   socket.on('add-product', (data) => {
-    const products = data.products;
+    const products = data.products.paginateData.payload;
     io.emit('update-products', products)
   })
 
