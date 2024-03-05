@@ -1,3 +1,4 @@
+const { paginate } = require('mongoose-paginate-v2');
 const ProductsModel = require('../models/products.model')
 
 class ProductsDbManager {
@@ -66,9 +67,7 @@ class ProductsDbManager {
       // Creo los links para la paginación
       // GPT Tip => URLSearchParams: permite crear un string con los parámetros de consulta de la url.
       const urlPrevLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.prevPage}`;
-
       const urlNextLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.nextPage}`;
-
 
       // Creo un objeto para almacenar los datos de paginación y los productos para enviarlos al front.
       let paginateData = {
@@ -84,8 +83,8 @@ class ProductsDbManager {
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
 
-      // console.log('products', products)
-      return { paginateData, products: paginateData.payload };
+      return { paginateData, products: products.docs };
+      // res.send(paginateData);
 
     } catch (error) {
       console.log(error)

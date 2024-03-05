@@ -56,3 +56,30 @@
 ✅ Permitir comentarios en el archivo
 ✅ La lógica del negocio que ya tienes hecha no debería cambiar, sólo su persistencia. 
 ✅ Los nuevos endpoints deben seguir la misma estructura y lógica que hemos seguido.
+
+## DUDAS:
+
+- ProductsDbManager.js: Los métodos (get, put, etc...) deben terminar con un 'return' (puedo renderizar si es así) o con un 'send' (solamente obtengo el json, pero no logro renderizar nada)
+- Sockets: debo tener un socket para cada view? Como 'products.socket.js' para 'products.handlebars' y 'realTimeProducts.socket.js' para 'realTimeProducts.socket.js' o debería ser un solo socket reutilizable?
+- No entiendo bien, cuándo debo retornar (return), cuándo enviar (res.send)
+- No entiendo bien, qué información o data debo returnar o enviar, pues en otras partes del código se me hace difícil acceder a los datos directamente sin tener que entrar a sus propiedades (debería usar destructuring? cómo?) 
+- El router debe enviar (res.send) o renderizar (res.render) ?
+
+## Orientación tomando en cuenta 'products':
+
+_1_ Todo nace en el _'model'_ 'products.model.js', donde se establece la estructura del product.
+  - El modelo tiene métodos propios? como el create(), find(), findOne(), updateOne(), deleteOne(),
+  
+_2_ Esa estructura pasa al _'manager'_ 'ProductsDBManager.js', donde se crean los métodos del mismo
+    - Métodos del manager: addProduct(product), getProducts(req, res), getProductById(id), updateProduct(id, newProduct), deleteProduct(id)
+    - Estos métodos utilizan los métodos propios? que mencionamos del modelo
+
+_3_ Ese manager se utiliza en el _'router'_ 'products.router.js' 
+      - El router inicializa una instancia del manager (const manager = new ProductsDbManager())
+      - Utilizar los métodos del manager (addProduct(product), getProducts(req, res), getProductById(id), updateProduct(id, newProduct), deleteProduct(id))
+      - Establece los endpoints (router.get('/'...), router.get('/:pid'...), router.post('/'...), router.put('/:pid'...), router.delete('/:pid'...))
+      - Renderiza y envía a las 'views handlebars' la información y el nombre del handlebars donde debe ser renderizado
+  
+_4_ Las _'views handlebars'_ renderizan la información enviada por el router
+
+_5_ Los _'sockets'_ capturan elementos del DOM e intereactúan con 'app.js' enviando (emit) y recibiendo (on) eventos para detectar cambios, actualizar y re-renderizar

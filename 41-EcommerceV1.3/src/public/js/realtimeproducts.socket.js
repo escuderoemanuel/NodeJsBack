@@ -46,7 +46,6 @@ productList.addEventListener('click', async (e) => {
       })
       // Este es el objeto del producto que estoy eliminando
       const { payload } = await response.json();
-      console.log('apretando delete en socketdelete btn', await response.json())
       // Aqui paso el producto al server
       socket.emit('delete-product', payload);
 
@@ -64,7 +63,8 @@ formAddProduct.addEventListener('submit', async (e) => {
   const formData = new FormData(formAddProduct)
   formData.forEach((value, key) => {
     newProduct[key] = key === 'thumbnails'
-      ? newProduct[key] = Array.from(formData.getAll('thumbnails')).map(thumbnail => thumbnail.name) : newProduct[key] = value.trim();
+      ? value.split(',').map(url => url.trim()) // Separar por comas y crear un array
+      : value.trim();
   });
 
   try {

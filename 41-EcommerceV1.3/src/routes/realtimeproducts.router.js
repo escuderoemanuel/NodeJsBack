@@ -17,6 +17,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     let paginateData = await manager.getProducts(req, res);
+    console.log('products EN EL GET DEL REALTIMEPRODUCTS.ROUTER', paginateData)
     res.render('realtimeproducts',
       paginateData
     );
