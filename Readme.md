@@ -2,8 +2,10 @@
 
 ## Technologies:
 
--  (NodeJs Express Nodemon)
-
+- NodeJS
+- Nodemon
+- Express
+- Handlebars
 
 ## About the Repo
 
