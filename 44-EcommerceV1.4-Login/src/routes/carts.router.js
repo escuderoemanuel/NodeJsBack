@@ -49,32 +49,6 @@ router.get('/:cid', async (req, res) => {
 })
 
 
-
-
-
-/* router.get('/:cid', async (req, res) => {
-  try {
-    const id = req.params.cid;
-    const cart = await cartManager.getCartById(id);
-    // console.log('cart', cart);
-    //const products = cart.products
-    // Hacer un map, para tener los products en un array
-    const products = cart.products.map(product => product)
-    //const products = cart.products.map(product => product._id )
-
-    //const product1 = products[1]
-    //console.log('cart.products', cart.products);
-    console.log('cart.products', products);
-    // console.log('productTitle', products[0].title);
-    res.render('carts', { cartId: cart._id, products });
-    // res.render('carts', cart); // Pasar los datos necesarios a la plantilla
-    //res.send({ status: 'success', products });
-  } catch (error) {
-    res.status(400).send({ error: error.message });
-  }
-}) */
-
-
 // Deberá agregar el producto al arreglo “products” del carrito seleccionado
 router.post('/:cid/product/:pid', async (req, res) => {
   try {

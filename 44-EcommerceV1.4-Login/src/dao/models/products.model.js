@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const productsSchema = new mongoose.Schema({
-  /* _id: {
-    type: mongoose.Schema.Types.ObjectId,
-  }, */
+
   title: {
     type: String,
     required: true,
