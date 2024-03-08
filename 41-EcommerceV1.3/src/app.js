@@ -63,8 +63,10 @@ io.on('connection', async (socket) => {
 
   //! Products Events
   socket.on('delete-product', (data) => {
+    // console.log('data', data)
     const products = data.products.paginateData.payload;
-    io.emit('update-products', products)
+    // const products = products.docs;
+    io.emit('update-products', products, data)
   })
 
   socket.on('add-product', (data) => {
@@ -90,8 +92,7 @@ io.on('connection', async (socket) => {
 
     await MessagesModel.create(messageData);
     const messages = await MessagesModel.find().lean();
-    console.log('messages', messages)
-    console.log('messages', { messages })
+
 
     io.emit('messages', { messages });
   })
