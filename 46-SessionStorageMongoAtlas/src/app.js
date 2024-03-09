@@ -1,18 +1,30 @@
+require('dotenv').config();
+const USER = process.env.USER;
+const PASSWORD = process.env.PASSWORD;
 const express = require('express');
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const PORT = 8080
 const serverMessage = `Server is running on port ${PORT}`
-const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const app = express();
 
 // Para usar el body request
-app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 
 // Session
+
+app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: `mongodb+srv://${USER}:${PASSWORD}@mongodbcluster.piysuzj.mongodb.net/`,
+    ttl: 10
+  }),
 }))
 
 //! Methods
@@ -50,12 +62,11 @@ app.get('/private', authenticated, (req, res) => {
   req.session.visitCounter++;
   if (req.session.visitCounter === 1) {
     res.send(`
-      Welcome ${name}! 👋</br>
+      Welcome ${name}! 👋 Lalala</br>
       You are now logged in!</br>
       This is your first visit 🎊
   `)
   } else {
-    44 - Sessions / src / app.js
     res.send(`
       Welcome again ${name}!  👋</br>
       You are now logged in!</br>
@@ -63,7 +74,6 @@ app.get('/private', authenticated, (req, res) => {
   `)
 
   }
-
 
 })
 

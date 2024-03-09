@@ -61,7 +61,7 @@ class ProductsDbManager {
       if (req.query.limit) urlQueryParams.limit = req.query.limit;
 
 
-      // Obtiene la URL base dinámicamente desde el front
+      // Obtiene la URL base dinámicamente desde el front (/api/products ó api/realtimeproducts)
       const baseUrl = req.baseUrl;
 
       // Creo los links para la paginación

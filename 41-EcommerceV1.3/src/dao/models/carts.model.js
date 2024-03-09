@@ -16,6 +16,7 @@ const cartsSchema = new mongoose.Schema({
 })
 
 // Populate
+// Cuando se use cartsSchema y haya un 'findOne' o 'find' lo que sigue será el populate
 cartsSchema.pre('findOne', function (next) {
   this.populate('products.product');
   next();

@@ -2,17 +2,23 @@ const express = require('express');
 const PORT = 8080
 const serverMessage = `Server is running on port ${PORT}`
 const session = require('express-session')
+const SessionFileStore = require('session-file-store')
+const cookieParser = require('cookie-parser')
 const app = express();
 
 // Para usar el body request
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+
+const sessionFileStore = SessionFileStore(session);
 // Session
+app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
+  store: new sessionFileStore({ path: `${__dirname}/sessions`, ttl: 100, retries: 0 }),
 }))
 
 //! Methods
@@ -55,7 +61,6 @@ app.get('/private', authenticated, (req, res) => {
       This is your first visit 🎊
   `)
   } else {
-    44 - Sessions / src / app.js
     res.send(`
       Welcome again ${name}!  👋</br>
       You are now logged in!</br>
@@ -63,7 +68,6 @@ app.get('/private', authenticated, (req, res) => {
   `)
 
   }
-
 
 })
 
