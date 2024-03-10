@@ -1,14 +1,14 @@
 // Atlas DB Connection
 require('dotenv').config();
-const USER = process.env.USER;
-const PASSWORD = process.env.PASSWORD;
+const MONGO_URL = process.env.MONGO_URL;
 
 // Mongoose Init & Connect
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb+srv://${USER}:${PASSWORD}@mongodbcluster.piysuzj.mongodb.net/ecommerce`)
+mongoose.connect(`${MONGO_URL}`)
   .then(() => {
     console.log('DB Connected Succesfully')
   })
+const MongoStore = require('connect-mongo');
 
 // Solamente traemos Server de io
 const { Server } = require('socket.io');
@@ -18,9 +18,18 @@ const handlebars = require('express-handlebars');
 
 // Express
 const express = require('express');
-const port = 8080;
-const serverMessage = `Server is running on port ${port}`;
+const PORT = 8080;
+const serverMessage = `Server is running on port ${PORT}`;
 const app = express();
+
+// Session Settings
+const session = require('express-session');
+app.use(session({
+  secret: 'milusaveme',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: `${MONGO_URL}`, ttl: 60 * 60 }),
+}))
 
 // Import Routes
 const cartsRouter = require('./routes/carts.router.js');
@@ -29,6 +38,9 @@ const realtimeproducts = require('./routes/realtimeproducts.router.js');
 const homeRouter = require('./routes/home.router.js');
 const chatRouter = require('./routes/chat.router.js');
 const MessagesModel = require('./dao/models/messages.model.js');
+const sessionRouter = require('./routes/sessions.router.js');
+const viewsRouter = require('./routes/views.router.js');
+
 
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
@@ -47,10 +59,12 @@ app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/chat', chatRouter)
 app.use('/api/realtimeproducts', realtimeproducts)
-app.use('/', homeRouter)
+//app.use('/', homeRouter)
+app.use('/api/sessions', sessionRouter)
+app.use('/', viewsRouter)
 
 // Server
-const server = app.listen(port, () => {
+const server = app.listen(PORT, () => {
   console.log(serverMessage)
 })
 
