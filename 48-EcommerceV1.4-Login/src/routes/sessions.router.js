@@ -35,48 +35,37 @@ sessionRouter.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-
-    if (!email || !password) {
-      return res.status(400).send({ status: 'error', error: 'Incomplete data' });
-    }
-
-    const user = await userModel.findOne({ email });
-
-    if (!user) {
-      return res.status(401).send({ status: 'error', error: 'User not found' });
-    }
-
-    if (user.password !== password) {
-      return res.status(401).send({ status: 'error', error: 'Invalid password' });
-    }
-
-    //! El hardcoding no está funcionando
     // Si el correo electrónico y la contraseña coinciden con los valores especificados
     if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
-      // Asigna el rol de 'admin'
-      req.session.user = {
-        name: `${user.firstName} ${user.lastName}`,
-        email: user.email,
+      const user = {
+        email: 'adminCoder@coder.com',
         role: 'admin', // Asigna el rol de 'admin' si coincide
-        age: user.age,
-      };
+      }
+      req.session.user = user; // Guarda los datos del usuario en la sesión.
+
     } else {
-      // De lo contrario, asigna los detalles del usuario normalmente
+
+      if (!email || !password) {
+        return res.status(400).send({ status: 'error', error: 'Incomplete data' });
+      }
+
+      const user = await userModel.findOne({ email });
+
+      if (!user) {
+        return res.status(401).send({ status: 'error', error: 'User not found' });
+      }
+
+      if (user.password !== password) {
+        return res.status(401).send({ status: 'error', error: 'Invalid password' });
+      }
+
       req.session.user = {
         name: `${user.firstName} ${user.lastName}`,
+        age: user.age,
         email: user.email,
         role: user.role,
-        age: user.age,
       };
     }
-
-    /* 
-        req.session.user = {
-          name: `${user.firstName} ${user.lastName}`,
-          email: user.email,
-          role: user.role,
-          age: user.age,
-        }; */
 
     // Regreso req.session.user porque no contiene datos sensibles
     res.send({ status: 'success', payload: req.session.user, message: 'Successfully logged in' });
