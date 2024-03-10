@@ -1,7 +1,7 @@
 {
   "name": "47-loginsession",
   "version": "1.0.0",
-  "description": "",
+  "description": "- Se levantará un sistema de login completo utilizando router + motor de plantillas Handlebars + base de datos para usuarios y sesiones +",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
