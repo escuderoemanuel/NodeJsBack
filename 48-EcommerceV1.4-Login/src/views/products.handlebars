@@ -1,6 +1,22 @@
 <section class='products'>
+  <div class="profile">
+    <h3>Welcome 😊</h3>
+    <br>
+    <div class='userData'>
+      <p><span>Name:</span> {{user.name}}</p>
+      <p><span>Email:</span> {{user.email}}</p>
+      <p><span>Age:</span> {{user.age}}</p>
+      <p><span>Role:</span> {{user.role}}</p>
+    </div>
+    <a href="/api/sessions/logout">
+      <button>Logout</button>
+    </a>
+  </div>
+  <br>
+
 
   <h1 class='viewTitle'>View Products List Handlebars!</h1>
+
 
   <ul id='products' class='productsContainer'>
     {{#each products}}

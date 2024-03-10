@@ -46,7 +46,6 @@ productList.addEventListener('click', async (e) => {
       })
       // Este es el objeto del producto que estoy eliminando
       const { payload } = await response.json();
-      console.log('apretando delete en socketdelete btn', await response.json())
       // Aqui paso el producto al server
       socket.emit('delete-product', payload);
 

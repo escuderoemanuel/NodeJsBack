@@ -1,32 +1,40 @@
-const registerForm = document.getElementById('registerForm')
+const loginForm = document.getElementById('registerForm')
 
-registerForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault()
 
   // Obtengo los datos del formulario y los guardo en un objeto.
-  const data = new FormData(registerForm)
+  const data = new FormData(loginForm)
   const obj = {}
 
   data.forEach((value, key) => (obj[key] = value))
 
-  fetch('/api/sessions/register', {
-    method: 'POST',
-    body: JSON.stringify(obj),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((result) => result.json())
-    .then((data) => {
-      console.log('data:', data)
-      if (data.status === 'success') {
-        window.location.replace('/login')
-      }
+  try {
+    const response = await fetch('/api/sessions/register', {
+      method: 'POST',
+      body: JSON.stringify(obj),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .catch((error) => console.log(error))
 
-  console.log(obj)
-  registerForm.reset()
-  window.location.replace('/login')
-  return false;
+    if (!response.ok) {
+      const errorMessage = await response.json();
+      document.querySelector('.errorMessage').textContent = errorMessage.error;
+      return;
+    }
+
+    if (data.status === 'success') {
+      window.location.replace('/login')
+    }
+
+
+    console.log(obj)
+    loginForm.reset()
+    window.location.replace('/login')
+
+  } catch (error) {
+    console.error('Error:', error);
+    document.querySelector('.errorMessage').textContent = 'Error occurred while processing your request.';
+  }
 })

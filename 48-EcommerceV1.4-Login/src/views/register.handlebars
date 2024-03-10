@@ -1,4 +1,4 @@
-<section class='register'>
+<section class='registerView'>
   <h1>Register</h1>
 
   <form action="" id='registerForm' class='registerForm'>
@@ -20,9 +20,14 @@
     <label for="repeatPassword"> Repeat Password: </label>
     <input type="password" name='repeatPassword'>
     <br>
-    <a href="">
-      <button>Register</button>
-    </a>
+    <span class='errorMessage' id='passwordError'>{{error}}</span>
+
+    <button>Register</button>
+
+    <p>Already have an account?
+      <a href="/login">LOGIN</a>
+    </p>
+    <br>
   </form>
 </section>
 <script src="/js/register.js"></script>

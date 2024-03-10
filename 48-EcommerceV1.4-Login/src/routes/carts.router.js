@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const CartsDbManager = require('../dao/dbManager/CartsDbManager');
 const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
+const { publicAuthentication, privateAuthentication } = require('../middlewares/middlewares');
+
 
 // Managers
 const cartManager = new CartsDbManager();
@@ -21,7 +23,7 @@ router.post('/', async (req, res) => {
 
 
 // Deberá listar todos los carritos (No lo pide el desafío).
-router.get('/', async (req, res) => {
+router.get('/', privateAuthentication, async (req, res) => {
   try {
     const carts = await cartManager.getCarts();
     res.send({ status: 'success', carts: carts });
@@ -31,7 +33,7 @@ router.get('/', async (req, res) => {
 })
 
 // Deberá listar los productos que pertenezcan al carrito con el cid proporcionado, dando acceso a los datos del cart y de las propiedades de los productos que contenga.
-router.get('/:cid', async (req, res) => {
+router.get('/:cid', privateAuthentication, async (req, res) => {
   try {
     const cid = req.params.cid;
     const cart = await cartManager.getCartById(cid);
