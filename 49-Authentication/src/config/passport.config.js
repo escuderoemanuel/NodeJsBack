@@ -17,7 +17,19 @@ const initializePassport = () => {
     clientSecret: CLIENT_SECRET,
   }, async (_accessToken, _refreshToken, profile, done) => {
     try {
-      console.log('profile', profile)
+      //console.log('profile', profile)
+      const user = await userModel.findOne({ email: profile._json.email })
+      if (!user) {
+        const newUser = await userModel.create({
+          first_name: profile._json.name,
+          last_name: '',
+          age: 0,
+          email: profile._json.email,
+          password: ''
+        })
+        let result = await userModel.create();
+        return done(null, newUser)
+      }
       done(null, false)
     } catch (error) {
       return done(error)
