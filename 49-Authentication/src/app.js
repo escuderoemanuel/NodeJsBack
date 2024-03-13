@@ -1,33 +1,42 @@
+// Credentials
 require('dotenv').config();
 const MONGO_URL = process.env.MONGO_URL;
-const MONGO_URL_COLLECTION = 'loginTest'
-const express = require('express');
-const session = require('express-session');
+
+// Mongo - Mongoose
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
+
+//Handlebars - Routers
 const handlebars = require('express-handlebars');
 const sessionsRouter = require('./routes/sessions.router');
 const viewsRouter = require('./routes/views.router');
+
+// Passport
+const passport = require('passport');
+const initializePassport = require('./config/passport.config');
+
+// Express
+const express = require('express');
+const session = require('express-session');
 const PORT = 8080;
-const serverMessage = `Server running on port ${PORT}${MONGO_URL_COLLECTION}`;
+const serverMessage = `Server running on port ${PORT}`;
 const app = express();
 
-
 // Mongoose Init & Connect
-mongoose.connect(`${MONGO_URL}${MONGO_URL_COLLECTION}`)
+mongoose.connect(`${MONGO_URL}`)
   .then(() => {
     console.log('DB Connected Succesfully')
   })
+
+// Passport
+initializePassport();
+app.use(passport.initialize());
 
 // Session Settings (middleware)
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: `${MONGO_URL}`,
-    ttl: 60 * 60
-  })
+  saveUninitialized: false
 }))
 
 // Middlewares

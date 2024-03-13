@@ -1,4 +1,4 @@
-const loginForm = document.getElementById('loginForm')
+/* const loginForm = document.getElementById('loginForm')
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(loginForm);
@@ -17,4 +17,4 @@ loginForm.addEventListener('submit', (e) => {
       alert('Incorrect data')
     }
   })
-})
+}) */

@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const userModel = require('../models/user');
 const session = require('express-session');
+const passport = require('passport');
 
 const sessionsRouter = Router();
 
-
+/* 
 //! Endpoints
 // Post Register
 sessionsRouter.post('/register', async (req, res) => {
@@ -65,6 +66,18 @@ sessionsRouter.get('/logout', (req, res) => {
     }
     res.redirect('/login') // <- Redirección desde el front
   })
+}) */
+
+//? GUTHUB
+sessionsRouter.get('/github', passport.authenticate('github', {
+  scope: ['user:email']
+}), async (req, res) => { })
+
+sessionsRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), async (req, res) => {
+  req.session.user = req.user;
+  res.redirect('/home')
+
 })
+
 
 module.exports = sessionsRouter;

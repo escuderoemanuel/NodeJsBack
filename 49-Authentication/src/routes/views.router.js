@@ -7,7 +7,7 @@ const viewsRouter = Router();
 // Se ejecuta antes de la ruta
 // Se ejecuta siempre
 // Controla que no se pueda acceder a las rutas si no está autenticado
-const publicAuthentication = (req, res, next) => {
+/* const publicAuthentication = (req, res, next) => {
   if (req.session.user) {
     return res.redirect('/');
   }
@@ -21,17 +21,21 @@ const privateAuthentication = (req, res, next) => {
   }
   next();
 }
- 
+ */
 //! Views
-viewsRouter.get('/register', publicAuthentication, (req, res) => {
+/* viewsRouter.get('/register', publicAuthentication, (req, res) => {
   res.render('register', {});
-})
+}) */
 
-viewsRouter.get('/login', publicAuthentication, (req, res) => {
+viewsRouter.get('/login', (req, res) => {
   res.render('login', {});
 })
 
-viewsRouter.get('/', privateAuthentication, (req, res) => {
-  res.render('profile', { user: req.session.user });
+viewsRouter.get('/home', (req, res) => {
+  res.render('home', {});
 })
+
+/* viewsRouter.get('/', privateAuthentication, (req, res) => {
+  res.render('profile', { user: req.session.user });
+}) */
 module.exports = viewsRouter;
