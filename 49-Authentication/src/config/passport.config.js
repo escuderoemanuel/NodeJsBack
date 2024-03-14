@@ -21,16 +21,17 @@ const initializePassport = () => {
       const user = await userModel.findOne({ email: profile._json.email })
       if (!user) {
         const newUser = await userModel.create({
-          first_name: profile._json.name,
-          last_name: '',
+          firstName: profile._json.name,
+          lastName: '',
           age: 0,
           email: profile._json.email,
           password: ''
         })
-        let result = await userModel.create();
-        return done(null, newUser)
+        let result = await userModel.create(newUser);
+        return done(null, result)
+      } else {
+        return done(null, user)
       }
-      done(null, false)
     } catch (error) {
       return done(error)
     }

@@ -32,7 +32,7 @@ viewsRouter.get('/login', (req, res) => {
 })
 
 viewsRouter.get('/home', (req, res) => {
-  res.render('home', {});
+  res.render('home', { user: req.session.user });
 })
 
 /* viewsRouter.get('/', privateAuthentication, (req, res) => {
