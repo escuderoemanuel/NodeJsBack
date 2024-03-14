@@ -1,7 +1,7 @@
 {
-  "name": "47-loginsession",
+  "name": "49-authenticationwithgithub",
   "version": "1.0.0",
-  "description": "- Se levantará un sistema de login completo utilizando router + motor de plantillas Handlebars + base de datos para usuarios y sesiones +",
+  "description": "-",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
