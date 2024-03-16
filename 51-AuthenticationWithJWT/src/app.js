@@ -23,24 +23,6 @@ const PORT = 8080;
 const serverMessage = `Server running on port ${PORT}`;
 const app = express();
 
-/* 
-// Mongoose Init & Connect
-mongoose.connect(`${MONGO_URL}`)
-  .then(() => {
-    console.log('DB Connected Succesfully')
-  })
-
-// Passport
-initializePassport();
-app.use(passport.initialize());
-
-// Session Settings (middleware)
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false
-})) */
-
 // Middlewares
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json())
