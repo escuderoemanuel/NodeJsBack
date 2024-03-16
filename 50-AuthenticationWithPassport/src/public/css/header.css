@@ -1,0 +1,46 @@
+/*? HEADER */
+
+.header {
+  font-weight: light;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0rem;
+}
+
+.header h1 {
+  margin-bottom: 1rem;
+}
+
+.header h2 {
+  margin: 1rem 0;
+}
+
+.header h1::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: whitesmoke;
+}
+
+/*? NAVBAR  */
+
+.navBar {
+  text-transform: uppercase;
+  background-color: rgba(0, 106, 255, 0.4);
+  padding: .5rem;
+  border-radius: 5px;
+}
+
+.navBar a {
+  text-decoration: none;
+  margin: .5rem;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.navBar a:hover {
+  text-shadow: 0px 0px 5px white;
+}
