@@ -1,7 +1,7 @@
 const passport = require('passport');
 const local = require('passport-local');
-const { createHash, isValidPassword } = require('../utils');
 const UserModel = require('../dao/models/user.model');
+const { createHash, isValidPassword } = require('../utils');
 
 const LocalStrategy = local.Strategy;
 
@@ -34,9 +34,8 @@ const initializePassport = () => {
   passport.use('login', new LocalStrategy({ usernameField: 'email' },
     async (email, password, done) => {
 
-      const user = await UserModel.findOne({ email });
-
       try {
+        const user = await UserModel.findOne({ email });
         if (!user) {
           return done(null, false);
         }

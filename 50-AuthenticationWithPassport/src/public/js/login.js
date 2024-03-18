@@ -1,6 +1,5 @@
 const loginForm = document.getElementById('loginForm')
-const emailError = document.getElementById('emailError')
-const passwordError = document.getElementById('passwordError')
+const errorMessage = document.getElementById('errorMessage')
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -21,19 +20,19 @@ loginForm.addEventListener('submit', async (e) => {
 
     if (!response.ok) {
       const errorMessage = await response.json(); // Aquí esperamos la respuesta JSON
-      document.querySelector('.errorMessage').textContent = errorMessage.error;
+      errorMessage.textContent = errorMessage.error;
       return;
     }
 
     if (response.status == 200) {
       // Limpiar errores previos
       loginForm.reset();
-      document.querySelector('.errorMessage').textContent = 'Logging in...';
+      errorMessage.textContent = 'Logging in...';
 
       window.location.replace('/api/products');
     }
   } catch (error) {
     console.error('Error:', error);
-    document.querySelector('.errorMessage').textContent = 'Error occurred while processing your request.';
+    errorMessage.textContent = 'Error occurred while processing your request.';
   }
 });
