@@ -1,20 +1,39 @@
 /* const loginForm = document.getElementById('loginForm')
-loginForm.addEventListener('submit', (e) => {
+const errorMessage = document.getElementById('errorMessage')
+
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+
   const data = new FormData(loginForm);
-  const obj = {};
-  data.forEach((value, key) => (obj[key] = value));
-  fetch('/api/sessions/login', {
-    method: 'POST',
-    body: JSON.stringify(obj),
-    headers: {
-      'Content-Type': 'application/json',
+  const payload = {};
+
+  data.forEach((value, key) => (payload[key] = value));
+
+  try {
+    const response = await fetch('/api/sessions/login', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.json(); // Aquí esperamos la respuesta JSON
+      errorMessage.textContent = errorMessage.error;
+      return;
     }
-  }).then(result => {
-    if (result.status === 200) {
-      window.location.replace('/') // <- Redirección desde el front
-    } else {
-      alert('Incorrect data')
+
+    if (response.status == 200) {
+      // Limpiar errores previos
+      loginForm.reset();
+      errorMessage.textContent = 'Logging in...';
+
+      window.location.replace('/api/products');
     }
-  })
-}) */
+  } catch (error) {
+    // console.error('Error:', error);
+    errorMessage.textContent = 'Error occurred while processing your request.';
+  }
+});
+ */

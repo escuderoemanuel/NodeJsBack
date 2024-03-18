@@ -7,8 +7,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 // Imports
 const passport = require('passport');
 const GithubStrategy = require('passport-github2');
-const UserModel = require('../dao/models/user.model');
-
+const UserModel = require('../models/user');
 
 const initializePassport = () => {
 
@@ -18,8 +17,7 @@ const initializePassport = () => {
     clientSecret: CLIENT_SECRET,
   }, async (_accessToken, _refreshToken, profile, done) => {
     try {
-      // console.log('profile', profile)
-
+      //console.log('profile', profile)
       const user = await UserModel.findOne({ email: profile._json.email })
 
       if (!user) {
@@ -30,8 +28,10 @@ const initializePassport = () => {
           email: profile._json.email,
           password: ''
         })
+
         let result = await UserModel.create(newUser);
         return done(null, result)
+        
       } else {
         return done(null, user)
       }
@@ -46,7 +46,7 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (userId, done) => {
-  const user = await UserModel.findOne({ _id: userId });
+  let user = await UserModel.findOne({ _id: userId });
   done(null, user);
 })
 
