@@ -7,7 +7,7 @@ const passport = require('passport');
 const sessionRouter = Router();
 
 // Endpoints
-sessionRouter.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/registerFail' }), async (req, res) => {
+/* sessionRouter.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/registerFail' }), async (req, res) => {
   try {
 
 
@@ -81,7 +81,7 @@ sessionRouter.post('/resetPassword', async (req, res) => {
     res.status(500).send({ error: 'Internal server error' });
   }
 
-})
+}) */
 
 // GitHub
 sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { })
@@ -94,7 +94,7 @@ sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRe
     age: req.user.age
   }
 
-  res.redirect('/')
+  res.redirect('/home')
 })
 
 
