@@ -1,30 +1,23 @@
 const { Router } = require('express');
-const UserModel = require('../dao/models/user.model');
-const session = require('express-session');
+const userModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
 
 
-const sessionsRouter = Router();
+const sessionRouter = Router();
 
-// Endpoints
-/* sessionRouter.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/registerFail' }), async (req, res) => {
-  try {
+//? LOCAL
 
-
-    res.send({ status: 'success', message: 'User registered' });
-  } catch (error) {
-    res.status(400).send({ error: error.message });
-
-  }
+sessionRouter.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/registrationFailed' }), async (req, res) => {
+  res.send({ status: 'success', message: 'User registered' });
 })
 
-sessionRouter.get('/registerFail', (req, res) => {
+sessionRouter.get('/registrationFailed', (req, res) => {
   res.status(401).send({ status: 'error', error: 'Registration failed' });
 
 })
 
-sessionRouter.post('/login', passport.authenticate('login', { failureRedirect: '/api/sessions/loginFail' }), async (req, res) => {
+sessionRouter.post('/login', passport.authenticate('login', { failureRedirect: '/api/sessions/loginFailed' }), async (req, res) => {
 
   const user = req.user;
   req.session.user = {
@@ -37,7 +30,7 @@ sessionRouter.post('/login', passport.authenticate('login', { failureRedirect: '
   res.send({ status: 'success', payload: req.session.user, message: 'Successfully logged in' })
 })
 
-sessionRouter.get('/loginFail', (req, res) => {
+sessionRouter.get('/loginFailed', (req, res) => {
   res.status(401).send({ status: 'error', error: 'Login failed' });
 })
 
@@ -61,7 +54,7 @@ sessionRouter.post('/resetPassword', async (req, res) => {
       return res.status(400).send({ error: 'Missing data' });
     }
 
-    const user = await UserModel.findOne({ email });
+    const user = await userModel.findOne({ email });
 
     if (!user) {
       return res.status(404).send({ error: 'User not found' });
@@ -71,7 +64,7 @@ sessionRouter.post('/resetPassword', async (req, res) => {
 
     const hashedPassword = createHash(password);
 
-    const result = await UserModel.updateOne(
+    const result = await userModel.updateOne(
       { _id: user._id }, {
       $set: { password: hashedPassword }
     });
@@ -81,21 +74,41 @@ sessionRouter.post('/resetPassword', async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: 'Internal server error' });
   }
-
-}) */
-
-//? GITHUB
-sessionsRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { })
-
-sessionsRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), async (req, res) => {
-  req.session.user = {
-    name: req.user.firstName,
-    email: req.user.email,
-    age: req.user.age,
-  };
-  res.redirect('/home')
-
 })
 
+//? GITHUB
+sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { })
 
-module.exports = sessionsRouter;
+sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), async (req, res) => {
+
+  req.session.user = {
+    name: `${req.user.firstName} ${req.user.lastName}`,
+    email: req.user.email,
+    age: req.user.age,
+    role: req.user.role
+  };
+  res.redirect('/home')
+});
+
+
+
+module.exports = sessionRouter;
+
+
+/* const { firstName, lastName, email, password, repeatPassword, age, role } = req.body;
+
+    if (!firstName || !lastName || !email || !password || !repeatPassword || !age) {
+      return res.status(400).send({ status: 'error', error: 'Incomplete data' });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).send({ status: 'error', error: 'Password must be at least 8 characters' });
+    }
+
+    if (password !== repeatPassword) {
+      return res.status(400).send({ status: 'error', error: 'Passwords do not match' });
+    }
+
+    const hashedPassword = createHash(password);
+
+    const result = await userModel.create({ firstName, lastName, email, password: hashedPassword, age, role }); */

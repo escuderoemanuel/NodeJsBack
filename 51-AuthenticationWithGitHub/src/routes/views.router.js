@@ -20,12 +20,12 @@ viewsRouter.get('/resetPassword', publicAuthentication, (req, res) => {
 })
 
 viewsRouter.get('/home', (req, res) => {
-  res.render('home', { user: req.session.user });
+  res.render('home', {});
 })
 
-/* viewsRouter.get('/*', publicAuthentication, (req, res) => {
+viewsRouter.get('/*', publicAuthentication, (req, res) => {
   res.redirect('/login');
-}) */
+})
 
 
 

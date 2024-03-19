@@ -1,11 +1,11 @@
-const registerForm = document.getElementById('registerForm')
-const boxMessage = document.querySelector('.errorMessage')
+const loginForm = document.getElementById('registerForm')
+const message = document.getElementById('errorMessage')
 
-registerForm.addEventListener('submit', async (e) => {
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault()
 
   // Obtengo los datos del formulario y los guardo en un objeto.
-  const data = new FormData(registerForm)
+  const data = new FormData(loginForm)
   const obj = {}
 
   data.forEach((value, key) => (obj[key] = value))
@@ -21,7 +21,7 @@ registerForm.addEventListener('submit', async (e) => {
 
     if (!response.ok) {
       const errorMessage = await response.json();
-      boxMessage.textContent = errorMessage.error;
+      document.querySelector('.errorMessage').textContent = errorMessage.error;
       return;
     }
 
@@ -31,10 +31,33 @@ registerForm.addEventListener('submit', async (e) => {
 
 
     console.log(obj)
-    registerForm.reset()
+    loginForm.reset()
     window.location.replace('/login')
 
   } catch (error) {
-    boxMessage.textContent = 'Error occurred while processing your request.';
+    console.error('Error:', error.message);
+    document.querySelector('.errorMessage').textContent = 'Error occurred while processing your request.';
   }
 })
+
+
+
+
+
+/* const registerForm = document.getElementById("registerForm");
+
+registerForm.addEventListener('submit',(e)=>{
+    e.preventDefault()
+    const data = new FormData(registerForm);
+    const obj = {}
+    data.forEach((value, key)=>obj[key]=value);
+    fetch('/api/sessions/register',{
+        method: 'POST', 
+        body: JSON.stringify(obj),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res=>res.json()).then((data)=>{
+        console.log("Data", data)
+    })
+}) */

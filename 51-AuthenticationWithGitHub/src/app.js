@@ -1,50 +1,31 @@
-// Imports Atlas DB Connection
+// Atlas DB Connection
 require('dotenv').config();
 const MONGO_URL = process.env.MONGO_URL;
 
-// Imports Routes
-const cartsRouter = require('./routes/carts.router.js');
-const productsRouter = require('./routes/products.router.js');
-const realtimeproducts = require('./routes/realtimeproducts.router.js');
-const homeRouter = require('./routes/home.router.js');
-const chatRouter = require('./routes/chat.router.js');
-const MessagesModel = require('./dao/models/messages.model.js');
-const sessionsRouter = require('./routes/sessions.router.js');
-
-const viewsRouter = require('./routes/views.router.js');
-
-const initializePassport = require('./config/passport.config.js');
-
-const passport = require('passport');
-
-// Import Mongo & Mongoose 
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo');
-
-// Import Server de socket.io
-const { Server } = require('socket.io');
-
-// Imports Handlebars
-const handlebars = require('express-handlebars');
-
-// Imports Express
-const express = require('express');
-
-// Imports Session
-const session = require('express-session');
 
 // Mongoose Init & Connect
+const mongoose = require('mongoose');
 mongoose.connect(`${MONGO_URL}`)
   .then(() => {
     console.log('DB Connected Succesfully')
   })
+const MongoStore = require('connect-mongo');
 
-// Express Settings
+// Solamente traemos Server de io
+const { Server } = require('socket.io');
+
+// Handlebars
+const handlebars = require('express-handlebars');
+
+// Express
+const express = require('express');
 const PORT = 8080;
 const serverMessage = `Server is running on port ${PORT}`;
 const app = express();
 
+
 // Session Settings
+const session = require('express-session');
 app.use(session({
   secret: 'milusaveme',
   resave: false,
@@ -52,34 +33,45 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: `${MONGO_URL}`, ttl: 60 * 60 }),
 }))
 
+// Imports
+const passport = require('passport');
+const initializePassport = require('./config/passport.config.js');
 
-// Init Passport
+// Passport
 initializePassport();
-// Passport Middlewares
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Router
+const MessagesModel = require('./dao/models/messages.model.js');
+const cartsRouter = require('./routes/carts.router.js');
+const productsRouter = require('./routes/products.router.js');
+const realtimeproducts = require('./routes/realtimeproducts.router.js');
+const chatRouter = require('./routes/chat.router.js');
+const sessionRouter = require('./routes/sessions.router.js');
+const viewsRouter = require('./routes/views.router.js');
 
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
 
-// Middlewares Json & Body Params
+// Json & Body Params
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Handlebars Settings
+
+
+// Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
 
-// Routes Settings
+// Routes
+app.use('/api/sessions', sessionRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/chat', chatRouter)
 app.use('/api/realtimeproducts', realtimeproducts)
-//app.use('/home', homeRouter)
-app.use('/api/sessions', sessionsRouter)
 app.use('/', viewsRouter)
-
 
 // Server
 const server = app.listen(PORT, () => {
@@ -133,8 +125,5 @@ io.on('connection', async (socket) => {
     console.log(`User ${socket.id} disconnected...`)
   })
 })
-
-
-
 
 

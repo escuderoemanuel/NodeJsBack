@@ -1,38 +1,43 @@
 const loginForm = document.getElementById('loginForm')
-const errorMessage = document.getElementById('errorMessage')
+const message = document.getElementById('errorMessage')
 
-loginForm.addEventListener('submit', async (e) => {
+loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const data = new FormData(loginForm);
-  const payload = {};
+  const obj = {};
+
+  data.forEach((value, key) => (obj[key] = value));
+
+  fetch('/api/sessions/login', {
+    method: 'POST',
+    body: JSON.stringify(obj),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(res => {
+    if (res.status === 200) {
+      window.location.replace('/api/products');
+    } else {
+      message.textContent = 'Error occurred while processing your request ELSE.';
+    }
+    return res.json(); // Aquí esperamos la respuesta JSON
+  })
+
+});
 
 
-  try {
-    data.forEach((value, key) => (payload[key] = value));
-    const response = await fetch('/api/sessions/login', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
+/* 
+if (!response.ok) {
       const errorMessage = await response.json(); // Aquí esperamos la respuesta JSON
-      errorMessage.textContent = errorMessage.error;
+      message.textContent = errorMessage.error;
       return;
     }
 
     if (response.status == 200) {
       // Limpiar errores previos
       loginForm.reset();
-      errorMessage.textContent = 'Logging in...';
+      message.textContent = 'Logging in...';
 
       window.location.replace('/api/products');
-    }
-  } catch (error) {
-    // console.error('Error:', error);
-    errorMessage.textContent = 'Error occurred while processing your request.';
-  }
-});
+    } */
