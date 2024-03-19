@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const userModel = require('../dao/models/user.model');
+const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
 
@@ -9,12 +9,11 @@ const sessionRouter = Router();
 //? LOCAL
 
 sessionRouter.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/registrationFailed' }), async (req, res) => {
-  res.send({ status: 'success', message: 'User registered' });
-})
+  res.send({ status: 'success', message: 'Successfully registered user.' });
+});
 
 sessionRouter.get('/registrationFailed', (req, res) => {
-  res.status(401).send({ status: 'error', error: 'Registration failed' });
-
+  res.status(401).send({ status: 'error', error: 'Registration failed.' });
 })
 
 sessionRouter.post('/login', passport.authenticate('login', { failureRedirect: '/api/sessions/loginFailed' }), async (req, res) => {
@@ -31,6 +30,7 @@ sessionRouter.post('/login', passport.authenticate('login', { failureRedirect: '
 })
 
 sessionRouter.get('/loginFailed', (req, res) => {
+
   res.status(401).send({ status: 'error', error: 'Login failed' });
 })
 
@@ -54,7 +54,7 @@ sessionRouter.post('/resetPassword', async (req, res) => {
       return res.status(400).send({ error: 'Missing data' });
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await UserModel.findOne({ email });
 
     if (!user) {
       return res.status(404).send({ error: 'User not found' });
@@ -64,7 +64,7 @@ sessionRouter.post('/resetPassword', async (req, res) => {
 
     const hashedPassword = createHash(password);
 
-    const result = await userModel.updateOne(
+    const result = await UserModel.updateOne(
       { _id: user._id }, {
       $set: { password: hashedPassword }
     });
@@ -87,9 +87,8 @@ sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRe
     age: req.user.age,
     role: req.user.role
   };
-  res.redirect('/home')
+  res.redirect('/api/products')
 });
-
 
 
 module.exports = sessionRouter;

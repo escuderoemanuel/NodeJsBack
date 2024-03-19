@@ -8,17 +8,20 @@
     <label for="password">Password: </label>
     <input type="password" name='password'>
     <br>
-    <span class='errorMessage' id='errorMessage'>{{error}}</span>
+    <span class='infoMessage' id='infoMessage'>{{message}}</span>
 
     <button>Login</button>
-    <a href="/api/sessions/github">Login with GitHub
-    </a>
+    <button id='githubBtn'>
+      <a class='githubLoginLink' href="/api/sessions/github">Login with GitHub
+        <img class='githubIcon' src="https://i.ibb.co/mtkQ2ch/github.png" alt="Github Icon">
+      </a>
+    </button>
     <br>
-    <p>Don't have an account?
+    <p class='secondaryParagraphs'>Don't have an account?
       <a href="/register">CREATE ONE</a>
     </p>
     <br>
-    <p>Forgot your password?
+    <p class='secondaryParagraphs'>Forgot your password?
       <a href="/resetPassword">RESET PASSWORD HERE!</a>
     </p>
     <br>
