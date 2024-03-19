@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const UserModel = require('../dao/models/user.model');
+const session = require('express-session');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
 
 
-const sessionRouter = Router();
+const sessionsRouter = Router();
 
 // Endpoints
 /* sessionRouter.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/registerFail' }), async (req, res) => {
@@ -83,19 +84,18 @@ sessionRouter.post('/resetPassword', async (req, res) => {
 
 }) */
 
-// GitHub
-sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { })
+//? GITHUB
+sessionsRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { })
 
-sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), async (req, res) => {
-
+sessionsRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), async (req, res) => {
   req.session.user = {
-    name: req.user.first_name,
+    name: req.user.firstName,
     email: req.user.email,
-    age: req.user.age
-  }
-
+    age: req.user.age,
+  };
   res.redirect('/home')
+
 })
 
 
-module.exports = sessionRouter;
+module.exports = sessionsRouter;

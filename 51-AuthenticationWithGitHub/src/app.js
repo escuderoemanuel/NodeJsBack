@@ -9,9 +9,12 @@ const realtimeproducts = require('./routes/realtimeproducts.router.js');
 const homeRouter = require('./routes/home.router.js');
 const chatRouter = require('./routes/chat.router.js');
 const MessagesModel = require('./dao/models/messages.model.js');
-const sessionRouter = require('./routes/sessions.router.js');
+const sessionsRouter = require('./routes/sessions.router.js');
+
 const viewsRouter = require('./routes/views.router.js');
+
 const initializePassport = require('./config/passport.config.js');
+
 const passport = require('passport');
 
 // Import Mongo & Mongoose 
@@ -74,8 +77,9 @@ app.use('/api/products', productsRouter)
 app.use('/api/chat', chatRouter)
 app.use('/api/realtimeproducts', realtimeproducts)
 //app.use('/home', homeRouter)
-app.use('/api/sessions', sessionRouter)
+app.use('/api/sessions', sessionsRouter)
 app.use('/', viewsRouter)
+
 
 // Server
 const server = app.listen(PORT, () => {
@@ -129,5 +133,8 @@ io.on('connection', async (socket) => {
     console.log(`User ${socket.id} disconnected...`)
   })
 })
+
+
+
 
 

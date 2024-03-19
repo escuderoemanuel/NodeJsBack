@@ -9,7 +9,6 @@ const passport = require('passport');
 const GithubStrategy = require('passport-github2');
 const UserModel = require('../dao/models/user.model');
 
-
 const initializePassport = () => {
 
   passport.use('github', new GithubStrategy({
@@ -18,8 +17,7 @@ const initializePassport = () => {
     clientSecret: CLIENT_SECRET,
   }, async (_accessToken, _refreshToken, profile, done) => {
     try {
-      // console.log('profile', profile)
-
+      //console.log('profile', profile)
       const user = await UserModel.findOne({ email: profile._json.email })
 
       if (!user) {

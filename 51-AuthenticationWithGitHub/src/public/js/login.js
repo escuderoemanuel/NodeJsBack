@@ -1,4 +1,4 @@
-/* const loginForm = document.getElementById('loginForm')
+const loginForm = document.getElementById('loginForm')
 const errorMessage = document.getElementById('errorMessage')
 
 loginForm.addEventListener('submit', async (e) => {
@@ -7,9 +7,9 @@ loginForm.addEventListener('submit', async (e) => {
   const data = new FormData(loginForm);
   const payload = {};
 
-  data.forEach((value, key) => (payload[key] = value));
 
   try {
+    data.forEach((value, key) => (payload[key] = value));
     const response = await fetch('/api/sessions/login', {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -36,4 +36,3 @@ loginForm.addEventListener('submit', async (e) => {
     errorMessage.textContent = 'Error occurred while processing your request.';
   }
 });
- */

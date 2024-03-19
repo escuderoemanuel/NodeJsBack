@@ -68,10 +68,8 @@ sessionsRouter.get('/logout', (req, res) => {
   })
 }) */
 
-//? GUTHUB
-sessionsRouter.get('/github', passport.authenticate('github', {
-  scope: ['user:email']
-}), async (req, res) => { })
+//? GITHUB
+sessionsRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { })
 
 sessionsRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), async (req, res) => {
   req.session.user = {

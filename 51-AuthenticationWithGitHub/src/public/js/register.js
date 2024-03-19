@@ -1,4 +1,5 @@
 const registerForm = document.getElementById('registerForm')
+const boxMessage = document.querySelector('.errorMessage')
 
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault()
@@ -20,7 +21,7 @@ registerForm.addEventListener('submit', async (e) => {
 
     if (!response.ok) {
       const errorMessage = await response.json();
-      document.querySelector('.errorMessage').textContent = errorMessage.error;
+      boxMessage.textContent = errorMessage.error;
       return;
     }
 
@@ -34,7 +35,6 @@ registerForm.addEventListener('submit', async (e) => {
     window.location.replace('/login')
 
   } catch (error) {
-    console.error('Error:', error);
-    document.querySelector('.errorMessage').textContent = 'Error occurred while processing your request.';
+    boxMessage.textContent = 'Error occurred while processing your request.';
   }
 })

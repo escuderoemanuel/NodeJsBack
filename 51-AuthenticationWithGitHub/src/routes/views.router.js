@@ -23,9 +23,9 @@ viewsRouter.get('/home', (req, res) => {
   res.render('home', { user: req.session.user });
 })
 
-viewsRouter.get('/*', publicAuthentication, (req, res) => {
+/* viewsRouter.get('/*', publicAuthentication, (req, res) => {
   res.redirect('/login');
-})
+}) */
 
 
 
