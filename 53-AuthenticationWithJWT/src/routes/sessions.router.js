@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const UserModel = require('../dao/models/user.model');
-const { createHash, isValidPassword } = require('../utils');
+const { createHash, isValidPassword, generateToken, authToken } = require('../utils');
 const passport = require('passport');
 
 
@@ -90,24 +90,43 @@ sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRe
   res.redirect('/api/products')
 });
 
+//? JWT
+
+const users = [];
+// Register
+sessionRouter.post('/register', (req, res) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).send({ error: 'Missing data' });
+  }
+  if (users.find(user => user.email === email && user.password === password)) {
+    return res.status(400).send({ status: 'error', error: 'User already exists' });
+  }
+
+  const user = { name, email, password };
+  users.push(user);
+
+  const accessToken = generateToken(user)
+  res.send({ status: 'success', message: 'Succesful registered user.', accessToken });
+})
+// Login
+sessionRouter.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).send({ error: 'Missing data' });
+  }
+  const user = users.find(user => user.email === email && user.password === password);
+  if (!user) {
+    return res.status(400).send({ status: 'error', error: 'Invalid credentials' });
+  }
+
+  const accessToken = generateToken(user)
+  res.send({ status: 'success', message: 'Succesful logged in.', accessToken });
+})
+// Current with middleare authToken
+sessionRouter.get('/current', authToken, (req, res) => {
+  res.send({ status: 'success', message: 'Current user', payload: req.user })
+})
+
 
 module.exports = sessionRouter;
-
-
-/* const { firstName, lastName, email, password, repeatPassword, age, role } = req.body;
-
-    if (!firstName || !lastName || !email || !password || !repeatPassword || !age) {
-      return res.status(400).send({ status: 'error', error: 'Incomplete data' });
-    }
-
-    if (password.length < 8) {
-      return res.status(400).send({ status: 'error', error: 'Password must be at least 8 characters' });
-    }
-
-    if (password !== repeatPassword) {
-      return res.status(400).send({ status: 'error', error: 'Passwords do not match' });
-    }
-
-    const hashedPassword = createHash(password);
-
-    const result = await userModel.create({ firstName, lastName, email, password: hashedPassword, age, role }); */
