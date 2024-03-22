@@ -1,129 +1,83 @@
 // Atlas DB Connection
-require('dotenv').config();
-const MONGO_URL = process.env.MONGO_URL;
-
-
-// Mongoose Init & Connect
-const mongoose = require('mongoose');
-mongoose.connect(`${MONGO_URL}`)
-  .then(() => {
-    console.log('DB Connected Succesfully')
-  })
-const MongoStore = require('connect-mongo');
-
-// Solamente traemos Server de io
-const { Server } = require('socket.io');
-
-// Handlebars
-const handlebars = require('express-handlebars');
-
-// Express
+/* require('dotenv').config();
+const MONGO_URL = process.env.MONGO_URL; */
 const express = require('express');
-const PORT = 8080;
-const serverMessage = `Server is running on port ${PORT}`;
+const handlebars = require('express-handlebars');
+const jwt = require('jsonwebtoken');
+const { generateToken, verifyToken } = require('./utils');
 const app = express();
+const port = 8080;
 
 
-// Session Settings
-const session = require('express-session');
-app.use(session({
-  secret: 'milusaveme',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: `${MONGO_URL}`, ttl: 60 * 60 }),
-}))
+// middlewares
+app.use(express.static(`${__dirname}/public`));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Imports
-const passport = require('passport');
-const initializePassport = require('./config/passport.config.js');
-
-// Passport
-initializePassport();
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Router
-const MessagesModel = require('./dao/models/messages.model.js');
-const cartsRouter = require('./routes/carts.router.js');
-const productsRouter = require('./routes/products.router.js');
-const realtimeproducts = require('./routes/realtimeproducts.router.js');
-const chatRouter = require('./routes/chat.router.js');
-const sessionRouter = require('./routes/sessions.router.js');
-const viewsRouter = require('./routes/views.router.js');
-
-// Public Folder
-app.use(express.static(`${__dirname}/public`))
-
-// Json & Body Params
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-
-
-// Handlebars
+// Handlebars Config
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
 
-// Routes
-app.use('/api/sessions', sessionRouter)
-app.use('/api/carts', cartsRouter)
-app.use('/api/products', productsRouter)
-app.use('/api/chat', chatRouter)
-app.use('/api/realtimeproducts', realtimeproducts)
-app.use('/', viewsRouter)
+//! DB
+const users = [{
+  name: 'John',
+  email: 'john@gmail.com',
+  password: '1234'
+}]
 
-// Server
-const server = app.listen(PORT, () => {
-  console.log(serverMessage)
+
+//! Views Routes
+app.get('/', (req, res) => {
+  res.render('home');
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+//! API Routes
+app.post('/api/register', (req, res) => {
+
+  const { name, email, password } = req.body;
+
+  if (users.find(u => u.email === email && u.password === password)) {
+    return res.status(400).send({ status: 'error', error: 'User already exists' })
+  }
+
+  const user = { name, email, password };
+  users.push(user);
+
+  const accessToken = generateToken(user);
+
+  res.send({ status: 'success', message: 'Successful register', accessToken });
+
 })
 
-// Socket Setting
-const io = new Server(server);
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
 
-io.on('connection', async (socket) => {
+  const user = users.find(u => u.email === email && u.password === password);
+  if (!user) {
+    return res.status(400).send({ status: 'error', error: 'Invalid credentials' });
+  }
 
-  console.log('Connected User Socket...')
+  const accessToken = generateToken(user);
 
-  //! Products Events
-  socket.on('delete-product', (data) => {
-    const products = data.products.paginateData.payload;
-    io.emit('update-products', products)
-  })
+  res.send({ status: 'success', message: 'Successful login', accessToken });
+})
 
-  socket.on('add-product', (data) => {
-    const products = data.products.paginateData.payload;
-    io.emit('update-products', products)
-  })
-
-  //! Messages Events
-  // Recive Event: user authenticated
-  socket.on('authenticated', ({ user }) => {
-    // Send Event with the messages in the array: for this client-socket!
-    socket.emit('messages', { messages });
-    // Send Event: for all users except the one connecting!
-    socket.broadcast.emit('newUserConnected', { user });
-  })
-
-  //!Esto Funciona pero no guarda en Atlas
-  const messages = await MessagesModel.find().lean();
-  socket.emit('messages', { messages });
-
-  socket.on('userMessage', async (messageData) => {
-    const data = messageData;
-
-    await MessagesModel.create(messageData);
-    const messages = await MessagesModel.find().lean();
-    console.log('messages', messages)
-    console.log('messages', { messages })
-
-    io.emit('messages', { messages });
-  })
-
-  //! Connection Finished
-  socket.on('disconnect', () => {
-    console.log(`User ${socket.id} disconnected...`)
-  })
+app.get('/api/current', verifyToken, (req, res) => {
+  res.send({ status: 'success', message: 'Successful login', payload: req.user });
 })
 
 
+
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});

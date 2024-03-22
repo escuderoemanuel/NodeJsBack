@@ -1,32 +1,16 @@
-<section class='loginView'>
-  <h1>Login</h1>
-  <form action="" id='loginForm' class='loginForm'>
+<h1>Login</h1>
 
-    <label for="email">Email: </label>
-    <input type="text" name='email'>
-    <br>
-    <label for="password">Password: </label>
-    <input type="password" name='password'>
-    <br>
-    <span class='infoMessage' id='infoMessage'>{{message}}</span>
+<form id='loginForm'>
+  <label>Email</label>
+  <input name='email' type="text">
+  <br>
+  <label>Password</label>
+  <input name='password' type="password">
+  <br>
+  <button type='submit'>Login</button>
+</form>
+<p>Don't have an account?
+  <a href="/register">Create one</a>
+</p>
 
-    <button>Login</button>
-    <button id='githubBtn'>
-      <a class='githubLoginLink' href="/api/sessions/github">Login with GitHub
-        <img class='githubIcon' src="https://i.ibb.co/mtkQ2ch/github.png" alt="Github Icon">
-      </a>
-    </button>
-    <br>
-    <p class='secondaryParagraphs'>Don't have an account?
-      <a href="/register">CREATE ONE</a>
-    </p>
-    <br>
-    <p class='secondaryParagraphs'>Forgot your password?
-      <a href="/resetPassword">RESET PASSWORD HERE!</a>
-    </p>
-    <br>
-
-
-</section>
-
-<script src="/js/login.js"></script>
+<script src='/js/login.js'></script>
