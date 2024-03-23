@@ -1,10 +1,11 @@
-const form = document.getElementById('registerForm');
+const registerForm = document.getElementById('registerForm');
 
-form.addEventListener('submit', (e) => {
+registerForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const data = new FormData(form);
+  const data = new FormData(registerForm);
   const payload = {};
+
   data.forEach((value, key) => (payload[key] = value));
 
   fetch('/api/register', {

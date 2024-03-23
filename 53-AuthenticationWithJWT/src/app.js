@@ -3,7 +3,6 @@
 const MONGO_URL = process.env.MONGO_URL; */
 const express = require('express');
 const handlebars = require('express-handlebars');
-const jwt = require('jsonwebtoken');
 const { generateToken, verifyToken } = require('./utils');
 const app = express();
 const port = 8080;
@@ -26,7 +25,6 @@ const users = [{
   password: '1234'
 }]
 
-
 //! Views Routes
 app.get('/', (req, res) => {
   res.render('home');
@@ -40,6 +38,7 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
+
 //! API Routes
 app.post('/api/register', (req, res) => {
 
@@ -51,10 +50,12 @@ app.post('/api/register', (req, res) => {
 
   const user = { name, email, password };
   users.push(user);
+  console.log(users)
 
   const accessToken = generateToken(user);
+  console.log('accessToken en el REGISTER:', accessToken)
 
-  res.send({ status: 'success', message: 'Successful register', accessToken });
+  res.send({ status: 'success', message: 'Successful register', accessToken: accessToken });
 
 })
 
@@ -67,8 +68,9 @@ app.post('/api/login', (req, res) => {
   }
 
   const accessToken = generateToken(user);
+  console.log('accessToken en el LOGIN:', accessToken);
 
-  res.send({ status: 'success', message: 'Successful login', accessToken });
+  res.send({ status: 'success', message: 'Successful login', accessToken: accessToken });
 })
 
 app.get('/api/current', verifyToken, (req, res) => {
