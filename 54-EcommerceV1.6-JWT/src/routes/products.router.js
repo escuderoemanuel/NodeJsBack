@@ -12,13 +12,15 @@ const router = Router();
 // Deberá traer todos los productos de la base de datos, incluyendo opcionalmente limit, page, sort, filter (Example: http://localhost:8080/api/products?limit=2&page=1&sort=desc&filter=iphone)
 router.get('/', verifyToken, async (req, res) => {
   try {
-    let paginateData = await manager.getProducts(req, res);
-    const userData = req.session.user;
+    // let paginateData = await manager.getProducts(req.query);
+    const userData = req.tokenUser.serializableUser;
+    console.log('userData', userData)
 
     // Combinar los datos del usuario y los datos de paginación en un solo objeto porque handlebars no deja pasar más de 1
-    const renderData = { ...paginateData, user: userData };
+    //const renderData = { ...paginateData, user: userData };
 
-    res.render('products', renderData);
+    //res.render('products', renderData);
+    res.render('products', { user: userData });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
