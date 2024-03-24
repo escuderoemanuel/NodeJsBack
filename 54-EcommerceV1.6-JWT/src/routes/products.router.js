@@ -13,10 +13,10 @@ const router = Router();
 router.get('/', verifyToken, async (req, res) => {
   try {
     let paginateData = await manager.getProducts(req, res);
-    console.log('paginateData', paginateData)
+    // console.log('paginateData', paginateData)
 
     const userData = req.tokenUser.serializableUser;
-    console.log('userData', userData)
+    // console.log('userData', userData)
 
     // Combinar los datos del usuario y los datos de paginación en un solo objeto porque handlebars no deja pasar más de 1
     const renderData = { ...paginateData, user: userData };
@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
 router.put('/:pid', async (req, res) => {
   try {
     const id = req.params.pid;
-    console.log('PUT ID', id)
+    // console.log('PUT ID', id)
     const updatedFields = req.body;
 
     const updatedProduct = await manager.updateProduct(id, updatedFields);

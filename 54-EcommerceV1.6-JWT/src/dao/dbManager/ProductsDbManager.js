@@ -88,7 +88,7 @@ class ProductsDbManager {
       return { paginateData, products: paginateData.payload };
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       throw new Error(error.message)
     }
   }
