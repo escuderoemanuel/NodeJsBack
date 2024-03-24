@@ -58,20 +58,3 @@ registerForm.addEventListener('submit', async (e) => {
     document.querySelector('.infoMessage').textContent = 'Error occurred while processing your request.';
   }
 });
-
-
-/* 
-    if (!response.ok) {
-      const errorMessage = await response.json();
-      document.querySelector('.infoMessage').textContent = errorMessage.error;
-      return;
-    }
-
-    const responseData = await response.json();
-    if (responseData.status === 'success') {
-      document.querySelector('.infoMessage').textContent = 'Successfully registered user.';
-      registerForm.reset();
-      window.location.replace('/login');
-      return;
-    }
- */

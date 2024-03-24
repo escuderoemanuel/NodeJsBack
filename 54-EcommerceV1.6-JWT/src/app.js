@@ -2,7 +2,6 @@
 require('dotenv').config();
 const MONGO_URL = process.env.MONGO_URL;
 
-
 // Mongoose Init & Connect
 const mongoose = require('mongoose');
 mongoose.connect(`${MONGO_URL}`)
@@ -29,12 +28,6 @@ const app = express();
 
 // Session Settings
 const session = require('express-session');
-/* app.use(session({
-  secret: 'milusaveme',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: `${MONGO_URL}`, ttl: 60 * 60 }),
-})) */
 
 // Imports
 const passport = require('passport');
@@ -43,7 +36,6 @@ const initializePassport = require('./config/passport.config.js');
 // Passport
 initializePassport();
 app.use(passport.initialize());
-// app.use(passport.session());
 
 // Router
 const MessagesModel = require('./dao/models/messages.model.js');
@@ -60,7 +52,6 @@ app.use(express.static(`${__dirname}/public`))
 // Json & Body Params
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 
 
 // Handlebars

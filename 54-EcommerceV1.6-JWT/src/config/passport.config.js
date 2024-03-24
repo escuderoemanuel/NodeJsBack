@@ -17,7 +17,7 @@ const GitHubStrategy = github.Strategy;
 
 const initializePassport = () => {
 
-  //? LOCAL STRATEGY
+  //? JWT STRATEGY
 
   passport.use('register', new LocalStrategy({
     passReqToCallback: true,
@@ -100,9 +100,6 @@ const initializePassport = () => {
       } else {
         return done(null, user)
       }
-
-      return done(null, false)
-
     } catch (error) {
       return done('ERROR:', error)
     }

@@ -39,22 +39,4 @@ loginForm.addEventListener('submit', (e) => {
   } catch (error) {
     document.querySelector('.infoMessage').textContent = 'Error occurred while processing your request.';
   }
-
-
 });
-
-
-/* 
-if (!response.ok) {
-      const errorMessage = await response.json(); // Aquí esperamos la respuesta JSON
-      message.textContent = errorMessage.error;
-      return;
-    }
-
-    if (response.status == 200) {
-      // Limpiar errores previos
-      loginForm.reset();
-      message.textContent = 'Logging in...';
-
-      window.location.replace('/api/products');
-    } */

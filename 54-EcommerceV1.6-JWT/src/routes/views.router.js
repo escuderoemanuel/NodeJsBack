@@ -40,6 +40,4 @@ viewsRouter.get('/*', publicAuthentication, (req, res) => {
   res.redirect('/login');
 })
 
-
-
 module.exports = viewsRouter;
