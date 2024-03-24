@@ -54,10 +54,7 @@ const initializePassport = () => {
     session: false
   },
     async (email, password, done) => {
-
       try {
-
-
         // ADMIN LOGIC
         if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
           return done(null, {
@@ -81,7 +78,6 @@ const initializePassport = () => {
       } catch (error) {
         done(error);
       }
-
     }))
 
 
@@ -94,9 +90,7 @@ const initializePassport = () => {
     session: false
   }, async (_accessToken, _refreshToken, profile, done) => {
     try {
-
       // console.log('profile', profile)
-
       const user = await UserManager.getByEmail({ email: profile._json.email })
       if (!user) {
         const newUser = {

@@ -22,7 +22,7 @@ router.get('/', verifyToken, async (req, res) => {
     const renderData = { ...paginateData, user: userData };
 
     res.render('products', renderData);
-    res.render('products', { user: userData });
+    //res.render('products', { user: userData });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }

@@ -57,7 +57,7 @@ productList.addEventListener('click', async (e) => {
 })
 
 //! Agrego un producto a la base de datos y lo envio a todos los clientes conectados.
-formAddProduct.addEventListener('submit', async (e) => {
+formAddProduct.addEventListener('DOMContentLoaded', 'submit', async (e) => {
   e.preventDefault()
 
   const newProduct = {};

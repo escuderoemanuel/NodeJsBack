@@ -21,7 +21,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-
 // Deberá listar todos los carritos (No lo pide el desafío).
 router.get('/', privateAuthentication, async (req, res) => {
   try {
@@ -156,6 +155,5 @@ router.delete('/:cid', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 })
-
 
 module.exports = router;
