@@ -1,8 +1,9 @@
-const UserModel = require('../models/user');
+const UserModel = require('../models/user.model');
 
 class UsersDbManager {
   constructor() {
-    //this.model = UserModel;
+    console.log('UserDbManager Intance')
+
   }
 
   async getAll() {
@@ -16,7 +17,7 @@ class UsersDbManager {
   }
 
   async getByEmail(email) {
-    let result = await UserModel.findOne({ email: email }).lean();
+    let result = await UserModel.findOne(email).lean();
     return result;
   }
 

@@ -23,6 +23,9 @@ sessionRouter.post('/login', passport.authenticate('login', {
 }), async (req, res) => {
 
   const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
+
+  
+
   const serializableUser = {
     id: _id,
     firstName,
@@ -40,6 +43,7 @@ sessionRouter.post('/login', passport.authenticate('login', {
   res.cookie('accessToken', accessToken);
 
   res.send({ status: 'success', message: 'Successfully logged in' })
+
 })
 
 sessionRouter.get('/loginFailed', (req, res) => {

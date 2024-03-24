@@ -7,9 +7,10 @@ const CALLBACK_URL = process.env.CALLBACK_URL;
 const passport = require('passport');
 const local = require('passport-local');
 const github = require('passport-github2');
-const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 
+const UsersDbManager = require('../dao/dbManager/UsersDbManager');
+const UserManager = new UsersDbManager();
 
 const LocalStrategy = local.Strategy;
 const GitHubStrategy = github.Strategy;
@@ -32,18 +33,18 @@ const initializePassport = () => {
         return done(null, false, { message: 'All fields are required.' });
       }
 
-      const existingUser = await UserModel.findOne({ email });
+      const existingUser = await UserManager.getByEmail({ email });
       if (existingUser) {
         return done(null, false, { message: 'The user is already registered.' });
       }
 
       const newUser = { firstName, lastName, email, age, password: createHash(password) };
 
-      const result = await UserModel.create(newUser);
-      return done(null, result);
+      const result = await UserManager.createUser(newUser);
+      done(null, result);
 
     } catch (error) {
-      return done(error);
+      done(error);
     }
   }));
 
@@ -55,7 +56,18 @@ const initializePassport = () => {
     async (email, password, done) => {
 
       try {
-        const user = await UserModel.findOne({ email });
+
+
+        // ADMIN LOGIC
+        if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
+          return done(null, {
+            firstName: 'User',
+            email: 'adminCoder@coder.com',
+            role: 'admin' // Asigna el rol de 'admin' si coincide
+          })
+        }
+
+        const user = await UserManager.getByEmail({ email });
         if (!user) {
           return done(null, false, { message: 'User does not exist.' });
         }
@@ -67,7 +79,7 @@ const initializePassport = () => {
         return done(null, user);
 
       } catch (error) {
-        return done(error);
+        done(error);
       }
 
     }))
@@ -85,7 +97,7 @@ const initializePassport = () => {
 
       // console.log('profile', profile)
 
-      const user = await UserModel.findOne({ email: profile._json.email })
+      const user = await UserManager.getByEmail({ email: profile._json.email })
       if (!user) {
         const newUser = {
           firstName: profile._json.name,
@@ -95,7 +107,7 @@ const initializePassport = () => {
           password: '',
           role: 'user',
         }
-        const result = await UserModel.create(newUser)
+        const result = await UserManager.createUser(newUser)
         return done(null, result)
       } else {
         return done(null, user)
@@ -112,7 +124,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await UserModel.findOne({ _id: id });
+    const user = await UserManager.getById({ _id: id });
     return done(null, user)
   } catch (error) {
     return done('ERROR:', error)
