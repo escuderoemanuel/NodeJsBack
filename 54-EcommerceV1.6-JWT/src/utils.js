@@ -14,8 +14,8 @@ const isValidPassword = (user, password) => {
 }
 
 // JWT
-const generateToken = (user) => {
-  const accessToken = jwt.sign({ user }, PRIVATE_KEY, { expiresIn: '1d' });
+const generateToken = (serializableUser) => {
+  const accessToken = jwt.sign({ serializableUser }, PRIVATE_KEY, { expiresIn: '1d' });
   console.log('accessToken en generateToken', accessToken)
   return accessToken;
 }
@@ -23,25 +23,17 @@ const generateToken = (user) => {
 // JWT Middleware
 const verifyToken = (req, res, next) => {
 
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).send({ status: 'error', error: 'Access Denied' });
-  }
+  const accessToken = req.cookies.accessToken;
+  console.log('accessToken en verifyToken', accessToken)
 
-  // Llega authorization 'bearer alskndalsd98d'
-  const accessToken = authHeader.split(' ')[1];
-  console.log('accessToken en el VERIFY:', accessToken)
-  try {
-    const decoded = jwt.verify(accessToken, PRIVATE_KEY, (error, credentials) => {
-      if (error) {
-        return res.status(403).send({ status: 'error', error: 'Forbidden' });
-      }
-      req.user = credentials.user;
-      next();
-    });
-  } catch (err) {
-    res.status(400).send('Invalid Token');
-  }
+  jwt.verify(accessToken, PRIVATE_KEY, (error, credentials) => {
+    if (error) {
+      return res.status(403).send({ status: 'error', error: 'Forbidden' });
+    }
+    req.tokenUser = credentials;
+    next();
+  });
+
 }
 
 module.exports = {

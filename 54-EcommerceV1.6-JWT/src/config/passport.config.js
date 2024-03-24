@@ -21,15 +21,19 @@ const initializePassport = () => {
 
   passport.use('register', new LocalStrategy({
     passReqToCallback: true,
-    usernameField: 'email'
-  }, async (req, username, password, done) => {
-
-    const { firstName, lastName, email, age } = req.body;
+    usernameField: 'email',
+    session: false
+  }, async (req, email, password, done) => {
 
     try {
-      const user = await UserModel.findOne({ email: username });
 
-      if (user) {
+      const { firstName, lastName, email, age } = req.body;
+      if (!firstName || !lastName || !email || !age || !password) {
+        return done(null, false, { message: 'All fields are required.' });
+      }
+
+      const existingUser = await UserModel.findOne({ email });
+      if (existingUser) {
         return done(null, false, { message: 'The user is already registered.' });
       }
 
@@ -44,7 +48,10 @@ const initializePassport = () => {
   }));
 
 
-  passport.use('login', new LocalStrategy({ usernameField: 'email' },
+  passport.use('login', new LocalStrategy({
+    usernameField: 'email',
+    session: false
+  },
     async (email, password, done) => {
 
       try {
@@ -72,6 +79,7 @@ const initializePassport = () => {
     clientID: CLIENT_ID,
     callbackURL: CALLBACK_URL,
     clientSecret: CLIENT_SECRET,
+    session: false
   }, async (_accessToken, _refreshToken, profile, done) => {
     try {
 
@@ -86,7 +94,6 @@ const initializePassport = () => {
           email: profile._json.email,
           password: '',
           role: 'user',
-
         }
         const result = await UserModel.create(newUser)
         return done(null, result)
@@ -94,10 +101,11 @@ const initializePassport = () => {
         return done(null, user)
       }
 
+      return done(null, false)
+
     } catch (error) {
       return done('ERROR:', error)
     }
-
   }))
 }
 

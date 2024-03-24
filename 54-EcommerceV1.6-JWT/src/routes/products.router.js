@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
 const { publicAuthentication, privateAuthentication } = require('../middlewares/middlewares');
+const { verifyToken } = require('../utils');
 
 
 // Manager
@@ -9,7 +10,7 @@ const manager = new ProductsDbManager();
 const router = Router();
 
 // Deberá traer todos los productos de la base de datos, incluyendo opcionalmente limit, page, sort, filter (Example: http://localhost:8080/api/products?limit=2&page=1&sort=desc&filter=iphone)
-router.get('/', privateAuthentication, async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     let paginateData = await manager.getProducts(req, res);
     const userData = req.session.user;

@@ -31,12 +31,10 @@ loginForm.addEventListener('submit', (e) => {
       },
     }).then(res => {
       if (res.status === 200) {
-        localStorage.setItem('accessToken', res.accessToken);
         window.location.replace('/api/products');
       } else {
         message.textContent = 'Error occurred while processing your request ELSE.';
       }
-      return res.json();
     })
   } catch (error) {
     document.querySelector('.infoMessage').textContent = 'Error occurred while processing your request.';

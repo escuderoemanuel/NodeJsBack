@@ -17,6 +17,9 @@ const { Server } = require('socket.io');
 // Handlebars
 const handlebars = require('express-handlebars');
 
+//
+const cookieParser = require('cookie-parser');
+
 // Express
 const express = require('express');
 const PORT = 8080;
@@ -26,12 +29,12 @@ const app = express();
 
 // Session Settings
 const session = require('express-session');
-app.use(session({
+/* app.use(session({
   secret: 'milusaveme',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: `${MONGO_URL}`, ttl: 60 * 60 }),
-}))
+})) */
 
 // Imports
 const passport = require('passport');
@@ -40,7 +43,7 @@ const initializePassport = require('./config/passport.config.js');
 // Passport
 initializePassport();
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 // Router
 const MessagesModel = require('./dao/models/messages.model.js');
@@ -61,6 +64,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // Handlebars
+app.use(cookieParser());
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');

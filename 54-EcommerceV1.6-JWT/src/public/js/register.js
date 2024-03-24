@@ -46,8 +46,21 @@ registerForm.addEventListener('submit', async (e) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    }).then(res => res.json()).then(
+      console.log(res)
+    );
 
+    registerForm.reset();
+    window.location.replace('/login');
+
+  } catch (error) {
+    console.error('Error:', error.message);
+    document.querySelector('.infoMessage').textContent = 'Error occurred while processing your request.';
+  }
+});
+
+
+/* 
     if (!response.ok) {
       const errorMessage = await response.json();
       document.querySelector('.infoMessage').textContent = errorMessage.error;
@@ -61,12 +74,4 @@ registerForm.addEventListener('submit', async (e) => {
       window.location.replace('/login');
       return;
     }
-
-    registerForm.reset();
-    window.location.replace('/login');
-
-  } catch (error) {
-    console.error('Error:', error.message);
-    document.querySelector('.infoMessage').textContent = 'Error occurred while processing your request.';
-  }
-});
+ */
