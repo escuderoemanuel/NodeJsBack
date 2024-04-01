@@ -1,0 +1,11 @@
+// .env.development file
+
+PORT= 8080
+ENVIRONMENT= development
+MONGO_URL= mongodb://localhost_development/
+
+// .env.production file
+
+PORT= 3000
+ENVIRONMENT= production
+MONGO_URL= mongodb://localhost_production/
