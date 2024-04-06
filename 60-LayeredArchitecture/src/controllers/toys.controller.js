@@ -1,17 +1,34 @@
+const ToysService = require("../services/toys.service")
+
+const toysService = new ToysService();
+
+
 const getToys = (req, res) => {
-  res.send({ status: 'success', message: 'Getting all toys' })
+  const payload = toysService.getAll()
+  res.send({ status: 'success', message: 'Getting all toys', payload })
 }
+
 const getToyById = (req, res) => {
-  res.send({ status: 'success', message: 'Getting a toy' })
+  const id = parseInt(req.params.id)
+  const payload = toysService.getById(id)
+  res.send({ status: 'success', message: 'Getting a toy', payload })
 }
+
 const createToy = (req, res) => {
-  res.send({ status: 'success', message: 'Creating a toy' })
+  const payload = toysService.create(req.body)
+  res.status(201).send({ status: 'success', message: 'Creating a toy', payload })
 }
+
 const updateToy = (req, res) => {
-  res.send({ status: 'success', message: 'Updating a toy' })
+  const id = parseInt(req.params.id)
+  const payload = toysService.update(id, req.body)
+  res.send({ status: 'success', message: 'Updating a toy', payload })
 }
+
 const deleteToy = (req, res) => {
-  res.send({ status: 'success', message: 'deleting a toy' })
+  const id = parseInt(req.params.id)
+  const payload = toysService.delete(id)
+  res.send({ status: 'success', message: 'Removed toy', payload })
 }
 
 module.exports = {
