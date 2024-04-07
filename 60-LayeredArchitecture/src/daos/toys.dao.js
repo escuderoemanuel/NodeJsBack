@@ -20,6 +20,7 @@ class ToysDao {
     return toy;
   }
 
+
   update(id, toy) {
     const index = this.toys.findIndex(toy => toy.id === id);
     this.toys[index] = { ...this.toys[index], ...toy };
