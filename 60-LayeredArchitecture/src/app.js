@@ -8,7 +8,7 @@ const app = express()
 /* MIDDLEWARES */
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
+console.log('port', PORT)
 
 /* ROUTES */
 app.use('/api/toys', toysRouter)
