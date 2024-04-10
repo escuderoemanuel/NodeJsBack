@@ -1,5 +1,5 @@
 //const { describe } = require('yargs')
-const myFunction = require('./myFunction')
+const myFunction = require('./myFunction.js')
 
 describe('myFunction', () => {
   it('should return the sum of two numbers', () => {
