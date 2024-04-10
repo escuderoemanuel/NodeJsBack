@@ -1,4 +1,3 @@
-//const { describe } = require('yargs')
 const myFunction = require('./myFunction.js')
 
 describe('myFunction', () => {
