@@ -1,0 +1,19 @@
+{
+  "name": "61-environmentoptions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app.js --env dev",
+    "start": "node app.js --env prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.3.1"
+  }
+}

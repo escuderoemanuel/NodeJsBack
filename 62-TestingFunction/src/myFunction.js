@@ -1,4 +1,5 @@
 // First Function
+
 /* const myFunction = (number1, number2) => {
   let result = number1;
   result = result + number2;
