@@ -8,7 +8,6 @@ class Enemy {
       attackPower: 5,
       defence: 0
     }
-
   }
 
   getStats() {
@@ -20,7 +19,7 @@ class Enemy {
 
 class EnemyDecorator extends Enemy {
   constructor(enemyToDecorate) {
-    super();
+    super(); // call the constructor of the parent class before own logic
     this.toDecorate = enemyToDecorate;
   }
 }
