@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Site</title>
+</head>
+
+<body>
+  <h1>Welcome to the jungle, baby!</h1>
+  <p>You gonna die!</p>
+  <button onclick='getData()'>Consult Endpint</button>
+
+  <!-- SCRIP -->
+  <script>
+    const getData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/test')
+        const data = await response.json()
+        console.log('Data:', data)
+      } catch (error) {
+        console.log('Error:', error)
+      }
+    }
+  </script>
+</body>
+
+</html>
