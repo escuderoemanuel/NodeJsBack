@@ -1,13 +1,12 @@
 const { Router } = require('express');
-const MessagesModel = require('../dao/models/messages.model');
-const { publicAuthentication, privateAuthentication } = require('../middlewares/middlewares');
-const ChatViewController = require('../controllers/chatView.controller');
+const { privateAuthentication } = require('../middlewares/middlewares');
+const ChatViewController = require('../controllers/chat.controller');
 
 
 // Manager
 const router = Router();
 
-router.post('/', ChatViewController.postMessage)
+router.post('/', privateAuthentication, ChatViewController.postMessage) //! Todo: Chequear que el privateAuthentication sea el correcto
 
 router.get('/', privateAuthentication, ChatViewController.getMessages)
 
