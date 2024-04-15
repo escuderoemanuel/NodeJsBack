@@ -13,3 +13,11 @@
 
 - Comprobación de fields en el register
 - Comprobación de fields en el login
+
+### Help Tips
+
+- Model -> Define las propiedades que tendrá el modelo, tipo de datos, valores por defecto, campos requeridos u opcionales, etc.
+- DAO -> Utiliza el Model. Se encarga únicamente de interactuar con la DB para las operaciones CRUD.
+- Service -> Se encarga de manejar la lógica de negocio utilizando el DAO para acceder a la DB.
+- Controller -> Se encarga de manejar las solicitudes HTTP relacionadas, utilizando el Service para realizar las operaciones correspondientes.
+- Router

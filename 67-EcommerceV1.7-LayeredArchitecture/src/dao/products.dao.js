@@ -1,13 +1,13 @@
-const productsModel = require('./models/products.model');
+const ProductsModel = require('./models/products.model');
 
 class ProductsDao {
 
   async getAll(filter, options) {
     try {
       if (filter && options) {
-        return await productsModel.paginate(filter, options);
+        return await ProductsModel.paginate(filter, options);
       }
-      return await productsModel.find().lean();
+      return await ProductsModel.find().lean();
     } catch (error) {
       throw new Error('Error fetching products from database');
     }
@@ -15,7 +15,7 @@ class ProductsDao {
 
   async getById(id) {
     try {
-      return await productsModel.findOne({ _id: id }).lean();
+      return await ProductsModel.findOne({ _id: id }).lean();
     } catch (error) {
       throw new Error('Error fetching product by ID from database');
     }
@@ -23,7 +23,7 @@ class ProductsDao {
 
   async create(product) {
     try {
-      return await productsModel.create(product);
+      return await ProductsModel.create(product);
     } catch (error) {
       throw new Error('Error creating product in database');
     }
@@ -32,7 +32,7 @@ class ProductsDao {
 
   async update(id, newProduct) {
     try {
-      return await productsModel.updateOne({ _id: id }, newProduct);
+      return await ProductsModel.updateOne({ _id: id }, newProduct);
     } catch (error) {
       throw new Error('Error updating product in database');
     }
@@ -40,7 +40,7 @@ class ProductsDao {
 
   async delete(id) {
     try {
-      return await productsModel.deleteOne({ _id: id });
+      return await ProductsModel.deleteOne({ _id: id });
     } catch (error) {
       throw new Error('Error deleting product from database');
     }

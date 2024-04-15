@@ -1,4 +1,4 @@
-const ProductsDao = require('../src/dao/products.dao');
+const ProductsDao = require('../dao/products.dao');
 
 class ProductsService {
 
@@ -88,6 +88,7 @@ class ProductsService {
   async getById(id) {
     try {
       const product = await this.dao.getById(id).lean();
+      console.log('product:', product)
       return product;
     } catch (error) {
       throw new Error('Error fetching product by ID');

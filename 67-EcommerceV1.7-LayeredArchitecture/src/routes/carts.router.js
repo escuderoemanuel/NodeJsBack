@@ -13,20 +13,19 @@ router.get('/', privateAuthentication, CartsController.getAll)
 // Deberá listar los productos que pertenezcan al carrito con el cid proporcionado, dando acceso a los datos del cart y de las propiedades de los productos que contenga.
 router.get('/:cid', privateAuthentication, CartsController.getById)
 
-
 // Deberá agregar el producto al arreglo “products” del carrito seleccionado
-router.post('/:cid/product/:pid', privateAuthentication, CartsController.addToCart)
+router.post('/:cid/product/:pid', privateAuthentication, CartsController.addProductToCart)
 
 // Deberá eliminar del carrito el producto seleccionado
-router.delete('/:cid/product/:pid', privateAuthentication, CartsController.deleteFromCartById)
+router.delete('/:cid/product/:pid', privateAuthentication, CartsController.deleteProductById)
 
 // Deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
-router.put('/:cid', privateAuthentication, CartsController.updateById)
+router.put('/:cid', privateAuthentication, CartsController.updateProductById)
 
 // Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
-router.put('/:cid/products/:pid', privateAuthentication, CartsController.updateQuantityById)
+router.put('/:cid/products/:pid', privateAuthentication, CartsController.updateProductQuantityById)
 
 // DELETE: api/carts/:cid deberá eliminar todos los productos del carrito
-router.delete('/:cid', privateAuthentication, CartsController.emptyById)
+router.delete('/:cid', privateAuthentication, CartsController.emptyCartById)
 
 module.exports = router;
