@@ -6,6 +6,7 @@ const cartManager = new CartsDbManager();
 const productManager = new ProductsDbManager();
 
 class CartsController {
+
   static async create(req, res) {
     try {
       const cart = await cartManager.addCart();

@@ -2,13 +2,14 @@ const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
 const manager = new ProductsDbManager();
 
 class ProductsController {
+
   static async getAll(req, res) {
     try {
       let paginateData = await manager.getProducts(req, res);
       // console.log('paginateData', paginateData)
 
       const userData = req.tokenUser.serializableUser;
-      // console.log('userData', userData)
+      console.log('userData', userData)
 
       // Combinar los datos del usuario y los datos de paginación en un solo objeto porque handlebars no deja pasar más de 1
       const renderData = { ...paginateData, user: userData };

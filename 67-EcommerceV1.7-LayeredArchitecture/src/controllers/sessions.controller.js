@@ -7,52 +7,47 @@ const { generateToken, verifyToken } = require('../utils');
 
 class SessionsController {
 
-  static async createRegister(req, res) {
-    passport.authenticate('register', {
-      failureRedirect: '/api/sessions/registrationFailed',
-      session: false
-    }), async (req, res) => {
-      res.send({ status: 'success', message: 'Successfully registered user.' });
-    }
+  //? REGISTER
+  static async registerUser(req, res) {
+    res.send({ status: 'success', message: 'Successfully registered user.' });
   }
 
   static async getRegisterError(req, res) {
     res.status(401).send({ status: 'error', error: 'Registration failed.' });
   }
 
-  static async createLogin(req, res) {
-    passport.authenticate('login', {
-      failureRedirect: '/api/sessions/loginFailed',
-      session: false
-    }), async (req, res) => {
-      const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
-      const serializableUser = {
-        id: _id,
-        firstName,
-        lastName,
-        email,
-        age,
-        role,
-        password,
-        cart
-      }
+  //? LOGIN
+  static async loginUser(req, res) {
 
-      const accessToken = generateToken(serializableUser);
-      res.cookie('accessToken', accessToken);
-      res.send({ status: 'success', message: 'Successfully logged in', payload: accessToken })
+    const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
+    const serializableUser = {
+      id: _id,
+      firstName,
+      lastName,
+      email,
+      age,
+      role,
+      password,
+      cart
     }
+
+    const accessToken = generateToken(serializableUser);
+    res.cookie('accessToken', accessToken);
+    res.send({ status: 'success', message: 'Successfully logged in', payload: accessToken })
   }
 
   static async getLoginError(req, res) {
     res.status(401).send({ status: 'error', error: 'Login failed' });
   }
 
-  static async getLogout(req, res) {
+  //? LOGOUT
+  static async logout(req, res) {
     res.clearCookie('accessToken');
     res.redirect('/login');
   }
 
-  static async createResetPass(req, res) {
+  //? RESET PASSWORD
+  static async resetPassword(req, res) {
     const { email, password, passwordConfirm } = req.body;
     try {
       if (!email || !password || !passwordConfirm) {
@@ -74,38 +69,35 @@ class SessionsController {
     }
   }
 
-  static async getGithubAccount(req, res) {
-    passport.authenticate('github', { scope: ['user:email'], session: false }), async (req, res) => { }
+  //? GITHUB ACCOUNT
+  static async githubLogin(req, res) {
+
   }
 
-  static async getGithubAccountCallback(req, res) {
-    passport.authenticate('github', { failureRedirect: '/login', session: false }), async (req, res) => {
+  static async githubCallback(req, res) {
+    const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
 
-      const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
-
-      const serializableUser = {
-        id: _id,
-        firstName,
-        lastName,
-        email,
-        age,
-        role,
-        password,
-        cart
-      }
-      const accessToken = generateToken(serializableUser);
-      res.cookie('accessToken', accessToken);
-      res.redirect('/api/products')
+    const serializableUser = {
+      id: _id,
+      firstName,
+      lastName,
+      email,
+      age,
+      role,
+      password,
+      cart
     }
+    const accessToken = generateToken(serializableUser);
+    res.cookie('accessToken', accessToken);
+    res.redirect('/api/products')
+
   }
 
-  static async getCurrentSession(req, res) {
+  //? CURRENT SESSION
+  static async currentSession(req, res) {
     const user = req.tokenUser;
     res.send({ payload: user });
   }
-
-
-
 
 }
 

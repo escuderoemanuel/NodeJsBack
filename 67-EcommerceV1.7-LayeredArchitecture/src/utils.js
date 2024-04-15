@@ -16,7 +16,7 @@ const isValidPassword = (user, password) => {
 // JWT
 const generateToken = (serializableUser) => {
   const accessToken = jwt.sign({ serializableUser }, JWT_PRIVATE_KEY, { expiresIn: '1d' });
-  // console.log('accessToken en generateToken', accessToken)
+  //console.log('accessToken en generateToken', accessToken)
   return accessToken;
 }
 
@@ -24,11 +24,11 @@ const generateToken = (serializableUser) => {
 const verifyToken = (req, res, next) => {
 
   const accessToken = req.cookies.accessToken;
-  //  console.log('accessToken en verifyToken', accessToken)
+  // console.log('accessToken en verifyToken', accessToken)
 
   jwt.verify(accessToken, JWT_PRIVATE_KEY, (error, credentials) => {
     if (error) {
-      return res.status(403).send({ status: 'error', error: 'Forbidden' });
+      return res.status(403).send({ status: 'error', error: 'JWT Verify Forbidden', message: error.message });
     }
     req.tokenUser = credentials;
     next();
