@@ -1,6 +1,7 @@
 const CartDao = require('../dao/carts.dao');
 const ProductsService = require('./products.service');
 
+
 class CartService {
   constructor() {
     this.dao = new CartDao();
@@ -34,39 +35,50 @@ class CartService {
     return await this.dao.delete(cid);
   }
 
-  async addProduct(cid, productId) {
+  async addProduct(cid, pid) {
     const cart = await this.getById(cid);
-    const productIndex = cart.products.findIndex(product => product._id === productId);
+    const product = await this.productsService.getById(pid);
 
-    if (productIndex >= 0) {
-      cart.products[productIndex].quantity++;
-    } else {
-      cart.products.push({ id: productId, quantity: 1 });
+    if (!cart) {
+      throw new Error('Cart does not exist');
     }
-    await this.update(cid, cart);
-    return cart;
+
+    if (!product) {
+      throw new Error('Product does not exist');
+    }
+
+    const existingProductIndex = cart.products.findIndex(item => item.product._id.toString() === pid);
+
+    if (existingProductIndex >= 0) {
+      cart.products[existingProductIndex].quantity++;
+    } else {
+      cart.products.push({ product: pid, quantity: 1 });
+    }
+
+    await this.update({ _id: cid }, cart);
+    return { message: 'Product added to cart successfully' };
   }
 
-  async deleteProductById(cid, productId) {
+  async deleteProductFromCartById(cid, pid) {
     const cart = await this.getById(cid);
-    await this.productsService.getById(productId);
+    const productToDelete = await this.productsService.getById(pid);
 
-    const newContent = cart.products.filter(product => product.id !== productId)
+    const newContent = cart.products.filter(item => item.product._id.toString() !== pid)
     await this.update(cid, { products: newContent });
     return this.getById(cid);
   }
 
   async updateProductQuantity(cid, pid, quantity) {
     const cart = await this.getById(cid);
-    console.log('cart en cartService', cart)
+    //console.log('cart en cartService', cart)
     const product = await this.productsService.getById(pid);
-    console.log('product en cartService', product)
+    //console.log('product en cartService', product)
 
     if (!quantity || isNaN(quantity) || quantity < 0) {
       throw { message: 'Quantity is not valid', status: 400 }
     }
 
-    const productIndex = cart.products.findIndex(product => product.id === pid);
+    const productIndex = cart.products.findIndex(item => item.product._id.toString() === pid);
 
     if (productIndex < 0) {
       throw { message: 'Product not found', status: 404 }

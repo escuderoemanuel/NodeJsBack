@@ -26,9 +26,9 @@
 
 - getAll -> No muestra
 - getById -> Bien
-- create -> Crea bien pero muestra un error
-- update -> Actualiza bien pero muestra un payload incorrecto
-- delete -> Elimina pero muestra un error
+- create -> Bien
+- update -> Bien
+- delete -> Bien
 
 
 ## CARTS
@@ -36,8 +36,8 @@
 - create -> Bien
 - getAll -> Bien
 - getById -> Bien
-- addProductToCart -> Agrega mal el id, no aumenta la cantidad
-- deleteProductById -> Elimina bien de la DB, pero da error
-- updateProductById ->
-- updateProductQuantityById ->
+- addProductToCart -> Bien
+- deleteProductById -> Bien
+- updateProductById -> 
+- updateProductQuantityById -> Bien
 - emptyCartById -> Bien

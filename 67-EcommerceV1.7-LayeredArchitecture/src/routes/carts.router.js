@@ -20,7 +20,7 @@ router.post('/:cid/product/:pid', privateAuthentication, CartsController.addProd
 router.delete('/:cid/product/:pid', privateAuthentication, CartsController.deleteProductById)
 
 // Deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba.
-router.put('/:cid', privateAuthentication, CartsController.updateProductById)
+router.put('/:cid', privateAuthentication, CartsController.updateProductsFromCart)
 
 // Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
 router.put('/:cid/products/:pid', privateAuthentication, CartsController.updateProductQuantityById)

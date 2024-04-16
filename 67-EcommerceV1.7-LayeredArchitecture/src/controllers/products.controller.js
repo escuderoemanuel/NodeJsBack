@@ -6,7 +6,7 @@ const productsService = new ProductsService();
 class ProductsController {
 
 
-  static async getAll(req, res) {
+  /* static async getAll(req, res) {
     try {
       let paginateData = await productsService.getAll(req, res);
       // console.log('paginateData', paginateData)
@@ -22,8 +22,8 @@ class ProductsController {
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
-  }
-  /* static async getAll(req, res) {
+  } */
+  static async getAll(req, res) {
     try {
       let { limit, page, filter, sort } = req.query;
       limit = parseInt(limit);
@@ -73,7 +73,7 @@ class ProductsController {
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
-  } */
+  }
 
   static async getById(req, res) {
     try {
@@ -82,7 +82,7 @@ class ProductsController {
       const product = await productsService.getById(pid);
       console.log('product', product) //! NO LLEGA AQUI
 
-      res.send({ status: 'success', payload: product });
+      res.send({ status: 'success', product });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
@@ -91,8 +91,8 @@ class ProductsController {
   static async create(req, res) {
     try {
       await productsService.create(req.body);
-      const products = await productsService.getAll(req, res);
-      res.send({ status: 'success', products });
+      //const products = await productsService.getAll(req, res);
+      res.send({ status: 'success', message: 'Product created' });
     } catch (error) {
       console.log(error);
       res.status(400).send({ error: error.message });
@@ -104,8 +104,9 @@ class ProductsController {
       const pid = req.params.pid;
       // console.log('PUT ID', id)
       const updatedFields = req.body;
-      const updatedProduct = await productsService.update(pid, updatedFields);
-      res.send({ status: 'success', payload: updatedProduct });
+      await productsService.update(pid, updatedFields);
+      const updatedProduct = await productsService.getById(pid);
+      res.send({ status: 'success', updatedProduct });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
@@ -116,8 +117,8 @@ class ProductsController {
       const pid = req.params.pid;
       const productToDelete = await productsService.getById(pid);
       await productsService.delete(pid);
-      const products = await productsService.getAll(req, res);
-      res.send({ status: 'success', payload: { productToDelete, products } });
+      //const products = await productsService.getAll(req, res);
+      res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {
       res.status(400).send({ status: 'error', message: error.message });
     }

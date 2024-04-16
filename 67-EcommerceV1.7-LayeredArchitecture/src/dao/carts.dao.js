@@ -21,27 +21,27 @@ class CartDao {
     }
   }
 
-  async getById(id) {
+  async getById(cid) {
     try {
-      const cart = await CartsModel.findOne({ _id: id }).lean()
+      const cart = await CartsModel.findOne({ _id: cid }).lean()
       return cart;
     } catch (error) {
-      throw new Error(`Error searching for cart with id: ${id}`)
+      throw new Error(`Error searching for cart with id: ${cid}`)
     }
   }
-  async update(id, cart) {
+  async update(cid, cart) {
     try {
-      await CartsModel.updateOne({ _id: id }, cart);
+      await CartsModel.updateOne({ _id: cid }, cart);
     } catch (error) {
       throw new Error(error.message)
     }
   }
 
-  async delete(id) {
+  async delete(cid) {
     try {
-      const result = await CartsModel.deleteOne({ _id: id });
+      const result = await CartsModel.deleteOne({ _id: cid });
       if (result.deletedCount === 0) {
-        throw new Error(`Cart with id ${id} not found`);
+        throw new Error(`Cart with id ${cid} not found`);
       }
     } catch (error) {
       throw new Error(error.message)

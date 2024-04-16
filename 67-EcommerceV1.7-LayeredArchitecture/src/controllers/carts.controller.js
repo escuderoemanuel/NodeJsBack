@@ -41,9 +41,9 @@ class CartsController {
     try {
       const cid = req.params.cid;
       const pid = req.params.pid;
-      console.log('cid:', cid, 'pid:', pid)
+      //console.log('cid:', cid, 'pid:', pid) //! OK
       const cart = await cartsService.addProduct(cid, pid);
-      console.log('cart', cart)
+      //console.log('cart', cart) //!OK
       res.send({ status: 'success', cart });
     } catch (error) {
       res.status(400).send({ error: error.message });
@@ -54,17 +54,18 @@ class CartsController {
     try {
       const cid = req.params.cid;
       const pid = req.params.pid;
-      await cartsService.deleteProductById(cid, pid);
+      await cartsService.deleteProductFromCartById(cid, pid);
       res.send({ status: 'success', message: 'Product successfully removed' });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
   }
 
-  static async updateProductById(req, res) {
+  static async updateProductsFromCart(req, res) {
     try {
       const cid = req.params.cid;
       await cartsService.updateCartProducts(cid, req.body);
+      await cartsService.update(cid);
       res.send({ status: 'success', message: 'Product successfully updated' });
     } catch (error) {
       res.status(400).send({ error: error.message });
