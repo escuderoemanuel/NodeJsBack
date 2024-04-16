@@ -61,16 +61,6 @@ class CartsController {
     }
   }
 
-  static async updateProductsFromCart(req, res) {
-    try {
-      const cid = req.params.cid;
-      await cartsService.updateCartProducts(cid, req.body);
-      await cartsService.update(cid);
-      res.send({ status: 'success', message: 'Product successfully updated' });
-    } catch (error) {
-      res.status(400).send({ error: error.message });
-    }
-  }
 
   static async updateProductQuantityById(req, res) {
     try {

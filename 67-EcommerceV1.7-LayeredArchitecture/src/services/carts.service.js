@@ -68,6 +68,7 @@ class CartService {
     return this.getById(cid);
   }
 
+
   async updateProductQuantity(cid, pid, quantity) {
     const cart = await this.getById(cid);
     //console.log('cart en cartService', cart)

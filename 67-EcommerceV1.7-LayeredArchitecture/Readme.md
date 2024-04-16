@@ -38,6 +38,5 @@
 - getById -> Bien
 - addProductToCart -> Bien
 - deleteProductById -> Bien
-- updateProductById -> 
 - updateProductQuantityById -> Bien
 - emptyCartById -> Bien
