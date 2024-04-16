@@ -21,3 +21,23 @@
 - Service -> Se encarga de manejar la lógica de negocio utilizando el DAO para acceder a la DB.
 - Controller -> Se encarga de manejar las solicitudes HTTP relacionadas, utilizando el Service para realizar las operaciones correspondientes.
 - Router
+
+## PRODUCTS
+
+- getAll -> No muestra
+- getById -> Bien
+- create -> Crea bien pero muestra un error
+- update -> Actualiza bien pero muestra un payload incorrecto
+- delete -> Elimina pero muestra un error
+
+
+## CARTS
+
+- create -> Bien
+- getAll -> Bien
+- getById -> Bien
+- addProductToCart -> Agrega mal el id, no aumenta la cantidad
+- deleteProductById -> Elimina bien de la DB, pero da error
+- updateProductById ->
+- updateProductQuantityById ->
+- emptyCartById -> Bien

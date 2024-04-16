@@ -3,10 +3,10 @@ const ProductsDao = require('../dao/products.dao');
 class ProductsService {
 
   constructor() {
-    this.dao = new ProductsDao();
+    this.productsDao = new ProductsDao();
   }
 
-  async getAll(req, res) {
+  /* async getAll(req, res) {
 
     try {
       // Obtengo los parámetros de consulta
@@ -81,47 +81,55 @@ class ProductsService {
 
     } catch (error) {
       // Handle errors
-      throw new Error('Error fetching products');
+      throw new Error('Service Error fetching products');
+    }
+  } */
+  async getAll(filter, options) {
+    try {
+      return await this.productsDao.getAll(filter, options);
+    } catch (error) {
+      throw new Error('Service Error fetching products');
     }
   }
 
-  async getById(id) {
+  async getById(pid) {
     try {
-      const product = await this.dao.getById(id).lean();
-      console.log('product:', product)
+      // console.log('pid en Service', pid) //! OK
+      const product = await this.productsDao.getById(pid);
+      // console.log('product en Service', product) //! OK
       return product;
     } catch (error) {
-      throw new Error('Error fetching product by ID');
+      throw new Error('Service Error fetching product by ID');
     }
   }
 
   async create(product) {
     try {
-      await this.dao.create(product);
+      //return await this.productsDao.create(product);
+      const newProduct = await this.productsDao.create(product);
+      return newProduct;
     } catch (error) {
-      throw new Error('Error creating product');
+      throw new Error('Service Error creating product');
     }
   }
 
-  async update(id, product) {
+  async update(pid, product) {
     try {
-      const productFound = await this.dao.getById(id);
+      /* const productFound = await this.dao.getById(pid);
       if (!productFound) {
         throw new Error('Product not found')
       };
-      return await this.dao.update(id, product);
+      return await this.dao.update(pid, product); */
+      return await this.productsDao.update(pid, product);
     } catch (error) {
       throw new Error('Error updating product');
     }
   }
 
-  async delete(id) {
+  async delete(pid) {
     try {
-      const productFound = await this.dao.getById(id);
-      if (!productFound) {
-        throw new Error('Product not found')
-      };
-      return await this.dao.delete(id);
+      await this.productsDao.delete(pid);
+      return ({ status: 'success', message: 'Product succesfully removed' })
     } catch (error) {
       throw new Error('Error deleting product');
     }
