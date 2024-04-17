@@ -23,17 +23,21 @@ const generateToken = (serializableUser) => {
 
 // JWT Middleware
 const verifyToken = (req, res, next) => {
-  console.log('res', req.cookies)
+  console.log('res', req.cookies.accessToken)
   const accessToken = req.cookies.accessToken; //! NO RECUPERA
   console.log('accessToken en Utils verifyToken', accessToken)
 
-  jwt.verify(accessToken, JWT_PRIVATE_KEY, (error, credentials) => {
-    if (error) {
-      return res.status(403).send({ status: 'error', error: 'Utils JWT Verify Forbidden', message: error.message });
-    }
-    req.tokenUser = credentials;
-    next();
-  });
+  if (accessToken) {
+
+    jwt.verify(accessToken, JWT_PRIVATE_KEY, (error, credentials) => {
+      if (error) {
+        return res.status(403).send({ status: 'error', error: 'Utils JWT Verify Forbidden', message: error.message });
+      }
+      req.tokenUser = credentials;
+    });
+  }
+  next();
+
 }
 
 module.exports = {

@@ -17,9 +17,10 @@
 ### Help Tips
 
 - Model -> Define las propiedades que tendrá el modelo, tipo de datos, valores por defecto, campos requeridos u opcionales, etc.
-- DAO -> Utiliza el Model. Se encarga únicamente de interactuar con la DB para las operaciones CRUD.
-- Service -> Se encarga de manejar la lógica de negocio utilizando el DAO para acceder a la DB.
-- Controller -> Se encarga de manejar las solicitudes HTTP relacionadas, utilizando el Service para realizar las operaciones correspondientes.
+- DAO -> Utiliza el Model. Es responsable de interactuar con la capa de almacenamiento de datos, como la DB. Debería tener métodos para realizar operaciones CRUD (crear, leer, actualizar, eliminar) en los datos.
+Evita que la lógica de acceso a datos se propague a otras partes de la aplicación que no sean el DAO.
+- Service -> La capa de servicio debe contener la lógica empresarial, como la manipulación de datos y la comunicación con la capa de acceso a datos (DAO).
+- Controller -> Se encarga de manejar las solicitudes HTTP relacionadas, utilizando el Service para realizar las operaciones correspondientes.Debe delegar la lógica empresarial a la capa de servicio. Interpreta y valida los parámetros de solicitud HTTP, como los filtros, el límite y la página, y luego los pasa a la capa de servicio para que realice la lógica empresarial correspondiente.
 - Router
 
 ## PRODUCTS
