@@ -45,6 +45,8 @@ class SessionsController {
 
   //? LOGOUT
   static async logout(req, res) {
+    // Remove storageUserEmail from localStorage
+    //localStorage.removeItem('storageUserEmail');
     res.clearCookie('accessToken');
     res.redirect('/login');
   }
