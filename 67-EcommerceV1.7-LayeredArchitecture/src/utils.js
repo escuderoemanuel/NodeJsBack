@@ -15,7 +15,7 @@ const isValidPassword = (user, password) => {
 
 // JWT
 const generateToken = (serializableUser) => {
-  console.log('serializableUser en generateToken', serializableUser) //! El serializableUser llega aqui correctamente con el siguiente formato
+  //console.log('serializableUser en generateToken', serializableUser) //! El serializableUser llega aqui correctamente con el siguiente formato
   /* 
   serializableUser(userData) en product controller: {
   id: '661c9a1149c87e2230e74bd2',
@@ -30,8 +30,8 @@ const generateToken = (serializableUser) => {
 
   const accessToken = jwt.sign({ serializableUser }, JWT_PRIVATE_KEY, { expiresIn: '1d' });
 
-  console.log('accessToken en generateToken', accessToken) //! Desde el navegador genera bien el token
-  
+  //console.log('accessToken en generateToken', accessToken) //! Desde el navegador genera bien el token
+
   return ('return accessToken', accessToken);
 
 }

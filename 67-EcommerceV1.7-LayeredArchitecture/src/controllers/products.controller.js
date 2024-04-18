@@ -1,13 +1,9 @@
 
 const ProductsService = require('../services/products.service');
 const ProductsModel = require('../dao/models/products.model');
-//const { response } = require('express');
-
 const productsService = new ProductsService();
 
 class ProductsController {
-
-
 
   static async getAll(req, res) {
     try {
@@ -81,13 +77,12 @@ class ProductsController {
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
 
-      //res.send(paginateData);
-      // res.send({ status: 'success', paginateData });
-      return { paginateData, products: paginateData.payload };
+      const userData = req.tokenUser.serializableUser;
+      const renderData = { paginateData, user: userData, products: paginateData.payload };
+      res.render('products', renderData);
 
     } catch (error) {
-      // console.log(error)
-      throw new Error(error.message)
+      res.status(400).send({ error: error.message });
     }
   }
 
@@ -134,7 +129,6 @@ class ProductsController {
       res.status(400).send({ status: 'error', message: error.message });
     }
   }
-
 }
 
 module.exports = ProductsController;
