@@ -85,8 +85,11 @@ class ProductsService {
     }
   } */
 
-  async getAll(filter, options) {
+  /* async getAll(filter, options) {
     return await this.productsDao.getAll(filter, options);
+  } */
+  async getAll() {
+    return await this.productsDao.getAll();
   }
 
   async getById(pid) {

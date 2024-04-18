@@ -3,16 +3,16 @@ const ProductsModel = require('./models/products.model');
 class ProductsDao {
 
 
-  async getAll(filter, options) {
+  /* async getAll(filter, options) {
     if (filter && options) {
       return await ProductsModel.paginate(filter, options);
     }
     return await ProductsModel.find().lean();;
+  } */
+  async getAll() {
+    return await ProductsModel.find().lean();
   }
 
-  /* async getAll() {
-    return await ProductsModel.find().lean();
-  } */
 
   async getById(pid) {
     return await ProductsModel.findOne({ _id: pid }).lean();

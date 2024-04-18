@@ -59,6 +59,7 @@ const initializePassport = () => {
         }
 
         const user = await UserManager.getByEmail({ email });
+       
         if (!user) {
           return done(null, false, { message: 'User does not exist.' });
         }
