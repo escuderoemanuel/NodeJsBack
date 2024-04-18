@@ -1,7 +1,7 @@
 
 const ProductsService = require('../services/products.service');
 const ProductsModel = require('../dao/models/products.model');
-const { response } = require('express');
+//const { response } = require('express');
 
 const productsService = new ProductsService();
 
@@ -81,7 +81,8 @@ class ProductsController {
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
 
-      // console.log('products', products)
+      //res.send(paginateData);
+      // res.send({ status: 'success', paginateData });
       return { paginateData, products: paginateData.payload };
 
     } catch (error) {

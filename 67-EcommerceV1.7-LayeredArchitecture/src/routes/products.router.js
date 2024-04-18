@@ -1,18 +1,13 @@
 const { Router } = require('express');
 const { verifyToken } = require('../utils');
 const ProductsController = require('../controllers/products.controller');
-const { publicAuthentication, privateAuthentication } = require('../middlewares/middlewares');
-const ProductsService = require('../services/products.service');
 
-// Manager
 const router = Router();
-//const productsController = new ProductsController();
 
 // Deberá traer todos los productos de la base de datos, incluyendo opcionalmente limit, page, sort, filter (Example: http://localhost:8080/api/products?limit=2&page=1&sort=desc&filter=iphone)
 
-//router.get('/', verifyToken, ProductsController.getAll)
-//router.get('/', ProductsController.getAll)
-router.get('/', verifyToken, async (req, res) => {
+router.get('/', verifyToken, ProductsController.getAll) // Así debería quedar
+/* router.get('/', verifyToken, async (req, res) => {
   try {
     let paginateData = await ProductsController.getAll(req, res);
     // console.log('paginateData', paginateData)
@@ -28,7 +23,7 @@ router.get('/', verifyToken, async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
-})
+}) */
 
 // Deberá traer sólo el producto con el id proporcionado
 router.get('/:pid', ProductsController.getById)
