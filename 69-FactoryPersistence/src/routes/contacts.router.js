@@ -6,7 +6,6 @@ const router = express.Router();
 
 const contacts = new Contacts();
 
-
 router.get('/', async (req, res) => {
   try {
     const result = await contacts.getAll();
@@ -55,7 +54,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).send({ status: 'error', error });
   }
 });
-
 
 module.exports = {
   contactsRouter: router
