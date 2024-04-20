@@ -1,5 +1,6 @@
 const express = require('express');
 const { Contacts } = require('../dao/factory.js');
+const ContactsDTO = require('../dao/DTOs/contacts.dto.js');
 //const Contacts = require('../dao/mongoDB/contacts.mongo');
 //const Contacts = require('../dao/memory/contacts.memory');
 const router = express.Router();
@@ -26,8 +27,9 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const contact = req.body;
+  //const contact = req.body;
   try {
+    const contact = new ContactsDTO(req.body);
     const result = await contacts.create(contact);
     res.send({ status: 'success', payload: result });
   } catch (error) {

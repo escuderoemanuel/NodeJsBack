@@ -9,10 +9,19 @@ const contactsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  fullName: {
+    type: String,
+  },
   email: {
     type: String,
     required: true
   },
+  active: {
+    type: Boolean,
+  },
+  role: {
+    type: String,
+  }
 })
 
 const contactsModel = mongoose.model('contacts', contactsSchema);
