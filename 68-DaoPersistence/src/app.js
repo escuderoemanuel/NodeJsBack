@@ -8,6 +8,7 @@ mongoose.connect(MONGO_URL).then(() => {
   console.log("Atlas MongoDB Connected");
 });
 
+/* Middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
