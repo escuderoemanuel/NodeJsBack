@@ -5,7 +5,7 @@ const { createHash, isValidPassword } = require('../utils');
 
 //const UsersServices = require('../dao/dbManager/UsersDbManager');
 const UsersService = require('../services/users.service');
-const { GITHUB_CLIENT_ID, GITHUB_CALLBACK_URL, GITHUB_CLIENT_SECRET } = require('./environment.config');
+const { GITHUB_CLIENT_ID, GITHUB_CALLBACK_URL, GITHUB_CLIENT_SECRET } = require('../config/environment.config');
 const UserManager = new UsersService();
 
 const LocalStrategy = local.Strategy;

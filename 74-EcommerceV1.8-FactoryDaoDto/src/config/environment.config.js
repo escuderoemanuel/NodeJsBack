@@ -1,5 +1,13 @@
 const dotenv = require('dotenv')
 dotenv.config()
+const { Command } = require('commander')
+const program = new Command()
+program.option('-p, --persistence <persistence>', 'persistence type')
+
+const options = program.opts();
+
+
+
 module.exports = {
   PORT: process.env.PORT,
   MONGO_USER: process.env.MONGO_USER,
@@ -11,5 +19,6 @@ module.exports = {
   GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
   GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
-  JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY
+  JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY,
+  PERSISTENCE: options.PERSISTENCE
 }

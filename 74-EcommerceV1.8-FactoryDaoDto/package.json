@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js -p MONGO"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@sweetalert2/theme-dark": "^5.0.16",
     "bcrypt": "^5.1.1",
+    "commander": "^12.0.0",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",

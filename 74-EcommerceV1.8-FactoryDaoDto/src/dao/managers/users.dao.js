@@ -3,9 +3,8 @@ const UserModel = require('../models/user.model');
 class UsersDao {
 
   constructor() {
-    console.log('UserDao Intance')
   }
-
+ 
   async create(user) {
     let result = await UserModel.create(user);
     return result;

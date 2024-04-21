@@ -1,12 +1,6 @@
-const { MONGO_URL, PORT } = require('./config/environment.config.js');
+const mongoose = require('mongoose')
+const { PORT, MONGO_URL } = require('./config/environment.config');
 
-// Mongoose Init & Connect
-const mongoose = require('mongoose');
-mongoose.connect(`${MONGO_URL}`)
-  .then(() => {
-    console.log('DB Connected Succesfully')
-  })
-const MongoStore = require('connect-mongo');
 
 // Solamente traemos Server de io
 const { Server } = require('socket.io');
@@ -22,10 +16,9 @@ const express = require('express');
 const serverMessage = `Server is running on port ${PORT}`;
 const app = express();
 
-// Session Settings
-const session = require('express-session');
-
-
+mongoose.connect(MONGO_URL).then(() => {
+  console.log('Connected to MongoDB');
+});
 // Imports
 const passport = require('passport');
 const initializePassport = require('./config/passport.config.js');
