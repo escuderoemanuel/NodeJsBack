@@ -48,7 +48,7 @@ const verifyToken = (req, res, next) => {
       if (error) {
         return res.status(403).send({ status: 'error', error: 'Utils JWT Verify Forbidden', message: error.message });
       }
-      req.tokenUser = credentials;
+      req.user = credentials;
     });
   }
   next();

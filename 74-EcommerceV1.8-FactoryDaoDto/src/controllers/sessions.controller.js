@@ -3,6 +3,7 @@ const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
 const { generateToken, verifyToken } = require('../utils');
+const UserDTO = require('../dao/DTOs/UserDTO');
 
 
 class SessionsController {
@@ -100,8 +101,9 @@ class SessionsController {
 
   //? CURRENT SESSION
   static async currentSession(req, res) {
-    const user = req.tokenUser;
-    res.send({ payload: user });
+    const user = req.user;
+    const userDTO = new UserDTO(user)
+    res.send({ payload: userDTO });
   }
 
 }
