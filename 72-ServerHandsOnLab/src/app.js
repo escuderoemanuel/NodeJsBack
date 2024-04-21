@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const BusinessRouter = require('./routes/business.router');
 const UsersRouter = require('./routes/users.router');
 const OrderRouter = require('./routes/orders.router')
+const cors = require('cors');
 
 const app = express();
 
@@ -14,6 +15,7 @@ mongoose.connect(MONGO_URL).then(() => {
 /* Middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 /* Routes */
 app.use('/api/business', BusinessRouter);

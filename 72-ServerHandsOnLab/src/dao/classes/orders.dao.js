@@ -1,4 +1,4 @@
-const OrdersModel = require('../models/users.models');
+const OrdersModel = require('../models/orders.models');
 
 class OrdersDAO {
 
