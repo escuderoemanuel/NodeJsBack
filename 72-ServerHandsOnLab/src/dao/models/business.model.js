@@ -5,6 +5,6 @@ const BusinessSchema = new mongoose.Schema({
   products: [],
 })
 
-const BusinessModel = mongoose.model('Business', BusinessSchema);
+const BusinessModel = mongoose.model('business', BusinessSchema);
 
 module.exports = BusinessModel;

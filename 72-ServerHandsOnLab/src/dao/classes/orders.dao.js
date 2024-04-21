@@ -7,7 +7,11 @@ class OrdersDAO {
   }
 
   async getById(id) {
-    return await OrdersModel.findById(id);
+    const order = await OrdersModel.findById(id);
+    if (!order) {
+      throw { status: 400, message: 'Order not found' };
+    }
+    return order;
     // return await OrdersModel.findOne({_id:id});
   }
 
@@ -16,6 +20,7 @@ class OrdersDAO {
   }
 
   async update(id, user) {
+    await this.getById(id);
     return await OrdersModel.updateOne({ _id: id }, user);
   }
 

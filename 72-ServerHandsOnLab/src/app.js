@@ -1,10 +1,15 @@
 const express = require('express');
-const { PORT } = require('./config/config');
+const { PORT, MONGO_URL } = require('./config/config');
+const mongoose = require('mongoose');
 const BusinessRouter = require('./routes/business.router');
 const UsersRouter = require('./routes/users.router');
 const OrderRouter = require('./routes/orders.router')
 
 const app = express();
+
+mongoose.connect(MONGO_URL).then(() => {
+  console.log('Connected to MongoDB')
+});
 
 /* Middlewares */
 app.use(express.json());

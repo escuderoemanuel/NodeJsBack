@@ -1,4 +1,4 @@
-const BusinessModel = require('../models/users.models');
+const BusinessModel = require('../models/business.model');
 
 class BusinessDAO {
 
@@ -7,8 +7,12 @@ class BusinessDAO {
   }
 
   async getById(id) {
-    return await BusinessModel.findById(id);
-    // return await UsersModel.findOne({_id:id});
+    const business = await BusinessModel.findById(id);
+    if (!business) {
+      throw { status: 400, message: 'Business not found' };
+    }
+    return business;
+    // return await BusinessModel.findOne({_id:id});
   }
 
   async create(user) {
@@ -16,6 +20,7 @@ class BusinessDAO {
   }
 
   async update(id, user) {
+    await this.getById(id);
     return await BusinessModel.updateOne({ _id: id }, user);
   }
 

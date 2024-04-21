@@ -9,7 +9,7 @@ BusinessRouter.get('/:id', BusinessController.getById);
 
 BusinessRouter.post('/', BusinessController.create);
 
-BusinessRouter.post('/:id/item', BusinessController.addItem);
+BusinessRouter.post('/:id/product', BusinessController.addProduct);
 
 BusinessRouter.put('/:id', BusinessController.update);
 
