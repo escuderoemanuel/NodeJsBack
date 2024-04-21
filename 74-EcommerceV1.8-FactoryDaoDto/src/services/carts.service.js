@@ -1,11 +1,11 @@
-const CartDao = require('../dao/managers/carts.dao');
-const ProductsService = require('./products.service');
+const MailingsService = require('./mailings.service')
+const mailingsService = new MailingsService();
 
-
-class CartService {
-  constructor(dao, productsService) {
+class CartsService {
+  constructor(dao, productsService, ticketService) {
     this.dao = dao;
     this.productsService = productsService;
+    this.ticketService = ticketService;
   }
 
   async create() {
@@ -96,4 +96,4 @@ class CartService {
     return this.getById(cid);
   }
 }
-module.exports = CartService;
+module.exports = CartsService;

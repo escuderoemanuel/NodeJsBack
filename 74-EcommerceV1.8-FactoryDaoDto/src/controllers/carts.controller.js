@@ -1,7 +1,4 @@
-const CartsService = require('../services/carts.service');
-const ProductsService = require('../services/products.service');
-const cartsService = new CartsService();
-// const productsService = new ProductsService();
+const { cartsService } = require('../repositories');
 
 class CartsController {
 

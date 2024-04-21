@@ -1,11 +1,14 @@
-// Manager
+const { productsService } = require('../repositories');
+
+/* // Manager
 const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
 const manager = new ProductsDbManager();
-
+ */
 class RealTimeProductsController {
   static async getAll(req, res) {
     try {
-      let paginateData = await manager.getProducts(req, res);
+      //let paginateData = await manager.getProducts(req, res);
+      let paginateData = await productsService.getAll(req, res);
       res.render('realtimeproducts',
         paginateData
       );

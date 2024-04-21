@@ -1,6 +1,5 @@
-const { PERSISTENCE } = require('../config/environment.config');
-const { MONGO_URL } = require('../config/environment.config');
 const mongoose = require('mongoose');
+const { MONGO_URL, PERSISTENCE } = require('../config/environment.config');
 
 let CartsDao;
 let ProductsDao;
