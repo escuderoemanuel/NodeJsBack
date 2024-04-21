@@ -16,9 +16,10 @@ const express = require('express');
 const serverMessage = `Server is running on port ${PORT}`;
 const app = express();
 
-mongoose.connect(MONGO_URL).then(() => {
+/* mongoose.connect(MONGO_URL).then(() => {
   console.log('Connected to MongoDB');
-});
+}); */
+
 // Imports
 const passport = require('passport');
 const initializePassport = require('./config/passport.config.js');

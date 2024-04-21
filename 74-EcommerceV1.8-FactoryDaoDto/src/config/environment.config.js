@@ -1,12 +1,14 @@
 const dotenv = require('dotenv')
 dotenv.config()
-const { Command } = require('commander')
-const program = new Command()
-program.option('-p, --persistence <persistence>', 'persistence type')
+
+//**COMMANDER */
+const { Command } = require('commander');
+const program = new Command();
+program
+  .option('-p,--PERSISTENCE <PERSISTENCE>', 'The selected persistence', 'MEMORY')
 
 const options = program.opts();
-
-
+program.parse(process.argv);
 
 module.exports = {
   PORT: process.env.PORT,
@@ -20,5 +22,5 @@ module.exports = {
   GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
   GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
   JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY,
-  PERSISTENCE: options.PERSISTENCE
+  //PERSISTENCE: options.PERSISTENCE
 }
