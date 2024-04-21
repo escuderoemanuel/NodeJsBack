@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const TicketSchema = new mongoose.Schema({
+const TicketsSchema = new mongoose.Schema({
   code: { type: String, required: true },
   purchase_datetime: {
     type: String,
@@ -10,6 +10,6 @@ const TicketSchema = new mongoose.Schema({
   purchaser: { type: String, required: true }
 });
 
-const TicketModel = mongoose.model('tickets', TicketSchema);
+const TicketsModel = mongoose.model('tickets', TicketsSchema);
 
-module.exports = TicketModel;
+module.exports = TicketsModel;

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const { PORT, MONGO_URL } = require('./config/environment.config');
+const { CartsDao, ProductsDao, UsersDao, TicketsDao } = require('./dao/factory');
+
 
 
 // Solamente traemos Server de io
@@ -16,9 +18,6 @@ const express = require('express');
 const serverMessage = `Server is running on port ${PORT}`;
 const app = express();
 
-/* mongoose.connect(MONGO_URL).then(() => {
-  console.log('Connected to MongoDB');
-}); */
 
 // Imports
 const passport = require('passport');

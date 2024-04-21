@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "test": "nodemon src/app.js --PERSISTENCE MEMO",
-    "dev": "nodemon src/app.js --PERSISTENCE MONGO"
+    "test": "nodemon src/app.js -p MEMORY",
+    "dev": "nodemon src/app.js -p MONGO"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "passport-github2": "^0.1.12",
     "passport-local": "^1.0.0",
     "socket.io": "^4.7.4",
-    "sweetalert2": "^11.10.5"
+    "sweetalert2": "^11.10.5",
+    "nodemailer": "^6.9.13"
   }
 }

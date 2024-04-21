@@ -1,5 +1,6 @@
+const { PERSISTENCE } = require('../config/environment.config');
+const { MONGO_URL } = require('../config/environment.config');
 const mongoose = require('mongoose');
-const { MONGO_URL, PERSISTENCE } = require('../config/environment.config');
 
 let CartsDao;
 let ProductsDao;
@@ -9,7 +10,7 @@ let TicketsDao;
 switch (PERSISTENCE) {
   case 'MONGO':
     mongoose.connect(MONGO_URL).then(() => {
-      console.log('connected to atlas.')
+      console.log('Connected to MongoDB')
     })
     CartsDao = require('../dao/managers/carts.dao')
     ProductsDao = require('../dao/managers/products.dao')
@@ -18,7 +19,7 @@ switch (PERSISTENCE) {
     break;
 
   case 'MEMORY':
-    console.log('MEMORYYYY')
+    console.log('Conntected to MEMORY')
     CartsDao = require('../dao/memory/carts.memory')
     ProductsDao = require('../dao/memory/products.memory')
     UsersDao = require('../dao/memory/users.memory')

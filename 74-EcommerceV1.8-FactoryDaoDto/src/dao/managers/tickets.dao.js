@@ -1,4 +1,4 @@
-const TicketModel = require("../models/tickets")
+const TicketModel = require("../models/tickets.model")
 
 class TicketsDao {
 
