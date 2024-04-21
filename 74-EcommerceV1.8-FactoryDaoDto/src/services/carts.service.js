@@ -3,9 +3,9 @@ const ProductsService = require('./products.service');
 
 
 class CartService {
-  constructor() {
-    this.dao = new CartDao();
-    this.productsService = new ProductsService();
+  constructor(dao, productsService) {
+    this.dao = dao;
+    this.productsService = productsService;
   }
 
   async create() {

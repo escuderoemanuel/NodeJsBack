@@ -1,11 +1,11 @@
 const dotenv = require('dotenv')
 dotenv.config()
 
-//**COMMANDER */
+// COMMANDER
 const { Command } = require('commander');
 const program = new Command();
 program
-  .option('-p,--PERSISTENCE <PERSISTENCE>', 'The selected persistence', 'MEMORY')
+  .option('-p,--PERSISTENCE <PERSISTENCE>', 'Selected Persistence', 'MEMORY')
 
 const options = program.opts();
 program.parse(process.argv);

@@ -1,14 +1,17 @@
 # Objetivos generales
 
-- Profesionalizar el servidor
+✅ Profesionalizar el servidor
 Objetivos específicos
-- Aplicar una arquitectura profesional para nuestro servidor
-- Aplicar prácticas como patrones de diseño, mailing, variables de entorno. etc.
+✅ Aplicar una arquitectura profesional para nuestro servidor
+✅ Aplicar prácticas como patrones de diseño, mailing, variables de entorno. etc.
 
 ## Se debe entregar
 
-- Modificar nuestra capa de persistencia para aplicar los conceptos de Factory (opcional), DAO y DTO. 
-- El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional)
+- Modificar nuestra capa de persistencia para aplicar los conceptos de:
+  ✅ Factory (opcional)
+  ✅ DAO
+  -  DTO 
+  ✅ El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional)
 - Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio. 
 - Modificar la ruta  /current para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
 - Realizar un middleware que pueda trabajar en conjunto con la estrategia “current” para hacer un sistema de autorización y delimitar el acceso a dichos endpoints:
@@ -34,10 +37,10 @@ Objetivos específicos
 
 ## Formato
 
-- Link al repositorio de Github con el proyecto (sin node_modules)
+✅ Link al repositorio de Github con el proyecto (sin node_modules)
 Además, archivo .env para poder correr el proyecto.
 
 ## Sugerencias
 
-- Te recomendamos ver el vídeo explicativo disponible en la carpeta de clase
+✅ Te recomendamos ver el vídeo explicativo disponible en la carpeta de clase
 

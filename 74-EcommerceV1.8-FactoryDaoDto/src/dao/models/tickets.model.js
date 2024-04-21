@@ -4,7 +4,8 @@ const TicketsSchema = new mongoose.Schema({
   code: { type: String, required: true },
   purchase_datetime: {
     type: String,
-    required: true
+    required: true,
+    default: new Date().toLocaleString()
   },
   amount: { type: Number, required: true },
   purchaser: { type: String, required: true }
