@@ -1,12 +1,13 @@
+const { GITHUB_CLIENT_ID, GITHUB_CALLBACK_URL, GITHUB_CLIENT_SECRET } = require('../config/environment.config');
 const passport = require('passport');
 const local = require('passport-local');
 const github = require('passport-github2');
 const { createHash, isValidPassword } = require('../utils');
+const { UsersService, CartsService, usersService } = require('../repositories')
 
 //const UsersServices = require('../dao/dbManager/UsersDbManager');
-const UsersService = require('../services/users.service');
-const { GITHUB_CLIENT_ID, GITHUB_CALLBACK_URL, GITHUB_CLIENT_SECRET } = require('../config/environment.config');
-const UserManager = new UsersService();
+// const UsersService = require('../services/users.service');
+// const UserManager = new UsersService();
 
 const LocalStrategy = local.Strategy;
 const GitHubStrategy = github.Strategy;
@@ -15,7 +16,7 @@ const GitHubStrategy = github.Strategy;
 const initializePassport = () => {
 
   //? JWT STRATEGY
-  passport.use('register', new LocalStrategy({
+  /* passport.use('register', new LocalStrategy({
     passReqToCallback: true,
     usernameField: 'email',
     session: false
@@ -37,6 +38,37 @@ const initializePassport = () => {
 
       const result = await UserManager.create(newUser);
       done(null, result);
+
+    } catch (error) {
+      done(error);
+    }
+  }));
+ */
+  passport.use('register', new LocalStrategy({
+    passReqToCallback: true,
+    usernameField: 'email',
+    session: false
+  }, async (req, email, password, done) => {
+    //    console.log('email', email) //! Llega OK
+    let existingUser;
+    existingUser = await usersService.getByEmail(email)
+    //  console.log('existingUser')
+
+    try {
+      const { firstName, lastName, email, age } = req.body;
+      if (!firstName || !lastName || !email || !password) {
+        return done(null, false, { message: 'All fields are required.' });
+      }
+
+      if (existingUser) {
+        return done(null, false, { message: 'The user is already registered.' });
+      }
+
+      const cart = await CartsService.create();
+      const newUserData = { firstName, lastName, email, age, password: createHash(password), cart: cart._id };
+
+      let result = await UsersService.create(newUserData);
+      return done(null, result);
 
     } catch (error) {
       done(error);

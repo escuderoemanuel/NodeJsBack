@@ -101,7 +101,7 @@ class ProductsController {
       await productsService.create(req.body);
       res.send({ status: 'success', message: 'Product created' });
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       res.status(400).send({ error: error.message });
     }
   }

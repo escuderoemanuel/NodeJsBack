@@ -9,7 +9,7 @@ class RealTimeProductsController {
     try {
       //let paginateData = await manager.getProducts(req, res); //! No llega a este punto
       let paginateData = await productsService.getAll(req, res);
-      console.log('paginateData', paginateData); //! No llega a este punto
+      //console.log('paginateData', paginateData); //! No llega a este punto
       res.render('realtimeproducts',
         paginateData
       );

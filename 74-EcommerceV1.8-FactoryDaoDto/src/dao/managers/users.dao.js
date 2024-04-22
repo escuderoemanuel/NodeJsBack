@@ -4,7 +4,7 @@ class UsersDao {
 
   constructor() {
   }
- 
+
   async create(user) {
     let result = await UserModel.create(user);
     return result;
@@ -20,8 +20,15 @@ class UsersDao {
     return result;
   }
 
+  async getByProperty(property, name) {
+    let options = {}
+    opts[property] = name;
+    let result = await UserModel.findOne(options).lean()
+    return result;
+  }
+
   async getByEmail(email) {
-    let result = await UserModel.findOne(email).lean();
+    let result = await UserModel.findOne({ email }).lean();
     return result;
   }
 

@@ -51,5 +51,3 @@ Además, archivo .env para poder correr el proyecto.
    -  {
         "error": "productsService.paginate is not a function"
       }
-3. En /chat, llegan los mensajes pero no renderiza
-4. En /chat, llega 'user' como 'undefined' para renderizar

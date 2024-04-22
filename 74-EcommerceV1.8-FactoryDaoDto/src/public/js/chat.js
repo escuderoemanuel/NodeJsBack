@@ -4,7 +4,6 @@ const socket = io();
 const userNameFront = document.getElementById('userNameFront')
 const messageInput = document.getElementById("messageInput");
 const messagesLog = document.getElementById("messagesLog");
-let user = 'yo'
 let userName = userNameFront.innerHTML;
 
 //! Events & Socket Events
