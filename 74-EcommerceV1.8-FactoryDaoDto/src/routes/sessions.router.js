@@ -12,7 +12,7 @@ sessionRouter.post('/register',
     failureRedirect: '/api/sessions/registrationFailed',
     session: false
   }), SessionsController.registerUser);
-
+ 
 sessionRouter.get('/registrationFailed', SessionsController.getRegisterError);
 
 //? Login
