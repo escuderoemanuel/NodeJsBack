@@ -23,7 +23,6 @@ viewsRouter.get('/profile', privateAccess, ViewsController.getProfile)
 
 viewsRouter.get('/*', publicAccess, ViewsController.getPublicRoute)
 
-viewsRouter.get('/chat', ChatViewController.getMessages)
 
 
 module.exports = viewsRouter;

@@ -1,4 +1,5 @@
 const MessagesModel = require('../dao/models/messages.model');
+const UserModel = require('../dao/models/user.model');
 
 class ChatViewController {
 
@@ -17,8 +18,11 @@ class ChatViewController {
   static async getMessages(req, res) {
     try {
       const messages = await MessagesModel.find().lean();
+      const user = req.user.serializableUser;
+      console.log('USER', user) //! undefined
       res.render('chat', {
         messages,
+        user,
         layout: 'main'
       })
     } catch (error) {

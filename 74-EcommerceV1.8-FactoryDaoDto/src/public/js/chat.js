@@ -1,10 +1,11 @@
 const socket = io();
-let user = 'yo';
 
 //! Elements
-const usernameFront = document.getElementById('usernameFront')
+const userNameFront = document.getElementById('userNameFront')
 const messageInput = document.getElementById("messageInput");
 const messagesLog = document.getElementById("messagesLog");
+let user = 'yo'
+let userName = userNameFront.innerHTML;
 
 //! Events & Socket Events
 
@@ -15,7 +16,7 @@ messageInput.addEventListener("keyup", (e) => {
     if (messageInput.value.trim().length > 0) {
       // Send Event: user data
       socket.emit("userMessage", {
-        user: user,
+        user: userName,
         message: e.target.value,
         date: new Date().toLocaleString(),
 
@@ -43,7 +44,6 @@ socket.on("messages", ({ messages }) => {
 
 // Socket New User Connected
 socket.on("newUserConnected", ({ user }) => {
-  console.log('USERRRRR', storageUserEmail)
   if (!user) return;
   // Alert New User Connected
   Swal.fire({

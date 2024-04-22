@@ -1,5 +1,5 @@
 const getRole = (role) => (req, res, next) => {
-  const user = req.user;
+  const user = req.user.serializableUser;
   if (user.role !== role) {
     return res.status(403).send({ status: 'error', error: `User of type ${role} are not authorized` });
   }

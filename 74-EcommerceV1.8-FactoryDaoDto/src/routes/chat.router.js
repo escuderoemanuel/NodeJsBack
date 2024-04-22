@@ -1,15 +1,12 @@
 const { Router } = require('express');
-const { privateAccess } = require('../middlewares/middlewares');
 const ChatViewController = require('../controllers/chat.controller');
-
+const { verifyToken } = require('../middlewares/verifyToken.middleware');
+const getRole = require('../middlewares/getRole.middleware');
 
 // Manager
 const router = Router();
 
-//router.post('/', privateAccess, ChatViewController.postMessage) 
-router.post('/', ChatViewController.postMessage) //! Todo: Chequear que el privateAccess sea el correcto
-
-//router.get('/', privateAccess, ChatViewController.getMessages)
-router.get('/', ChatViewController.getMessages)
+router.post('/', verifyToken, getRole('user'), ChatViewController.postMessage)
+router.get('/', verifyToken, getRole('user'), ChatViewController.getMessages)
 
 module.exports = router;
