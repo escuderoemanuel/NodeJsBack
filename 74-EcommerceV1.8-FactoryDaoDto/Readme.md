@@ -42,3 +42,14 @@ Además, archivo .env para poder correr el proyecto.
 
 ✅ Te recomendamos ver el vídeo explicativo disponible en la carpeta de clase
 
+
+### PROBLEMS
+
+1. En /realtimeproduct, al eliminar o agregar un product da error.
+   - Llega 'null' en 'data' en el socket on de app.js
+2. POSTMAN: 'http://localhost:8080/api/products' getAll me trae 
+   -  {
+        "error": "productsService.paginate is not a function"
+      }
+3. En /chat, llegan los mensajes pero no renderiza
+4. En /chat, llega 'user' como 'undefined' para renderizar

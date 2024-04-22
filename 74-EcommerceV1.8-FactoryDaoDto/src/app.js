@@ -68,11 +68,12 @@ const io = new Server(server);
 
 io.on('connection', async (socket) => {
 
-  console.log('Connected User Socket...')
+  console.log(`Connected User Socket ${socket.id}...`)
 
   //! Products Events
-  socket.on('delete-product', (data) => {
-    const products = data.products.paginateData.payload;
+  socket.on('delete-product', async (data) => {
+    console.log('data', data)
+    const products = await data.products.paginateData.payload;
     io.emit('update-products', products)
   })
 

@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { publicAccess, privateAccess } = require('../middlewares/middlewares');
 const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
 const ViewsController = require('../controllers/views.controller');
+const ChatViewController = require('../controllers/chat.controller');
 
 const productsManager = new ProductsDbManager();
 
@@ -21,5 +22,8 @@ viewsRouter.get('/resetPassword', publicAccess, ViewsController.getResetPassword
 viewsRouter.get('/profile', privateAccess, ViewsController.getProfile)
 
 viewsRouter.get('/*', publicAccess, ViewsController.getPublicRoute)
+
+viewsRouter.get('/chat', ChatViewController.getMessages)
+
 
 module.exports = viewsRouter;

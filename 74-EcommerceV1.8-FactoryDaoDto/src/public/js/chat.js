@@ -1,5 +1,5 @@
 const socket = io();
-let user;
+let user = 'yo';
 
 //! Elements
 const usernameFront = document.getElementById('usernameFront')
@@ -59,7 +59,7 @@ socket.on("newUserConnected", ({ user }) => {
 
 
 // Login
-Swal.fire({
+/* Swal.fire({
   color: "#eee",
   background: "#222",
   radius: 2,
@@ -74,6 +74,6 @@ Swal.fire({
   socket.emit("newUser", user);
   // Send Event Auth
   socket.emit("authenticated", { user });
-});
+}); */
 
 

@@ -2,28 +2,28 @@ const mongoose = require('mongoose');
 const { persistence, mongoConnectionLink } = require('../config/config');
 
 
-let CartsDao; 
+let CartsDao;
 let ItemsDao;
-let UsersDao; 
-let TicketsDao; 
+let UsersDao;
+let TicketsDao;
 
-switch(persistence){
+switch (persistence) {
     case 'MONGO':
-        mongoose.connect(mongoConnectionLink).then(()=>{
+        mongoose.connect(mongoConnectionLink).then(() => {
             console.log('connected to atlas.')
         })
         CartsDao = require('./dbManagers/carts.dao')
         ItemsDao = require('./dbManagers/items.dao')
         UsersDao = require('./dbManagers/users.dao')
         TicketsDao = require('./dbManagers/tickets.dao')
-    break;
+        break;
 
     case 'MEMORY':
         CartsDao = require('./memory/carts.memory')
         ItemsDao = require('./memory/items.memory')
         UsersDao = require('./memory/users.memory')
         TicketsDao = require('./memory/tickets.memory')
-    break;
+        break;
 }
 
 module.exports = {

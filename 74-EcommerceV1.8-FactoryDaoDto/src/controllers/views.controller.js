@@ -1,8 +1,7 @@
+const ProductsModel = require('../dao/models/products.model');
 const { productsService } = require('../repositories');
 
-/* const ProductsManager = require('../dao/managers/products.dao')
-const productsManager = new ProductsManager();
- */
+
 class ViewsController {
 
   static async getHome(req, res) {
@@ -11,7 +10,8 @@ class ViewsController {
   }
 
   static async getRealTimeProducts(req, res) {
-    const products = await productsManager.getAll();
+
+    const products = await productsService.getAll();
     res.render('realTimeProducts', { products });
   }
 

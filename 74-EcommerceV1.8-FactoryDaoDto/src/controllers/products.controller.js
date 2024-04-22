@@ -42,6 +42,7 @@ class ProductsController {
       }
 
       // Ejecuto la consulta pasando filter (si hay), más options
+      //let products = await ProductsModel.paginate(filter, options);
       let products = await ProductsModel.paginate(filter, options);
 
       // Creo un objeto para almacenar los parámetros de consulta de la url, para armar los links 'prev' y 'next'
