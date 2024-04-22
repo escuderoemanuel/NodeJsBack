@@ -36,28 +36,9 @@ const generateToken = (serializableUser) => {
 
 }
 
-// JWT Middleware
-const verifyToken = (req, res, next) => {
-  //console.log('Utils req.cookies.accessToken:', req.cookies.accessToken) //! EL NAVEGADOR LO RECUPERA, POSTMAN NO
-  const accessToken = req.cookies.accessToken;
-  //console.log('Utils accessToken en verifyToken', accessToken) //! Llega bien
-
-  if (accessToken) {
-
-    jwt.verify(accessToken, JWT_PRIVATE_KEY, (error, credentials) => {
-      if (error) {
-        return res.status(403).send({ status: 'error', error: 'Utils JWT Verify Forbidden', message: error.message });
-      }
-      req.user = credentials;
-    });
-  }
-  next();
-
-}
 
 module.exports = {
   createHash,
   isValidPassword,
   generateToken,
-  verifyToken
 };

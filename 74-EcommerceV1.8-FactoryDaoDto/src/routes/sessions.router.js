@@ -2,7 +2,7 @@ const { Router } = require('express');
 const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
-const { generateToken, verifyToken } = require('../utils');
+const { verifyToken } = require('../middlewares/verifyToken.middleware');
 const sessionRouter = Router();
 const SessionsController = require('../controllers/sessions.controller')
 

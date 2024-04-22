@@ -1,4 +1,4 @@
-const { verifyToken } = require('../utils');
+const { verifyToken } = require('./verifyToken.middleware');
 
 // Middlewares
 const publicAuthentication = (req, res, next) => {

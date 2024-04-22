@@ -10,7 +10,7 @@ Objetivos específicos
 - Modificar nuestra capa de persistencia para aplicar los conceptos de:
   ✅ Factory (opcional)
   ✅ DAO
-  -  DTO
+  ✅  DTO
   ✅ El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional)
 ✅ Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio. 
 - Modificar la ruta  /current para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
