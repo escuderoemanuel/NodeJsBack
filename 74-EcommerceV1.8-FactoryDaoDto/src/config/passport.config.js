@@ -3,10 +3,10 @@ const passport = require('passport');
 const local = require('passport-local');
 const github = require('passport-github2');
 const { createHash, isValidPassword } = require('../utils');
-const { UsersService, CartsService, usersService } = require('../repositories')
+const { cartsService, usersService } = require('../repositories')
 
-//const UsersServices = require('../dao/dbManager/UsersDbManager');
 // const UsersService = require('../services/users.service');
+// const UsersServices = require('../dao/dbManager/UsersDbManager');
 // const UserManager = new UsersService();
 
 const LocalStrategy = local.Strategy;
@@ -42,32 +42,37 @@ const initializePassport = () => {
     } catch (error) {
       done(error);
     }
-  }));
- */
+  })); */
+
   passport.use('register', new LocalStrategy({
     passReqToCallback: true,
     usernameField: 'email',
     session: false
   }, async (req, email, password, done) => {
-    //    console.log('email', email) //! Llega OK
+    console.log('email', email) //! Llega OK
+
     let existingUser;
-    existingUser = await usersService.getByEmail(email)
-    //  console.log('existingUser')
+    //existingUser = await usersService.getByEmail(email)
+    //existingUser = await usersService.getByProperty('email', email)
+    existingUser = await usersService.getByEmail(email);
+    console.log('existingUser', existingUser) //! Chequea bien
 
     try {
-      const { firstName, lastName, email, age } = req.body;
-      if (!firstName || !lastName || !email || !password) {
+      const { firstName, lastName, email, password, age } = req.body;
+      if (!firstName || !lastName || !email || !password || !age) {
         return done(null, false, { message: 'All fields are required.' });
       }
 
       if (existingUser) {
         return done(null, false, { message: 'The user is already registered.' });
+        //! AQUI no muestra el mensaje de error en el front
+
       }
 
-      const cart = await CartsService.create();
+      const cart = await cartsService.create();
       const newUserData = { firstName, lastName, email, age, password: createHash(password), cart: cart._id };
 
-      let result = await UsersService.create(newUserData);
+      let result = await usersService.create(newUserData);
       return done(null, result);
 
     } catch (error) {
@@ -147,6 +152,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await UserManager.getById({ _id: id });
+    //! const user = await UserModel.findOne({ _id: id });
     return done(null, user)
   } catch (error) {
     return done('ERROR:', error)

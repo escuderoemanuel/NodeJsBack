@@ -20,10 +20,10 @@ class UsersDao {
     return result;
   }
 
-  async getByProperty(property, name) {
+  async getByProperty(property, value) {
     let options = {}
-    opts[property] = name;
-    let result = await UserModel.findOne(options).lean()
+    options[property] = value;
+    let result = await UserModel.findOne(options).lean();
     return result;
   }
 

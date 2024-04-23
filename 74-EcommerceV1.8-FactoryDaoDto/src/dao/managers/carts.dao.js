@@ -3,10 +3,9 @@ const CartsModel = require('../models/carts.model');
 
 class CartDao {
 
-  async create() {
+  async create(cart) {
     try {
-      const cart = { products: [] }
-      await CartsModel.create(cart);
+      return await CartsModel.create(cart);
     } catch (error) {
       throw new Error(error.message)
     }
