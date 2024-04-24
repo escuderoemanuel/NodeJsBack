@@ -2,8 +2,9 @@ const { Router } = require('express');
 const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
-const { generateToken } = require('../utils');
 const UserDTO = require('../dao/DTOs/UserDTO');
+const { JWT_PRIVATE_KEY } = require('../config/environment.config');
+const jwt = require('jsonwebtoken');
 
 
 class SessionsController {
@@ -20,24 +21,27 @@ class SessionsController {
   //? LOGIN
 
   static async loginUser(req, res) {
+    try {
+      const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
 
-    const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
-    const serializableUser = {
-      id: _id,
-      firstName,
-      lastName,
-      email,
-      age,
-      role,
-      password,
-      cart
+      const serializableUser = {
+        id: _id,
+        firstName,
+        lastName,
+        email,
+        age,
+        role,
+        password,
+        cart
+      }
+      // console.log('serializableUser', serializableUser) //! OK
+
+      const accessToken = jwt.sign(serializableUser, JWT_PRIVATE_KEY, { expiresIn: '1d' });
+      res.cookie('accessToken', accessToken);
+      res.send({ status: 'success', message: 'User logged successfuly' })
+    } catch (error) {
+      res.status(500).send({ error: 'Internal server error' });
     }
-
-    const accessToken = generateToken(serializableUser);
-    res.cookie('accessToken', accessToken);
-    res.send({ status: 'success', message: 'Successfully logged in', payload: accessToken, serializableUser })
-    // console.log('SerializableUser', serializableUser)
-    // console.log('accessToken', accessToken)
   }
 
   static async getLoginError(req, res) {
@@ -81,28 +85,33 @@ class SessionsController {
   }
 
   static async githubCallback(req, res) {
-    const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
+    try {
+      const { _id, firstName, lastName, email, age, role, password, cart } = req.user;
 
-    const serializableUser = {
-      id: _id,
-      firstName,
-      lastName,
-      email,
-      age,
-      role,
-      password,
-      cart
+      const serializableUser = {
+        id: _id,
+        firstName,
+        lastName,
+        email,
+        age,
+        role,
+        password,
+        cart
+      }
+      const accessToken = jwt.sign(serializableUser, JWT_PRIVATE_KEY, { expiresIn: '1d' });
+      res.cookie('accessToken', accessToken, serializableUser);
+      res.redirect('/api/products')
+    } catch (error) {
+      res.status(error.status || 500).send({ status: 'error', message: error.message })
     }
-    const accessToken = generateToken(serializableUser);
-    res.cookie('accessToken', accessToken, serializableUser);
-    res.redirect('/api/products')
-
   }
 
   //? CURRENT SESSION
-  static async currentSession(req, res) {
+  static async getCurrentSession(req, res) {
+    console.log('req.user', req.user)
     const user = req.user;
     const userDTO = new UserDTO(user)
+    console.log('user', UserDTO)
     res.send({ payload: userDTO });
   }
 

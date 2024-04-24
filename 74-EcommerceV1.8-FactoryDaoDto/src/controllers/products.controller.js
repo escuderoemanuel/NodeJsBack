@@ -76,7 +76,8 @@ class ProductsController {
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
 
-      const userData = req.user.serializableUser;
+      const userData = req.user;
+      console.log("userData", userData)
       const renderData = { paginateData, user: userData, products: paginateData.payload };
       res.render('products', renderData);
 

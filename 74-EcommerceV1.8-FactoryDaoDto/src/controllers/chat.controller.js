@@ -18,7 +18,7 @@ class ChatViewController {
   static async getMessages(req, res) {
     try {
       const messages = await MessagesModel.find().lean();
-      const user = req.user.serializableUser;
+      const user = req.user;
       res.render('chat', {
         messages,
         user,
