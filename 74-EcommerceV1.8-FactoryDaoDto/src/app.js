@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const { PORT, MONGO_URL } = require('./config/environment.config');
 const { CartsDao, ProductsDao, UsersDao, TicketsDao } = require('./dao/factory');
+const cors = require('cors');
+
 
 
 
@@ -43,6 +45,8 @@ app.use(express.static(`${__dirname}/public`))
 // Json & Body Params
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors());
+
 
 
 // Handlebars
@@ -78,8 +82,8 @@ io.on('connection', async (socket) => {
     io.emit('update-products', products)
   })
 
-  socket.on('add-product', (data) => {
-    const products = data.products.paginateData.payload;
+  socket.on('add-product', async (data) => {
+    const products = await productsService.getAll();
     io.emit('update-products', products)
   })
 

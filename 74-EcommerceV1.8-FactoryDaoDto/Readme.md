@@ -14,7 +14,7 @@ Objetivos específicos
   ✅ El DAO seleccionado (por un parámetro en línea de comandos como lo hicimos anteriormente) será devuelto por una Factory para que la capa de negocio opere con él. (Factory puede ser opcional)
 ✅ Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio. 
 - Modificar la ruta  /current para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
-- Realizar un middleware que pueda trabajar en conjunto con la estrategia “current” para hacer un sistema de autorización y delimitar el acceso a dichos endpoints:
+✅ Realizar un middleware que pueda trabajar en conjunto con la estrategia “current” para hacer un sistema de autorización y delimitar el acceso a dichos endpoints:
   ✅ Sólo el administrador puede crear, actualizar y eliminar productos.
   ✅ Sólo el usuario puede enviar mensajes al chat.
   ✅ Sólo el usuario puede agregar productos a su carrito.
@@ -45,7 +45,9 @@ Además, archivo .env para poder correr el proyecto.
 
 ### PROBLEMS
 
-1. En /realtimeproduct, al eliminar o agregar un product da error.
-   - Llega 'null' en 'data' en el socket on de app.js
+1. Chequear que no llega los mensajes de error cuando el getRole es incorrecto
 2. En /realtimeproduct, no muestra los datos del user en la section profile
-3. Chequear en cart controller que se usa el manager aun
+5. Chequear en cart controller que se usa el manager aun
+6. Chat: no muestra mensajes ni envia
+7. Cart: Muestra el json, no la view
+8. 

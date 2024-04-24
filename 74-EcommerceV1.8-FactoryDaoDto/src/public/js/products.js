@@ -15,29 +15,38 @@ const addProductToCart = (cid, pid) => {
     }
   })
 }
-const addToCart = (cartId, itemId) => {
-  fetch(`/api/carts/${cartId}/item/${itemId}`, {
+const test = () => {
+  console.log("test")
+}
+
+const addToCart = (cid, pid) => {
+  // console.log("addToCart"); //!OK
+  fetch(`/api/carts/${cid}/product/${pid}`, {
     method: "POST"
   }).then(res => {
     if (res.status == 200) {
       window.location.reload();
     }
-  })
-}
+  });
+};
 
 // Agrega un listener de eventos al contenedor de productos
 productList.addEventListener('click', async (e) => {
   // Verifica si el clic fue en un botón 'Add to Cart'
-  console.log("CLICK")
   if (e.target.classList.contains('btnAddToCart')) {
     // Extrae el ID del producto del ID del botón
     const pid = e.target.id.split('-')[1];
-    // Aquí puedes obtener el cid de user.cart de alguna manera
-    const cid = user.cart;
+    console.log('pid', pid); //!OK
+
+    // Obtiene el valor del carrito directamente del elemento p
+    const cartElement = document.querySelector('.cartValue');
+    const cid = cartElement.textContent;
+    console.log('cid', cid);
     // Llama a la función addToCart con el cid y el productId
-    addProductToCart(cid, pid);
+    addToCart(cid, pid);
   }
 });
+
 
 /* PURCHASE */
 const purchaseCart = (cid) => {

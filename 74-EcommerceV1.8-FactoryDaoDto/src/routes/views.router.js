@@ -8,7 +8,7 @@ const viewsRouter = Router();
 // Routes
 viewsRouter.get('/home', publicAccess, ViewsController.getHome)
 
-viewsRouter.get('/realtimeproducts', privateAccess, ViewsController.getRealTimeProducts)
+viewsRouter.get('/realtimeproducts', ViewsController.getRealTimeProducts)
 
 viewsRouter.get('/register', publicAccess, ViewsController.getRegister)
 
