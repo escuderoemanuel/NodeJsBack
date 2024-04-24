@@ -96,7 +96,6 @@ const initializePassport = () => {
         const newUserData = {
           firstName: firstName,
           lastName: lastName,
-          age: 37,
           email: profile._json.email,
           password: '****',
           role: 'user',

@@ -108,13 +108,17 @@ class SessionsController {
 
   //? CURRENT SESSION
   static async getCurrentSession(req, res) {
-    console.log('req.user', req.user)
-    const user = req.user;
-    const userDTO = new UserDTO(user)
-    console.log('user', UserDTO)
-    res.send({ payload: userDTO });
-  }
+    try {
+      const user = req.user;
+      console.log('CLG session.controller req.user!!', user)
+      const userDTO = new UserDTO(user)
+      console.log('CLG session.controller userDTO', UserDTO)
+      res.send({ payload: userDTO });
+    } catch (error) {
+      res.status(error.status || 500).send({ status: 'error', message: error.message })
 
+    }
+  }
 }
 
 module.exports = SessionsController;

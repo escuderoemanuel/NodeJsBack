@@ -47,7 +47,3 @@ Además, archivo .env para poder correr el proyecto.
 
 1. En /realtimeproduct, al eliminar o agregar un product da error.
    - Llega 'null' en 'data' en el socket on de app.js
-2. POSTMAN: 'http://localhost:8080/api/products' getAll me trae 
-   -  {
-        "error": "productsService.paginate is not a function"
-      }

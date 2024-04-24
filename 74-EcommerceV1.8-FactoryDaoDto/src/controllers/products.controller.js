@@ -77,7 +77,7 @@ class ProductsController {
       };
 
       const userData = req.user;
-      console.log("userData", userData)
+      // console.log("userData", userData) //! OK
       const renderData = { paginateData, user: userData, products: paginateData.payload };
       res.render('products', renderData);
 

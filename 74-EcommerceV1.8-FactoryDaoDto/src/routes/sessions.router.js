@@ -36,6 +36,6 @@ sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:ema
 sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login', session: false }), SessionsController.githubCallback);
 
 //? CURRENT
-sessionRouter.get('/current', verifyToken, SessionsController.getCurrentSession)
+sessionRouter.get('/current', SessionsController.getCurrentSession)
 
 module.exports = sessionRouter;
