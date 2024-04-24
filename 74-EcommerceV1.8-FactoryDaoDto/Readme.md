@@ -15,9 +15,9 @@ Objetivos específicos
 ✅ Implementar el patrón Repository para trabajar con el DAO en la lógica de negocio. 
 - Modificar la ruta  /current para evitar enviar información sensible, enviar un DTO del usuario sólo con la información necesaria.
 - Realizar un middleware que pueda trabajar en conjunto con la estrategia “current” para hacer un sistema de autorización y delimitar el acceso a dichos endpoints:
-  - Sólo el administrador puede crear, actualizar y eliminar productos.
-  - Sólo el usuario puede enviar mensajes al chat.
-  - Sólo el usuario puede agregar productos a su carrito.
+  ✅ Sólo el administrador puede crear, actualizar y eliminar productos.
+  ✅ Sólo el usuario puede enviar mensajes al chat.
+  ✅ Sólo el usuario puede agregar productos a su carrito.
 - Crear un modelo Ticket el cual contará con todas las formalizaciones de la compra.
 - Éste contará con los campos
   - Id (autogenerado por mongo)
@@ -47,3 +47,5 @@ Además, archivo .env para poder correr el proyecto.
 
 1. En /realtimeproduct, al eliminar o agregar un product da error.
    - Llega 'null' en 'data' en el socket on de app.js
+2. En /realtimeproduct, no muestra los datos del user en la section profile
+3. Chequear en cart controller que se usa el manager aun

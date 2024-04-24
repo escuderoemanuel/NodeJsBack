@@ -35,6 +35,7 @@ const realtimeproducts = require('./routes/realtimeproducts.router.js');
 const chatRouter = require('./routes/chat.router.js');
 const sessionRouter = require('./routes/sessions.router.js');
 const viewsRouter = require('./routes/views.router.js');
+const { productsService } = require('./repositories/index.js');
 
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
@@ -72,8 +73,8 @@ io.on('connection', async (socket) => {
 
   //! Products Events
   socket.on('delete-product', async (data) => {
-    console.log('data', data)
-    const products = await data.products.paginateData.payload;
+    await productsService.delete(data.productId);
+    const products = await productsService.getAll();
     io.emit('update-products', products)
   })
 

@@ -1,4 +1,4 @@
-const { cartsService } = require('../repositories');
+const { cartsService, productsService } = require('../repositories');
 
 class CartsController {
 
@@ -35,6 +35,7 @@ class CartsController {
   }
 
   static async addProductToCart(req, res) {
+    console.log('HEREE')
     try {
       const cid = req.params.cid;
       const pid = req.params.pid;
@@ -43,6 +44,8 @@ class CartsController {
       //console.log('cart', cart) //!OK
       res.send({ status: 'success', cart });
     } catch (error) {
+      console.log(error)
+
       res.status(400).send({ error: error.message });
     }
   }
@@ -84,6 +87,17 @@ class CartsController {
       })
     } catch (error) {
       res.status(400).send({ error: error.message });
+    }
+  }
+
+
+  static async getProducts(req, res) {
+    try {
+      const { docs, ...rest } = await productsService.getAll(req.query);
+      const cart = await cartsService.getById(req.user.cart)
+      res.render('userCart', { products: docs, user: req.user, cart, ...rest })
+    } catch (error) {
+      res.status(error.status || 500).send({ status: 'error', error: error.message })
     }
   }
 }

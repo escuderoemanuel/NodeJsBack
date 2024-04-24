@@ -22,7 +22,8 @@
         <p> <span>category:</span> {{this.category}}</p>
         <p> <span>status:</span> {{this.status}}</p>
       </div>
-      <button class='btnAddToCart'>Add to Cart</button>
+      <button class='btnAddToCart' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart'>Add to Cart</button>
+
     </li>
     {{/each}}
   </ul>

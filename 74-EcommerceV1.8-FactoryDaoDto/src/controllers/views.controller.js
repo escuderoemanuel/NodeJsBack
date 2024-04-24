@@ -1,6 +1,4 @@
-const ProductsModel = require('../dao/models/products.model');
 const { productsService } = require('../repositories');
-
 
 class ViewsController {
 

@@ -1,11 +1,69 @@
 const socket = io();
 
-// ul (cardContainer)
 const productList = document.getElementById('products');
-// form
-const formAddProduct = document.getElementById('formAddProduct');
 
 
+/* ADD */
+const btnAddToCart = document.getElementById('btnAddToCart');
+
+const addProductToCart = (cid, pid) => {
+  fetch(`/api/carts/${cid}/product/${pid}`, {
+    method: "POST"
+  }).then(res => {
+    if (res.status == 200) {
+      window.location.reload();
+    }
+  })
+}
+const addToCart = (cartId, itemId) => {
+  fetch(`/api/carts/${cartId}/item/${itemId}`, {
+    method: "POST"
+  }).then(res => {
+    if (res.status == 200) {
+      window.location.reload();
+    }
+  })
+}
+
+// Agrega un listener de eventos al contenedor de productos
+productList.addEventListener('click', async (e) => {
+  // Verifica si el clic fue en un botón 'Add to Cart'
+  console.log("CLICK")
+  if (e.target.classList.contains('btnAddToCart')) {
+    // Extrae el ID del producto del ID del botón
+    const pid = e.target.id.split('-')[1];
+    // Aquí puedes obtener el cid de user.cart de alguna manera
+    const cid = user.cart;
+    // Llama a la función addToCart con el cid y el productId
+    addProductToCart(cid, pid);
+  }
+});
+
+/* PURCHASE */
+const purchaseCart = (cid) => {
+
+  fetch(`/api/carts/${cid}/purchase`, {
+    method: "GET"
+  }).then(res => {
+    if (res.status == 200) {
+      window.location.reload();
+    }
+  })
+}
+
+/* DELETE */
+const deleteFromCart = (cid, pid) => {
+
+  fetch(`/api/carts/${cid}/product/${pid}`, {
+    method: "DELETE"
+  }).then(res => {
+    if (res.status == 200) {
+      window.location.reload();
+    }
+  })
+}
+
+/* 
 //! Recibo la lista actualizada de productos y la renderizo en el cliente.
 socket.on('update-products', products => {
   const productList = document.getElementById('products');
@@ -100,3 +158,4 @@ formAddProduct.addEventListener('DOMContentLoaded', 'submit', async (e) => {
   }
 })
 
+ */

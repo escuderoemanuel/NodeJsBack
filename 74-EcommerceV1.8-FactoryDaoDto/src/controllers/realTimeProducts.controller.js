@@ -1,9 +1,7 @@
 const { productsService } = require('../repositories');
 
-/* // Manager
-const ProductsDbManager = require('../dao/dbManager/ProductsDbManager');
-const manager = new ProductsDbManager();
- */
+// Manager
+
 class RealTimeProductsController {
   static async getAll(req, res) {
     try {

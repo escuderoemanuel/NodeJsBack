@@ -77,7 +77,7 @@ class ProductsController {
       };
 
       const userData = req.user;
-      // console.log("userData", userData) //! OK
+       //console.log("userData", userData) //! OK
       const renderData = { paginateData, user: userData, products: paginateData.payload };
       res.render('products', renderData);
 
@@ -122,7 +122,11 @@ class ProductsController {
   static async delete(req, res) {
     try {
       const pid = req.params.pid;
+
+      console.log('CLG productscontroller pid', pid) //! LLega Ok
       const productToDelete = await productsService.getById(pid);
+      console.log('CLG productscontroller productToDelete', productToDelete) //! LLega Ok
+
       await productsService.delete(pid);
       res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {

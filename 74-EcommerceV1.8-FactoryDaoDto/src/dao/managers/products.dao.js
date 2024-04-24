@@ -14,9 +14,9 @@ class ProductsDao {
   }
 
 
-  
-  async getById(pid) {
-    return await ProductsModel.findOne({ _id: pid }).lean();
+
+  async getById(id) {
+    return await ProductsModel.findOne({ _id: id }).lean();
   }
 
   async update(pid, product) {
