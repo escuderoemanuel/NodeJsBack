@@ -6,11 +6,15 @@ const UserDTO = require('../dao/DTOs/UserDTO');
 const { JWT_PRIVATE_KEY } = require('../config/environment.config');
 const jwt = require('jsonwebtoken');
 
+const MailingsService = require('../services/mailings.service');
+const mailingsService = new MailingsService();
 
 class SessionsController {
 
   //? REGISTER
   static async registerUser(req, res) {
+
+    await mailingsService.sendRegisterEmail(req.user.email);
     res.send({ status: 'success', message: 'Successfully registered user.' });
   }
 
@@ -111,7 +115,7 @@ class SessionsController {
     try {
 
       const user = req.user;
-      console.log('CLG session.controller req.user!!', user)
+      console.log('CLG session.controller req.user!!', user) //! undefined
       const userDTO = new UserDTO(user)
       console.log('CLG session.controller userDTO', UserDTO)
       res.send({ payload: userDTO });

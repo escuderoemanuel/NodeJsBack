@@ -1,5 +1,6 @@
 const { cartsService, productsService } = require('../repositories');
 
+
 class CartsController {
 
   static async create(req, res) {
@@ -102,28 +103,14 @@ class CartsController {
     }
   }
 
-  /* static async purchase(req, res) {
-    const { cid } = req.params
-    console.log('CLG cartsController purchase cid', cid)
-    const email = req.user.email
-    console.log('CLG cartsController purchase email', email)
-    try {
-      const remainderProducts = await cartsService.purchase(cid, email)
-      console.log('CLG cartsController purchase reamainderProducts', remainderProducts)
 
-      res.send({ status: 'success', message: 'Purchase successful', payload: remainderProducts })
-
-    } catch (error) {
-      console.log('CLG Cart purchase error', error)
-      res.status(error.status || 500).send({ status: 'error', error: error.message })
-    }
-  } */
   static async purchase(req, res) {
     console.log('Entrando a cart controller purchase')
     const { cid } = req.params;
     console.log('Entrando a cart controller purchase cid', cid)
     try {
       const remainderItems = await cartsService.purchase(cid, req.user.email)
+      
       res.send({ status: 'success', payload: remainderItems })
     } catch (error) {
       console.log(error)
