@@ -118,7 +118,7 @@ class CartsService {
 
     if (totalAmount > 0) {
       await this.ticketService.generate(email, totalAmount);
-      await mailingsService.sendPurchaseEmail(req.user.email);
+      await mailingsService.sendPurchaseEmail(email);
     }
 
     return notPurchasedIds;

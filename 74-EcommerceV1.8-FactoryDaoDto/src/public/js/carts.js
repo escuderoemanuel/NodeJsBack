@@ -9,9 +9,9 @@ const purchaseCart = (cid) => {
   fetch(`/api/carts/${cid}/purchase`, {
     method: "GET"
   }).then(res => {
-    console.log('Purchase OK')
     if (res.status == 200) {
-      // window.location.reload();
+      console.log('Purchase OK status 200')
+      window.location.reload();
     }
   })
 }

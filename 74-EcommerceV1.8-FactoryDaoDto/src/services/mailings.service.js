@@ -35,7 +35,7 @@ class MailingsService {
         <h1>Thanks for your purchase 👋</h1>
         <p>🥳 You have successfully purchased the following products: 👌</p>
         <br/>
-        <p>${ticketCode}</p>
+        <p>${purchaseInfo.ticketCode}</p>
         <ul>
           ${purchaseInfo.map(product => `
           <li>${product.title}</li>
