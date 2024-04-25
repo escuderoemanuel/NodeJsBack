@@ -1,6 +1,4 @@
 <section class='carts'>
-  <h1 class='viewTitle'>View User Cart Handlebars!</h1>
-  <h4 class='cartTitle'>Cart ID: {{this._id}}</h4>
 
   <table class='cartTable'>
     <thead>
@@ -14,6 +12,7 @@
       </tr>
     </thead>
     <tbody>
+      {{#if products}}
       {{#each products}}
       <tr class='cart'>
         <td class='col'>{{this.product.title}}</td>
@@ -26,6 +25,12 @@
         </td>
       </tr>
       {{/each}}
+      {{else}}
+      <tr class='cart'>
+        <td colspan='6' class='col'>There are no products in the cart!</td>
+      </tr>
+      {{/if}}
+
     </tbody>
   </table>
   <button id='btnPurchaseCart' onclick="purchaseCart('{{this._id}}')">Purchase Cart</button>

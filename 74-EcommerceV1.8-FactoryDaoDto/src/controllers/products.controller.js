@@ -76,9 +76,9 @@ class ProductsController {
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
 
-      const userData = req.user;
+      const user = req.user;
        //console.log("userData", userData) //! OK
-      const renderData = { paginateData, user: userData, products: paginateData.payload };
+      const renderData = { paginateData, user: user, products: paginateData.payload };
       res.render('products', renderData);
 
     } catch (error) {

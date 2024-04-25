@@ -17,12 +17,12 @@
   align-items: center;
 }
 
-.headerChat h1 {
-  margin: .5rem;
+.userNameFront {
+  margin: 0 .5rem;
 }
 
 .iconChat {
-  width: 50px;
+  width: 40px;
   height: auto;
 }
 
@@ -57,7 +57,7 @@
 
 .messagesLog {
   width: 100%;
-  padding: 0% 5%;
+  padding: 0% 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,7 +66,7 @@
 }
 
 .messageContainer {
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   border-radius: 8px;
   padding: .5rem 1rem;
   display: flex;
@@ -97,14 +97,12 @@
 
 /* Estilo para los mensajes enviados */
 .sentMessage {
-  width: 90%;
   background-color: #f2cb5e;
   align-self: flex-end;
 }
 
 /* Estilo para los mensajes recibidos */
 .receivedMessage {
-  width: 90%;
   background-color: #43c09e;
   align-self: flex-start;
 }

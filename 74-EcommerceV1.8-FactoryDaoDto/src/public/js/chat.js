@@ -26,20 +26,6 @@ messageInput.addEventListener("keyup", (e) => {
 })
 
 // SOCKET ON => Recive Event: new messages
-/* socket.on("messages", ({ messages }) => {
-  if (!userName) return;
-  messagesLog.innerHTML = '';
-  messages.forEach(message => {
-    messagesLog.innerHTML += `
-    <p class='messageContainer'>
-    <span class='messageInfo'>${message.date} ${message.user}</span>
-    
-    <span class='userMessage'>${message.message}</span>
-    </p>
-    `;
-  })
-  messagesLog.scrollTop = messagesLog.scrollHeight;
-}) */
 socket.on("messages", ({ messages }) => {
   if (!userName) return;
   messagesLog.innerHTML = '';
@@ -77,7 +63,7 @@ Swal.fire({
   color: "#fff",
   background: "#43c09e",
   radius: 2,
-  title: "👋 Hey, welcome to out chat! 😉",
+  title: "👋 Hey, welcome to our chat! 😉",
   timer: 2000,
   showConfirmButton: false,
 

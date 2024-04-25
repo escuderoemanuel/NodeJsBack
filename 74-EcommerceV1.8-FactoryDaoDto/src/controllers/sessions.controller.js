@@ -2,9 +2,8 @@ const { Router } = require('express');
 const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils');
 const passport = require('passport');
-const UserDTO = require('../dao/DTOs/UserDTO');
-const { JWT_PRIVATE_KEY } = require('../config/environment.config');
 const jwt = require('jsonwebtoken');
+const { JWT_PRIVATE_KEY } = require('../config/environment.config');
 
 const MailingsService = require('../services/mailings.service');
 const mailingsService = new MailingsService();
@@ -41,7 +40,7 @@ class SessionsController {
       // console.log('serializableUser', serializableUser) //! OK
 
       const accessToken = jwt.sign(serializableUser, JWT_PRIVATE_KEY, { expiresIn: '1d' });
-      res.cookie('accessToken', accessToken);
+      res.cookie('accessToken', accessToken, serializableUser);
       res.send({ status: 'success', message: 'User logged successfuly' })
     } catch (error) {
       res.status(500).send({ error: 'Internal server error' });
@@ -110,20 +109,7 @@ class SessionsController {
     }
   }
 
-  //? CURRENT SESSION
-  static async getCurrentSession(req, res) {
-    try {
 
-      const user = req.user;
-      console.log('CLG session.controller req.user!!', user) //! undefined
-      const userDTO = new UserDTO(user)
-      console.log('CLG session.controller userDTO', UserDTO)
-      res.send({ payload: userDTO });
-    } catch (error) {
-      res.status(error.status || 500).send({ status: 'error', message: error.message })
-
-    }
-  }
 }
 
 module.exports = SessionsController;

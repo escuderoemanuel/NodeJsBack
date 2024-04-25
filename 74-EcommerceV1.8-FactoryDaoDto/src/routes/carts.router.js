@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const { privateAccess } = require('../middlewares/middlewares');
 const CartsController = require('../controllers/carts.controller');
 const { verifyToken } = require('../middlewares/verifyToken.middleware');
 const getRole = require('../middlewares/getRole.middleware');

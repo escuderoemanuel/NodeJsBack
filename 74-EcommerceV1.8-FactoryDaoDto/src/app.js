@@ -29,7 +29,6 @@ app.use(passport.initialize());
 const MessagesModel = require('./dao/models/messages.model.js');
 const cartsRouter = require('./routes/carts.router.js');
 const productsRouter = require('./routes/products.router.js');
-const realtimeproducts = require('./routes/realtimeproducts.router.js');
 const chatRouter = require('./routes/chat.router.js');
 const sessionRouter = require('./routes/sessions.router.js');
 const viewsRouter = require('./routes/views.router.js');
@@ -56,7 +55,6 @@ app.use('/api/sessions', sessionRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/chat', chatRouter)
-app.use('/api/realtimeproducts', realtimeproducts)
 app.use('/', viewsRouter)
 
 // Server

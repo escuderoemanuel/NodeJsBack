@@ -13,7 +13,7 @@ class SessionController {
         res.status(400).send({ status: 'error', error: 'There has been a problem with the register process' })
     }
 
-    
+
     static async login(req, res) {
         try {
             const { _id, first_name, last_name, role, email, cart, age } = req.user;
@@ -33,40 +33,41 @@ class SessionController {
             res.status(error.status || 500).send({ status: 'error', message: error.message })
         }
     }
-    static async getLoginError(req, res){
-        res.status(400).send({status:'error', error:'There has been a problem with the login process'})
+    static async getLoginError(req, res) {
+        res.status(400).send({ status: 'error', error: 'There has been a problem with the login process' })
     }
-    static async logout(req, res){
+    static async logout(req, res) {
         // req.session.destroy((err)=>{
         //     if(err) return res.status(500).send('there was an error destroying session')
         // })
         res.clearCookie('jwtCookie')
         res.redirect('/login')
     }
-    static async processGithub(req,res){
+    static async processGithub(req, res) {
         try {
-            const {_id, first_name, last_name, role, email,cart, age} = req.user; 
+            const { _id, first_name, last_name, role, email, cart, age } = req.user;
             const serializableUser = {
-                id: _id, 
+                id: _id,
                 first_name,
                 last_name,
-                role, 
+                role,
                 age,
-                cart, 
+                cart,
                 email
             }
-            const token = jwt.sign(serializableUser,'JWT_SECRET',{expiresIn:'1h'})
+            const token = jwt.sign(serializableUser, 'JWT_SECRET', { expiresIn: '1h' })
             res.cookie('jwtCookie', token);
-            res.redirect('/items')   
+            res.redirect('/items')
         } catch (error) {
             res.status(error.status || 500).send({ status: 'error', message: error.message })
         }
     }
-    static async getCurrent(req, res){
-        const user = req.user; 
-        const userDTO= new UserDTO(user);
-        res.send({payload: userDTO})
-    }  
+
+    static async getCurrent(req, res) {
+        const user = req.user;
+        const userDTO = new UserDTO(user);
+        res.send({ payload: userDTO })
+    }
 
 }
 

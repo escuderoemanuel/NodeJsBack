@@ -23,13 +23,14 @@ class CartsController {
 
   static async getById(req, res) {
     try {
+      const user = req.user;
       const cid = req.params.cid;
       const cart = await cartsService.getById(cid);
       if (!cart) {
         res.status(400).send('Cart does not exist')
       } else {
         // res.send(cart);
-        res.render('userCart', { ...cart });
+        res.render('userCart', { ...cart, user });
       }
     } catch (error) {
       res.status(400).send({ error: error.message });
@@ -110,7 +111,7 @@ class CartsController {
     console.log('Entrando a cart controller purchase cid', cid)
     try {
       const remainderItems = await cartsService.purchase(cid, req.user.email)
-      
+
       res.send({ status: 'success', payload: remainderItems })
     } catch (error) {
       console.log(error)
