@@ -99,6 +99,7 @@ class CartsService {
 
   async purchase(cid, email) {
     console.log('Entrando a cart Service purchase')
+    console.log('Entrando a cart Service purchase EMAIL', email)
     const cart = await this.getById(cid);
 
     const notPurchasedIds = []
@@ -117,8 +118,9 @@ class CartsService {
     };
 
     if (totalAmount > 0) {
-      await this.ticketService.generate(email, totalAmount);
-      await mailingsService.sendPurchaseEmail(email);
+      const ticket = await this.ticketService.generate(email, totalAmount);
+      console.log('TICKET', ticket)
+      await mailingsService.sendPurchaseEmail(email, ticket);
     }
 
     return notPurchasedIds;

@@ -13,9 +13,9 @@ const transporter = nodemailer.createTransport({
 class MailingsService {
 
   async sendRegisterEmail(destinationEmail) {
+    console.log('destinationEmail', destinationEmail)
     const info = await transporter.sendMail({
-      from: authUser,
-      // from: GMAIL_AUTH_USER ,
+      from: GMAIL_AUTH_USER,
       to: destinationEmail,
       subject: 'Registration Email',
       html: `
@@ -26,7 +26,9 @@ class MailingsService {
     return info;
   }
 
-  async sendPurchaseEmail(destinationEmail, purchaseInfo) {
+  async sendPurchaseEmail(destinationEmail, ticket) {
+    console.log('destinationEmail', destinationEmail)
+
     const info = await transporter.sendMail({
       from: GMAIL_AUTH_USER,
       to: destinationEmail,
@@ -35,16 +37,10 @@ class MailingsService {
         <h1>Thanks for your purchase 👋</h1>
         <p>🥳 You have successfully purchased the following products: 👌</p>
         <br/>
-        <p>${purchaseInfo.ticketCode}</p>
-        <ul>
-          ${purchaseInfo.map(product => `
-          <li>${product.title}</li>
-          <li>Price: ${product.price}</li>
-          <li>Quantity: ${product.quantity}</li>
-          <li>Total: ${product.quantity * product.price}</li>
-          <br/>
-          `).join('')}
-        </ul>`
+        <p>Ticket Code: ${ticket.code}</p>
+        <p>Purchase Date: ${ticket.purchase_datetime}</p>
+        <p>Total Amount: $${ticket.amount}</p>
+        `
     })
   }
 }
