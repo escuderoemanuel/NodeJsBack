@@ -33,6 +33,14 @@ class ViewsController {
     res.redirect('/login');
   }
 
+  static async getChat(req, res){
+    try{    
+        res.render('chat',{user: req.user})
+    } catch (error) {
+        res.status(error.status || 500).send({status:'error', error: error.message})
+    }
+}
+
 }
 
 module.exports = ViewsController;

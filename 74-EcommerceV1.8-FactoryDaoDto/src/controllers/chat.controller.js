@@ -1,15 +1,19 @@
+const MessagesDao = require('../dao/managers/messages.dao');
 const MessagesModel = require('../dao/models/messages.model');
-const UserModel = require('../dao/models/user.model');
+// const UserModel = require('../dao/models/user.model');
 
 class ChatViewController {
 
   static async postMessage(req, res) {
     try {
       await MessagesModel.create(req.body);
-      const message = await manager.addMessage();
-      const messages = await manager.getMessages();
+      const user = req.user;
+      // const message = await manager.addMessage();
+      // const messages = await manager.getMessages();
+      const messages = await MessagesDao.getAll();
+      console.log('messages', messages)
 
-      res.status(201).send({ messages: messages });
+      res.status(201).send({ user, messages: messages });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
