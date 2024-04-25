@@ -26,7 +26,7 @@ messageInput.addEventListener("keyup", (e) => {
 })
 
 // SOCKET ON => Recive Event: new messages
-socket.on("messages", ({ messages }) => {
+/* socket.on("messages", ({ messages }) => {
   if (!userName) return;
   messagesLog.innerHTML = '';
   messages.forEach(message => {
@@ -39,15 +39,30 @@ socket.on("messages", ({ messages }) => {
     `;
   })
   messagesLog.scrollTop = messagesLog.scrollHeight;
-})
+}) */
+socket.on("messages", ({ messages }) => {
+  if (!userName) return;
+  messagesLog.innerHTML = '';
+  messages.forEach(message => {
+    const messageClass = message.user === userName ? 'sentMessage' : 'receivedMessage';
+    messagesLog.innerHTML += `
+      <p class='messageContainer ${messageClass}'>
+        <span class='messageInfo'>${message.date} ${message.user}</span>
+        <span class='userMessage'>${message.message}</span>
+      </p>
+    `;
+  });
+  messagesLog.scrollTop = messagesLog.scrollHeight;
+});
+
 
 // Socket New User Connected
-socket.on("newUserConnected", ({ user }) => {
-  if (!user) return;
+socket.on("newUserConnected", ({ userName }) => {
+  if (!userName) return;
   // Alert New User Connected
   Swal.fire({
     color: "#eee",
-    text: `🔔 ${user} has joined the chat!`,
+    text: `🔔 ${userName} has joined the chat!`,
     toast: true,
     position: 'top-right',
     timer: 2000,
@@ -58,21 +73,20 @@ socket.on("newUserConnected", ({ user }) => {
 
 
 // Login
-/* Swal.fire({
-  color: "#eee",
-  background: "#222",
+Swal.fire({
+  color: "#fff",
+  background: "#43c09e",
   radius: 2,
-  title: "👋 Hey, welcome! 😉",
-  text: "Enter your email 👇",
-  input: "email",
-  confirmButtonColor: "#43c09e",
-  allowOutsideClick: false
+  title: "👋 Hey, welcome to out chat! 😉",
+  timer: 2000,
+  showConfirmButton: false,
+
 }).then((result) => {
   user = result.value;
-  usernameFront.innerHTML = `${user}`;
-  socket.emit("newUser", user);
+  userName = `${userName}`;
+  socket.emit("newUser", userName);
   // Send Event Auth
-  socket.emit("authenticated", { user });
-}); */
+  socket.emit("authenticated", { userName });
+});
 
 

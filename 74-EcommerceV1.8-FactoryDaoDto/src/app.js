@@ -89,11 +89,11 @@ io.on('connection', async (socket) => {
 
   //! Messages Events
   // Recive Event: user authenticated
-  socket.on('authenticated', ({ user }) => {
+  socket.on('authenticated', ({ userName }) => {
     // Send Event with the messages in the array: for this client-socket!
     socket.emit('messages', { messages });
     // Send Event: for all users except the one connecting!
-    socket.broadcast.emit('newUserConnected', { user });
+    socket.broadcast.emit('newUserConnected', { userName });
   })
 
   //! Guarda en ATLAS
