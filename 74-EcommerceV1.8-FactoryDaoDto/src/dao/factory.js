@@ -18,7 +18,7 @@ switch (PERSISTENCE) {
     break;
 
   case 'MEMORY':
-    console.log('Conntected to MEMORY')
+    console.log('Connetected to MEMORY')
     ProductsDao = require('../dao/memory/products.memory')
     UsersDao = require('../dao/memory/users.memory')
     TicketsDao = require('../dao/memory/tickets.memory')

@@ -109,6 +109,7 @@ class SessionsController {
   //? CURRENT SESSION
   static async getCurrentSession(req, res) {
     try {
+
       const user = req.user;
       console.log('CLG session.controller req.user!!', user)
       const userDTO = new UserDTO(user)
