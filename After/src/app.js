@@ -59,7 +59,7 @@ io.on('connection',async (socket)=>{
         io.emit('list updated', {items:items})
     })
 
-    /** CHAT */
+    //!/** CHAT */
     const messages = await messageModel.find().lean()
     socket.emit('chat messages', {messages})
 

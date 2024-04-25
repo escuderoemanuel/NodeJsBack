@@ -48,6 +48,6 @@ Además, archivo .env para poder correr el proyecto.
 1. Chequear que no llega los mensajes de error cuando el getRole es incorrecto
 2. En /realtimeproduct, no muestra los datos del user en la section profile
 5. Chequear en cart controller que se usa el manager aun
-6. Chat: no muestra mensajes ni envia
+6. Chat: No muestra nuevo usuario conectado
 7. Cart: Muestra el json, no la view
 8. 
