@@ -26,6 +26,6 @@ viewsRouter.get('/current', privateAccess, SessionsController.getCurrentSession)
 
 viewsRouter.get('/chat', verifyToken, getRole('user'), ViewsController.getChat);
 
-viewsRouter.get('/*', publicAccess, ViewsController.getPublicRoute)
+// viewsRouter.get('/*', publicAccess, ViewsController.getPublicRoute)
 
 module.exports = viewsRouter;

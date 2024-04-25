@@ -10,7 +10,6 @@
         <th class='col'>Quantity</th>
         <th class='col'>Stock</th>
         <th class='col'>Price</th>
-        <th class='col'>Total</th>
         <th class='col'>Remove</th>
       </tr>
     </thead>
@@ -22,18 +21,17 @@
         <td class='col'>{{this.quantity}}</td>
         <td class='col'>{{this.product.stock}}</td>
         <td class='col'>${{this.product.price}}</td>
-        <td class='col'>${{this.product.price}}</td>
-        {{!-- <td>{{multiply this.quantity this.product.price}}</td> --}}
         <td class='btnDeleteProductById' onclick="deleteFromCart('{{../this._id}}','{{this.product._id}}')">
-          🗑️</td>
+          🗑️
+        </td>
       </tr>
-
       {{/each}}
     </tbody>
   </table>
-  <button id='btnPurchaseCart' onclick="purchaseCart('{{user.cart}}')">Purchase Cart</button>
-
+  <button id='btnPurchaseCart' onclick="purchaseCart('{{this._id}}')">Purchase Cart</button>
 </section>
+
+
 
 <script src=' /socket.io/socket.io.js'></script>
 <script src='/js/carts.js'></script>

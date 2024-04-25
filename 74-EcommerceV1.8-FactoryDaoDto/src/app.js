@@ -3,14 +3,10 @@ const { PORT, MONGO_URL } = require('./config/environment.config');
 const { CartsDao, ProductsDao, UsersDao, TicketsDao } = require('./dao/factory');
 const cors = require('cors');
 
-
-
-
-// Solamente traemos Server de io
-const { Server } = require('socket.io');
-
-// Handlebars
 const handlebars = require('express-handlebars');
+
+ // Solamente traemos Server de io
+const { Server } = require('socket.io');
 
 // Cookie Parser
 const cookieParser = require('cookie-parser');

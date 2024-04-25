@@ -9,8 +9,9 @@ const purchaseCart = (cid) => {
   fetch(`/api/carts/${cid}/purchase`, {
     method: "GET"
   }).then(res => {
+    console.log('Purchase OK')
     if (res.status == 200) {
-      window.location.reload();
+      // window.location.reload();
     }
   })
 }
@@ -31,3 +32,4 @@ const deleteFromCart = (cid, pid) => {
 
   }
 }
+

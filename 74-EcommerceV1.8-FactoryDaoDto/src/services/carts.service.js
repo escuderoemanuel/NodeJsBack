@@ -18,9 +18,10 @@ class CartsService {
   }
 
   async getById(cid) {
+    console.log('cid en cartService', cid)
     const cart = await this.dao.getById(cid);
     if (!cart) {
-      throw new Error(`There's no card by id ${cid}`)
+      throw { message: `There's no cart by id ${cid}`, status: 400 }
     };
     return cart;
   }
@@ -97,6 +98,7 @@ class CartsService {
   }
 
   async purchase(cid, email) {
+    console.log('Entrando a cart Service purchase')
     const cart = await this.getById(cid);
 
     const notPurchasedIds = []

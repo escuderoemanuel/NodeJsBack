@@ -31,7 +31,7 @@ class TicketsService {
   async generate(email, totalAmount) {
     const ticket = await this.dao.create({
       code: uuidv4(),
-      purchase_datetime: new Date().toLocalString(),
+      purchase_datetime: new Date().toLocaleString(),
       amount: totalAmount,
       purchaser: email
     });
