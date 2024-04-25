@@ -1,4 +1,4 @@
-const MessagesDao = require('../dao/managers/messages.dao');
+const MessagesDao = require('../dao/daoManagers/messages.dao');
 const MessagesModel = require('../dao/models/messages.model');
 // const UserModel = require('../dao/models/user.model');
 

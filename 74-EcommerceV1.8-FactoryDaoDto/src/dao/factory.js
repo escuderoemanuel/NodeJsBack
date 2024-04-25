@@ -11,10 +11,10 @@ switch (PERSISTENCE) {
     mongoose.connect(MONGO_URL).then(() => {
       console.log('Connected to MongoDB')
     })
-    ProductsDao = require('../dao/managers/products.dao')
-    UsersDao = require('../dao/managers/users.dao')
-    TicketsDao = require('../dao/managers/tickets.dao')
-    CartsDao = require('../dao/managers/carts.dao')
+    ProductsDao = require('./daoManagers/products.dao')
+    UsersDao = require('./daoManagers/users.dao')
+    TicketsDao = require('./daoManagers/tickets.dao')
+    CartsDao = require('./daoManagers/carts.dao')
     break;
 
   case 'MEMORY':

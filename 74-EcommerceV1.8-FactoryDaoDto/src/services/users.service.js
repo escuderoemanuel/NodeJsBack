@@ -1,4 +1,4 @@
-const UsersDao = require('../dao/managers/users.dao')
+const UsersDao = require('../dao/daoManagers/users.dao')
 
 class UsersService {
   constructor() {

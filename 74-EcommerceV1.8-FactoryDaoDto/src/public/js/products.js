@@ -1,10 +1,9 @@
 const socket = io();
 
 const productList = document.getElementById('products');
-
-
 /* ADD */
 const btnAddToCart = document.getElementById('btnAddToCart');
+const btnPurchaseCart = document.getElementById('btnPurchaseCart');
 
 const addProductToCart = (cid, pid) => {
   fetch(`/api/carts/${cid}/product/${pid}`, {
@@ -48,7 +47,7 @@ productList.addEventListener('click', async (e) => {
 });
 
 
-/* PURCHASE */
+/* // PURCHASE
 const purchaseCart = (cid) => {
 
   fetch(`/api/carts/${cid}/purchase`, {
@@ -60,7 +59,7 @@ const purchaseCart = (cid) => {
   })
 }
 
-/* DELETE */
+// DELETE 
 const deleteFromCart = (cid, pid) => {
 
   fetch(`/api/carts/${cid}/product/${pid}`, {
@@ -70,9 +69,9 @@ const deleteFromCart = (cid, pid) => {
       window.location.reload();
     }
   })
-}
+} */
 
-/* 
+
 //! Recibo la lista actualizada de productos y la renderizo en el cliente.
 socket.on('update-products', products => {
   const productList = document.getElementById('products');
@@ -167,4 +166,3 @@ formAddProduct.addEventListener('DOMContentLoaded', 'submit', async (e) => {
   }
 })
 
- */

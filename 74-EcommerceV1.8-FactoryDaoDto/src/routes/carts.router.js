@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { privateAccess } = require('../middlewares/middlewares');
 const CartsController = require('../controllers/carts.controller');
+const { verifyToken } = require('../middlewares/verifyToken.middleware');
+const getRole = require('../middlewares/getRole.middleware');
 
 const router = Router();
 
@@ -17,12 +19,17 @@ router.get('/:cid', privateAccess, CartsController.getById)
 router.post('/:cid/product/:pid', privateAccess, CartsController.addProductToCart)
 
 // Deberá eliminar del carrito el producto seleccionado
-router.delete('/:cid/product/:pid', privateAccess, CartsController.deleteProductById)
+// router.delete('/:cid/product/:pid', privateAccess, CartsController.deleteProductById)
+router.delete('/:cid/product/:pid', CartsController.deleteProductById)
 
 // Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
 router.put('/:cid/products/:pid', privateAccess, CartsController.updateProductQuantityById)
 
 // DELETE: api/carts/:cid deberá eliminar todos los productos del carrito
 router.delete('/:cid', privateAccess, CartsController.emptyCartById)
+
+// Crear un ticket
+// router.post('/:cid/purchase', verifyToken, CartsController.purchase)
+router.post('/:cid/purchase', privateAccess, CartsController.purchase)
 
 module.exports = router;

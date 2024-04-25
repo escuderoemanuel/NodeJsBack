@@ -7,7 +7,7 @@ Objetivos específicos
 
 ## Se debe entregar
 
-- Modificar nuestra capa de persistencia para aplicar los conceptos de:
+✅ Modificar nuestra capa de persistencia para aplicar los conceptos de:
   ✅ Factory (opcional)
   ✅ DAO
   ✅  DTO
@@ -45,9 +45,8 @@ Además, archivo .env para poder correr el proyecto.
 
 ### PROBLEMS
 
-1. Chequear que no llega los mensajes de error cuando el getRole es incorrecto
+1. Chequear que no llega los mensajes de 'ERROR' cuando el getRole es incorrecto
 2. En /realtimeproduct, no muestra los datos del user en la section profile
 5. Chequear en cart controller que se usa el manager aun
-6. Chat: No muestra nuevo usuario conectado
 7. Cart: Muestra el json, no la view
 8. 

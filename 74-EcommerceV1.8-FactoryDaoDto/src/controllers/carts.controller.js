@@ -27,7 +27,8 @@ class CartsController {
       if (!cart) {
         res.status(400).send('Cart does not exist')
       } else {
-        res.send(cart);
+        // res.send(cart);
+        res.render('userCart', { ...cart });
       }
     } catch (error) {
       res.status(400).send({ error: error.message });
@@ -54,8 +55,8 @@ class CartsController {
     try {
       const cid = req.params.cid;
       const pid = req.params.pid;
-      await cartsService.deleteProductFromCartById(cid, pid);
-      res.send({ status: 'success', message: 'Product successfully removed' });
+      const result = await cartsService.deleteProductFromCartById(cid, pid);
+      res.send({ status: 'success', message: 'Product successfully removed', result });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
@@ -97,6 +98,18 @@ class CartsController {
       const cart = await cartsService.getById(req.user.cart)
       res.render('userCart', { products: docs, user: req.user, cart, ...rest })
     } catch (error) {
+      res.status(error.status || 500).send({ status: 'error', error: error.message })
+    }
+  }
+
+  static async purchase(req, res) {
+    const { cid } = req.params
+    const email = req.user.email
+    try {
+      const remainderProducts = await cartsService.purchase(cid, email)
+      res.send({ status: 'success', message: 'Purchase successful', payload: remainderProducts })
+    } catch (error) {
+      console.log('CLG Cart purchase error', error)
       res.status(error.status || 500).send({ status: 'error', error: error.message })
     }
   }

@@ -1,31 +1,39 @@
 <section class='carts'>
-
   <h1 class='viewTitle'>View User Cart Handlebars!</h1>
+  <h4 class='cartTitle'>Cart ID: {{this._id}}</h4>
 
-  <h4 class='cartTitle'>Cart ID: {{user.cart}}</h4>
-  <ul id='productsContainer' class='cartContainer'>
-    {{#each products}}
-    <li class='cart'>
-      <h4 class='productFromCardTitle'>{{this.product.title}}</h4>
-      <div class='cartDataContainer'>
-        <p> <span>Id:</span> {{this._id}}</p>
-        <p> <span>Quantity:</span> {{this.quantity}}</p>
-        <p> <span>Title:</span> {{this.product.title}}</p>
-        <p> <span>Description:</span> {{this.product.description}}</p>
-        <p> <span>Price:</span> {{this.product.price}}</p>
-        <p> <span>thumbnails:</span><br>
-          {{#each this.product.thumbnails}}
-          <a class='linkThumbnail' href='{{this}}' target='_blank'>{{this}}</a>
-          <br>
-          {{/each}}
-        </p>
+  <table class='cartTable'>
+    <thead>
+      <tr>
+        <th class='col'>Product Title</th>
+        <th class='col'>Product ID</th>
+        <th class='col'>Quantity</th>
+        <th class='col'>Stock</th>
+        <th class='col'>Price</th>
+        <th class='col'>Total</th>
+        <th class='col'>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+      <tr class='cart'>
+        <td class='col'>{{this.product.title}}</td>
+        <td class='col'>{{this.product._id}}</td>
+        <td class='col'>{{this.quantity}}</td>
+        <td class='col'>{{this.product.stock}}</td>
+        <td class='col'>${{this.product.price}}</td>
+        <td class='col'>${{this.product.price}}</td>
+        {{!-- <td>{{multiply this.quantity this.product.price}}</td> --}}
+        <td class='btnDeleteProductById' onclick="deleteFromCart('{{../this._id}}','{{this.product._id}}')">
+          🗑️</td>
+      </tr>
 
-        <p> <span>Code:</span> {{this.product.code}}</p>
-        <p> <span>Stock:</span> {{this.product.stock}}</p>
-        <p> <span>Category:</span> {{this.product.category}}</p>
-        <p> <span>Status:</span> {{this.product.status}}</p>
-      </div>
-    </li>
-    {{/each}}
-  </ul>
+      {{/each}}
+    </tbody>
+  </table>
+  <button id='btnPurchaseCart' onclick="purchaseCart('{{user.cart}}')">Purchase Cart</button>
+
 </section>
+
+<script src=' /socket.io/socket.io.js'></script>
+<script src='/js/carts.js'></script>

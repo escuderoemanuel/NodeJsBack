@@ -72,8 +72,8 @@ const server = app.listen(PORT, () => {
 const io = new Server(server);
 
 io.on('connection', async (socket) => {
-
-  console.log(`Connected User Socket ${socket.id}...`)
+  const sockerId = socket.id;
+  console.log(`Socket Connected..`)
 
   //! Products Events
   socket.on('delete-product', async (data) => {
@@ -113,7 +113,7 @@ io.on('connection', async (socket) => {
 
   //! Connection Finished
   socket.on('disconnect', () => {
-    console.log(`User ${socket.id} disconnected...`)
+    console.log(`Socket Disconnected...`)
   })
 })
 
