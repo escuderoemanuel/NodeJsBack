@@ -1,18 +1,13 @@
 const { Router } = require('express');
 const ViewsController = require('../controllers/views.controller');
-const SessionsController = require('../controllers/sessions.controller');
 const { verifyToken } = require('../middlewares/verifyToken.middleware');
-const ChatViewController = require('../controllers/chat.controller');
 const getRole = require('../middlewares/getRole.middleware');
-const { verify } = require('jsonwebtoken');
-
-
 const viewsRouter = Router();
 
 // Routes
 viewsRouter.get('/home', ViewsController.getHome)
 
-viewsRouter.get('/realtimeproducts', verifyToken, ViewsController.getRealTimeProducts)
+viewsRouter.get('/realtimeproducts', verifyToken, getRole('admin'), ViewsController.getRealTimeProducts)
 
 viewsRouter.get('/register', ViewsController.getRegister)
 
@@ -25,8 +20,8 @@ viewsRouter.get('/profile', verifyToken, ViewsController.getProfile)
 
 viewsRouter.get('/current', verifyToken, ViewsController.getCurrent);
 
-viewsRouter.get('/chat', verifyToken, getRole('user'), ViewsController.getChat);
+viewsRouter.get('/chat', verifyToken, ViewsController.getChat);
 
-// viewsRouter.get('/*',  ViewsController.getPublicRoute)
+viewsRouter.get('/*', ViewsController.getPublicRoute)
 
 module.exports = viewsRouter;

@@ -8,8 +8,6 @@ class ChatViewController {
     try {
       await MessagesModel.create(req.body);
       const user = req.user;
-      // const message = await manager.addMessage();
-      // const messages = await manager.getMessages();
       const messages = await MessagesDao.getAll();
       console.log('messages', messages)
 

@@ -43,7 +43,6 @@ Además, archivo .env para poder correr el proyecto.
 ✅ Te recomendamos ver el vídeo explicativo disponible en la carpeta de clase
 
 
-### PROBLEMS
+### ToDo
 
-1. Chequear que no llega los mensajes de 'ERROR' cuando el getRole es incorrecto
-3. Chequear en cart controller que se usa el manager aun
+1. Chequear que en /chat, no puedo restringir solamente el post para enviar mensajes, pero si para entrar al endpoint.

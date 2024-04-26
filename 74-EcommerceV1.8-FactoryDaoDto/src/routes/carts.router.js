@@ -15,10 +15,9 @@ router.get('/', verifyToken, CartsController.getAll)
 router.get('/:cid', verifyToken, CartsController.getById)
 
 // Deberá agregar el producto al arreglo “products” del carrito seleccionado
-router.post('/:cid/product/:pid', verifyToken, CartsController.addProductToCart)
+router.post('/:cid/product/:pid', verifyToken, getRole('user'), CartsController.addProductToCart)
 
 // Deberá eliminar del carrito el producto seleccionado
-// router.delete('/:cid/product/:pid', privateAccess, CartsController.deleteProductById)
 router.delete('/:cid/product/:pid', CartsController.deleteProductById)
 
 // Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
@@ -28,8 +27,6 @@ router.put('/:cid/products/:pid', verifyToken, CartsController.updateProductQuan
 router.delete('/:cid', verifyToken, CartsController.emptyCartById)
 
 // Crear un ticket
-// router.post('/:cid/purchase', verifyToken, CartsController.purchase)
-// router.post('/:cid/purchase', CartsController.purchase)
 router.get('/:cid/purchase', verifyToken, CartsController.purchase)
 
 module.exports = router;

@@ -24,7 +24,7 @@ switch (PERSISTENCE) {
     TicketsDao = require('../dao/memory/tickets.memory')
     CartsDao = require('../dao/memory/carts.memory')
     break;
-}
+};
 
 module.exports = {
   CartsDao,

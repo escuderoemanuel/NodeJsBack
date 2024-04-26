@@ -26,6 +26,7 @@ messageInput.addEventListener("keyup", (e) => {
 })
 
 // SOCKET ON => Recive Event: new messages
+
 socket.on("messages", ({ messages }) => {
   if (!userName) return;
   messagesLog.innerHTML = '';

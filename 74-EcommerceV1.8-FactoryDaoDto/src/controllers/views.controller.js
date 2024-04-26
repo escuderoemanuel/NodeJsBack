@@ -5,8 +5,8 @@ const { productsService } = require('../repositories');
 class ViewsController {
 
   static async getHome(req, res) {
-    const products = await productsService.getAll();
-    res.render('home', { products: products });
+    res.redirect('/api/products');
+
   }
 
   static async getRealTimeProducts(req, res) {
