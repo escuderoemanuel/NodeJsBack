@@ -33,6 +33,7 @@ const sessionRouter = require('./routes/sessions.router.js');
 const viewsRouter = require('./routes/views.router.js');
 const { productsService } = require('./repositories/index.js');
 const mockingProducts = require('./routes/mockingProducts.js');
+const errorHandler = require('./middlewares/errorHandler.middleware.js');
 
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
@@ -111,3 +112,4 @@ io.on('connection', async (socket) => {
 })
 
 
+app.use(errorHandler)

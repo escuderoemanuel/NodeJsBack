@@ -1,5 +1,8 @@
 const { productsService } = require('../repositories');
 const ProductsModel = require('../dao/models/products.model');
+const CustomErrors = require('../utils/errors/CustomErrors');
+const { getCreateProductErrorInfo } = require('../utils/errors/ErrorInfo');
+const { TypesOfErrors } = require('../utils/errors/TypesOfErrors');
 
 class ProductsController {
 
@@ -98,12 +101,21 @@ class ProductsController {
 
   static async create(req, res) {
     try {
+      const { title, description, code, price, stock, category, status } = req.body;
+      if (!title || !description || !code || !price || !stock || !category || !status)
+      throw new CustomErrors({
+        name: 'Product creation error',
+        cause: getCreateProductErrorInfo(req.body),
+        message: 'Error creating product',
+        code: TypesOfErrors.INVALID_PRODUCT_DATA
+      })
       await productsService.create(req.body);
       res.send({ status: 'success', message: 'Product created' });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
   }
+
 
   static async update(req, res) {
     try {
