@@ -20,4 +20,3 @@ Además, archivo .env para poder correr el proyecto.
 
 ✅ Puedes revisar el documento de testing aquí: 
 
-

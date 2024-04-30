@@ -1,5 +1,5 @@
 const UserModel = require('../dao/models/user.model');
-const { createHash, isValidPassword } = require('../utils');
+const { createHash, isValidPassword } = require('../utils/utils');
 const jwt = require('jsonwebtoken');
 const { JWT_PRIVATE_KEY } = require('../config/environment.config');
 
