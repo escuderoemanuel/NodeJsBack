@@ -13,4 +13,13 @@ const getCreateProductErrorInfo = (product) => {
   `
 }
 
-module.exports = { getCreateProductErrorInfo }
+const getAddProductToCartErrorInfo = (cid, pid) => {
+  return `
+  One or more required properties were incomplete or not valid.
+  List of required properties:
+  - cid: expected 'String', received ${cid},
+  - pid: expected 'String', received ${pid},
+  `
+}
+
+module.exports = { getCreateProductErrorInfo, getAddProductToCartErrorInfo }

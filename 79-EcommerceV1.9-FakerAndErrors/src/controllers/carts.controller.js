@@ -1,5 +1,7 @@
 const { cartsService, productsService } = require('../repositories');
-
+const { getAddProductToCartErrorInfo } = require('../utils/errors/ErrorInfo');
+const TypesOfErrors = require('../utils/errors/TypesOfErrors');
+const CustomErrors = require('../utils/errors/CustomErrors');
 
 class CartsController {
 
@@ -41,11 +43,21 @@ class CartsController {
     try {
       const cid = req.params.cid;
       const pid = req.params.pid;
+
+      if (!cid || !pid) {
+        console.log('AQUI')
+        throw new CustomErrors({
+          name: 'Product added error',
+          cause: getAddProductToCartErrorInfo(cid, pid),
+          message: 'Error adding product to the cart',
+          code: TypesOfErrors.INVALID_PRODUCT_DATA
+        })
+      }
+
+
       const cart = await cartsService.addProduct(cid, pid);
       res.send({ status: 'success', cart });
     } catch (error) {
-      console.log(error)
-
       res.status(400).send({ error: error.message });
     }
   }

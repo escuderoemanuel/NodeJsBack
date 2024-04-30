@@ -2,7 +2,7 @@ const { productsService } = require('../repositories');
 const ProductsModel = require('../dao/models/products.model');
 const CustomErrors = require('../utils/errors/CustomErrors');
 const { getCreateProductErrorInfo } = require('../utils/errors/ErrorInfo');
-const { TypesOfErrors } = require('../utils/errors/TypesOfErrors');
+const TypesOfErrors = require('../utils/errors/TypesOfErrors');
 
 class ProductsController {
 
