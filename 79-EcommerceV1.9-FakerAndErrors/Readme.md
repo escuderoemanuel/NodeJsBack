@@ -7,7 +7,9 @@
 
 ✅ Generar un módulo de Mocking para el servidor, con el fin de que, al inicializarse pueda generar y entregar 100 productos con el mismo formato que entregaría una petición de Mongo. Ésto solo debe ocurrir en un endpoint determinado (‘/mockingproducts’)
 
-✅ Además, generar un customizador de errores y crear un diccionario para tus errores más comunes al crear un producto, agregarlo al carrito, etc.
+✅ Además, generar un customizador de errores y crear un diccionario para tus errores más comunes:
+  ✅ Al crear un producto
+  ✅ Agregarlo al carrito
 
 ## Formato
 
@@ -18,5 +20,5 @@ Además, archivo .env para poder correr el proyecto.
 
 ✅ Céntrate solo en los errores más comunes 
 
-✅ Puedes revisar el documento de testing aquí: 
+✅ Puedes revisar el documento de testing aquí: ? 
 

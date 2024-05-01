@@ -41,8 +41,11 @@ class CartsController {
 
   static async addProductToCart(req, res) {
     try {
+
       const cid = req.params.cid;
+      console.log('cid', cid)
       const pid = req.params.pid;
+      console.log('pid', pid)
 
       if (!cid || !pid) {
         console.log('AQUI')
@@ -53,8 +56,7 @@ class CartsController {
           code: TypesOfErrors.INVALID_PRODUCT_DATA
         })
       }
-
-
+      
       const cart = await cartsService.addProduct(cid, pid);
       res.send({ status: 'success', cart });
     } catch (error) {
