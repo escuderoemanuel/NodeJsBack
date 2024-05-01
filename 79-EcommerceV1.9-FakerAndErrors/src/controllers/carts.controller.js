@@ -38,17 +38,12 @@ class CartsController {
       res.status(400).send({ error: error.message });
     }
   }
-
-  static async addProductToCart(req, res) {
+  static async addProductToCart(req, res, next) {
     try {
-
       const cid = req.params.cid;
-      console.log('cid', cid)
       const pid = req.params.pid;
-      console.log('pid', pid)
 
       if (!cid || !pid) {
-        console.log('AQUI')
         throw new CustomErrors({
           name: 'Product added error',
           cause: getAddProductToCartErrorInfo(cid, pid),
@@ -56,11 +51,11 @@ class CartsController {
           code: TypesOfErrors.INVALID_PRODUCT_DATA
         })
       }
-      
+
       const cart = await cartsService.addProduct(cid, pid);
       res.send({ status: 'success', cart });
     } catch (error) {
-      res.status(400).send({ error: error.message });
+      next(error)
     }
   }
 
