@@ -25,3 +25,7 @@ Además, archivo .env para poder correr el proyecto.
 - Memory Register: Reparado ✅
 - Memory Login: Reparado ✅
 - Memory Vistas: Pendiente ❓
+
+
+- Al logearme correctamente
+  - "error": "Operation `products.countDocuments()` buffering timed out after 10000ms"
