@@ -1,4 +1,3 @@
-//? const UserModel = require('../dao/models/user.model');
 const { createHash, isValidPassword } = require('../utils/utils');
 const jwt = require('jsonwebtoken');
 const { JWT_PRIVATE_KEY } = require('../config/environment.config');
@@ -66,8 +65,6 @@ class SessionsController {
 
   //? LOGOUT
   static async logout(req, res) {
-    // Remove storageUserEmail from localStorage
-    //localStorage.removeItem('storageUserEmail');
     res.clearCookie('accessToken');
     res.redirect('/login');
   }

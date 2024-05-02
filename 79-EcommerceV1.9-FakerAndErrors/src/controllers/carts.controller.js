@@ -112,15 +112,12 @@ class CartsController {
 
 
   static async purchase(req, res) {
-    console.log('Entrando a cart controller purchase')
     const { cid } = req.params;
-    console.log('Entrando a cart controller purchase cid', cid)
     try {
       const remainderItems = await cartsService.purchase(cid, req.user.email)
 
       res.send({ status: 'success', payload: remainderItems })
     } catch (error) {
-      console.log(error)
       return res.status(error.status || 500).send({ status: 'error', error: error.message })
     }
   }

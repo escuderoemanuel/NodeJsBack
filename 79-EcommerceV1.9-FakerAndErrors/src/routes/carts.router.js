@@ -12,10 +12,10 @@ router.post('/', verifyToken, CartsController.create)
 router.get('/', verifyToken, CartsController.getAll)
 
 // Deberá listar los productos que pertenezcan al carrito con el cid proporcionado, dando acceso a los datos del cart y de las propiedades de los productos que contenga.
-router.get('/:cid', /* verifyToken, */ CartsController.getById)
+router.get('/:cid', verifyToken, CartsController.getById)
 
 // Deberá agregar el producto al arreglo “products” del carrito seleccionado
-router.post('/:cid/product/:pid',/*  verifyToken, getRole('user'), */ CartsController.addProductToCart)
+router.post('/:cid/product/:pid', verifyToken, getRole('user'), CartsController.addProductToCart)
 
 // Deberá eliminar del carrito el producto seleccionado
 router.delete('/:cid/product/:pid', CartsController.deleteProductById)

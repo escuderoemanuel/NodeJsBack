@@ -1,7 +1,6 @@
 const TypesOfErrors = require('../utils/errors/TypesOfErrors')
 
 const errorHandler = (error, req, res, next) => {
-  console.log(error)
 
   switch (error.code) {
     case TypesOfErrors.UNKNOWN:
