@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const { PORT, MONGO_URL } = require('./config/environment.config');
+const { PORT } = require('./config/environment.config');
 const cors = require('cors');
 
 const handlebars = require('express-handlebars');
