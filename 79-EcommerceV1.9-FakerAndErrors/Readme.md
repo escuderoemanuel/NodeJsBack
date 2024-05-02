@@ -20,18 +20,8 @@ Además, archivo .env para poder correr el proyecto.
 
 ✅ Céntrate solo en los errores más comunes 
 
-✅ Puedes revisar el documento de testing aquí: ? 
-
 # ¡¡ ERRORS !!
 
-- Al Logearme con GUTHUB: MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
-    at Timeout.<anonymous> (C:\Users\escud\Desktop\Personal Projects\BackendCourse\Emanuel\NodeJsBack\99-Practice\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:185:23)
-    at listOnTimeout (node:internal/timers:573:17)
-    at process.processTimers (node:internal/timers:514:7)
-
-- Al registrar nuevo usuario: const err = new MongooseError(message);
-
-MongooseError: Operation `users.findOne()` buffering timed out after 10000ms     
-    at Timeout.<anonymous> (C:\Users\escud\Desktop\Personal Projects\BackendCourse\Emanuel\NodeJsBack\79-EcommerceV1.9-FakerAndErrors\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:185:23)
-    at listOnTimeout (node:internal/timers:573:17)
-    at process.processTimers (node:internal/timers:514:7)
+- Memory Register: Reparado ✅
+- Memory Login: Reparado ✅
+- Memory Vistas: Pendiente ❓
