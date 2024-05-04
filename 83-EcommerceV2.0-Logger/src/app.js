@@ -29,7 +29,6 @@ const serverMessage = `Server is running on port ${PORT}`;
 const app = express();
 app.use(getLogger)
 
-
 // Imports
 const passport = require('passport');
 const initializePassport = require('./config/passport.config.js');
@@ -38,9 +37,6 @@ const initializePassport = require('./config/passport.config.js');
 initializePassport();
 app.use(passport.initialize());
 
-
-
-
 // Public Folder
 app.use(express.static(`${__dirname}/public`))
 
@@ -48,7 +44,6 @@ app.use(express.static(`${__dirname}/public`))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
-
 
 // Handlebars
 app.use(cookieParser());

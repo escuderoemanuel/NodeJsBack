@@ -1,7 +1,6 @@
 const { prodLogger, devLogger } = require('../utils/loggers.utils');
 
 const getLogger = (req, res, next) => {
-
   switch (process.env.NODE_ENV) {
     case 'production':
       req.logger = prodLogger;
@@ -12,6 +11,7 @@ const getLogger = (req, res, next) => {
   }
 
   next()
+
 }
 
 module.exports = getLogger;

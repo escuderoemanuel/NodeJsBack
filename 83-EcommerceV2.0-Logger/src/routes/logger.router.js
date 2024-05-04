@@ -4,8 +4,9 @@ const { verifyToken } = require('../middlewares/verifyToken.middleware');
 const router = Router();
 
 router.get('/', verifyToken, (req, res) => {
+
   // localhost:8080/api/loggerTest
-  // req.logger.fatal('0. This is a fatal log');
+  req.logger.fatal('Level 0. This is a fatal log');
   req.logger.error('Level 1. Unhandled error');
   req.logger.warn('Level 2. This is a warning log');
   req.logger.info('Level 3. This is a info log');
@@ -13,7 +14,7 @@ router.get('/', verifyToken, (req, res) => {
   req.logger.debug('Level 5. This is a debug log');
 
 
-  res.send({ status: 'success', message: 'Logger test' })
+  res.send({ status: 'success', message: 'Logger test', environment: process.env.NODE_ENV })
 })
 
 

@@ -1,6 +1,6 @@
 const winston = require('winston')
 
-const customLevelOptions = {
+const customProperties = {
   levels: {
     fatal: 0,
     error: 1,
@@ -19,26 +19,27 @@ const customLevelOptions = {
   }
 }
 
+
 const prodLogger = winston.createLogger({
-  levels: customLevelOptions.levels,
+  levels: customProperties.levels,
   transports: [
     new winston.transports.Console({
       level: 'info',
-      format: winston.format.cli()
+      format: winston.format.json()
     }),
     new winston.transports.File({
       level: 'info', filename: './src/logs/errors.log',
-      format: winston.format.simple()
+      format: winston.format.json()
     })
   ]
 })
 
 const devLogger = winston.createLogger({
-  levels: customLevelOptions.levels,
+  levels: customProperties.levels,
   transports: [
     new winston.transports.Console({
       level: 'debug',
-      format: winston.format.cli()
+      format: winston.format.json()
     }),
   ]
 })
