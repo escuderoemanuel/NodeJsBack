@@ -63,6 +63,7 @@ app.use('/', viewsRouter)
 
 // Server
 const server = app.listen(PORT, () => {
+
   console.log(serverMessage)
 })
 

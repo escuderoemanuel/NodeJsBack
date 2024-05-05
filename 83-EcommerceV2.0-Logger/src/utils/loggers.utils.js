@@ -4,7 +4,7 @@ const customProperties = {
   levels: {
     fatal: 0,
     error: 1,
-    warn: 2,
+    warning: 2,
     info: 3,
     http: 4,
     debug: 5
@@ -12,13 +12,12 @@ const customProperties = {
   colors: {
     fatal: 'red',
     error: 'orange',
-    warn: 'yellow',
+    warning: 'yellow',
     info: 'blue',
     http: 'cyan',
     debug: 'white'
   }
 }
-
 
 const prodLogger = winston.createLogger({
   levels: customProperties.levels,
