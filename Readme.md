@@ -1,6 +1,8 @@
-# Mono Repo (NodeJs Express Nodemon)
+# Mono Repo
 
 ## Technologies:
+
+-  (NodeJs Express Nodemon)
 
 
 ## About the Repo
