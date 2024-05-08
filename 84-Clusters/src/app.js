@@ -26,3 +26,4 @@ if (cluster.isPrimary) {
 
 console.log(cluster.isPrimary)
 // En proceso
+// Ver clase pendiente
