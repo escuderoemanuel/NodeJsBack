@@ -13,9 +13,11 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
 
-  /* cluster.on('message', (worker, message) => {
-    console.log('first', worker.process.pid, message)
-  }) */
+  cluster.on('exit', (worker) => {
+    console.log(`I've been killed, ${worker.process.pid}`)
+    cluster.fork();
+
+  })
 
 } else {
   console.log(`${process.pid} is primary? ${cluster.isPrimary}`)
@@ -35,7 +37,7 @@ if (cluster.isPrimary) {
 
   app.get('/operation/complex', (req, res) => {
     let suma = 0;
-    for (let i = 0; i < 500_000_000; i++) {
+    for (let i = 0; i < 50_000_000; i++) {
       suma += i;
     }
 
@@ -49,7 +51,3 @@ if (cluster.isPrimary) {
   })
 
 }
-
-// console.log(cluster.isPrimary)
-// En proceso
-// Ver clase pendiente
