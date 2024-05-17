@@ -1,12 +1,11 @@
 import { faker } from '@faker-js/faker';
-faker.locale = 'es';
 
 const generateUser = () => {
   return {
-    name: faker.name.findName(),
+    name: faker.person.fullName(),
     email: faker.internet.email(),
     website: faker.internet.url(),
-    image: faker.image.imageUrl(),
+    image: faker.image.url(),
   }
 }
 
