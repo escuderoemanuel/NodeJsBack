@@ -6,20 +6,20 @@ class TicketsDao {
     return await TicketModel.find().lean()
   }
 
-  async getById(id) {
-    return await TicketModel.findOne({ _id: id }).populate('items.item').lean()
+  async getById(tid) {
+    return await TicketModel.findOne({ _id: tid }).populate('items.item').lean()
   }
 
   async create(item) {
     return await TicketModel.create(item)
   }
 
-  async update(id, item) {
-    return await TicketModel.updateOne({ _id: id }, item)
+  async update(tid, item) {
+    return await TicketModel.updateOne({ _id: tid }, item)
   }
 
-  async delete(id) {
-    return await TicketModel.deleteOne({ _id: id })
+  async delete(tid) {
+    return await TicketModel.deleteOne({ _id: tid })
   }
 }
 
