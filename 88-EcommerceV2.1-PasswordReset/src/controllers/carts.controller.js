@@ -52,6 +52,16 @@ class CartsController {
         })
       }
 
+      const product = await productsService.getById(pid);
+      if (req.user.role === 'premium' && product.owner === req.user.email) {
+        throw new CustomErrors({
+          name: 'Product added error',
+          cause: 'Product adding error',
+          message: 'You cannot add your own products',
+          code: TypesOfErrors.INVALID_PARAM_ERROR
+        })
+      }
+
       const cart = await cartsService.addProduct(cid, pid);
       res.send({ status: 'success', cart });
     } catch (error) {

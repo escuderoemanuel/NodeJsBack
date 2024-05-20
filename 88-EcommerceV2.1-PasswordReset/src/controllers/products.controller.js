@@ -168,9 +168,9 @@ class ProductsController {
 
       const pid = req.params.pid;
       const productToDelete = await productsService.getById(pid);
-      const productDeleted = await productsService.delete(pid);
 
-      if (!pid || !productToDelete || !productDeleted) {
+
+      if (!pid || !productToDelete) {
         // CUSTOM ERROR
         throw new CustomErrors({
           name: 'Product delete error',
@@ -189,6 +189,7 @@ class ProductsController {
         })
       }
 
+      const productDeleted = await productsService.delete(pid);
       res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {
       next(error)
