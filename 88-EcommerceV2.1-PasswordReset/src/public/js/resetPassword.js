@@ -35,7 +35,7 @@ passwordResetForm.addEventListener('submit', async (e) => {
 
         // Redirigir al usuario a la página de inicio de sesión después de un tiempo
         setTimeout(() => {
-          window.location.href = '/login';
+          window.close();
         }, 1500);
       }
     })

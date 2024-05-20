@@ -79,7 +79,8 @@ class SessionsController {
         return res.status(404).send({ error: 'User not found' });
       }
       await mailingsService.sendPasswordResetEmail(user, email, passwordResetToken);
-      res.send({ status: 'success', message: 'Password reset email sent' });
+      res.send({ status: 'success', message: 'Password reset email sent', closeWindow: true });
+
     } catch (error) {
       res.status(500).send({ error: 'Internal server error on reset password' });
     }
@@ -92,9 +93,9 @@ class SessionsController {
     try {
       jwt.verify(passwordResetToken, JWT_PRIVATE_KEY, (error) => {
         if (error) {
-          return redirect('/resetPassword')
+          return res.redirect('/resetPassword')
         }
-        redirect('/changePassword')
+        res.redirect('/changePassword')
       })
     } catch (error) {
       res.status(500).send({ error: 'Internal server error on verify password reset token' });
