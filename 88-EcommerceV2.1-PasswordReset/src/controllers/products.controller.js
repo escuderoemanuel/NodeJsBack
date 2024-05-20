@@ -125,6 +125,10 @@ class ProductsController {
           code: TypesOfErrors.INVALID_PARAM_ERROR
         })
 
+      if (req.user.role === 'premium') {
+        req.body.owner = req.user.email;
+      }
+
       await productsService.create(req.body);
       res.send({ status: 'success', message: 'Product created' });
     } catch (error) {
@@ -172,6 +176,15 @@ class ProductsController {
           name: 'Product delete error',
           cause: 'Product deleting error',
           message: 'Error deleting product',
+          code: TypesOfErrors.INVALID_PARAM_ERROR
+        })
+      }
+
+      if (req.user.role === 'premium' && productToDelete.owner !== req.user.email) {
+        throw new CustomErrors({
+          name: 'Product delete error',
+          cause: 'Product deleting error',
+          message: 'Only owners can delete products they have created',
           code: TypesOfErrors.INVALID_PARAM_ERROR
         })
       }
