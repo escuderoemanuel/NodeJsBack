@@ -23,11 +23,17 @@ passwordChangeForm.addEventListener('submit', async (e) => {
       body: JSON.stringify(payload)
     }).then((response) => {
 
+      if (response.status === 400) {
+        document.querySelector('.infoMessage').textContent = 'The new password cannot be the same as the previous one';
+        return;
+      }
+
       if (!response.ok) {
         const errorMessage = response.json(); // Aquí esperamos la respuesta JSON
         document.querySelector('.infoMessage').textContent = errorMessage.error;
         return;
       }
+
       if (response.status === 200) {
         document.querySelector('.infoMessage').textContent = 'Password changed succesfully';
 

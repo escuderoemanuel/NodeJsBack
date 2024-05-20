@@ -108,7 +108,7 @@ class SessionsController {
       const { email, password } = req.body;
       let user = await usersService.getByEmail(email)
       if (isValidPassword(user, password)) {
-        return res.status(400).send({ status: 'erorr', error: 'same password' })
+        return res.status(400).send({ status: 'error', error: 'The new password cannot be the same as the previous one' })
       }
       user.password = password;
       await usersService.update(user._id.toString(), { $set: { password: createHash(password) } })
