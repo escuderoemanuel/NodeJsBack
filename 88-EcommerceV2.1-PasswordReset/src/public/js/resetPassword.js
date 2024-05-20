@@ -23,16 +23,15 @@ passwordResetForm.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
-    }).then((response) => { 
+    }).then((response) => {
 
       if (!response.ok) {
         const errorMessage = response.json(); // Aquí esperamos la respuesta JSON
         document.querySelector('.infoMessage').textContent = errorMessage.error;
         return;
       }
-
       if (response.status === 200) {
-        document.querySelector('.infoMessage').textContent = 'Password reset successful...';
+        document.querySelector('.infoMessage').textContent = 'Password reset email sent';
 
         // Redirigir al usuario a la página de inicio de sesión después de un tiempo
         setTimeout(() => {
