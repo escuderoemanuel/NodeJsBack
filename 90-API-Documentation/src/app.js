@@ -31,10 +31,10 @@ const swaggerOptions = {
   apis: [`${_dirname}/docs/**/*.yaml`],
 };
 
-// const test = `${_dirname}/src/docs/Users/Users.yaml`
-
 const specs = swaggerJsDoc(swaggerOptions);
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+
+
 
 app.use(express.json());
 app.use(cookieParser());
