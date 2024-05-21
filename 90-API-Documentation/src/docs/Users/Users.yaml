@@ -1,5 +1,10 @@
+# Aquí se definen los endpoints y sus respectivos schemas
 paths:
+
+  # Endpoint con diferentes consultas
   /api/users/:
+
+    # Este endpoint obtiene todos los usuarios
     get:
       summary: Obtiene todos los usuarios
       tags:
@@ -14,11 +19,35 @@ paths:
                 items:
                   $ref: '#components/schemas/User'
         '500':
-          description: Error interno del servidor, usualmente generado por una query
-            defectuosa o un fallo de conexion con la base de datos
-            
+          description: Error interno del servidor
+
+    # Este endpoint crea un nuevo usuario
+    post:
+        summary: Registra un nuevo usuario en la base de datos
+        tags:
+          - Users
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#components/requestBodies/registerUser'
+        responses:
+          '200':
+            description: El usuario fue creado correctamente en la base de datos
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/User'
+          '400':
+            description: Error en las propiedades del usuario, o el usuario ya existe en la base de datos
+          '500':
+            description: Error interno del servidor
+
+  # Endpoint pasando UID como parámetro
   /api/users/{uid}:
 
+    # Este endpoint obtiene un usuario por su ID
     get:
       summary: Obtiene un usuario por su ID
       tags:
@@ -27,7 +56,7 @@ paths:
         - name: uid
           in: path
           required: true
-          description: ID del usuario a obtener
+          description: ID del usuario a consultar
           schema:
             $type: String
       responses:
@@ -40,9 +69,9 @@ paths:
         '404':
           description: El usuario no fue encontrado en la base de datos
         '500':
-          description: Error interno del servidor, usualmente generado por una query
-            defectuosa o un fallo de conexion con la base de datos
+          description: Error interno del servidor
 
+    # Este endpoint actualiza un usuario por su ID
     put:
       summary: Actualiza un usuario existente en la base de datos
       tags:
@@ -60,9 +89,25 @@ paths:
           application/json:
             schema:
               $ref: '#components/requestBodies/updateUser'
+      responses:
+        '200':
+          description: El usuario fue actualizado correctamente de la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/User'
+        '404':
+          description: El usuario no fue encontrado en la base de datos
+        '500':
+          description: Error interno del servidor
 
+# Componentes de los endpoints
 components:
+
+  # Componente de los schemas
   schemas:
+
+    # Schema de un usuario
     User:
       type: object
       properties:
@@ -82,14 +127,37 @@ components:
           type: String
           description: Contraseña Hasheada del usuario
       example:
-        _id: ObjectId(638d0e5e8f8e9d7a0d8f8e9d)
+        _id: ObjectId("638d0e5e8f8e9d7a0d8f8e9d")
         first_name: Jane
         last_name: Doe
         email: jane@email.com
         password: $2b$10$6TDObIyljW606qW3MV113uoV5ypLmyMRQNdZkvDUKtN2sGDrTFtEG
 
+  # Componente de los requestBodies
   requestBodies:
     updateUser:
+      type: object
+      properties:
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Correo electronico del usuario (campo único)
+        password:
+          type: String
+          description: Contraseña Hasheada del usuario
+      example:
+        first_name: Claire
+        last_name: Fraser
+        email: claire@email.com
+        password: 1234
+
+    # Componente del createUser
+    registerUser:
       type: object
       properties:
         first_name:
