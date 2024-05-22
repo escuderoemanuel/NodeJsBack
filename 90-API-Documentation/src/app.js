@@ -28,6 +28,7 @@ const swaggerOptions = {
     },
   },
   apis: [`${__dirname}/../docs/**/*.yaml`],
+
 };
 
 const specs = swaggerJsDoc(swaggerOptions);

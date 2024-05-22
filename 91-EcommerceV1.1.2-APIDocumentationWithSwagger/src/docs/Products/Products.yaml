@@ -4,6 +4,8 @@ paths:
 
     get:
       summary: Get all products
+      security:
+        - bearerAuth: []
       tags:
         - Products
       responses:
@@ -20,6 +22,8 @@ paths:
 
     post:
       summary: Create a new product
+      security:
+        - bearerAuth: []
       tags:
         - Products
       requestBody:
@@ -42,6 +46,8 @@ paths:
 
     get:
       summary: Get one product by ID
+      security:
+        - bearerAuth: []
       tags:
         - Products
       parameters:
@@ -103,6 +109,13 @@ paths:
              Faulty or a connection failure with the database    
 
 components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
     Product:
       type: object
