@@ -6,7 +6,7 @@ const TypesOfErrors = require('../utils/errors/TypesOfErrors');
 
 class ProductsController {
 
-  static async getAll(req, res, next) {
+  /* static async getAll(req, res, next) {
     try {
       // Obtengo los parámetros de consulta
       let { limit, page, filter, sort } = req.query
@@ -99,8 +99,91 @@ class ProductsController {
     } catch (error) {
       next(error)
     }
-  }
+  } */
 
+  static async getAll(req, res, next) {
+    try {
+      // Obtengo los parámetros de consulta
+      let { limit, page, filter, sort } = req.query;
+
+      // Filtros de búsqueda
+      limit = parseInt(req.query.limit);
+      page = parseInt(req.query.page);
+      sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : null;
+      filter = {};
+      if (req.query.filter) {
+        filter = {
+          $or: [
+            { title: { $regex: req.query.filter, $options: 'i' } },
+            { category: { $regex: req.query.filter, $options: 'i' } }
+          ]
+        };
+      }
+
+      // Paginación
+      let options = {
+        limit: limit || 10,
+        page: page || 1,
+        lean: true,
+      };
+      if (sort !== null) {
+        options.sort = { price: sort, title: 1 };
+      }
+
+      // Ejecutar consulta
+      let products = await ProductsModel.paginate(filter, options);
+
+      // Parámetros de consulta de la URL
+      let urlQueryParams = {};
+      if (req.query.filter) urlQueryParams.filter = req.query.filter;
+      if (req.query.sort) urlQueryParams.sort = req.query.sort;
+      if (req.query.limit) urlQueryParams.limit = req.query.limit;
+
+      // URL base
+      const baseUrl = req.baseUrl;
+
+      // Links de paginación
+      const urlPrevLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.prevPage}`;
+      const urlNextLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.nextPage}`;
+
+      // Datos de paginación
+      let paginateData = {
+        status: 'success',
+        payload: products.docs,
+        totalPages: products.totalPages,
+        prevPage: products.prevPage,
+        nextPage: products.nextPage,
+        page: products.page,
+        hasPrevPage: products.hasPrevPage,
+        hasNextPage: products.hasNextPage,
+        prevLink: products.hasPrevPage ? urlPrevLink : null,
+        nextLink: products.hasNextPage ? urlNextLink : null,
+      };
+
+      const user = req.user;
+      const renderData = { paginateData, user: user, products: paginateData.payload };
+
+      if (!user || !renderData) {
+        throw new CustomErrors({
+          name: 'Error getting product list',
+          cause: 'Error getting product list',
+          message: 'Error getting product list',
+          code: TypesOfErrors.INVALID_PARAM_ERROR
+        });
+      }
+
+      // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
+      const acceptHeader = req.headers['accept'] || '';
+      if (acceptHeader.includes('text/html')) {
+        res.render('products', renderData);
+      } else {
+        res.send(renderData);
+      }
+
+    } catch (error) {
+      next(error);
+    }
+  }
 
   static async getById(req, res) {
     try {
