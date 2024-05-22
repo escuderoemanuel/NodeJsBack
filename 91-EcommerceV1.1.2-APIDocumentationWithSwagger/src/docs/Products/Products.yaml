@@ -51,6 +51,7 @@ paths:
           description: Product ID to search for
           schema:
             type: string
+            example: 65ffd0289713b7d3858134f4
       responses:
         '200':
           description: Product was correctly obtained from the database
@@ -101,6 +102,7 @@ paths:
           description: Product ID to delete
           schema:
             type: string
+            example: 65ffd0289713b7d3858134f4
       responses:
         '200':
           description: Product was correctly deleted from the database
