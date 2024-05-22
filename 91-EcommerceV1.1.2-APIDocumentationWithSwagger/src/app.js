@@ -49,9 +49,9 @@ const swaggerOptions = {
   definition: {
     openapi: '3.0.1',
     info: {
-      title: 'API Pets',
-      version: '1.0.0',
-      description: 'API to manage pet adoption',
+      title: 'NodeJsEcommerce',
+      version: '1.1.2',
+      description: 'NodeJsEcommerce API',
     },
   },
   apis: [`${__dirname}/docs/**/*.yaml`],

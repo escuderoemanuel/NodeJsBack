@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
-// import _dirname from '../';
-const _dirname = './src'
+import __dirname from './utils/index.js';
 
 import usersRouter from './routes/users.router.js';
 import petsRouter from './routes/pets.router.js';
@@ -28,7 +27,7 @@ const swaggerOptions = {
       description: 'API to manage pet adoption',
     },
   },
-  apis: [`${_dirname}/docs/**/*.yaml`],
+  apis: [`${__dirname}/../docs/**/*.yaml`],
 };
 
 const specs = swaggerJsDoc(swaggerOptions);
