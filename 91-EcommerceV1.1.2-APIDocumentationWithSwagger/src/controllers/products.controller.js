@@ -177,7 +177,9 @@ class ProductsController {
       if (acceptHeader.includes('text/html')) {
         res.render('products', renderData);
       } else {
-        res.send(renderData);
+        // Si la solicitud es para JSON (por ejemplo, desde Postman)
+        let products = await ProductsModel.find();
+        res.send({ status: 'success', payload: products });
       }
 
     } catch (error) {
