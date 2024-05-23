@@ -24,7 +24,7 @@ router.post('/:cid/product/:pid', verifyToken, getRole(['user', 'premium']), Car
 router.delete('/:cid/product/:pid', CartsController.deleteProductById)
 
 // Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
-router.put('/:cid/products/:pid', verifyToken, CartsController.updateProductQuantityById)
+router.put('/:cid/product/:pid', verifyToken, CartsController.updateProductQuantityById)
 
 // Crear un ticket
 router.get('/:cid/purchase', verifyToken, CartsController.purchase)

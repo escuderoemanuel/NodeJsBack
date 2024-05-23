@@ -149,6 +149,45 @@ paths:
 
     # Put method
     put:
+      summary: Update the 'quantity' of an existing product within an existing cart
+      security:
+        - bearerAuth: []
+      tags:
+        - [Carts]
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart Id
+          schema:
+            type: string
+            example: "66291acaff0b5f0c7a285dc6"
+        - name: pid
+          in: path
+          required: true
+          description: Product Id
+          schema:
+            type: string
+            example: "65ffd0289713b7d3858134fa"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+                  example: 3
+              required:
+                - quantity
+      responses:
+        '200':
+          description: The product quantity was correctly updated
+        '404':
+          description: Cart or product was not found in the database
+        '500':
+          description: Internal server error
 
     # Delete method
     delete:
