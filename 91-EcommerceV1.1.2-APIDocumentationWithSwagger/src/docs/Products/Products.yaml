@@ -1,11 +1,13 @@
 paths:
+  #? Endpoint (all products)
   /api/products/:
+    # Get method
     get:
       summary: Get all products
       security:
         - bearerAuth: []
       tags:
-        - Products
+        - [Products]
       responses:
         '200':
           description: All products were correctly obtained from the database
@@ -17,12 +19,14 @@ paths:
                   $ref: '#/components/schemas/Product'
         '500':
           description: Internal server error
+
+    # Post method
     post:
       summary: Create a new product
       security:
         - bearerAuth: []
       tags:
-        - Products
+        - [Products]
       requestBody:
         required: true
         content:
@@ -37,13 +41,15 @@ paths:
         '500':
           description: Internal server error
 
+  #? Endpoint (product by id)
   /api/products/{pid}:
+    # Get method
     get:
       summary: Get one product by ID
       security:
         - bearerAuth: []
       tags:
-        - Products
+        - [Products]
       parameters:
         - name: pid
           in: path
@@ -63,12 +69,14 @@ paths:
           description: Product was not found in the database
         '500':
           description: Internal server error
+
+    # Put method
     put:
       summary: Update an existing product in the database
       security:
         - bearerAuth: []
       tags:
-        - Products
+        - [Products]
       parameters:
         - name: pid
           in: path
@@ -89,12 +97,14 @@ paths:
           description: Product was not found in the database
         '500':
           description: Internal server error
+
+    # Delete method
     delete:
       summary: Delete an existing product in the database
       security:
         - bearerAuth: []
       tags:
-        - Products
+        - [Products]
       parameters:
         - name: pid
           in: path
@@ -111,13 +121,17 @@ paths:
         '500':
           description: Internal server error
 
+#? Components
 components:
+
+  #? Security
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
 
+  #? Schemas
   schemas:
     Product:
       type: object
@@ -165,6 +179,7 @@ components:
         status: true
         owner: "628d0f7e8d9f8d8d8d8d8d8"
 
+  #? Request bodies
   requestBodies:
     updateProduct:
       content:
