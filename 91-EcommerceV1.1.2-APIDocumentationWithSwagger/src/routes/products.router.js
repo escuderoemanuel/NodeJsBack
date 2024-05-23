@@ -12,7 +12,7 @@ router.get('/', verifyToken, ProductsController.getAll)
 router.get('/:pid', verifyToken, ProductsController.getById)
 
 // Deberá agregar un nuevo producto
-router.post('/', verifyToken, /* getRole(['admin', 'premium']), */ ProductsController.create);
+router.post('/', verifyToken, getRole(['admin', 'premium']), ProductsController.create);
 
 // Deberá actualizar un producto existente con el id proporcionado.
 router.put('/:pid', verifyToken, getRole(['admin', 'premium']), ProductsController.update)
