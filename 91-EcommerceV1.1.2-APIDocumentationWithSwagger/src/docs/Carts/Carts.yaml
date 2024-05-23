@@ -152,6 +152,31 @@ paths:
 
     # Delete method
     delete:
+      summary: Delete an existing product within an existing cart
+      secutity:
+        - bearerAuth: []
+      tags:
+        - [Carts]
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "66291acaff0b5f0c7a285dc6"
+        - name: pid
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "65ffd0289713b7d3858134f4"
+      responses:
+        '200':
+          description: Product was correctly removed to the cart
+        '404':
+          description: Cart or product was not found in the database
+        '500':
+          description: Internal server error
 
 components:
   securitySchemes:
