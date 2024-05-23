@@ -3,7 +3,7 @@ paths:
   /api/products/:
     # Get method
     get:
-      summary: Get all products
+      summary: Get all existing products from the database
       security:
         - bearerAuth: []
       tags:
@@ -22,7 +22,7 @@ paths:
 
     # Post method
     post:
-      summary: Create a new product
+      summary: Create a new product and save it in the database
       security:
         - bearerAuth: []
       tags:
@@ -45,7 +45,7 @@ paths:
   /api/products/{pid}:
     # Get method
     get:
-      summary: Get one product by ID
+      summary: Get one existing product by Id from the database
       security:
         - bearerAuth: []
       tags:

@@ -18,3 +18,9 @@ Además, archivo .env para poder correr el proyecto.
 ## Sugerencias
 
 ✅ Recuerda que es un proceso de documentación, ¡Hay que ser lo más claros posibles!
+
+==============================================
+==============================================
+# [X] MEJORAR LA DESCRIPTION DE LOS FILE.YAML #
+==============================================
+==============================================
