@@ -1,0 +1,104 @@
+paths:
+  /api/adoptions:
+
+    get:
+      summary: Obtiene todas las adopciones
+      tags:
+        - Adoptions
+      responses:
+        '200':
+          description: Se obtuvieron las adopciones correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Adoption'
+        '500':
+          description: Error interno del servidor
+
+  /api/adoptions/{aid}:
+    get:
+      summary: Obtiene una adopción por su ID
+      tags:
+        - Adoptions
+      parameters:
+        - name: aid
+          in: path
+          required: true
+          description: ID de la adopción a obtener
+          schema:
+            $type: String
+      responses:
+        '200':
+          description: Se obtuvo la adopción correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Adoption'
+        '404':
+          description: La adopción no fue encontrada
+        '500':
+          description: Error interno del servidor
+
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Crea una nueva adopción
+      tags:
+        - Adoptions
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario que realiza la adopción
+          schema:
+            type: String
+            example: '622d8f9e5c5d6f8f8f8f8f8'
+        - name: pid
+          in: path
+          required: true
+          description: ID de la mascota que se adopciona
+          schema:
+            type: String
+            example: '622d8f9e5c5d6f8f8f8f8f8'
+      responses:
+        '201':
+          description: La adopción fue creada correctamente
+        '400':
+          description: Los datos ingresados son inválidos
+        '500':
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: ID de la adopción autogenerado por MongoDB
+        userId:
+          type: ObjectId
+          description: ID del usuario que realiza la adopción
+        petId:
+          type: ObjectId
+          description: ID de la mascota que se adopciona
+        
+      example:
+        _id: ObjectId("622d8f9e5c5d6f8f8f8f8f8")
+        userId: ObjectId("622d8f9e5c5d6f8f8f8f8f8")
+        petId: ObjectId("622d8f9e5c5d6f8f8f8f8f8")
+
+  requestBodies:
+    createAdoption:
+      type: object
+      properties:
+        userId:
+          type: ObjectId
+          description: ID del usuario que realiza la adopción
+        petId:
+          type: ObjectId
+          description: ID de la mascota que se adopciona
+      example:
+        userId: ObjectId("622d8f9e5c5d6f8f8f8f8f8")
+        petId: ObjectId("622d8f9e5c5d6f8f8f8f8f8
