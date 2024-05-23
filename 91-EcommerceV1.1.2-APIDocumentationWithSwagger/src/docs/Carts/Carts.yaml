@@ -2,15 +2,16 @@ paths:
 
   #? Endpoint (all carts)
   /api/carts/:
+
     # Get Method
     get:
       summary: Get all existing carts, whether or not they have added products.
       security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       responses:
-        "200":
+        '200':
           description: All carts were correctly obtained from the database
           content:
             application/json:
@@ -18,23 +19,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cart'
-        "500":
+        '500':
           description: Internal server error
 
     # Post Method
     post:
-      summary: Create a empty cart manually, but when a user registers, a empty cart is automatically created and assigned to that user.
+      summary: Create an empty cart manually, but when a user registers, an empty cart is automatically created and assigned to that user.
       security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       responses:
         '200':
           description: Cart was created successfully
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Cart'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
         '400':
           description: Bad request, cart was not created
         '500':
@@ -42,17 +43,19 @@ paths:
 
   #? Endpoint (cart by id)
   /api/carts/{cid}:
+
     # Get Method
     get:
-      summary: Get a cart by id
+      summary: Get an existing cart in the database by its ID
       security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       parameters:
         - name: cid
           in: path
           required: true
+          description: The ID of the cart to retrieve
           schema:
             type: string
             example: "66291acaff0b5f0c7a285dc6"
@@ -68,43 +71,47 @@ paths:
         '500':
           description: Internal server error
 
+    # Delete Method
     delete:
-      summary: Empty cart by id
+      summary: Empty an existing cart by ID
       security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       parameters:
         - name: cid
           in: path
           required: true
+          description: The ID of the cart to empty
           schema:
             type: string
             example: "664e8d1e4e828721745e8243"
       responses:
         '200':
-          description: Cart was correctly deleted from the database
+          description: Cart was correctly emptied
         '404':
           description: Cart was not found in the database
         '500':
           description: Internal server error
-  
-  #? Endpoint (cart by id)
+
+  #? Endpoint (cart by id for purchase)
   /api/carts/{cid}/purchase:
+
+    # Get Method
     get:
-      summary: Search the cart by id, generate a purchase ticket with the products in the cart and finally empty the cart
+      summary: Search the cart by ID, generate a purchase ticket with the products in the cart and finally empty the cart
       security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       parameters:
         - name: cid
           in: path
           required: true
-          description: The id of the cart to purchase
+          description: The ID of the cart to purchase
           schema:
             type: string
-            example: 664e8d1e4e828721745e8243
+            example: "664e8d1e4e828721745e8243"
       responses:
         '200':
           description: Cart was correctly purchased
@@ -116,26 +123,29 @@ paths:
           description: Cart was not found in the database
         '500':
           description: Internal server error
-  
+
   #? Endpoint (cart by id + product by id)
   /api/carts/{cid}/product/{pid}:
+
     # Post method
     post:
       summary: Add an existing product to an existing cart
-      secutity:
+      security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       parameters:
         - name: cid
           in: path
           required: true
+          description: The ID of the cart
           schema:
             type: string
             example: "66291acaff0b5f0c7a285dc6"
         - name: pid
           in: path
           required: true
+          description: The ID of the product
           schema:
             type: string
             example: "65ffd0289713b7d3858134f4"
@@ -149,23 +159,23 @@ paths:
 
     # Put method
     put:
-      summary: Update the 'quantity' of an existing product within an existing cart
+      summary: Update the quantity of an existing product within an existing cart
       security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       parameters:
         - name: cid
           in: path
           required: true
-          description: Cart Id
+          description: The ID of the cart
           schema:
             type: string
             example: "66291acaff0b5f0c7a285dc6"
         - name: pid
           in: path
           required: true
-          description: Product Id
+          description: The ID of the product
           schema:
             type: string
             example: "65ffd0289713b7d3858134fa"
@@ -178,6 +188,7 @@ paths:
               properties:
                 quantity:
                   type: number
+                  description: The quantity of the product to update
                   example: 3
               required:
                 - quantity
@@ -191,32 +202,35 @@ paths:
 
     # Delete method
     delete:
-      summary: Delete an existing product within an existing cart
-      secutity:
+      summary: Remove an existing product from an existing cart
+      security:
         - bearerAuth: []
       tags:
-        - [Carts]
+        - Carts
       parameters:
         - name: cid
           in: path
           required: true
+          description: The ID of the cart
           schema:
             type: string
             example: "66291acaff0b5f0c7a285dc6"
         - name: pid
           in: path
           required: true
+          description: The ID of the product
           schema:
             type: string
             example: "65ffd0289713b7d3858134f4"
       responses:
         '200':
-          description: Product was correctly removed to the cart
+          description: Product was correctly removed from the cart
         '404':
           description: Cart or product was not found in the database
         '500':
           description: Internal server error
 
+#? Components
 components:
   securitySchemes:
     bearerAuth:
@@ -224,23 +238,35 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
+  #? Schemas
   schemas:
     Cart:
       type: object
       properties:
         _id:
           type: string
-          description: The auto-generated id of the cart
+          description: The auto-generated ID of the cart
         products:
           type: array
           description: The products in the cart
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: The ID of the product
+              quantity:
+                type: number
+                description: The quantity of the product
       example:
+        _id: "66291acaff0b5f0c7a285dc6"
         products:
           - product: "65ffd0289713b7d3858134f4"
             quantity: 1
           - product: "65ffd0289713b7d3858134f7"
             quantity: 2
-    
+
+    #? Purchase schema
     Purchase:
       type: object
       properties:
@@ -252,10 +278,10 @@ components:
           description: The datetime of the purchase
         amount:
           type: number
-          description: The amount of the purchase
+          description: The total amount of the purchase
         purchaser:
           type: string
-          description: The purchaser of the purchase
+          description: The email of the purchaser
       example:
         code: "7ca0c948-79de-433d-82ef-a6e66f1385c6"
         purchase_datetime: "22/5/2024, 17:52:07"
