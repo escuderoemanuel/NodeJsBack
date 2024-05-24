@@ -74,10 +74,12 @@ class SessionsController {
     try {
       const { email } = req.body
       const user = await usersService.getByEmail(email);
-      const passwordResetToken = jwt.sign(user, JWT_PRIVATE_KEY, { expiresIn: '1h' })
       if (!user) {
+        // document.querySelector('.infoMessage').textContent = 'User not found';
         return res.status(404).send({ error: 'User not found' });
       }
+
+      const passwordResetToken = jwt.sign({ email: user.email }, JWT_PRIVATE_KEY, { expiresIn: '1h' })
       await mailingsService.sendPasswordResetEmail(user, email, passwordResetToken);
       res.send({ status: 'success', message: 'Password reset email sent', closeWindow: true });
 
@@ -87,19 +89,17 @@ class SessionsController {
   }
 
   //? VERIFY PASSWORD RESET TOKEN
+  // Extrae el email y verifica el token
   static async verifyPasswordResetToken(req, res) {
     const { passwordResetToken } = req.params;
     try {
-      jwt.verify(passwordResetToken, JWT_PRIVATE_KEY, (error) => {
-        if (error) {
-          return res.redirect('/resetPassword')
-        }
-        res.redirect('/changePassword')
-      })
+      const decoded = jwt.verify(passwordResetToken, JWT_PRIVATE_KEY);
+      res.redirect(`/changePassword?token=${passwordResetToken}`);
     } catch (error) {
-      res.status(500).send({ error: 'Internal server error on verify password reset token' });
+      res.redirect('/resetPassword');
     }
   }
+
 
   //? CHANGE PASSWORD
   static async changePassword(req, res) {
