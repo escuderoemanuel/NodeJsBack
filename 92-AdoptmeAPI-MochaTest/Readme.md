@@ -1,9 +1,12 @@
-# Proceso de adopción desde Swagger
+# Testing with Mocha
 
-✅ Definir la documentación para mascotas, sólo es necesario definir el método get y el post para crear y ver las mascotas.
+- Se desarrollará un conjunto de tests para el resto del Dao de Usuarios. Se abordarán diferentes formas de utilizar el assert
+- Se debe cumplir el siguiente listado de tests:
 
-✅ Definir la documentación para procesar el método “register” que se encargará de crear un usuario. No es necesario implementar el login, sólo el registro.
+✅ El Dao debe agregar correctamente un elemento a la base de datos. 
 
-✅ Definir la documentación de adopción, la cual deberá recibir doble parámetro para poder llevar a cabo el proceso de adopción.
+✅ Al agregar un nuevo usuario, éste debe crearse con un arreglo de mascotas vacío por defecto.
 
-✅ Corroborar en la base de datos que las entidades se estén creando correctamente.
+✅ El Dao puede obtener  a un usuario por email
+
+
