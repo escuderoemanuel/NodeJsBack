@@ -1,12 +1,12 @@
 {
-  "name": "92-adoptmeapi-mochatest",
+  "name": "93-adoptmeapi-mochaandchai",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "mocha src/test"
+    "test": "mocha src/test/**"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,7 @@
     "supertest": "^6.3.3"
   },
   "devDependencies": {
-    "chai": "^4.3.7",
+    "chai": "^4.4.1",
     "mocha": "^10.1.0"
   }
 }

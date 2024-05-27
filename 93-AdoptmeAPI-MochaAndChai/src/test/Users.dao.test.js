@@ -6,13 +6,13 @@ const Users = require('../dao/Users.dao');
 const assert = Assert.strict; // Aquí seteo el assert a strictEqual
 
 // Conectar a la base de datos antes de empezar los tests
-mongoose.connect(MONGO_URL).then(() => {
-  console.log('Connected to MongoDB')
+before(async function () {
+  this.timeout(10000); // Aumentar el tiempo de espera a 10 segundos
+  await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+  console.log('Connected to MongoDB');
 });
 
-// Aquí uso function para poder setear el this.timeout, luego puedo seguir la sintaxis de arrow function
-describe('Users Dao Tests', function () {
-
+describe('Assert Version: Users Dao Tests', function () {
   this.timeout(10000); // Aumentar el tiempo de espera a 10 segundos
 
   //! Crea una instancia de Users(), para utilizarla en todos los test
