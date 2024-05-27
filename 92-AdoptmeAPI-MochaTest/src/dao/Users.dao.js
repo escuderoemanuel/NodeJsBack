@@ -1,7 +1,7 @@
-import userModel from "./models/User.js";
+const userModel = require("./models/User.js");
 
 
-export default class Users {
+class Users {
     
     get = (params) =>{
         return userModel.find(params);
@@ -23,3 +23,5 @@ export default class Users {
         return userModel.findByIdAndDelete(id);
     }
 }
+
+module.exports = Users; 

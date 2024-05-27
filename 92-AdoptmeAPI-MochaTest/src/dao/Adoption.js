@@ -1,6 +1,6 @@
-import adoptionModel from "./models/Adoption.js";
+const adoptionModel = require("./models/Adoption.js");
 
-export default class Adoption {
+class Adoption {
 
     get = (params) =>{
         return adoptionModel.find(params);
@@ -22,3 +22,5 @@ export default class Adoption {
         return adoptionModel.findByIdAndDelete(id);
     }
 }
+
+module.exports = Adoption; 

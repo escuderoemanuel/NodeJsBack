@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 
 const collection = "Adoptions";
@@ -16,4 +16,4 @@ const schema = new mongoose.Schema({
 
 const adoptionModel = mongoose.model(collection,schema);
 
-export default adoptionModel;
+module.exports = adoptionModel;

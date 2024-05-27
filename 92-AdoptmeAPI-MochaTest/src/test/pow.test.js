@@ -1,17 +1,14 @@
-import Assert from 'assert';
-import pow from '../utils/pow.js';
+const Assert = require('assert');
+const pow = require('../utils/pow');
 
-describe('Pow Function Tests', () => {
-
-  // Para empezar a escribir un test en concreto
-  it('2 to the power of 3 should be 8', function () {
+describe('Pow function tests', () => {
+  it('Should return 8', () => {
     const result = pow(2, 3);
     Assert.equal(result, 8);
-  });
+  })
 
-  it('3 to the power of 3 should be 27', function () {
+  it('Should return 27', () => {
     const result = pow(3, 3);
     Assert.equal(result, 27);
-  });
-
+  })
 })

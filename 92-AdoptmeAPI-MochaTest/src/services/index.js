@@ -1,11 +1,17 @@
-import Users from "../dao/Users.dao.js";
-import Pet from "../dao/Pets.dao.js";
-import Adoption from "../dao/Adoption.js";
+const Users = require("../dao/Users.dao.js");
+const Pet = require("../dao/Pets.dao.js");
+const Adoption = require("../dao/Adoption.js");
 
-import UserRepository from "../repository/UserRepository.js";
-import PetRepository from "../repository/PetRepository.js";
-import AdoptionRepository from "../repository/AdoptionRepository.js";
+const UserRepository = require("../repository/UserRepository.js");
+const PetRepository = require("../repository/PetRepository.js");
+const AdoptionRepository = require("../repository/AdoptionRepository.js");
 
-export const usersService = new UserRepository(new Users());
-export const petsService = new PetRepository(new Pet());
-export const adoptionsService = new AdoptionRepository(new Adoption());
+const usersService = new UserRepository(new Users());
+const petsService = new PetRepository(new Pet());
+const adoptionsService = new AdoptionRepository(new Adoption());
+
+module.exports = {
+    usersService,
+    petsService,
+    adoptionsService
+}

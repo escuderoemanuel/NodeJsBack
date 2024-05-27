@@ -1,6 +1,5 @@
-import PetDTO from "../dto/Pet.dto.js";
-import { petsService } from "../services/index.js"
-import __dirname from "../utils/index.js";
+const PetDTO = require("../dto/Pet.dto.js");
+const { petsService } = require("../services/index.js")
 
 const getAllPets = async(req,res)=>{
     const pets = await petsService.getAll();
@@ -43,7 +42,7 @@ const createPetWithImage = async(req,res) =>{
     const result = await petsService.create(pet);
     res.send({status:"success",payload:result})
 }
-export default {
+module.exports = {
     getAllPets,
     createPet,
     updatePet,

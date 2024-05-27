@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import petsController from '../controllers/pets.controller.js';
-import uploader from '../utils/uploader.js';
+const { Router } = require('express');
+const petsController = require('../controllers/pets.controller.js');
+const uploader = require('../utils/uploader.js');
 
 const router = Router();
 
@@ -10,4 +10,4 @@ router.post('/withimage',uploader.single('image'), petsController.createPetWithI
 router.put('/:pid',petsController.updatePet);
 router.delete('/:pid',petsController.deletePet);
 
-export default router;
+module.exports = router;

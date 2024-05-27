@@ -1,6 +1,6 @@
-import petModel from "./models/Pet.js";
+const petModel = require("./models/Pet.js");
 
-export default class Pet {
+class Pet {
 
     get = (params) =>{
         return petModel.find(params)
@@ -22,3 +22,5 @@ export default class Pet {
         return petModel.findByIdAndDelete(id);
     }
 }
+
+module.exports = Pet; 

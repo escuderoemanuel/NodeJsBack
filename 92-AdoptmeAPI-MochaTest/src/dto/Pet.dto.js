@@ -1,4 +1,4 @@
-export default class PetDTO {
+class PetDTO {
     static getPetInputFrom = (pet) =>{
         return {
             name:pet.name||'',
@@ -9,3 +9,5 @@ export default class PetDTO {
         }
     }
 }
+
+module.exports = PetDTO; 

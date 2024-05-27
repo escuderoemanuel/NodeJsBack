@@ -1,4 +1,4 @@
-export default class UserDTO {
+class UserDTO {
     static getUserTokenFrom = (user) =>{
         return {
             name: `${user.first_name} ${user.last_name}`,
@@ -7,3 +7,5 @@ export default class UserDTO {
         }
     }
 }
+
+module.exports = UserDTO; 

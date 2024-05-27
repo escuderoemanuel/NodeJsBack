@@ -1,4 +1,4 @@
-import { adoptionsService, petsService, usersService } from "../services/index.js"
+const { adoptionsService, petsService, usersService } = require("../services/index.js");
 
 const getAllAdoptions = async(req,res)=>{
     const result = await adoptionsService.getAll();
@@ -26,7 +26,7 @@ const createAdoption = async(req,res)=>{
     res.send({status:"success",message:"Pet adopted"})
 }
 
-export default {
+module.exports = {
     createAdoption,
     getAllAdoptions,
     getAdoption

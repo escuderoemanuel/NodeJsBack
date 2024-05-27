@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import sessionsController from '../controllers/sessions.controller.js';
+const { Router } = require('express');
+const sessionsController = require('../controllers/sessions.controller.js');
 
 const router = Router();
 
@@ -9,4 +9,4 @@ router.get('/current',sessionsController.current);
 router.get('/unprotectedLogin',sessionsController.unprotectedLogin);
 router.get('/unprotectedCurrent',sessionsController.unprotectedCurrent);
 
-export default router;
+module.exports = router;

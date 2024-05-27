@@ -1,7 +1,7 @@
 
-import GenericRepository from "./GenericRepository.js";
+const GenericRepository = require("./GenericRepository.js");
 
-export default class UserRepository extends GenericRepository{
+class UserRepository extends GenericRepository{
     constructor(dao){
         super(dao);
     }
@@ -14,3 +14,5 @@ export default class UserRepository extends GenericRepository{
     }
     
 }
+
+module.exports = UserRepository;
