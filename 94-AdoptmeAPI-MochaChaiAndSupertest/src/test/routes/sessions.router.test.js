@@ -26,14 +26,14 @@ describe('/api/sessions tests [AVANZADO]', () => {
     await mongoose.connection.collections.users.drop() // borra la coleccion de usuarios
   })
 
-  it('Debe poder registrar correctamente un usuario', async () => {
+  it('1. Debe poder registrar correctamente un usuario', async () => {
     const { _body, statusCode } = await requester.post('/api/sessions/register').send(this.userMock);
     // console.log({ '_body': _body, 'statusCode': statusCode })
     expect(_body).to.exist
     expect(statusCode).to.be.equal(200)
   })
 
-  it('Debe loguear correctamente al usuario y retornar una cookie', async () => {
+  it('2. Debe loguear correctamente al usuario y retornar una cookie', async () => {
     const loginMock = { email: this.userMock.email, password: this.userMock.password }
     const { _body, statusCode, headers } = await requester.post('/api/sessions/login').send(loginMock);
 
@@ -49,7 +49,7 @@ describe('/api/sessions tests [AVANZADO]', () => {
     expect(this.cookie.value).to.be.ok
   })
 
-  it('debe enviar la cookie que contiene los datos del usuario y desestructurar correctamente', async () => {
+  it('3. debe enviar la cookie que contiene los datos del usuario y desestructurar correctamente', async () => {
     const { _body, statusCode } = await requester.get('/api/sessions/current').set('Cookie', [`${this.cookie.name}=${this.cookie.value}`])
     const userFromCookie = _body.payload;
     expect(userFromCookie).to.have.property('email')

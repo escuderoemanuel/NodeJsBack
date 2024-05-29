@@ -65,8 +65,12 @@ class SessionsController {
 
   //? LOGOUT
   static async logout(req, res) {
-    res.clearCookie('accessToken');
-    res.redirect('/login');
+    try {
+      res.clearCookie('accessToken');
+      res.status(200).send({ status: 'success', message: 'Logout successful' });
+    } catch (error) {
+      res.status(500).send({ error: 'Internal server error' });
+    }
   }
 
   //? RESET PASSWORD
