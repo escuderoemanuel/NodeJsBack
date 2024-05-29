@@ -7,7 +7,8 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "mocha src/test/**",
-    "super": "mocha src/test/routes/pets.router.test.js"
+    "pets": "mocha src/test/routes/pets.router.test.js",
+    "sessions": "mocha src/test/routes/sessions.router.test.js"
   },
   "keywords": [],
   "author": "",

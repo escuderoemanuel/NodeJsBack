@@ -1,4 +1,4 @@
-# Testing with Mocha, Chai Library
+# Testing with Mocha, Chai and Supertest Library
 
 ### Test de elementos aislados del proyecto
 
@@ -9,8 +9,6 @@
 3. Si la contraseña hasheada se altera, debe fallar en la comparación de la contraseña original.
 4. Por parte del DTO de usuario: Corroborar que el DTO unifique el nombre y apellido en una única propiedad. (Recuerda que puedes evaluar múltiples expects)
 5. Por parte del DTO de usuario: El DTO debe eliminar las propiedades innecesarias como password, first_name, last_name.
-
-# Testing with Supertest
 
 ### Pruebas del módulo Pets
 
@@ -23,11 +21,18 @@
 5. El método DELETE debe poder borrar la última mascota agregada, ésto se puede alcanzar agregando a la mascota con un POST, tomando el id, borrando la mascota  con el DELETE, y luego corroborar si la mascota existe con un GET
 
 
-### Pruebas del módulo Sessions
+### Pruebas del módulo Session
 
--
+- Corroborar que el login devuelva una cookie
 
-1.
-2.
-3.
-4.
+1. Primero realizaremos un registro. 
+2. Posteriormente, con el mismo usuario registrado, llamaremos a nuestro login
+3. A partir del login, no evaluaremos necesariamente la respuesta, sino que también nuestro punto de interés será recibir una cookie con el usuario.
+4. Esta cookie la utilizaremos posteriormente para probar que el endpoint current reciba la cookie y nos entregue la información que necesitamos. 
+
+### Pruebas del módulo Session (Rutas Desprotegidas)
+
+- Existen dos endpoints: /unprotectedLogin  y  /unprotectedCurrent en el router de sessions. Evaluar:
+
+1. Que el endpoint de unprotectedLogin devuelva una cookie de nombre unprotectedCookie.
+2. Que el endpoint unprotectedCurrent devuelva al usuario completo, evaluar que se encuentren todos los campos que se guardaron en la base de datos.
