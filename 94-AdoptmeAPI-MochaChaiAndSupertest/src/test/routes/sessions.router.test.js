@@ -58,7 +58,6 @@ describe('/api/sessions tests [AVANZADO]', () => {
   })
 })
 
-
 describe('/api/sessions tests [RUTAS DESPROTEGIDAS]', () => {
   it('Endpoint unprotedtedLogin debe devolver una cookie de nombre unprotectedCookie', async () => {
     const loginMock = { email: this.userMock.email, password: this.userMock.password }
@@ -70,8 +69,6 @@ describe('/api/sessions tests [RUTAS DESPROTEGIDAS]', () => {
       name: cookieParts[0],
       value: cookieParts[1]
     }
-
-
     expect(this.unprotectedCookie.name).to.be.ok.and.equal('unprotectedCookie')
     expect(this.unprotectedCookie.value).to.be.ok
   })

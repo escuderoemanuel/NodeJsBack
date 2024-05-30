@@ -1,43 +1,61 @@
+const { faker } = require('@faker-js/faker');
 const mongoose = require('mongoose');
 const chai = require('chai');
 const supertest = require('supertest');
 const path = require('path');
 const { TESTING_URL, MONGO_URL } = require('../config/environment.config');
-const Carts = require('../dao/daoManagers/carts.dao');
-
 const expect = chai.expect;
 const requester = supertest(TESTING_URL);
+const cartsModel = require('../dao/models/carts.model');
 
-describe('Testing NodeJsEcommerce', function () {
+mongoose.connect(MONGO_URL)
+
+describe('▼ CARTS ROUTER TESTS', function () {
   this.timeout(10000); // Aumentar el tiempo de espera a 10 segundos
 
-  describe('⚠️ Carts Tests', function () {
-
-    before(async () => {
-      await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-      this.cartMock = {
-        // name: 'Coco',
-        // specie: 'Dog',
-        // birthDate: '10-10-2020'
-      };
-    });
-
-    /*  beforeEach(async () => {
-       const collection = mongoose.connection.collections['carts'];
-       if (collection) {
-         await collection.drop().catch(err => {
-           if (err.message !== 'ns not found') {
-             throw err;
-           }
-         });
-       }
-     });
-  */
-    it('1. The POST endpoint "XXXXXXX" should create a cart correctly', async () => {
-
-    });
-
-
+  before(async () => {
+    //! Create a new user with faker
+    this.cartMock = {
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      age: faker.number.int({ min: 18, max: 90 }),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+    this.cookie;
   });
 
+  it('1. The GET endpoint "/api/carts" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('2. The POST endpoint "/api/carts" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('3. The GET endpoint "/api/carts/{cid}" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('4. The DELETE endpoint "/api/carts/{cid}" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('5. The GET endpoint "/api/carts/{cid}/purchase" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('6. The POST endpoint "/api/carts/{cid}/product/{pid}" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('7. The PUT endpoint "/api/carts/{cid}/product/{pid}" should ...', async () => {
+    //! 
+    //! Tests
+  })
+  it('6. The DELETE endpoint "/api/carts/{cid}/product/{pid}" should ...', async () => {
+    //! 
+    //! Tests
+  })
 });
+
