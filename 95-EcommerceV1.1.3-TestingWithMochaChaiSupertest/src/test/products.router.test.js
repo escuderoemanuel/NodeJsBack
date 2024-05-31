@@ -58,7 +58,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
   });
 
 
-  it('1. [GET]: "/api/products" should get all products with any user role ', async () => {
+  it('01. [GET]: "/api/products" should get all products with any user role ', async () => {
     //! Get the cookie
     this.cookie = await this.getCookie(this.userMock);
     const token = this.cookie.value;
@@ -72,7 +72,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(productsResponse._body.payload).to.be.an('array');
   });
 
-  it('2. [POST]: "/api/products" should reject the creation of a new product with an account with role "user"', async () => {
+  it('02. [POST]: "/api/products" should reject the creation of a new product with an account with role "user"', async () => {
     //! Get the cookie from the user with role 'user'
     this.cookie = await this.getCookie(this.userMock);
     const token = this.cookie.value;
@@ -84,7 +84,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(productsResponse._body.status).to.equal('error');
   });
 
-  it('3. [POST]: "/api/products" should allow the creation of a new product with an account with role "premium"', async () => {
+  it('03. [POST]: "/api/products" should allow the creation of a new product with an account with role "premium"', async () => {
     //! Get the cookie from the user with role 'premium'
     this.cookie = await this.getCookie(this.premiumMock);
     const token = this.cookie.value;
@@ -97,7 +97,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(productsResponse._body).to.have.property('message').and.equal('Product created');
   });
 
-  it('4. [POST]: "/api/products" should allow the creation of a new product with an account with role "admin"', async () => {
+  it('04. [POST]: "/api/products" should allow the creation of a new product with an account with role "admin"', async () => {
     //! Get the cookie from the user with role 'admin'
     this.cookie = await this.getCookie(this.adminMock);
     const token = this.cookie.value;
@@ -112,7 +112,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
 
 
 
-  it('5. [GET]: "/api/products/{pid}" should get the product with the queried "pid" with any user role', async () => {
+  it('05. [GET]: "/api/products/{pid}" should get the product with the queried "pid" with any user role', async () => {
     //! Get the cookie from the user with role 'admin'
     this.cookie = await this.getCookie(this.adminMock);
     const token = this.cookie.value;
@@ -134,9 +134,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(productResponse._body.product).to.have.property('_id');
   });
 
-
-
-  it('6. [PUT]: "/api/products/{pid}" should update a product with an account with role "user"', async () => {
+  it('06. [PUT]: "/api/products/{pid}" should update a product with an account with role "user"', async () => {
     //! Get the cookie from the user with role 'user'
     this.cookie = await this.getCookie(this.userMock);
     const token = this.cookie.value;
@@ -171,7 +169,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(initialStock).to.equal(updatedStock);
   });
 
-  it('7. [PUT]: "/api/products/{pid}" should update a product with an account with role "admin"', async () => {
+  it('07. [PUT]: "/api/products/{pid}" should update a product with an account with role "admin"', async () => {
     //! Get the cookie from the user with role 'admin'
     this.cookie = await this.getCookie(this.adminMock);
     const token = this.cookie.value;
@@ -207,7 +205,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(initialStock).to.not.equal(updatedStock);
   });
 
-  it('8. [PUT]: "/api/products/{pid}" should update a product with an account with role "premium"', async () => {
+  it('08. [PUT]: "/api/products/{pid}" should update a product with an account with role "premium"', async () => {
     //! Get the cookie from the user with role 'admin'
     this.cookie = await this.getCookie(this.premiumMock);
     const token = this.cookie.value;
@@ -243,7 +241,7 @@ describe('🔰 PRODUCTS ROUTER TESTS', function () {
     expect(initialStock).to.not.equal(updatedStock);
   });
 
-  it('9. [DELETE]: "/api/products/{pid}" should reject the deletion of a product if the account is role "user"', async () => {
+  it('09. [DELETE]: "/api/products/{pid}" should reject the deletion of a product if the account is role "user"', async () => {
     //! Get the cookie from the user with role 'user'
     this.cookie = await this.getCookie(this.userMock);
     const token = this.cookie.value;

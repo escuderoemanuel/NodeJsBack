@@ -25,7 +25,7 @@ describe('🔰 SESSIONS ROUTER TESTS', function () {
     this.cookie;
   });
 
-  it('1. [POST]: "/api/sessions/register" should register a new user correctly', async () => {
+  it('01. [POST]: "/api/sessions/register" should register a new user correctly', async () => {
     //! Register a new user
     const response = await requester.post('/api/sessions/register').send(this.userMock);
 
@@ -34,7 +34,7 @@ describe('🔰 SESSIONS ROUTER TESTS', function () {
     expect(response._body.status).to.equal('success');
   });
 
-  it('2. [POST]: "/api/sessions/login" should login an user and return a cookie', async () => {
+  it('02. [POST]: "/api/sessions/login" should login an user and return a cookie', async () => {
     //! Register a new user
     const newUser = await requester.post('/api/sessions/register').send(this.userMock);
 
@@ -62,7 +62,7 @@ describe('🔰 SESSIONS ROUTER TESTS', function () {
     expect(this.cookie.value).to.be.ok
   })
 
-  it('3. [GET]: "/api/sessions/current" should return the current user', async () => {
+  it('03. [GET]: "/api/sessions/current" should return the current user', async () => {
     //! Register a new user
     const newUser = await requester.post('/api/sessions/register').send(this.userMock);
 
@@ -94,7 +94,7 @@ describe('🔰 SESSIONS ROUTER TESTS', function () {
     expect(userFromCookie.email).to.be.equal(loginMocK.email)
   })
 
-  it('4. [GET]: "/api/sessions/logout" should delete the cookie with the token', async () => {
+  it('04. [GET]: "/api/sessions/logout" should delete the cookie with the token', async () => {
     //! Register a new user
     const newUser = await requester.post('/api/sessions/register').send(this.userMock);
 
@@ -138,4 +138,3 @@ describe('🔰 SESSIONS ROUTER TESTS', function () {
     expect(logoutCookie.value).not.to.be.equal(loginCookie.value)
   })
 });
-
