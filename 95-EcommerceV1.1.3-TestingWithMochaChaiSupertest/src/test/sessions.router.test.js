@@ -11,7 +11,7 @@ const usersModel = require('../dao/models/user.model');
 mongoose.connect(MONGO_URL)
 
 describe('🔰 SESSIONS ROUTER TESTS', function () {
-  this.timeout(10000); // Aumentar el tiempo de espera a 10 segundos
+  this.timeout(10000); // Increase timeout to 10 seconds
 
   before(async () => {
     //! Create a new user with faker
