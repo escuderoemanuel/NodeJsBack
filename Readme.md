@@ -8,6 +8,7 @@
 - Handlebars
 - DotEnv
 - Mailing
+- NestJs
 
 ## About the Repo
 
