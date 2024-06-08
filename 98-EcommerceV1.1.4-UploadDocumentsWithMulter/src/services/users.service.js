@@ -39,6 +39,11 @@ class UsersService {
     const deletedUser = await this.dao.delete(id)
     return deletedUser
   }
+
+  async setLastConnection(id) {
+    const user = await this.dao.getById(id)
+    return await this.dao.update(id, { lastConnection: new Date().toLocaleString() })
+  }
 }
 
 module.exports = UsersService;

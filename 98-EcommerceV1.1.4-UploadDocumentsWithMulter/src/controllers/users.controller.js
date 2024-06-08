@@ -1,6 +1,15 @@
 const { usersService } = require('../repositories');
 
 class UsersController {
+  static async getAll(req, res) {
+    try {
+      const users = await usersService.getAll();
+      res.send({ status: 'success', payload: users })
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message })
+    }
+  }
+
   static async changeRole(req, res) {
     const uid = req.params.uid;
     try {
