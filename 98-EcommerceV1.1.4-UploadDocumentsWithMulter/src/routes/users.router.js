@@ -6,7 +6,6 @@ const usersRouter = Router();
 
 usersRouter.get('/', UsersController.getAll);
 usersRouter.get('/premium/:uid', UsersController.changeRole);
-usersRouter.post('/:uid/documents', upload.array('document'), UsersController.uploadDocuments)
-
+usersRouter.post('/:uid/documents', upload.any(), UsersController.uploadDocuments)
 
 module.exports = usersRouter
