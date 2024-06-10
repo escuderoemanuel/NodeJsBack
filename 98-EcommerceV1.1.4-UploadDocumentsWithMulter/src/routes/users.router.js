@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const UsersController = require('../controllers/users.controller');
+const upload = require('../middlewares/upload.middleware');
 
 const usersRouter = Router();
 
 usersRouter.get('/', UsersController.getAll);
 usersRouter.get('/premium/:uid', UsersController.changeRole);
-usersRouter.get('/:uid/documents', UsersController)
+usersRouter.post('/:uid/documents', upload.array('document'), UsersController.uploadDocuments)
 
 
 module.exports = usersRouter
