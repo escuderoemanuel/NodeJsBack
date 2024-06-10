@@ -18,11 +18,31 @@ class UsersController {
         throw new Error(`The user's role is not valid`)
       }
 
-      if (user.role === 'user') {
-        user.role = 'premium';
-      } else {
-        user.role = 'user';
+      const requiredDocuments = [
+        'Identification',
+        'Proof of Address',
+        'Proof of Account Status'
+      ];
+
+      if (user.role == 'user') {
+        if (!user.documents.some(d => d.name.includes('Identification'))) {
+          throw new Error('The user has not finished uploading the required documentation')
+        }
+        if (!user.documents.some(d => d.name.includes('Proof of Address'))) {
+          throw new Error('The user has not finished uploading the required documentation')
+        }
+        if (!user.documents.some(d => d.name.includes('Proof of Account Status'))) {
+          throw new Error('The user has not finished uploading the required documentation')
+        }
       }
+
+      if (!['user', 'premium'].includes(user.role)) {
+        throw new Error('User has invalid role')
+      }
+
+      user.role = user.role == 'user' ? 'premium' : 'user'
+
+
 
       let updatedUser = await usersService.update(user._id.toString(), { $set: { role: user.role } });
       res.send({ status: 'success', message: `role updated to '${user.role}'` })

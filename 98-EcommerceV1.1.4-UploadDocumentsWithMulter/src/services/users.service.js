@@ -56,6 +56,11 @@ class UsersService {
     return await this.update(uid, { documents: documents })
   }
 
+  async changeRole(uid) {
+    const user = await this.getById(uid);
+    return await this.update(uid, { role: user.role })
+  }
+
 }
 
 module.exports = UsersService;
