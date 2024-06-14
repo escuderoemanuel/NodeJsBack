@@ -7,8 +7,26 @@
 - Express
 - Handlebars
 - DotEnv
-- Mailing
+- NodeMailer
 - NestJs
+- Faker
+- Stripe
+- SweetAlert
+- BCrypt
+- Commander
+- MongoDB
+- Mongoose
+- CookieParser
+- Cors
+- Dotenv
+- JWT
+- Luxon
+- Multer
+- Passport
+- SocketIO
+- Swagger
+- UUID
+- Winston
 
 ## About the Repo
 
