@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {{!-- STYLES --}}
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/chatView.css">
+  <link rel="stylesheet" href="/css/userCartsView.css">
+  <link rel="stylesheet" href="/css/productsView.css">
+  <link rel="stylesheet" href="/css/btnPaginate.css">
+  <link rel="stylesheet" href="/css/realTimeProductsView.css">
+  <link rel="stylesheet" href="/css/register-login.css">
+
+  {{!-- FAVICON --}}
+  <link rel="shortcut icon" href="https://i.ibb.co/27ybJtZ/Logo2024.png" type="image/x-icon">
+
+  {{!-- FONTS --}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  {{!-- SWEET ALERT --}}
+  <link rel="stylesheet" href="@sweetalert2/theme-dark/dark.css">
+
+  <title>NodeJs Ecommerce</title>
+
+</head>
+
+<body>
+  <header class='header'>
+    <h1>NodeJs Ecommerce</h1>
+    {{#if user.email}}
+
+    <nav class='navBar'>
+      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
+        Products</a>
+      <a href="/api/chat" class="{{#ifEq currentPath '/api/chat'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
+        Chat
+      </a>
+      <a href="/realtimeproducts" class="{{#ifEq currentPath '/realtimeproducts'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/s5Y1QBy/add.png' alt="plus sign to add a product">
+        Create Product
+      </a>
+      <a href="/api/carts/{{user.cart}}" class="{{#ifContains currentPath '/api/carts'}}active{{/ifContains}}">
+        <img class='iconNavBar' src='https://i.ibb.co/Cbjwjkq/cart.png' alt="shopping cart icon">
+        Cart
+      </a>
+      <a href="/current" class="{{#ifEq currentPath '/current'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
+        Current
+      </a>
+    </nav>
+    <br>
+    <section class="profile">
+      <section class='userData'>
+        <p><span>Name:</span> {{user.firstName}} {{user.lastName}}</p>
+        <p><span>Email:</span> {{user.email}}</p>
+        <p><span>UID:</span> {{user.id}}</p>
+        {{#if user.age}}
+        <p><span>Age:</span> {{ user.age }}</p>
+        {{else}}
+        <p><span>Age:</span> N/A</p>
+        {{/if}}
+        <p><span>Role:</span> {{user.role}}</p>
+        <p><span>Cart:</span> {{user.cart}}</p>
+      </section>
+      <a href="/api/sessions/logout">
+        <button class='btnLogout'>Logout</button>
+      </a>
+    </section>
+    {{/if}}
+  </header>
+  <main class='main'>
+    {{{body}}}
+  </main>
+  <footer class='footer'>
+    <div class='footerContainer'>
+      <p>
+        < Developed by Emanuel Escudero />
+      </p>
+      <a href='https://emanuelescudero.ar' rel='noopener noreferrer' target='_blank'>
+        <img class='logoDev' src='https://i.ibb.co/27ybJtZ/Logo2024.png' alt='Developer Logo' />
+      </a>
+    </div>
+  </footer>
+</body>
+
+</html>
