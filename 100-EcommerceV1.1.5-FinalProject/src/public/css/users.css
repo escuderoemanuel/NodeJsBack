@@ -1,0 +1,39 @@
+ .users {
+   width: 90vw;
+ }
+
+ .usersContainer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+   flex-wrap: wrap;
+ }
+
+ .user {
+   list-style: none;
+ }
+
+ .userDataContainer {
+   border-radius: 8px;
+   max-width: 350px;
+   padding: 1rem;
+   border: 1px solid rgb(0, 106, 255);
+   line-height: 1.4rem;
+   background-color: rgba(245, 245, 245, 0.05);
+   flex-direction: column;
+   align-items: flex-start;
+ }
+
+ .userDataContainer span {
+   text-transform: uppercase;
+   font-weight: bold;
+   margin-right: .4rem;
+   color: whitesmoke
+ }
+
+ .btnContainer {
+   gap: .5rem;
+   width: 100%;
+   margin-top: 2rem;
+ }

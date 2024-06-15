@@ -12,7 +12,7 @@ class UsersController {
       // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
-        res.render('users', usersDTO);
+        res.render('users', { users: usersDTO });
       } else {
         res.send({ status: 'success', payload: usersDTO })
       }

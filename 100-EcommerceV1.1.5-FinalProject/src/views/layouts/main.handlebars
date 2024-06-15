@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="/css/btnPaginate.css">
   <link rel="stylesheet" href="/css/realTimeProductsView.css">
   <link rel="stylesheet" href="/css/register-login.css">
+  <link rel="stylesheet" href="/css/profile.css">
+  <link rel="stylesheet" href="/css/users.css">
 
   {{!-- FAVICON --}}
   <link rel="shortcut icon" href="https://i.ibb.co/27ybJtZ/Logo2024.png" type="image/x-icon">
@@ -33,8 +35,8 @@
 <body>
   <header class='header'>
     <h1>NodeJs Ecommerce</h1>
-    {{#if user.email}}
 
+    {{#if user.email}}
     <nav class='navBar'>
       <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
@@ -51,14 +53,15 @@
         <img class='iconNavBar' src='https://i.ibb.co/Cbjwjkq/cart.png' alt="shopping cart icon">
         Cart
       </a>
-      <a href="/current" class="{{#ifEq currentPath '/current'}}active{{/ifEq}}">
+      <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
-        Current
+        Profile
       </a>
       <a href="/api/sessions/logout">
         <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit
       </a>
     </nav>
+
     <br>
     {{!-- <section class="profile">
       <section class='userData'>

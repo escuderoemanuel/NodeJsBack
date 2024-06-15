@@ -1,21 +1,21 @@
 <section class="profile">
-  {{#if this.email}}
-  <section class='userData'>
-    <p><span>Name:</span> {{this.firstName}} {{this.lastName}}</p>
-    <p><span>Email:</span> {{this.email}}</p>
-    <p><span>UID:</span> {{this.id}}</p>
-    {{#if this.age}}
-    <p><span>Age:</span> {{ this.age }}</p>
+  {{#if user.email}}
+  <div class='userData'>
+    <p><span>Name:</span> {{user.lastName}}</p>
+    <p><span>LastName:</span>{{user.lastName}}</p>
+    <p><span>Email:</span> {{user.email}}</p>
+    <p><span>UID:</span> {{user.id}}</p>
+    {{#if user.age}}
+    <p><span>Age:</span> {{ user.age }}</p>
     {{else}}
     <p><span>Age:</span> N/A</p>
     {{/if}}
-    <p><span>Role:</span> {{this.role}}</p>
-    <p><span>Cart:</span> {{this.cart}}</p>
-  </section>
+    <p><span>Role:</span> {{user.role}}</p>
+    <p><span>Cart:</span> {{user.cart}}</p>
+  </div>
   {{/if}}
 </section>
 
 {{!-- Para tener acceso a socket.io --}}
 <script src='/socket.io/socket.io.js'></script>
-{{!--
-<script src='/js/profile.js'></script> --}}
+<script src='/js/profile.js'></script>

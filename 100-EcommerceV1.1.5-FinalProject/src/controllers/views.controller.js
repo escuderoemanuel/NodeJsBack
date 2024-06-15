@@ -39,7 +39,22 @@ class ViewsController {
   }
 
   static async getProfile(req, res) {
-    res.render('profile', { user: req.user });
+
+    try {
+      const user = req.user;
+      const userDTO = new UserDTO(user)
+
+      // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
+      const acceptHeader = req.headers['accept'] || '';
+      if (acceptHeader.includes('text/html')) {
+        res.render('profile', { user: userDTO, currentPath: req.path })
+      } else {
+        res.send({ payload: userDTO });
+      }
+
+    } catch (error) {
+      res.status(error.status || 500).send({ status: 'error', message: error.message })
+    }
   }
 
   static async getPublicRoute(req, res) {
