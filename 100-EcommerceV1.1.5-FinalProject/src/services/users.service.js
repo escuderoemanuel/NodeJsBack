@@ -64,6 +64,16 @@ class UsersService {
     const user = await this.getById(uid);
     return await this.update(uid, { role: user.role });
   }
+
+  async deleteInactiveUsers() {
+    const users = await this.getAll();
+    // const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)); // 2 days
+    const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 30 * 60 * 1000)); // 30 minutes
+    
+    await Promise.all(inactiveUsers.map(user => this.delete(user._id)));
+    return inactiveUsers;
+
+  }
 }
 
 module.exports = UsersService;

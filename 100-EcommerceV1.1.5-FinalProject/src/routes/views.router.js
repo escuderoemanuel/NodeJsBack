@@ -7,7 +7,7 @@ const viewsRouter = Router();
 // Routes
 viewsRouter.get('/home', verifyToken, ViewsController.getHome)
 
-viewsRouter.get('/realtimeproducts', verifyToken, /* getRole('admin'), */ ViewsController.getRealTimeProducts)
+viewsRouter.get('/realtimeproducts', verifyToken, getRole('admin'), ViewsController.getRealTimeProducts)
 
 viewsRouter.get('/register', ViewsController.getRegister)
 

@@ -1,10 +1,22 @@
 const { usersService } = require('../repositories');
+const UserDTO = require('../dao/DTOs/UserDTO');
 
 class UsersController {
   static async getAll(req, res) {
     try {
       const users = await usersService.getAll();
-      res.send({ status: 'success', payload: users })
+      const usersDTO = users.map(user => ({
+        user: new UserDTO(user)
+      }))
+
+      // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
+      const acceptHeader = req.headers['accept'] || '';
+      if (acceptHeader.includes('text/html')) {
+        res.render('users', usersDTO);
+      } else {
+        res.send({ status: 'success', payload: usersDTO })
+      }
+
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message })
     }
@@ -42,8 +54,6 @@ class UsersController {
 
       user.role = user.role == 'user' ? 'premium' : 'user'
 
-
-
       let updatedUser = await usersService.update(user._id.toString(), { $set: { role: user.role } });
       res.send({ status: 'success', message: `role updated to '${user.role}'` })
 
@@ -61,8 +71,15 @@ class UsersController {
       res.status(500).send({ status: 'error', error: error.message })
     }
   }
+
+  static async deleteInactiveUsers(req, res) {
+    try {
+      const result = await usersService.deleteInactiveUsers();
+      res.send({ status: 'success', payload: result })
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message })
+    }
+  }
 }
-
-
 
 module.exports = UsersController; 

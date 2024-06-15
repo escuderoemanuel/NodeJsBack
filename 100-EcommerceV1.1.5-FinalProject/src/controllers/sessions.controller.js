@@ -165,6 +165,9 @@ class SessionsController {
       };
       const accessToken = jwt.sign(serializableUser, JWT_PRIVATE_KEY, { expiresIn: '1d' });
       res.cookie('accessToken', accessToken, { httpOnly: true });
+
+      await usersService.setLastConnection(_id);
+
       res.redirect('/api/products');
     } catch (error) {
       res.status(error.status || 500).send({ status: 'error', message: error.message });

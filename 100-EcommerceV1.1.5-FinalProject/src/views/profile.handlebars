@@ -1,9 +1,21 @@
 <section class="profile">
-  <h3>Welcome {{user.name}}</h3>
-  <ul class="userDataProfile">
-    <li class="userDataItem">Name:{{user.name}}</li>
-    <li class="userDataItem">Age: {{user.age}}</li>
-    <li class="userDataItem">Email: {{user.email}}</li>
-    <li class="userDataItem">Role: {{user.role}}</li>
-  </ul>
+  {{#if this.email}}
+  <section class='userData'>
+    <p><span>Name:</span> {{this.firstName}} {{this.lastName}}</p>
+    <p><span>Email:</span> {{this.email}}</p>
+    <p><span>UID:</span> {{this.id}}</p>
+    {{#if this.age}}
+    <p><span>Age:</span> {{ this.age }}</p>
+    {{else}}
+    <p><span>Age:</span> N/A</p>
+    {{/if}}
+    <p><span>Role:</span> {{this.role}}</p>
+    <p><span>Cart:</span> {{this.cart}}</p>
+  </section>
+  {{/if}}
 </section>
+
+{{!-- Para tener acceso a socket.io --}}
+<script src='/socket.io/socket.io.js'></script>
+{{!--
+<script src='/js/profile.js'></script> --}}

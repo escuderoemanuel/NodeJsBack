@@ -55,9 +55,12 @@
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
         Current
       </a>
+      <a href="/api/sessions/logout">
+        <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit
+      </a>
     </nav>
     <br>
-    <section class="profile">
+    {{!-- <section class="profile">
       <section class='userData'>
         <p><span>Name:</span> {{user.firstName}} {{user.lastName}}</p>
         <p><span>Email:</span> {{user.email}}</p>
@@ -70,10 +73,8 @@
         <p><span>Role:</span> {{user.role}}</p>
         <p><span>Cart:</span> {{user.cart}}</p>
       </section>
-      <a href="/api/sessions/logout">
-        <button class='btnLogout'>Logout</button>
-      </a>
-    </section>
+
+    </section> --}}
     {{/if}}
   </header>
   <main class='main'>

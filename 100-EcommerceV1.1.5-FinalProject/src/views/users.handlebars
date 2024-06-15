@@ -1,0 +1,32 @@
+<section class='users'>
+
+  <ul id='users' class='usersContainer'>
+
+    {{#each users}}
+
+    <li class='user'>
+      <h4 class='userName'>{{this.firstName}}{{this.lastName}}</h4>
+      <div class='userDataContainer'>
+        <p> <span>age:</span> {{this.age}}</p>
+        <p> <span>email:</span> {{this.email}}</p>
+        <p> <span>cart:{{this.role}}</p>
+        <p> <span>role:</span> {{this.role}}</p>
+        <p> <span>lastConnection:</span> {{this.lastConnection}}</p>
+      </div>
+
+      {{!-- <button class='btnAddToCart' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart' cid='cid-{{user.cart}}'
+        onclick='addToCart("{{../user.cart}}", "{{this._id}}")'>
+        Add to Cart
+      </button>
+      --}}
+
+    </li>
+    {{/each}}
+  </ul>
+
+
+</section>
+
+{{!-- Para tener acceso a socket.io --}}
+<script src=' /socket.io/socket.io.js'></script>
+<script src='/js/users.js'></script>
