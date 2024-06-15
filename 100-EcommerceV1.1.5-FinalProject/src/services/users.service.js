@@ -69,10 +69,13 @@ class UsersService {
     const users = await this.getAll();
     // const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)); // 2 days
     const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 30 * 60 * 1000)); // 30 minutes
-    
-    await Promise.all(inactiveUsers.map(user => this.delete(user._id)));
-    return inactiveUsers;
 
+    for (const user of inactiveUsers) {
+      await this.delete(user._id);
+    }
+
+    const updatedUsers = await this.getAll();
+    return updatedUsers;
   }
 }
 

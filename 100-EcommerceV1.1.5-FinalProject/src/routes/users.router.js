@@ -10,7 +10,7 @@ usersRouter.get('/premium/:uid', UsersController.changeRole);
 usersRouter.post('/:uid/documents', upload.any(), UsersController.uploadDocuments)
 
 usersRouter.get('/', verifyToken, getRole('admin'), UsersController.getAll);
-usersRouter.delete('/', UsersController.deleteInactiveUsers)
+usersRouter.delete('/', verifyToken, getRole('admin'), UsersController.deleteInactiveUsers)
 
 /* 
 - Desde el router de /api/users, crear tres rutas:
