@@ -6,7 +6,7 @@ const getRole = require('../middlewares/getRole.middleware');
 // Manager
 const router = Router();
 
-router.post('/', verifyToken, getRole(['user', 'premium']), ChatViewController.postMessage)
-router.get('/', verifyToken, getRole(['user', 'premium']), ChatViewController.getMessages)
+router.post('/', verifyToken, ChatViewController.postMessage)
+router.get('/', verifyToken, ChatViewController.getMessages)
 
 module.exports = router;

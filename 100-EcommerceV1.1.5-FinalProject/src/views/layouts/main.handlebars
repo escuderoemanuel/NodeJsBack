@@ -36,12 +36,54 @@
   <header class='header'>
     <h1>NodeJs Ecommerce</h1>
 
-    {{#if user.email}}
+    {{#if user}}
     <nav class='navBar'>
+      {{#ifEq user.role 'admin'}}
+      <a href="/realtimeproducts" class="{{#ifEq currentPath '/realtimeproducts'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/s5Y1QBy/add.png' alt="plus sign to add a product">
+        Product Manager
+      </a>
+      <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
+        Profile
+      </a>
+      <a href="/api/users" class="{{#ifEq currentPath '/api/users'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/tLYgHcr/users.png' alt="users list icon">
+        Users
+      </a>
+      <a href="/api/sessions/logout">
+        <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit
+      </a>
+      {{/ifEq}}
+
+      {{#ifEq user.role 'user'}}
       <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
-        Products</a>
-      <a href="/api/chat" class="{{#ifEq currentPath '/api/chat'}}active{{/ifEq}}">
+        Products
+      </a>
+      <a href="/chat" class="{{#ifEq currentPath '/chat'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
+        Chat
+      </a>
+      <a href="/api/carts/{{user.cart}}" class="{{#ifContains currentPath '/api/carts'}}active{{/ifContains}}">
+        <img class='iconNavBar' src='https://i.ibb.co/Cbjwjkq/cart.png' alt="shopping cart icon">
+        Cart
+      </a>
+      <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
+        Profile
+      </a>
+      <a href="/api/sessions/logout">
+        <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit
+      </a>
+      {{/ifEq}}
+
+      {{#ifEq user.role 'premium'}}
+      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
+        Products
+      </a>
+      <a href="/chat" class="{{#ifEq currentPath '/chat'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
         Chat
       </a>
@@ -57,32 +99,13 @@
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
         Profile
       </a>
-      <a href="/api/users" class="{{#ifEq currentPath '/api/users'}}active{{/ifEq}}">
-        <img class='iconNavBar' src='https://i.ibb.co/tLYgHcr/users.png' alt="users list icon">
-        Users
-      </a>
       <a href="/api/sessions/logout">
         <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit
       </a>
+      {{/ifEq}}
     </nav>
-
-    <br>
-    {{!-- <section class="profile">
-      <section class='userData'>
-        <p><span>Name:</span> {{user.firstName}} {{user.lastName}}</p>
-        <p><span>Email:</span> {{user.email}}</p>
-        <p><span>UID:</span> {{user.id}}</p>
-        {{#if user.age}}
-        <p><span>Age:</span> {{ user.age }}</p>
-        {{else}}
-        <p><span>Age:</span> N/A</p>
-        {{/if}}
-        <p><span>Role:</span> {{user.role}}</p>
-        <p><span>Cart:</span> {{user.cart}}</p>
-      </section>
-
-    </section> --}}
     {{/if}}
+
   </header>
   <main class='main'>
     {{{body}}}

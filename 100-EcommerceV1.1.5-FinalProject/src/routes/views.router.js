@@ -21,7 +21,7 @@ viewsRouter.get('/profile', verifyToken, ViewsController.getProfile)
 
 viewsRouter.get('/current', verifyToken, ViewsController.getCurrent);
 
-viewsRouter.get('/chat', verifyToken, ViewsController.getChat);
+viewsRouter.get('/chat', verifyToken, getRole(['user', 'premium']), ViewsController.getChat);
 
 viewsRouter.get('/*', ViewsController.getPublicRoute)
 

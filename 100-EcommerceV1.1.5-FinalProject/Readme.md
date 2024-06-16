@@ -11,11 +11,9 @@
 
 # ============= WORK ON =============  #
 
-[x] En la vista USERS no se muestra el navbar
-[x] Vista de user con los botones de deleteUser, changeRole
+[x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones
 [x] Al intentar modificar un role y que no sea posible porque no ha cargado los documentos, mostrar el mensaje correspondiente
 [x] Cambiar navbar dependiendo del role del usuario
-[x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones
 
 ## Aspectos a incluir
 
