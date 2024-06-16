@@ -72,6 +72,19 @@ class MailingsService {
     });
     return info;
   }
+
+  async sendDeletedProduct(destinationEmail) {
+    const info = await transporter.sendMail({
+      from: GMAIL_AUTH_USER,
+      to: destinationEmail,
+      subject: 'Deleted Product',
+      html: `
+        <h1>Info Message!</h1>
+        <p> You have successfully deleted one of the products you created.</p>
+      `
+    });
+    return info;
+  }
 }
 
 module.exports = MailingsService;

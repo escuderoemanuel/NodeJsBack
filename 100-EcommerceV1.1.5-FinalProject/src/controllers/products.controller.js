@@ -3,6 +3,8 @@ const ProductsModel = require('../dao/models/products.model');
 const CustomErrors = require('../utils/errors/CustomErrors');
 const { getCreateProductErrorInfo } = require('../utils/errors/ErrorInfo');
 const TypesOfErrors = require('../utils/errors/TypesOfErrors');
+const MailingsService = require('../services/mailings.service');
+const mailingsService = new MailingsService();
 
 class ProductsController {
 
@@ -162,7 +164,7 @@ class ProductsController {
         throw new CustomErrors({
           name: 'Product delete error',
           cause: 'Product deleting error',
-          message: 'Error deleting product',
+          message: 'Error deleting product, invalid pid or productToDelete not found',
           code: TypesOfErrors.INVALID_PARAM_ERROR
         })
       }
@@ -177,6 +179,8 @@ class ProductsController {
       }
 
       const productDeleted = await productsService.delete(pid);
+
+      await mailingsService.sendDeletedProduct(req.user.email);
       res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {
       next(error)

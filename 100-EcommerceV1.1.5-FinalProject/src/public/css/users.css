@@ -12,6 +12,11 @@
    font-weight: bold;
  }
 
+ .btnDeleteInactiveUsers:hover {
+   background-color: rgb(208, 1, 1);
+ }
+
+
  .usersContainer {
    display: flex;
    justify-content: center;
