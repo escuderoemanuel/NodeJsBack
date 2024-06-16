@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersList = document.getElementById('users');
 
   usersList.addEventListener('click', async (e) => {
+    // Change Role
     if (e.target.classList.contains('btnChangeRole')) {
       const userId = e.target.id.split('-')[1];
       console.log('userId', userId);
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.reload();
         }
       });
+      // Delete User
     } else if (e.target.classList.contains('btnDeleteUser')) {
       const userId = e.target.id.split('-')[1];
       console.log('Deleting user with ID:', userId);

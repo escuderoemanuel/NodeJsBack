@@ -59,6 +59,19 @@ class MailingsService {
       `
     })
   }
+
+  async sendDeletedInactiveUserEmail(destinationEmail) {
+    const info = await transporter.sendMail({
+      from: GMAIL_AUTH_USER,
+      to: destinationEmail,
+      subject: 'Deleted Account',
+      html: `
+        <h1>Hi, we have bad news for you! 😢</h1>
+        <p> You account has been deleted due to inactivity. Please, register again to reactivate your account.</p>
+      `
+    });
+    return info;
+  }
 }
 
 module.exports = MailingsService;

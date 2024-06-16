@@ -8,6 +8,7 @@ const usersRouter = Router();
 
 usersRouter.get('/premium/:uid', UsersController.changeRole);
 usersRouter.post('/:uid/documents', upload.any(), UsersController.uploadDocuments)
+usersRouter.delete('/:uid', verifyToken, getRole('admin'), UsersController.delete)
 
 usersRouter.get('/', verifyToken, getRole('admin'), UsersController.getAll);
 usersRouter.delete('/', verifyToken, getRole('admin'), UsersController.deleteInactiveUsers)

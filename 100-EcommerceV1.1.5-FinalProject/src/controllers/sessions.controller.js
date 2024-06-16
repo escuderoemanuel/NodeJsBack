@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken');
 const { JWT_PRIVATE_KEY } = require('../config/environment.config');
 const CustomErrors = require('../utils/errors/CustomErrors');
 
-const MailingsService = require('../services/mailings.service');
 const { getUserRegisterErrorInfo } = require('../utils/errors/ErrorInfo');
 const TypesOfErrors = require('../utils/errors/TypesOfErrors');
 const { usersService } = require('../repositories');
+const MailingsService = require('../services/mailings.service');
 const mailingsService = new MailingsService();
 
 class SessionsController {

@@ -80,6 +80,16 @@ class UsersController {
       res.status(500).send({ status: 'error', error: error.message })
     }
   }
+
+  static async delete(req, res) {
+    try {
+      const { uid } = req.params;
+      const result = await usersService.delete(uid);
+      res.send({ status: 'success', payload: result })
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message })
+    }
+  }
 }
 
 module.exports = UsersController; 
