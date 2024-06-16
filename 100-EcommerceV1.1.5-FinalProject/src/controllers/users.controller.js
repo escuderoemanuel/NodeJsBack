@@ -1,6 +1,19 @@
 const { usersService } = require('../repositories');
 const UserDTO = require('../dao/DTOs/UserDTO');
+const path = require('path');
+const multer = require('multer');
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage }).array('document', 3);
 
 class UsersController {
   static async getAll(req, res) {
@@ -12,7 +25,6 @@ class UsersController {
         user: new UserDTO(user)
       }))
 
-      // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
         res.render('users', { user, users: usersDTO });
@@ -51,10 +63,6 @@ class UsersController {
         }
       }
 
-      if (!['user', 'premium'].includes(user.role)) {
-        throw new Error('User has invalid role')
-      }
-
       user.role = user.role == 'user' ? 'premium' : 'user'
 
       let updatedUser = await usersService.update(user._id.toString(), { $set: { role: user.role } });
@@ -66,13 +74,24 @@ class UsersController {
   }
 
   static async uploadDocuments(req, res) {
-    try {
+    upload(req, res, async (error) => {
+      if (error) {
+        return res.status(400).send({ status: 'error', error: error.message });
+      }
+
       const { uid } = req.params;
-      const result = await usersService.addDocuments(uid, req.files)
-      res.send({ status: 'success', payload: result })
-    } catch (error) {
-      res.status(500).send({ status: 'error', error: error.message })
-    }
+      const documents = req.files.map(file => ({
+        name: file.originalname,
+        path: file.path
+      }));
+
+      try {
+        const result = await usersService.addDocuments(uid, documents);
+        res.send({ status: 'success', payload: result });
+      } catch (error) {
+        res.status(500).send({ status: 'error', error: error.message });
+      }
+    });
   }
 
   static async deleteInactiveUsers(req, res) {
@@ -95,4 +114,4 @@ class UsersController {
   }
 }
 
-module.exports = UsersController; 
+module.exports = UsersController;

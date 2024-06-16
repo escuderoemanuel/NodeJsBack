@@ -46,7 +46,7 @@ const storage = multer.diskStorage({
 
       // Armo el nombre final del archivo que se sube
       cb(null, `${readableDate}_${readableTime} - ${file.originalname}`);
-      
+
     } catch (error) {
       console.error('Error in filename function:', error);
       cb(error);

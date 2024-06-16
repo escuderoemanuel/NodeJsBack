@@ -50,12 +50,15 @@ class UsersService {
 
   async addDocuments(uid, files) {
     const user = await this.getById(uid);
+    if (!user) {
+      throw new Error(`User with id ${uid} not found`);
+    }
     let documents = user.documents || [];
 
     documents = [
       ...documents,
       ...files.map(file => ({
-        name: file.originalname,
+        name: file.name,
         reference: file.path.split('public')[1].replace(/\\/g, '/')
       }))
     ];
