@@ -1,9 +1,12 @@
 const { usersService } = require('../repositories');
 const UserDTO = require('../dao/DTOs/UserDTO');
 
+
 class UsersController {
   static async getAll(req, res) {
     try {
+      const user = await usersService.getById(req.user.id);
+
       const users = await usersService.getAll();
       const usersDTO = users.map(user => ({
         user: new UserDTO(user)
@@ -12,7 +15,7 @@ class UsersController {
       // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
-        res.render('users', { users: usersDTO });
+        res.render('users', { user, users: usersDTO });
       } else {
         res.send({ status: 'success', payload: usersDTO })
       }

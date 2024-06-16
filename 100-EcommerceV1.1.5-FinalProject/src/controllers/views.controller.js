@@ -1,6 +1,7 @@
 const UserDTO = require('../dao/DTOs/UserDTO');
 
-const { productsService } = require('../repositories');
+
+const { productsService, usersService } = require('../repositories');
 
 class ViewsController {
 
@@ -41,7 +42,7 @@ class ViewsController {
   static async getProfile(req, res) {
 
     try {
-      const user = req.user;
+      const user = await usersService.getById(req.user.id)
       const userDTO = new UserDTO(user)
 
       // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
