@@ -10,6 +10,11 @@
 - Cerrar detalles administrativos con los roles.
 
 
+# ============= WORK ON =============  #
+
+[x] Vista de user con los botones de deleteUser, changeRole
+✅ Botón deleteInactiveUsers FUNCIONA!
+
 ## Aspectos a incluir
 
 - Desde el router de /api/users, crear tres rutas:

@@ -1,17 +1,109 @@
 const socket = io();
 
-const usersList = document.getElementById('users');
+// const usersList = document.getElementById('users');
+// const btnDeleteInactiveUsers = document.getElementById('deleteInactiveUsers');
 
-/* const addProductToCart = (cid, pid) => {
-  fetch(`/api/carts/${cid}/product/${pid}`, {
-    method: "POST"
+document.addEventListener('DOMContentLoaded', () => {
+  const usersList = document.getElementById('users');
+
+  usersList.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('btnChangeRole')) {
+      const userId = e.target.id.split('-')[1];
+      console.log('userId', userId);
+      fetch(`/api/users/premium/${userId}`, {
+        method: 'GET'
+      }).then(res => {
+        if (res.status === 200) {
+          window.location.reload();
+        }
+      });
+    } else if (e.target.classList.contains('btnDeleteUser')) {
+      const userId = e.target.id.split('-')[1];
+      console.log('Deleting user with ID:', userId);
+      fetch(`/api/users/${userId}`, {
+        method: 'DELETE'
+      }).then(res => {
+        if (res.status === 200) {
+          window.location.reload();
+        }
+      });
+    }
+  });
+
+  const deleteInactiveUsersButton = document.getElementById('btnDeleteInactiveUsers');
+  deleteInactiveUsersButton.addEventListener('click', () => {
+    fetch('/api/users', {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status === 200) {
+        window.location.reload();
+      }
+    });
+  });
+});
+
+
+
+const deleteInactiveUsers = () => {
+  fetch('/api/users', {
+    method: 'DELETE'
   }).then(res => {
     if (res.status == 200) {
       window.location.reload();
     }
-  })
+  });
 }
 
+/* const changerole = () => {
+  fetch(`/api/users//premium/${userId}`, {
+    method: 'GET'
+  }).then(res => {
+    if (res.status == 200) {
+      window.location.reload();
+    }
+  });
+} */
+
+usersList.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('btnDeleteInactiveUsers')) {
+    fetch(`/api/users`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status == 200) {
+        window.location.reload();
+      }
+    });
+  }
+});
+
+usersList.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('btnDeleteUser')) {
+    const userId = e.target.id.split('-')[1];
+    fetch(`/api/users/${userId}`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status == 200) {
+        window.location.reload();
+      }
+    });
+  }
+});
+
+
+usersList.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('btnDeleteUser')) {
+    const userId = e.target.id.split('-')[1];
+    fetch(`/api/users/${userId}`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status == 200) {
+        window.location.reload();
+      }
+    });
+  }
+});
+
+/*
 const addToCart = (cid, pid) => {
   fetch(`/api/carts/${cid}/product/${pid}`, {
     method: "POST"
@@ -36,7 +128,7 @@ productList.addEventListener('click', async (e) => {
     addToCart(cid, pid);
   }
 });
- */
+ 
 
 
 //? Recibo la lista actualizada de productos y la renderizo en el cliente.
@@ -133,3 +225,4 @@ formAddProduct.addEventListener('DOMContentLoaded', 'submit', async (e) => {
   }
 })
 
+*/

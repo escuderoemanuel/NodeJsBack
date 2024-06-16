@@ -1,12 +1,14 @@
 <section class='users'>
+  <button class='btnDeleteInactiveUsers' id='btnDeleteInactiveUsers'>
+    Delete Inactive Users
+  </button>
 
   <ul id='users' class='usersContainer'>
-
     {{#each users}}
-
     <li class='user'>
       <div class='userDataContainer'>
         <h4 class='userName'>{{user.firstName}} {{user.lastName}}</h4>
+        <p><span>UID:</span> {{user.id}}</p>
         <p> <span>age:</span> {{user.age}}</p>
         <p> <span>email:</span> {{user.email}}</p>
         <p> <span>cart:</span> {{user.cart}}</p>
@@ -14,25 +16,19 @@
         <p> <span>last Connection:</span> {{user.lastConnection}}</p>
 
         <div class='btnContainer'>
-          <button class='btnAddToCart' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart' cid='cid-{{user.cart}}'
-            onclick='addToCart("{{../user.cart}}", "{{this._id}}")'>
+          <button class='btnChangeRole' id='changeRole-{{id}}'>
             Change Role
           </button>
-          <button class='btnAddToCart' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart' cid='cid-{{user.cart}}'
-            onclick='addToCart("{{../user.cart}}", "{{this._id}}")'>
+          <button class='btnDeleteUser' id='deleteUser-{{id}}'>
             Delete User
           </button>
         </div>
       </div>
-
-
     </li>
     {{/each}}
   </ul>
-
-
 </section>
 
 {{!-- Para tener acceso a socket.io --}}
-<script src=' /socket.io/socket.io.js'></script>
+<script src='/socket.io/socket.io.js'></script>
 <script src='/js/users.js'></script>

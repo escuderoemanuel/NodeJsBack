@@ -1,5 +1,15 @@
  .users {
    width: 90vw;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .btnDeleteInactiveUsers {
+   width: 200px;
+   background-color: red;
+   text-transform: uppercase;
+   font-weight: bold;
  }
 
  .usersContainer {
