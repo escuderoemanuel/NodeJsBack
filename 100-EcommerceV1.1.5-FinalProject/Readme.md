@@ -10,6 +10,7 @@
 - Cerrar detalles administrativos con los roles.
 
 # ============= WORK ON =============  #
+
 [x] Vista de Profile para subir archivos
     - Se suben tanto desde el fron como de postman, pero me da error y no se guardan en la base de datos
 [x] Al intentar modificar un role y que no sea posible porque no ha cargado los documentos, mostrar el mensaje correspondiente
