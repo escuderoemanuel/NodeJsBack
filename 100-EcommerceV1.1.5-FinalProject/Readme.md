@@ -13,8 +13,11 @@
 
 [x] Vista de Profile para subir archivos
     - Se suben tanto desde el fron como de postman, pero me da error y no se guardan en la base de datos
+    - 
+[x] Vista de Profile para subir Img Perfil y que se muestre en el header
 [x] Al intentar modificar un role y que no sea posible porque no ha cargado los documentos, mostrar el mensaje correspondiente
 [x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones
+[x] Mostrar carrousel de img en los productos
 
 ## Aspectos a incluir
 
