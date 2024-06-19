@@ -8,6 +8,7 @@ class UserDTO {
     this.cart = user.cart;
     this.role = user.role;
     this.lastConnection = user.lastConnection;
+    this.documents = user.documents;
   }
 }
 

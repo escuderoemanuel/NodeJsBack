@@ -67,7 +67,8 @@ class MailingsService {
       subject: 'Deleted Account',
       html: `
         <h1>Hi, we have bad news for you! 😢</h1>
-        <p> You account has been deleted due to inactivity. Please, register again to reactivate your account.</p>
+        <p> You account has been deleted due to inactivity.</p>
+        <p>Please, register again to reactivate your account.</p>
       `
     });
     return info;

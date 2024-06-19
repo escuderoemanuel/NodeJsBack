@@ -11,7 +11,7 @@ usersRouter.post('/:uid/documents', verifyToken, upload.any(), UsersController.u
 usersRouter.delete('/:uid', verifyToken, getRole('admin'), UsersController.delete)
 
 usersRouter.get('/', verifyToken, getRole('admin'), UsersController.getAll);
-usersRouter.delete('/', verifyToken, getRole('admin'), UsersController.deleteInactiveUsers)
+usersRouter.delete('/', verifyToken, getRole('admin'), UsersController.deleteInactive)
 
 
 module.exports = usersRouter

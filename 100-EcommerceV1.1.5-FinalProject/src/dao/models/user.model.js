@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   lastConnection: {
     type: Date,
+    default: null
   },
   cart: {
     type: mongoose.Schema.Types.ObjectId,

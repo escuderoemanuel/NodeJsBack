@@ -94,9 +94,9 @@ class UsersController {
     });
   }
 
-  static async deleteInactiveUsers(req, res) {
+  static async deleteInactive(req, res) {
     try {
-      const result = await usersService.deleteInactiveUsers();
+      const result = await usersService.deleteInactive();
       res.send({ status: 'success', payload: result })
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message })
