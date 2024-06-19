@@ -73,9 +73,12 @@ class UsersService {
 
   async deleteInactive() {
     const users = await this.getAll();
-    const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)); // 2 days
+    const inactiveUsers = users.filter(user =>
+      !user.lastConnection ||
+      user.lastConnection < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)); // 2 days
     // const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 1 * 60 * 1000)); // 30 minutes
 
+    console.log(inactiveUsers);
     for (const user of inactiveUsers) {
       await mailingsService.sendDeletedInactiveUserEmail(user.email)
       await this.delete(user._id);
