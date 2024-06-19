@@ -32,8 +32,6 @@ class UsersController {
         };
       });
 
-      console.log('UsersDTO:', usersDTO);
-
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
         res.render('users', { user, users: usersDTO });
