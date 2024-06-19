@@ -39,17 +39,21 @@
     {{#if user}}
     <nav class='navBar'>
       {{#ifEq user.role 'admin'}}
+      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
+        Products
+      </a>
       <a href="/realtimeproducts" class="{{#ifEq currentPath '/realtimeproducts'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/s5Y1QBy/add.png' alt="plus sign to add a product">
-        Product Manager
+        Products Manager
+      </a>
+      <a href="/api/users" class="{{#ifEq currentPath '/api/users'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/tLYgHcr/users.png' alt="users list icon">
+        Users Manager
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
         Profile
-      </a>
-      <a href="/api/users" class="{{#ifEq currentPath '/api/users'}}active{{/ifEq}}">
-        <img class='iconNavBar' src='https://i.ibb.co/tLYgHcr/users.png' alt="users list icon">
-        Users
       </a>
       <a href="/api/sessions/logout">
         <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit

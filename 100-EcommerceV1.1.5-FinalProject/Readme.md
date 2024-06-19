@@ -17,6 +17,7 @@
 [x] Al intentar modificar un role y que no sea posible porque no ha cargado los documentos, mostrar el mensaje correspondiente
 [x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones
 [x] Mostrar carrousel de img en los productos
+[x] Chequear que valide correctamente en el register si un email ya esta registrado y no redirija a login, sino que muestre el error
 
 ## Aspectos a incluir
 

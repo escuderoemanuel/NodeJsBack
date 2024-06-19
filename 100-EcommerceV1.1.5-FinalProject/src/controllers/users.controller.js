@@ -17,25 +17,35 @@ const upload = multer({ storage: storage }).array('document', 3);
 
 class UsersController {
   static async getAll(req, res) {
+    const uid = req.user.id;
     try {
-      const user = await usersService.getById(req.user.id);
-
+      const user = await usersService.getById(uid);
       const users = await usersService.getAll();
-      const usersDTO = users.map(user => ({
-        user: new UserDTO(user)
-      }))
+
+      const usersDTO = users.map(u => {
+        const userDTO = new UserDTO(u);
+        return {
+          ...userDTO,
+          isUser: u.role === 'user',
+          isPremium: u.role === 'premium',
+          isAdmin: u.role === 'admin'
+        };
+      });
+
+      console.log('UsersDTO:', usersDTO);
 
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
         res.render('users', { user, users: usersDTO });
       } else {
-        res.send({ status: 'success', payload: usersDTO })
+        res.send({ status: 'success', payload: usersDTO });
       }
 
     } catch (error) {
-      res.status(500).send({ status: 'error', error: error.message })
+      res.status(500).send({ status: 'error', error: error.message });
     }
   }
+
 
   static async changeRole(req, res) {
     const uid = req.params.uid;
@@ -107,6 +117,17 @@ class UsersController {
     try {
       const { uid } = req.params;
       const result = await usersService.delete(uid);
+      res.send({ status: 'success', payload: result })
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message })
+    }
+  }
+
+  static async update(req, res) {
+    const { uid } = req.params;
+    const user = req.body;
+    try {
+      const result = await usersService.update(uid, user);
       res.send({ status: 'success', payload: result })
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message })

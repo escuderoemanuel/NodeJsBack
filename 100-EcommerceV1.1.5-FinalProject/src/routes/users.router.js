@@ -6,12 +6,15 @@ const { verifyToken } = require('../middlewares/verifyToken.middleware');
 
 const usersRouter = Router();
 
-usersRouter.get('/premium/:uid', verifyToken, UsersController.changeRole);
-usersRouter.post('/:uid/documents', verifyToken, upload.any(), UsersController.uploadDocuments)
-usersRouter.delete('/:uid', verifyToken, getRole('admin'), UsersController.delete)
 
 usersRouter.get('/', verifyToken, getRole('admin'), UsersController.getAll);
 usersRouter.delete('/', verifyToken, getRole('admin'), UsersController.deleteInactive)
 
+usersRouter.put('/:uid', verifyToken, UsersController.update);
+usersRouter.delete('/:uid', verifyToken, getRole('admin'), UsersController.delete)
+
+usersRouter.get('/premium/:uid', verifyToken, UsersController.changeRole);
+
+usersRouter.post('/:uid/documents', verifyToken, upload.any(), UsersController.uploadDocuments)
 
 module.exports = usersRouter

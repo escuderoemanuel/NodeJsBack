@@ -7,19 +7,38 @@
     {{#each users}}
     <li class='user'>
       <div class='userDataContainer'>
-        <h4 class='userName'>{{user.firstName}} {{user.lastName}}</h4>
-        <p><span>UID:</span> {{user.id}}</p>
-        <p> <span>age:</span> {{user.age}}</p>
-        <p> <span>email:</span> {{user.email}}</p>
-        <p> <span>cart:</span> {{user.cart}}</p>
-        <p> <span>role:</span> {{user.role}}</p>
-        <p> <span>last Connection:</span> {{user.lastConnection}}</p>
+        <h4 class='userName'>{{firstName}} {{lastName}}</h4>
+        <p><span>UID:</span> {{id}}</p>
+        <p> <span>age:</span> {{age}}</p>
+        <p> <span>email:</span> {{email}}</p>
+        <p> <span>cart:</span> {{cart}}</p>
+        <p> <span>role:</span>
+          <select name="role" id="select-{{id}}">
+
+            {{#if isUser}}
+            <option value='user' selected> user </option>{{else}}
+            <option value='user'> user </option>
+            {{/if}}
+
+            {{#if isPremium}}
+            <option value='premium' selected> premium </option>{{else}}
+            <option value='premium'> premium </option>
+            {{/if}}
+
+            {{#if isAdmin}}
+            <option value='admin' selected> admin </option>{{else}}
+            <option value='admin'> admin </option>
+            {{/if}}
+
+          </select>
+        </p>
+        <p> <span>last Connection:</span> {{lastConnection}}</p>
 
         <div class='btnContainer'>
-          <button class='btnChangeRole' id='changeRole-{{user.id}}'>
+          <button class='btnChangeRole' id='changeRole-{{id}}' onclick="updateUser('{{id}}')">
             Change Role
           </button>
-          <button class='btnDeleteUser' id='deleteUser-{{user.id}}'>
+          <button class='btnDeleteUser' id='deleteUser-{{id}}' onclick="deleteUser('{{id}}')">
             Delete User
           </button>
         </div>
