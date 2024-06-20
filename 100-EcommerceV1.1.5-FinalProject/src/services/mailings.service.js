@@ -81,7 +81,7 @@ class MailingsService {
       subject: 'Deleted Product',
       html: `
         <h1>Info Message!</h1>
-        <p> You have successfully deleted one of the products you created.</p>
+        <p> A product you created was deleted by an '@admin' user.</p>
       `
     });
     return info;

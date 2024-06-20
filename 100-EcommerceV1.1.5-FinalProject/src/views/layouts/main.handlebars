@@ -87,13 +87,13 @@
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
-      <a href="/chat" class="{{#ifEq currentPath '/chat'}}active{{/ifEq}}">
-        <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
-        Chat
-      </a>
       <a href="/realtimeproducts" class="{{#ifEq currentPath '/realtimeproducts'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/s5Y1QBy/add.png' alt="plus sign to add a product">
         Product Manager
+      </a>
+      <a href="/chat" class="{{#ifEq currentPath '/chat'}}active{{/ifEq}}">
+        <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
+        Chat
       </a>
       <a href="/api/carts/{{user.cart}}" class="{{#ifContains currentPath '/api/carts'}}active{{/ifContains}}">
         <img class='iconNavBar' src='https://i.ibb.co/Cbjwjkq/cart.png' alt="shopping cart icon">

@@ -154,13 +154,10 @@ class ProductsController {
 
   static async delete(req, res, next) {
     try {
-
       const pid = req.params.pid;
       const productToDelete = await productsService.getById(pid);
 
-
       if (!pid || !productToDelete) {
-        // CUSTOM ERROR
         throw new CustomErrors({
           name: 'Product delete error',
           cause: 'Product deleting error',
@@ -169,18 +166,24 @@ class ProductsController {
         })
       }
 
-      if (req.user.role === 'premium' && productToDelete.owner !== req.user.email) {
+      // case 1 = role = admin & email = owner -> delete --------> ''
+      // case 2 = role = admin & email != owner -> delete & email --------> 'OK'
+      // case 3 = role = premium & email != owner -> error --------> 'OK'
+      // case 4 = role = premium & email = owner -> delete --------> 'OK'
+      if (req.user.role === 'admin' && req.user.email !== productToDelete.owner) {
+        await mailingsService.sendDeletedProduct(productToDelete.owner);
+        await productsService.delete(pid);
+      } else if (req.user.role === 'premium' && req.user.email !== productToDelete.owner) {
+        // CUSTOM ERROR
         throw new CustomErrors({
           name: 'Product delete error',
           cause: 'Product deleting error',
-          message: 'Only owners can delete products they have created',
+          message: 'Only owners or @admin user can delete products they have created',
           code: TypesOfErrors.INVALID_PARAM_ERROR
         })
       }
 
-      const productDeleted = await productsService.delete(pid);
-
-      await mailingsService.sendDeletedProduct(req.user.email);
+      await productsService.delete(pid);
       res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {
       next(error)
