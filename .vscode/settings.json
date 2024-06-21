@@ -4,5 +4,8 @@
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "notebook.stickyScroll.enabled": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.cursorSmoothCaretAnimation": "on"
 }

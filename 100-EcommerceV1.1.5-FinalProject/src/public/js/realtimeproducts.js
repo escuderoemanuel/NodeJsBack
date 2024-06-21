@@ -26,6 +26,7 @@ socket.on('update-products', products => {
         <p> <span>code:</span> ${product.code}</p>
         <p> <span>stock:</span> ${product.stock}</p>
         <p> <span>category:</span> ${product.category}</p>
+        <p> <span>owner:</span> ${product.owner}</p>
         <p> <span>status:</span> ${product.status}</p>
       </div>
       <button class='btnDelete' id="btnDelete${product._id}" data-id='btnDelete'>Delete Product</button>
@@ -54,33 +55,6 @@ productList.addEventListener('click', async (e) => {
     }
   }
 });
-
-/* productList.addEventListener('click', async (e) => {
-  if (e.target.getAttribute('data-id') === 'btnDelete') {
-    const productId = e.target.getAttribute('id').slice(9);
-    try {
-      const response = await fetch(`/api/products/${productId}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al eliminar el producto');
-      }
-
-      // Este es el objeto del producto que estoy eliminando
-      const { payload } = await response.json();
-
-      // Aqui paso el producto al server
-      socket.emit('delete-product', payload);
-
-      // Recargar la página para actualizar la lista de productos
-      window.location.reload();
-
-    } catch (error) {
-      console.log('Error:', error);
-    }
-  }
-}); */
 
 //? Agrego un producto a la base de datos y lo envio a todos los clientes conectados.
 formAddProduct.addEventListener('submit', async (e) => {

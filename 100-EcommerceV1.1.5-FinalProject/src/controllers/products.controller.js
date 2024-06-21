@@ -170,10 +170,42 @@ class ProductsController {
       // case 2 = role = admin & email != owner -> delete & email --------> 'OK'
       // case 3 = role = premium & email != owner -> error --------> 'OK'
       // case 4 = role = premium & email = owner -> delete --------> 'OK'
-      if (req.user.role === 'admin' && req.user.email !== productToDelete.owner) {
-        await mailingsService.sendDeletedProduct(productToDelete.owner);
+      const role = req.user.role;
+      const email = req.user.email;
+      const owner = productToDelete.owner;
+
+      /* switch (role, email, owner) {
+        case ('admin' && email === owner):
+          await productsService.delete(pid);
+          break;
+        case ('admin' && email !== owner):
+          await productsService.delete(pid);
+          await mailingsService.sendDeletedProduct(owner);
+          break;
+        case ('premium' && email === owner):
+          await productsService.delete(pid);
+          break;
+        case ('premium', email !== owner):
+          throw new CustomErrors({
+            name: 'Product delete error',
+            cause: 'Product deleting error',
+            message: 'Only owners or @admin user can delete products they have created',
+            code: TypesOfErrors.INVALID_PARAM_ERROR
+          })
+      } */
+
+      if (role === 'admin' && email === owner) {
         await productsService.delete(pid);
-      } else if (req.user.role === 'premium' && req.user.email !== productToDelete.owner) {
+      }
+
+      if (role === 'admin' && email !== owner) { //! OK
+        await productsService.delete(pid);
+        await mailingsService.sendDeletedProduct(owner);
+      }
+      if (role === 'premium' && email === owner) {
+        await productsService.delete(pid);
+      }
+      if (role === 'premium' && email !== owner) {
         // CUSTOM ERROR
         throw new CustomErrors({
           name: 'Product delete error',
@@ -183,7 +215,7 @@ class ProductsController {
         })
       }
 
-      await productsService.delete(pid);
+      // await productsService.delete(pid);
       res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {
       next(error)
