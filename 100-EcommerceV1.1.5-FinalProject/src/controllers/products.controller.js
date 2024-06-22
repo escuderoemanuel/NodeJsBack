@@ -120,7 +120,11 @@ class ProductsController {
         req.body.owner = req.user.email;
       }
 
-      await productsService.create(req.body);
+      const newProduct = {
+        ...req.body,
+        owner: req.user.email, // Agregar el owner del producto
+      }
+      await productsService.create(newProduct);
       res.send({ status: 'success', message: 'Product created' });
     } catch (error) {
       next(error)

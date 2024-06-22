@@ -1,25 +1,26 @@
 <section class='products'>
-
-  {{!-- <p class="cartValue"><span>{{user.cart}}</p> --}}
   <ul id='products' class='productsContainer'>
     {{#each products}}
     <li class='product'>
       <h4 class='productTitle'>{{this.title}}</h4>
       <div class='productDataContainer'>
-        <p> <span>id:</span> {{this._id}}</p>
-        <p> <span>title:</span> {{this.title}}</p>
-        <p> <span>description:</span> {{this.description}}</p>
-        <p> <span>price:</span> {{this.price}}</p>
-        <p> <span>thumbnails:</span><br>
-          {{#each this.thumbnails}}
-          <a class='linkThumbnail' href='{{this}}' target='_blank'>{{this}}</a>
-          <br>
-          {{/each}}
+        <p><span>id:</span> {{this._id}}</p>
+        <p><span>title:</span> {{this.title}}</p>
+        <p><span>description:</span> {{this.description}}</p>
+        <p><span>price:</span> {{this.price}}</p>
+        <p><span>thumbnails:</span>
+        <div id="carousel{{this._id}}">
+          <div class="carousel-inner">
+            {{#each this.thumbnails}}
+            <img class="eachThumbnail" src="{{this}}" alt="Slide {{@index}}">
+            {{/each}}
+          </div>
+        </div>
         </p>
-        <p> <span>code:</span> {{this.code}}</p>
-        <p> <span>stock:</span> {{this.stock}}</p>
-        <p> <span>category:</span> {{this.category}}</p>
-        <p> <span>status:</span> {{this.status}}</p>
+        <p><span>code:</span> {{this.code}}</p>
+        <p><span>stock:</span> {{this.stock}}</p>
+        <p><span>category:</span> {{this.category}}</p>
+        <p><span>status:</span> {{this.status}}</p>
       </div>
       {{#ifEq ../user.role 'admin'}}
       <button class='btnAddToCart disabled' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart'
@@ -32,8 +33,6 @@
         Add to Cart
       </button>
       {{/ifEq}}
-
-
     </li>
     {{/each}}
   </ul>
@@ -46,15 +45,13 @@
     {{/if}}
 
     {{#if paginateData.hasNextPage}}
-    <button class='btnPage' onclick="window.location.href='{{paginateData.nextLink}}'">Next
-    </button>
+    <button class='btnPage' onclick="window.location.href='{{paginateData.nextLink}}'">Next</button>
     {{else}}
     <button class='btnPageDisabled' disabled>Next</button>
     {{/if}}
   </div>
-
 </section>
 
-{{!-- Para tener acceso a socket.io --}}
-<script src=' /socket.io/socket.io.js'></script>
+<!-- Scripts -->
+<script src='/socket.io/socket.io.js'></script>
 <script src='/js/products.js'></script>
