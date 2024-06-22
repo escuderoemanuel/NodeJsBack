@@ -15,11 +15,10 @@
     - Se suben tanto desde el front como de postman, pero me da error y no se guardan en la base de datos
     - Subir img de perfil y que se muestre en el header junto con el btn de logout
 
-[x] Al intentar modificar un role y que no sea posible porque no ha cargado los documentos, mostrar el mensaje correspondiente
 
-[x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones
+[x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones al eliminar un producto que pertenece a otro user
 
-[x] Mostrar carrousel de img en los productos
+[x] Si hago un purchase de un carrito con un producto sin stock, debería darme un mensaje de error
 
 ## Aspectos a incluir
 

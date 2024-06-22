@@ -121,7 +121,7 @@ class UsersController {
     }
   }
 
-  static async update(req, res) {
+  /* static async update(req, res) {
     const { uid } = req.params;
     const user = req.body;
     try {
@@ -129,6 +129,38 @@ class UsersController {
       res.send({ status: 'success', payload: result })
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message })
+    }
+  } */
+  static async update(req, res) {
+    const { uid } = req.params;
+    const userUpdates = req.body;
+
+    try {
+      const user = await usersService.getById(uid);
+
+      if (userUpdates.role && user.role === 'user' && (userUpdates.role === 'premium' || userUpdates.role === 'admin')) {
+        const requiredDocuments = [
+          'Identification',
+          'Proof of Address',
+          'Proof of Account Status'
+        ];
+
+        for (const doc of requiredDocuments) {
+          if (!user.documents.some(d => d.name.includes(doc))) {
+            throw new Error(`The user has not finished uploading the required documentation: ${doc}`);
+          }
+        }
+      }
+
+      if (userUpdates.role && user.role !== 'user' && userUpdates.role === 'user') {
+        userUpdates.role = 'user';
+      }
+
+      const result = await usersService.update(uid, userUpdates);
+      res.send({ status: 'success', message: 'User updated successfully', payload: result });
+
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message });
     }
   }
 }

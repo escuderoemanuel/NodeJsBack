@@ -5,7 +5,7 @@ const getRole = require('../middlewares/getRole.middleware');
 
 const router = Router();
 
-// Deberá listar todos los carritos (No lo pide el desafío).
+// Deberá listar todos los carritos.
 router.get('/', verifyToken, CartsController.getAll)
 
 // Deberá crear un nuevo carrito con id y products[].

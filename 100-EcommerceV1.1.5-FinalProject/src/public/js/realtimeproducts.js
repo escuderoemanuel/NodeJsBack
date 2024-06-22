@@ -48,7 +48,8 @@ productList.addEventListener('click', async (e) => {
       if (response.status === 200) {
         socket.emit('delete-product', response);
       } else {
-        console.error('Failed to delete product');
+        console.log('response', response);
+        alert(response.error);
       }
     } catch (error) {
       console.error(error);
