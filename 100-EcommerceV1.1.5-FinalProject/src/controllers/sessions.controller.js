@@ -23,6 +23,16 @@ class SessionsController {
         });
       }
 
+      const existingUser = await usersService.getByEmail(email)
+      if (existingUser) {
+        throw new CustomErrors({
+          name: 'User creation error',
+          cause: getUserRegisterErrorInfo({ email }),
+          message: 'User already exists',
+          code: TypesOfErrors.AUTHENTICATION_ERROR
+        });
+      }
+
       await mailingsService.sendRegisterEmail(req.user.email);
       res.send({ status: 'success', message: 'Successfully registered user.', payload: req.user });
     } catch (error) {
@@ -31,7 +41,7 @@ class SessionsController {
   }
 
   static async getRegisterError(req, res) {
-    res.status(401).send({ status: 'error', error: 'Registration failed.' });
+    res.status(401).send({ status: 'error', error: 'Register failed' });
   }
 
   //? LOGIN

@@ -1,4 +1,4 @@
-const { productsService } = require('../repositories');
+const { productsService, usersService } = require('../repositories');
 const ProductsModel = require('../dao/models/products.model');
 const CustomErrors = require('../utils/errors/CustomErrors');
 const { getCreateProductErrorInfo } = require('../utils/errors/ErrorInfo');
@@ -166,56 +166,39 @@ class ProductsController {
         })
       }
 
-      // case 1 = role = admin & email = owner -> delete --------> ''
-      // case 2 = role = admin & email != owner -> delete & email --------> 'OK'
-      // case 3 = role = premium & email != owner -> error --------> 'OK'
-      // case 4 = role = premium & email = owner -> delete --------> 'OK'
-      const role = req.user.role;
-      const email = req.user.email;
-      const owner = productToDelete.owner;
+      // Los 'admin' pueden eliminar un producto, pero si el owner del producto es 'premium' debe enviarle un email
+      // Los 'premium' solamente pueden eliminar productos que ellos hayan creado
 
-      /* switch (role, email, owner) {
-        case ('admin' && email === owner):
-          await productsService.delete(pid);
+      const currentRole = req.user.role; // Role del usuario logeado
+      const currentEmail = req.user.email; // Email del usuario logeado
+      const ownerEmail = productToDelete.owner; // Email del owner del product
+      const owner = await usersService.getByEmail(ownerEmail); // Owner completo
+      const productOwnerRole = owner.role; // Role del owner del producto
+
+      switch (currentRole) {
+        case 'admin':
+          if (currentEmail !== ownerEmail && productOwnerRole === 'premium') {
+            await productsService.delete(pid);
+            await mailingsService.sendDeletedProduct(ownerEmail);
+          } else {
+            await productsService.delete(pid);
+          }
           break;
-        case ('admin' && email !== owner):
-          await productsService.delete(pid);
-          await mailingsService.sendDeletedProduct(owner);
+
+        case 'premium':
+          if (currentEmail === ownerEmail) {
+            await productsService.delete(pid);
+          } else {
+            throw new CustomErrors({
+              name: 'Product delete error',
+              cause: 'Product deleting error',
+              message: 'Only owners or @admin user can delete products',
+              code: TypesOfErrors.INVALID_PARAM_ERROR
+            });
+          }
           break;
-        case ('premium' && email === owner):
-          await productsService.delete(pid);
-          break;
-        case ('premium', email !== owner):
-          throw new CustomErrors({
-            name: 'Product delete error',
-            cause: 'Product deleting error',
-            message: 'Only owners or @admin user can delete products they have created',
-            code: TypesOfErrors.INVALID_PARAM_ERROR
-          })
-      } */
-
-      if (role === 'admin' && email === owner) {
-        await productsService.delete(pid);
       }
 
-      if (role === 'admin' && email !== owner) { //! OK
-        await productsService.delete(pid);
-        await mailingsService.sendDeletedProduct(owner);
-      }
-      if (role === 'premium' && email === owner) {
-        await productsService.delete(pid);
-      }
-      if (role === 'premium' && email !== owner) {
-        // CUSTOM ERROR
-        throw new CustomErrors({
-          name: 'Product delete error',
-          cause: 'Product deleting error',
-          message: 'Only owners or @admin user can delete products they have created',
-          code: TypesOfErrors.INVALID_PARAM_ERROR
-        })
-      }
-
-      // await productsService.delete(pid);
       res.send({ status: 'success', deletedProduct: { productToDelete } });
     } catch (error) {
       next(error)

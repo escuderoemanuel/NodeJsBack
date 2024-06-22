@@ -1,4 +1,4 @@
-const registerForm = document.getElementById('registerForm')
+const registerForm = document.getElementById('registerForm');
 
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -9,7 +9,6 @@ registerForm.addEventListener('submit', async (e) => {
 
   data.forEach((value, key) => (payload[key] = value));
 
-  //? Verifications
   // Limpiar el mensaje de error antes de hacer las validaciones nuevamente
   document.querySelector('.infoMessage').textContent = '';
 
@@ -46,12 +45,17 @@ registerForm.addEventListener('submit', async (e) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(res => res.json()).then(
-    );
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      document.querySelector('.infoMessage').textContent = responseData.error || 'An error occurred during registration';
+      return;
+    }
 
     registerForm.reset();
     window.location.replace('/login');
-
   } catch (error) {
     document.querySelector('.infoMessage').textContent = 'Register error occurred while processing your request.';
   }

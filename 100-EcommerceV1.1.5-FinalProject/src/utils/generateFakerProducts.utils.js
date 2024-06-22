@@ -3,7 +3,7 @@ const { options } = require('../routes/products.router');
 
 const generateFakerProducts = () => {
   return {
-    id: faker.database.mongodbObjectId(),
+    // id: faker.database.mongodbObjectId(),
     title: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     price: faker.commerce.price(),

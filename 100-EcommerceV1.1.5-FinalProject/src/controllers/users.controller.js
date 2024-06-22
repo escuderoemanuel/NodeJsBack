@@ -17,9 +17,9 @@ const upload = multer({ storage: storage }).array('document', 3);
 
 class UsersController {
   static async getAll(req, res) {
-    const uid = req.user.id;
+    // const uid = req.user.id;
     try {
-      const user = await usersService.getById(uid);
+      // const user = await usersService.getById(uid);
       const users = await usersService.getAll();
 
       const usersDTO = users.map(u => {

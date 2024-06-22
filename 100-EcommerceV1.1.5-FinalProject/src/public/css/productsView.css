@@ -71,3 +71,9 @@
 .btnAddToCart {
   margin-top: auto;
 }
+
+.btnAddToCart.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
