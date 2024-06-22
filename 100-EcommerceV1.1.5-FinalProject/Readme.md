@@ -21,8 +21,6 @@
 
 [x] Mostrar carrousel de img en los productos
 
-[x] Chequear que valide correctamente en el register si un email ya esta registrado y no redirija a login, sino que muestre el error
-
 ## Aspectos a incluir
 
 1. Desde el router de /api/users, crear tres rutas:

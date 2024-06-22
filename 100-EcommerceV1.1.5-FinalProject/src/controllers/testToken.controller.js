@@ -9,7 +9,7 @@ class TestTokenController {
       const testToken = jwt.sign(testUser, JWT_PRIVATE_KEY, { expiresIn: '7d' }); // Token válido por 7 días
       res.json({ token: testToken });
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error in TestToken' });
     }
   }
 }

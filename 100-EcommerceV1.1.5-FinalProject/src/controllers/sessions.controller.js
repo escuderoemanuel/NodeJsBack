@@ -23,20 +23,11 @@ class SessionsController {
         });
       }
 
-      const existingUser = await usersService.getByEmail(email)
-      if (existingUser) {
-        throw new CustomErrors({
-          name: 'User creation error',
-          cause: getUserRegisterErrorInfo({ email }),
-          message: 'User already exists',
-          code: TypesOfErrors.AUTHENTICATION_ERROR
-        });
-      }
 
       await mailingsService.sendRegisterEmail(req.user.email);
       res.send({ status: 'success', message: 'Successfully registered user.', payload: req.user });
     } catch (error) {
-      res.status(500).send({ error: 'Internal server error', details: error.message });
+      res.status(500).send({ error: 'Internal server error in register', details: error.message });
     }
   }
 
@@ -68,7 +59,7 @@ class SessionsController {
       res.send({ status: 'success', message: 'User logged successfully' });
     } catch (error) {
       console.error('Error in loginUser:', error);
-      res.status(500).send({ error: 'Internal server error', details: error.message });
+      res.status(500).send({ error: 'Internal server error in login', details: error.message });
     }
   }
 
@@ -108,7 +99,7 @@ class SessionsController {
         res.status(200).send({ status: 'success', message: 'Logout successful' });
       }
     } catch (error) {
-      res.status(500).send({ error: 'Internal server error', details: error.message });
+      res.status(500).send({ error: 'Internal server error in logout', details: error.message });
     }
   }
 
