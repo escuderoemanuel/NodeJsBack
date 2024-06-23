@@ -4,15 +4,39 @@ const productList = document.getElementById('products');
 /* ADD */
 const btnAddToCart = document.getElementById('btnAddToCart');
 
-const addToCart = (cid, pid) => {
+/* const addToCart = (cid, pid) => {
   fetch(`/api/carts/${cid}/product/${pid}`, {
     method: "POST"
-  }).then(res => {
+  }).then(res => { console.log('res.status', res.status) }).then(alert(`Error ${res.status}`)).then(res => {
     if (res.status === 200) {
       window.location.reload();
     }
   });
+}; */
+
+const addToCart = async (cid, pid) => {
+  const res = await fetch(`/api/carts/${cid}/product/${pid}`, {
+    method: "POST"
+  }).then(res => {
+    if (!res.ok) {
+      // Si la respuesta no es exitosa, extraemos el mensaje de error
+      return res.json().then(errorData => {
+        throw new Error(errorData.error); // Lanzamos un error con el mensaje recibido
+      });
+    }
+    return res.json(); // Si la respuesta es exitosa, convertimos a JSON
+  })
+    .then(data => {
+      // Aquí puedes manejar la respuesta exitosa si es necesario
+      window.location.reload();
+    })
+    .catch(error => {
+      // Aquí manejamos el error
+      alert('Error:', error.message);
+      console.error('Error:', error.message);
+    });
 };
+
 
 
 //? Recibo la lista actualizada de productos y la renderizo en el cliente.
@@ -35,6 +59,7 @@ socket.on('update-products', products => {
         <p> <span>code:</span> ${product.code}</p>
         <p> <span>stock:</span> ${product.stock}</p>
         <p> <span>category:</span> ${product.category}</p>
+        <p> <span>owner:</span> ${product.owner}</p>
         <p> <span>status:</span> ${product.status}</p>
       </div>
       <button class='btnAddToCart'>Add to Cart</button>

@@ -15,11 +15,11 @@
     - Se suben tanto desde el front como de postman, pero me da error y no se guardan en la base de datos
     - Subir img de perfil y que se muestre en el header junto con el btn de logout
 
-
 [x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones al eliminar un producto que pertenece a otro user
 
 [x] Si hago un purchase de un carrito con un producto sin stock, debería darme un mensaje de error
 
+[x] Que el status sea true cuando se crea el producto y ya no cambie
 ## Aspectos a incluir
 
 1. Desde el router de /api/users, crear tres rutas:
