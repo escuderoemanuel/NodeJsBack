@@ -66,7 +66,17 @@ const path = require('path');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     try {
-      let destinationFolder = 'documents';
+      console.log('file.fieldname', file.fieldname);
+      let destinationFolder;
+      if (file.fieldname === 'profilePicture') {
+        destinationFolder = 'profiles';
+      } else if (file.fieldname === 'product') {
+        destinationFolder = 'products';
+      } else {
+        destinationFolder = 'documents';
+      }
+
+
       const fullPath = path.join(`${__dirname}/../public/filesUploadedByUser/${destinationFolder}`);
 
       if (!fs.existsSync(fullPath)) {

@@ -12,7 +12,6 @@
 # ============= WORK ON =============  #
 
 [x] Vista de Profile para subir archivos
-    - Se suben tanto desde el front como de postman, pero me da error y no se guardan en la base de datos
     - Subir img de perfil y que se muestre en el header junto con el btn de logout
 
 # !!!! ERRORS !!!

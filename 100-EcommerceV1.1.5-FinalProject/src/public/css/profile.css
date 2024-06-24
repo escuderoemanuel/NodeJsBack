@@ -30,6 +30,11 @@
 
 .profile h4 {
   margin-top: 1.5rem;
+  text-decoration: underline;
+  color: red;
+  text-align: center;
+  font-size: .9em;
+  font-weight: bold;
 }
 
 .userDocs {

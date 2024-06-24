@@ -18,4 +18,5 @@ usersRouter.get('/premium/:uid', verifyToken, UsersController.changeRole);
 usersRouter.post('/:uid/documents', verifyToken, upload.any(), UsersController.uploadDocuments)
 
 
+
 module.exports = usersRouter
