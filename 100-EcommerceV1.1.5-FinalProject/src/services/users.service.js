@@ -48,27 +48,7 @@ class UsersService {
     return await this.update(uid, { lastConnection: new Date() });
   }
 
-  //! Estoy aqui cambiando el codigo para que se suba cada archivo donde correcponde
-  /* async addDocuments(uid, files) {
-    const user = await this.getById(uid);
-    if (!user) {
-      throw new Error(`User with id ${uid} not found`);
-    }
-    let profilePicture = user.documents.profilePicture
-    let identification = user.documents.identification
-    let proofOfAddress = user.documents.proofOfAddress
-    let proofOfAccountStatus = user.documents.proofOfAccountStatus 
-    
-    let documents = user.documents || [];
-    documents = [
-      ...documents,
-      ...files.map(file => ({
-        name: file.name,
-        reference: file.path.split('public')[1].replace(/\\/g, '/')
-      }))
-    ];
-    return await this.update(uid, { documents });
-  } */
+
   async addDocuments(uid, files) {
     const user = await this.getById(uid);
     if (!user) {

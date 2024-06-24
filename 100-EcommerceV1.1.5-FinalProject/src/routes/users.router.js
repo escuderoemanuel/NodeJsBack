@@ -15,8 +15,6 @@ usersRouter.delete('/:uid', verifyToken, getRole('admin'), UsersController.delet
 
 usersRouter.get('/premium/:uid', verifyToken, UsersController.changeRole);
 
-// usersRouter.post('/:uid/documents', verifyToken, upload.any(), UsersController.uploadDocuments)
-
 usersRouter.post('/:uid/documents', verifyToken, upload.fields([
   { name: 'profilePicture', maxCount: 1 },
   { name: 'identification', maxCount: 1 },

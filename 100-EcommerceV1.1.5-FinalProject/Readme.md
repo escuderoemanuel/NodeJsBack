@@ -17,6 +17,14 @@
 # !!!! ERRORS !!!
 
 
+# TODO:
+
+- Readme con documentación
+- Revisar cada archivo para eliminar logs y comentarios innecesarios
+- Convertir los err en error
+- Convertir los res en response
+
+
 
 ## Aspectos a incluir
 

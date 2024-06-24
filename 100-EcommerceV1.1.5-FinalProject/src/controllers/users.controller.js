@@ -79,14 +79,36 @@ class UsersController {
 
   static async uploadDocuments(req, res) {
     const { uid } = req.params;
-    const documents = Object.keys(req.files).map(fieldname => ({
-      name: req.files[fieldname][0].originalname,
-      path: req.files[fieldname][0].path,
-      type: fieldname
-    }));
+    const files = req.files;
+
+    const documents = {
+      profilePicture: 'profilePicture',
+      identification: 'identification',
+      proofOfAddress: 'proofOfAddress',
+      proofOfAccountStatus: 'proofOfAccountStatus'
+    }
+    
     try {
-      const result = await usersService.addDocuments(uid, documents);
-      res.send({ status: 'success', payload: result });
+      const user = await usersService.getById(uid);
+      if (!user) {
+        return res.status(404).send({ status: 'error', message: 'User not found' });
+      }
+
+      // Asigno los docs subidos al campo que le corresponde
+      Object.keys(files).forEach(field => {
+        const file = files[field][0];
+        const docType = documents[field];
+        if (docType) {
+          user.documents[docType] = {
+            name: file.originalname,
+            reference: file.path.split('public')[1].replace(/\\/g, '/'),
+          }
+        }
+      })
+
+      const result = await usersService.update(uid, user);
+      // const result = await usersService.addDocuments(uid, documents);
+      res.send({ status: 'success',message: 'Documents uploaded successfully', payload: result });
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message });
     }

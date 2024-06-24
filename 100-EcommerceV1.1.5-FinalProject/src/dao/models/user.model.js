@@ -31,10 +31,10 @@ const userSchema = new mongoose.Schema({
     ref: 'Cart',
   },
   documents: {
-    profilePicture: { type: String, default: null },
-    identification: { type: String, default: null },
-    proofOfAddress: { type: String, default: null },
-    proofOfAccountStatus: { type: String, default: null },
+    profilePicture: { type: Object, default: null },
+    identification: { type: Object, default: null },
+    proofOfAddress: { type: Object, default: null },
+    proofOfAccountStatus: { type: Object, default: null },
   },
 });
 
