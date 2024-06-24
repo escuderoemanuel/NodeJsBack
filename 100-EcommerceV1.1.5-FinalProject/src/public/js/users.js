@@ -63,7 +63,6 @@ function updateUserRole(uid) {
       }
     })
     .catch(error => {
-      console.error('Error updating user role:', error);
       Swal.fire({
         color: "#eee",
         position: 'center',
@@ -85,7 +84,8 @@ function deleteUser(id) {
     headers: {
       'Content-Type': 'application/json'
     },
-  }).then(res => {
+  }).then(async res => {
+    const response = await res.json();
     if (res.status === 200) {
       Swal.fire({
         color: "#eee",
@@ -110,14 +110,13 @@ function deleteUser(id) {
         icon: 'warning',
         title: 'Oops...',
         position: 'center',
-        text: response.error,
+        text: response.message,
         showConfirmButton: false,
         timer: 3000
       })
-
-      setTimeout(() => {
+      /* setTimeout(() => {
         window.location.reload();
-      }, 3000);
+      }, 3000); */
     }
   });
 }

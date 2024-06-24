@@ -19,25 +19,24 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
-    default: 'user'
+    enum: ['user', 'premium', 'admin'],
+    default: 'user',
   },
   lastConnection: {
     type: Date,
-    default: null
+    default: null,
   },
   cart: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Cart'
+    ref: 'Cart',
   },
-  documents: [
-    {
-      name: String,
-      reference: String
-    }
-  ]
+  documents: {
+    profilePicture: { type: String, default: null },
+    identification: { type: String, default: null },
+    proofOfAddress: { type: String, default: null },
+    proofOfAccountStatus: { type: String, default: null },
+  },
 });
 
-const UserModel = mongoose.model('users', userSchema);
+const UserModel = mongoose.model('User', userSchema);
 module.exports = UserModel;
-

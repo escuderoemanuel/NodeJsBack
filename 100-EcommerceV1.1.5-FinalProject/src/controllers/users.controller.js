@@ -1,20 +1,20 @@
 const { usersService } = require('../repositories');
 const UserDTO = require('../dao/DTOs/UserDTO');
-const path = require('path');
-const multer = require('multer');
-const { listeners } = require('../dao/models/products.model');
+// const path = require('path');
+// const multer = require('multer');
+// const { listeners } = require('../dao/models/products.model');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/');
+//   },
+//   filename: function (req, file, cb) {
+//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//     cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+//   }
+// });
 
-const upload = multer({ storage: storage }).array('document', 3);
+// const upload = multer({ storage: storage }).array('document', 3);
 
 class UsersController {
   static async getAll(req, res) {
@@ -22,7 +22,6 @@ class UsersController {
     try {
       const user = await usersService.getById(uid);
       const users = await usersService.getAll();
-
       const usersDTO = users.map(u => {
         const userDTO = new UserDTO(u);
         return {
@@ -32,64 +31,59 @@ class UsersController {
           isAdmin: u.role === 'admin'
         };
       });
-
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
         res.render('users', { user, users: usersDTO });
       } else {
         res.send({ status: 'success', payload: usersDTO });
       }
-
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message });
     }
   }
 
 
+  static async handleRoleChange(user, userUpdates) {
+    if (userUpdates.role && user.role === 'user' && (userUpdates.role === 'premium' || userUpdates.role === 'admin')) {
+      const requiredDocuments = [
+        user.documents.identification,
+        user.documents.proofOfAddress,
+        user.documents.proofOfAccountStatus,
+      ];
+      if (requiredDocuments.some(d => d === null)) {
+        throw new Error('The user has not finished uploading the required documentation');
+      }
+    }
+    if (userUpdates.role && user.role !== 'user' && userUpdates.role === 'user') {
+      userUpdates.role = 'user';
+    }
+    return userUpdates;
+  }
+
+
   static async changeRole(req, res) {
-    const uid = req.params.uid;
+    const { uid } = req.params;
+    const userUpdates = req.body;
     try {
       const user = await usersService.getById(uid);
-      if (!['user', 'premium'].includes(user.role)) {
-        throw new Error(`The user's role is not valid`)
-      }
-
-      const requiredDocuments = [
-        'Identification',
-        'Proof of Address',
-        'Proof of Account Status'
-      ];
-
-      if (user.role === 'user') {
-        if (!user.documents.some(d => d.name.includes('Identification'))) {
-          throw new Error('The user has not finished uploading the required documentation')
-        }
-        if (!user.documents.some(d => d.name.includes('Proof of Address'))) {
-          throw new Error('The user has not finished uploading the required documentation')
-        }
-        if (!user.documents.some(d => d.name.includes('Proof of Account Status'))) {
-          throw new Error('The user has not finished uploading the required documentation')
-        }
-      }
-
-      user.role = user.role === 'user' ? 'premium' : 'user'
-
-      let updatedUser = await usersService.update(user._id.toString(), { $set: { role: user.role } });
-      res.send({ status: 'success', message: `role updated to '${user.role}'` })
-
+      // console.log('user', user)
+      // console.log('user documents', user.documents)
+      const updatedUser = UsersController.handleRoleChange(user, userUpdates);
+      const result = await usersService.update(uid, updatedUser);
+      res.send({ status: 'success', message: 'User updated successfully', payload: result });
     } catch (error) {
-      res.status(500).send({ status: 'error', error: error.message })
+      res.status(500).send({ status: 'error', error: error.message });
     }
   }
 
 
   static async uploadDocuments(req, res) {
     const { uid } = req.params;
-    const documents = req.files.map(file => ({
-      name: file.originalname,
-      path: file.path
+    const documents = Object.keys(req.files).map(fieldname => ({
+      name: req.files[fieldname][0].originalname,
+      path: req.files[fieldname][0].path,
+      type: fieldname
     }));
-
     try {
       const result = await usersService.addDocuments(uid, documents);
       res.send({ status: 'success', payload: result });
@@ -108,9 +102,14 @@ class UsersController {
     }
   }
 
+
   static async delete(req, res) {
     try {
       const { uid } = req.params;
+      const currentUser = req.user;
+      if (uid === currentUser.id) {
+        return res.status(400).send({ status: 'error', message: 'You cannot delete your own account' })
+      }
       const result = await usersService.delete(uid);
       res.send({ status: 'success', payload: result })
     } catch (error) {
@@ -122,31 +121,13 @@ class UsersController {
   static async update(req, res) {
     const { uid } = req.params;
     const userUpdates = req.body;
-
     try {
       const user = await usersService.getById(uid);
-
-      if (userUpdates.role && user.role === 'user' && (userUpdates.role === 'premium' || userUpdates.role === 'admin')) {
-        const requiredDocuments = [
-          'Identification',
-          'Proof of Address',
-          'Proof of Account Status'
-        ];
-
-        for (const doc of requiredDocuments) {
-          if (!user.documents.some(d => d.name.includes(doc))) {
-            throw new Error(`The user has not finished uploading the required documentation: ${doc}`);
-          }
-        }
-      }
-
-      if (userUpdates.role && user.role !== 'user' && userUpdates.role === 'user') {
-        userUpdates.role = 'user';
-      }
-
-      const result = await usersService.update(uid, userUpdates);
+      // console.log('user', user)
+      // console.log('user documents', user.documents)
+      const updatedUser = await UsersController.handleRoleChange(user, userUpdates);
+      const result = await usersService.update(uid, updatedUser);
       res.send({ status: 'success', message: 'User updated successfully', payload: result });
-
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message });
     }

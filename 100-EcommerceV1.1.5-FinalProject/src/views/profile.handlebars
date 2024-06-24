@@ -6,7 +6,7 @@
     <p><span>Email:</span> {{user.email}}</p>
     <p><span>UID:</span> {{user.id}}</p>
     {{#if user.age}}
-    <p><span>Age:</span> {{ user.age }}</p>
+    <p><span>Age:</span> {{user.age}}</p>
     {{else}}
     <p><span>Age:</span> N/A</p>
     {{/if}}
@@ -29,16 +29,15 @@
       <input class='fileInput' type="file" name='identification' id='identification'>
     </div>
     <div>
-      <label for="proof-of-address">Proof of Address:</label>
-      <input class='fileInput' type="file" name='proofOfAddress' id='proof-of-address'>
+      <label for="proofOfAddress">Proof of Address:</label>
+      <input class='fileInput' type="file" name='proofOfAddress' id='proofOfAddress'>
     </div>
     <div>
-      <label for="proof-of-account-status">Proof of Account Status:</label>
-      <input class='fileInput' type="file" name='proofOfAccountStatus' id='proof-of-account-status'>
+      <label for="proofOfAccountStatus">Proof of Account Status:</label>
+      <input class='fileInput' type="file" name='proofOfAccountStatus' id='proofOfAccountStatus'>
     </div>
     <button type="submit" id='sendDocumentation-{{user.id}}'>Send Documentation</button>
   </form>
-
 </section>
 
 {{!-- Para tener acceso a socket.io --}}

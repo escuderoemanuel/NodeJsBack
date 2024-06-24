@@ -48,12 +48,17 @@ class UsersService {
     return await this.update(uid, { lastConnection: new Date() });
   }
 
-
-  async addDocuments(uid, files) {
+  //! Estoy aqui cambiando el codigo para que se suba cada archivo donde correcponde
+  /* async addDocuments(uid, files) {
     const user = await this.getById(uid);
     if (!user) {
       throw new Error(`User with id ${uid} not found`);
     }
+    let profilePicture = user.documents.profilePicture
+    let identification = user.documents.identification
+    let proofOfAddress = user.documents.proofOfAddress
+    let proofOfAccountStatus = user.documents.proofOfAccountStatus 
+    
     let documents = user.documents || [];
     documents = [
       ...documents,
@@ -63,7 +68,37 @@ class UsersService {
       }))
     ];
     return await this.update(uid, { documents });
+  } */
+  async addDocuments(uid, files) {
+    const user = await this.getById(uid);
+    if (!user) {
+      throw new Error(`User with id ${uid} not found`);
+    }
+
+    // Definir un mapa para asociar los nombres de los archivos con los documentos correspondientes
+    const documentMap = {
+      profilePicture: 'profilePicture',
+      identification: 'identification',
+      proofOfAddress: 'proofOfAddress',
+      proofOfAccountStatus: 'proofOfAccountStatus',
+    };
+
+    // Iterar sobre los archivos y actualizarlos en el usuario
+    files.forEach(file => {
+      const docType = documentMap[file.type];
+      if (docType) {
+        user.documents[docType] = {
+          name: file.name,
+          reference: file.path.split('public')[1].replace(/\\/g, '/'),
+        };
+      }
+    });
+
+    // await user.save();
+    const userUpdated = await this.update(uid, { documents });
+    return userUpdated;
   }
+
 
 
   async changeRole(uid) {
