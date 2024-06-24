@@ -59,7 +59,7 @@ class UsersController {
         'Proof of Account Status'
       ];
 
-      if (user.role == 'user') {
+      if (user.role === 'user') {
         if (!user.documents.some(d => d.name.includes('Identification'))) {
           throw new Error('The user has not finished uploading the required documentation')
         }
@@ -71,7 +71,7 @@ class UsersController {
         }
       }
 
-      user.role = user.role == 'user' ? 'premium' : 'user'
+      user.role = user.role === 'user' ? 'premium' : 'user'
 
       let updatedUser = await usersService.update(user._id.toString(), { $set: { role: user.role } });
       res.send({ status: 'success', message: `role updated to '${user.role}'` })
@@ -101,6 +101,10 @@ class UsersController {
       }
     });
   }
+
+
+
+
 
   static async deleteInactive(req, res) {
     try {

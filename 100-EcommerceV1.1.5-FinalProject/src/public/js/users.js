@@ -29,16 +29,52 @@ function updateUserRole(uid) {
     .then(async res => {
       const response = await res.json();
       if (res.status === 200) {
-        alert(response.message);
-        window.location.reload();
+        Swal.fire({
+          color: "#eee",
+          position: 'center',
+          background: "#222",
+          icon: 'success',
+          title: 'Success!',
+          position: 'center',
+          text: 'The user role has been updated.',
+          showConfirmButton: false,
+          timer: 3000
+        })
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } else {
-        alert(response.error);
-        window.location.reload();
+        Swal.fire({
+          color: "#eee",
+          position: 'center',
+          background: "#222",
+          icon: 'warning',
+          title: 'Oops...',
+          position: 'center',
+          text: response.error,
+          showConfirmButton: false,
+          timer: 3000
+        })
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
     })
     .catch(error => {
       console.error('Error updating user role:', error);
-      alert('An error occurred while updating the user role.');
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'warning',
+        title: 'Oops...',
+        position: 'center',
+        text: 'An error occurred while updating the user role.',
+        showConfirmButton: false,
+        timer: 3000
+      })
     });
 }
 
@@ -51,7 +87,37 @@ function deleteUser(id) {
     },
   }).then(res => {
     if (res.status === 200) {
-      window.location.reload();
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'success',
+        title: 'Success!',
+        position: 'center',
+        text: 'The user has been deleted.',
+        showConfirmButton: false,
+        timer: 3000
+      })
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } else {
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'warning',
+        title: 'Oops...',
+        position: 'center',
+        text: response.error,
+        showConfirmButton: false,
+        timer: 3000
+      })
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
   });
 }
@@ -61,7 +127,37 @@ function deleteInactiveUsers() {
     method: 'DELETE'
   }).then(res => {
     if (res.status === 200) {
-      window.location.reload();
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'success',
+        title: 'Success!',
+        position: 'center',
+        text: 'The inactive users have been deleted.',
+        showConfirmButton: false,
+        timer: 3000
+      })
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } else {
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'warning',
+        title: 'Oops...',
+        position: 'center',
+        text: response.error,
+        showConfirmButton: false,
+        timer: 3000
+      })
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
   });
 }

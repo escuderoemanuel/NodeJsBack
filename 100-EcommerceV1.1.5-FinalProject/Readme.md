@@ -15,8 +15,6 @@
     - Se suben tanto desde el front como de postman, pero me da error y no se guardan en la base de datos
     - Subir img de perfil y que se muestre en el header junto con el btn de logout
 
-[x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones al eliminar un producto que pertenece a otro user
-
 # !!!! ERRORS !!!
 
 
