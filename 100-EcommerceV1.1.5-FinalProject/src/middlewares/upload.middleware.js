@@ -1,4 +1,4 @@
-const multer = require('multer');
+/* const multer = require('multer');
 const { DateTime } = require('luxon');
 const fs = require('fs');
 const path = require('path');
@@ -45,6 +45,48 @@ const storage = multer.diskStorage({
       let readableTime = DateTime.fromMillis(timestampMs).toFormat('HH-mm-ss');
 
       // Armo el nombre final del archivo que se sube
+      cb(null, `${readableDate}_${readableTime} - ${file.originalname}`);
+
+    } catch (error) {
+      console.error('Error in filename function:', error);
+      cb(error);
+    }
+  }
+});
+
+const upload = multer({ storage: storage });
+
+module.exports = upload;
+ */
+const multer = require('multer');
+const { DateTime } = require('luxon');
+const fs = require('fs');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    try {
+      let destinationFolder = 'documents';
+      const fullPath = path.join(`${__dirname}/../public/filesUploadedByUser/${destinationFolder}`);
+
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true });
+      }
+
+      cb(null, fullPath);
+
+    } catch (err) {
+      console.error('Error in destination function:', err);
+      cb(err);
+    }
+  },
+
+  filename: function (req, file, cb) {
+    try {
+      let timestampMs = Date.now();
+      let readableDate = DateTime.fromMillis(timestampMs).toFormat('dd-MM-yyyy');
+      let readableTime = DateTime.fromMillis(timestampMs).toFormat('HH-mm-ss');
+
       cb(null, `${readableDate}_${readableTime} - ${file.originalname}`);
 
     } catch (error) {

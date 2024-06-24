@@ -81,26 +81,41 @@ class UsersController {
     }
   }
 
+  /*  static async uploadDocuments(req, res) {
+     upload(req, res, async (error) => {
+       if (error) {
+         return res.status(400).send({ status: 'error', error: error.message });
+       }
+ 
+       const { uid } = req.params;
+       const documents = req.files.map(file => ({
+         name: file.originalname,
+         path: file.path
+       }));
+ 
+       try {
+         const result = await usersService.addDocuments(uid, documents);
+         res.send({ status: 'success', payload: result });
+       } catch (error) {
+         res.status(500).send({ status: 'error', error: error.message });
+       }
+     });
+   } */
   static async uploadDocuments(req, res) {
-    upload(req, res, async (error) => {
-      if (error) {
-        return res.status(400).send({ status: 'error', error: error.message });
-      }
+    const { uid } = req.params;
+    const documents = req.files.map(file => ({
+      name: file.originalname,
+      path: file.path
+    }));
 
-      const { uid } = req.params;
-      const documents = req.files.map(file => ({
-        name: file.originalname,
-        path: file.path
-      }));
-
-      try {
-        const result = await usersService.addDocuments(uid, documents);
-        res.send({ status: 'success', payload: result });
-      } catch (error) {
-        res.status(500).send({ status: 'error', error: error.message });
-      }
-    });
+    try {
+      const result = await usersService.addDocuments(uid, documents);
+      res.send({ status: 'success', payload: result });
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message });
+    }
   }
+
 
 
 

@@ -22,18 +22,19 @@
     enctype="multipart/form-data">
     <div>
       <label for="identification">Identification:</label>
-      <input class='fileInput' type="file" name='document' id='identification'>
+      <input class='fileInput' type="file" name='identification' id='identification'>
     </div>
     <div>
       <label for="proof-of-address">Proof of Address:</label>
-      <input class='fileInput' type="file" name='document' id='proof-of-address'>
+      <input class='fileInput' type="file" name='proofOfAddress' id='proof-of-address'>
     </div>
     <div>
       <label for="proof-of-account-status">Proof of Account Status:</label>
-      <input class='fileInput' type="file" name='document' id='proof-of-account-status'>
+      <input class='fileInput' type="file" name='proofOfAccountStatus' id='proof-of-account-status'>
     </div>
     <button type="submit" id='sendDocumentation-{{user.id}}'>Send Documentation</button>
   </form>
+
 </section>
 
 {{!-- Para tener acceso a socket.io --}}
