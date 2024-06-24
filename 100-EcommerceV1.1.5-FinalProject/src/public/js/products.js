@@ -4,34 +4,45 @@ const productList = document.getElementById('products');
 /* ADD */
 const btnAddToCart = document.getElementById('btnAddToCart');
 
-/* const addToCart = (cid, pid) => {
-  fetch(`/api/carts/${cid}/product/${pid}`, {
-    method: "POST"
-  }).then(res => { console.log('res.status', res.status) }).then(alert(`Error ${res.status}`)).then(res => {
-    if (res.status === 200) {
-      window.location.reload();
-    }
-  });
-}; */
-
 const addToCart = async (cid, pid) => {
   const res = await fetch(`/api/carts/${cid}/product/${pid}`, {
     method: "POST"
   }).then(res => {
     if (!res.ok) {
-      // Si la respuesta no es exitosa, extraemos el mensaje de error
+      // Respuesta no exitosa, extraigo el mensaje de error
       return res.json().then(errorData => {
-        throw new Error(errorData.error); // Lanzamos un error con el mensaje recibido
+        throw new Error(errorData.error); // Disparo un error que recibe el catch
       });
     }
-    return res.json(); // Si la respuesta es exitosa, convertimos a JSON
+    return res.json(); // Respuesta exitosa, convierto a JSON
   })
     .then(data => {
-      // Aquí puedes manejar la respuesta exitosa si es necesario
-      window.location.reload();
+      // Acción luego de tener la res convertida a JSON
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'success',
+        title: 'Success',
+        text: 'Product added to cart',
+        showConfirmButton: false,
+        timer: 2500,
+      });
+      // Recargar la página para actualizar la lista de productos
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     })
     .catch(error => {
-      alert('Error: ' + error.message);
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'warning',
+        title: 'Oops...',
+        text: error.message,
+        confirmButtonColor: "#43c09e",
+      });
       console.error(`Error: ${error.message}`);
     });
 };
@@ -77,12 +88,9 @@ productList.addEventListener('click', async (e) => {
       const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
       });
-      console.log('products.js response antes del if:', response);
       if (!response.ok) {
         // Si la respuesta no es exitosa, extraemos el mensaje de error
-        console.log('products.js response:', response);
         const errorData = await response.json();
-        console.log('products.js response.json:', errorData);
         const errorMessage = errorData.message || errorData.error || 'Unknown error';
         throw new Error(errorMessage);
       }
@@ -96,30 +104,17 @@ productList.addEventListener('click', async (e) => {
       // Recargar la página para actualizar la lista de productos
       window.location.reload();
     } catch (error) {
-      alert('Error: ' + error.message);
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'warning',
+        title: 'Oops...',
+        text: error.message,
+        confirmButtonColor: "#43c09e",
+      });
+      // alert('Error: ' + error.message);
       console.error(`Error: ${error.message}`);
     }
   }
 });
-
-
-/*
-    if (!res.ok) {
-    // Si la respuesta no es exitosa, extraemos el mensaje de error
-    return res.json().then(errorData => {
-      throw new Error(errorData.error); // Lanzamos un error con el mensaje recibido
-    });
-  }
-  return res.json(); // Si la respuesta es exitosa, convertimos a JSON
-})
-  .then(data => {
-    // Aquí puedes manejar la respuesta exitosa si es necesario
-    window.location.reload();
-  })
-  .catch(error => {
-    alert('Error: ' + error.message);
-    console.error(`Error: ${error.message}`);
-  }); 
-     
-});
-*/

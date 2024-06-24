@@ -1,279 +1,422 @@
 [
   {
-    "title": "iPhone 9",
-    "description": "An apple mobile which is nothing like apple",
-    "price": 549,
+    "title": "Bespoke Plastic Table",
+    "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+    "price": "272.00",
     "thumbnails": [
-      "https://i.ibb.co/C7YbfcL/iphone9-01.jpg",
-      "https://i.ibb.co/qntSrfY/iphone9-02.jpg",
-      "https://i.ibb.co/y8frZ5d/iphone9-03.jpg"
+      "https://picsum.photos/seed/kjtEhxHn0/640/480",
+      "https://loremflickr.com/640/480?lock=511625945677824"
     ],
-    "code": "i9sm001",
+    "code": "Dt4wxbBw",
     "stock": 9,
-    "category": "smartphones",
+    "category": "Toys",
+    "owner": "admin@admin.com",
     "status": true
   },
   {
-    "title": "iPhone X",
-    "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-    "price": 899,
+    "title": "Modern Bronze Chicken",
+    "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+    "price": "785.00",
     "thumbnails": [
-      "https://i.ibb.co/s3M2GBS/iphone-X-01.jpg",
-      "https://i.ibb.co/Y8GVNHR/iphone-X-02.jpg",
-      "https://i.ibb.co/PgR9G28/iphone-X-03.jpg",
-      "https://i.ibb.co/FYbsQ2b/iphone-X-04.jpg"
+      "https://picsum.photos/seed/jlWckOqX/640/480",
+      "https://loremflickr.com/640/480?lock=1302817901903872"
     ],
-    "code": "iXsm002",
-    "stock": 34,
-    "category": "smartphones",
+    "code": "1EmnQwCr",
+    "stock": 2,
+    "category": "Jewelery",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Samsung Universe 9",
-    "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-    "price": 1249,
+    "title": "Handmade Plastic Cheese",
+    "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+    "price": "443.00",
     "thumbnails": [
-      "https://i.ibb.co/Yp5LLBQ/samsung-Universe9-01.jpg"
+      "https://picsum.photos/seed/ezLiisx/640/480",
+      "https://picsum.photos/seed/uICviJb/640/480"
     ],
-    "code": "s9sm003",
-    "stock": 36,
-    "category": "smartphones",
+    "code": "RBSn28JB",
+    "stock": 8,
+    "category": "Jewelery",
+    "owner": "admin@admin.com",
     "status": true
   },
   {
-    "title": "OPPOF19",
-    "description": "OPPO F19 is officially announced on April 2021.",
-    "price": 280,
+    "title": "Unbranded Cotton Table",
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "price": "797.00",
     "thumbnails": [
-      "https://i.ibb.co/s2MRCmK/oppof19-01.jpg",
-      "https://i.ibb.co/DwxLmXz/oppof19-02.jpg",
-      "https://i.ibb.co/dMm6pLj/oppof19-03.jpg",
-      "https://i.ibb.co/WPG0QRr/oppof19-04.jpg"
+      "https://loremflickr.com/640/480?lock=1071083329421312",
+      "https://picsum.photos/seed/iqHDHFQ/640/480"
     ],
-    "code": "oPsm004",
-    "stock": 123,
-    "category": "smartphones",
+    "code": "JuARKgS4",
+    "stock": 10,
+    "category": "Health",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Huawei P30",
-    "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-    "price": 499,
+    "title": "Modern Soft Pants",
+    "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+    "price": "581.00",
     "thumbnails": [
-      "https://i.ibb.co/fSnZdvH/huawei-P30-01.jpg",
-      "https://i.ibb.co/9yDgv6p/huawei-P30-02.jpg",
-      "https://i.ibb.co/dk41mBR/huawei-P30-03.jpg"
+      "https://loremflickr.com/640/480?lock=8652437502033920",
+      "https://loremflickr.com/640/480?lock=766097867407360"
     ],
-    "code": "hPsm005",
-    "stock": 32,
-    "category": "smartphones",
+    "code": "FeALTKED",
+    "stock": 1,
+    "category": "Clothing",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "MacBook Pro",
-    "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
-    "price": 1749,
+    "title": "Small Fresh Pants",
+    "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+    "price": "610.00",
     "thumbnails": [
-      "https://i.ibb.co/7NGfZJH/macbook-Pro02.jpg",
-      "https://i.ibb.co/1QXB8Fk/macbook-Pro03.jpg",
-      "https://i.ibb.co/Qb6r0Z2/macbook-Pro04.jpg"
+      "https://picsum.photos/seed/vxVKYf/640/480",
+      "https://picsum.photos/seed/AzxqSO/640/480"
     ],
-    "code": "mPsm006",
-    "stock": 83,
-    "category": "laptops",
+    "code": "tCI2m03d",
+    "stock": 7,
+    "category": "Toys",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Samsung Galaxy Book",
-    "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
-    "price": 1499,
+    "title": "Handmade Concrete Salad",
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "price": "973.00",
     "thumbnails": [
-      "https://i.ibb.co/xHBnXdq/samsung-Book01.jpg",
-      "https://i.ibb.co/1mk5HY6/samsung-Book02.jpg",
-      "https://i.ibb.co/TRJf7zw/samsung-Book03.jpg",
-      "https://i.ibb.co/xCFBK39/samsung-Book04.jpg"
+      "https://loremflickr.com/640/480?lock=7293227914756096",
+      "https://picsum.photos/seed/2TJjqTzOhi/640/480"
     ],
-    "code": "sGsm007",
-    "stock": 50,
-    "category": "laptops",
+    "code": "pwvhbcnI",
+    "stock": 4,
+    "category": "Grocery",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Microsoft Surface Laptop 4",
-    "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
-    "price": 1499,
+    "title": "Luxurious Fresh Salad",
+    "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+    "price": "724.00",
     "thumbnails": [
-      "https://i.ibb.co/BrvndgJ/infinix02.jpg",
-      "https://i.ibb.co/c1DVW2R/infinix03.jpg",
-      "https://i.ibb.co/8MStn5S/infinix01.jpg",
-      "https://i.ibb.co/d6vyJWy/infinix04.jpg"
+      "https://loremflickr.com/640/480?lock=3531834407256064",
+      "https://loremflickr.com/640/480?lock=7453726019158016"
     ],
-    "code": "mLsm008",
-    "stock": 68,
-    "category": "laptops",
+    "code": "ZVaEudNv",
+    "stock": 10,
+    "category": "Clothing",
+    "owner": "emanuelescudero.dev@gmail.com",
     "status": true
   },
   {
-    "title": "HP Pavilion 15-DK1056WM",
-    "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
-    "price": 1099,
+    "title": "Oriental Wooden Tuna",
+    "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+    "price": "488.00",
     "thumbnails": [
-      "https://i.ibb.co/jrmR0Pg/hp-Pavilion01.jpg",
-      "https://i.ibb.co/QK9R0QQ/hp-Pavilion02.jpg",
-      "https://i.ibb.co/9qT57P7/hp-Pavilion03.jpg"
+      "https://picsum.photos/seed/NgK9xfWFF/640/480",
+      "https://loremflickr.com/640/480?lock=1960167121879040"
     ],
-    "code": "hPsm009",
-    "stock": 89,
-    "category": "laptops",
+    "code": "3eT8OGmi",
+    "stock": 7,
+    "category": "Baby",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Gigabyte 27'",
-    "description": "Model: G27FC - Size: 27' - Resolution: Full HD ( 1920 X 1080)165 Hz - Ports : 2 USB 3.0, 2 HDMI 1.4, DisplayPort 1.2, Jack 3.5 mm - Panel: VA",
-    "price": 300,
+    "title": "Small Soft Soap",
+    "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+    "price": "843.00",
     "thumbnails": [
-      "https://i.ibb.co/gWcrS9r/ma01.jpg",
-      "https://i.ibb.co/MhBqztv/ma02.jpg",
-      "https://i.ibb.co/cgkVGM4/ma03.jpg",
-      "https://i.ibb.co/VSSv8nh/ma04.jpg",
-      "https://i.ibb.co/80LkPqQ/ma05.jpg",
-      "https://i.ibb.co/Sm7Y5mv/ma07.jpg"
+      "https://picsum.photos/seed/DFlVfXd/640/480",
+      "https://picsum.photos/seed/N1NGn/640/480"
     ],
-    "code": "gGsm010",
-    "stock": 65,
-    "category": "monitors",
+    "code": "PEkckFOa",
+    "stock": 5,
+    "category": "Beauty",
+    "owner": "emanuelescudero.dev@gmail.com",
     "status": true
   },
   {
-    "title": "LG Gamer 27'",
-    "description": "Size 27' - Resolution 1920x1080 - Panel IPS - Angle 178°",
-    "price": 140,
+    "title": "Small Metal Hat",
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "price": "198.00",
     "thumbnails": [
-      "https://i.ibb.co/hsBh1Hr/mb01.jpg",
-      "https://i.ibb.co/FsvPXDt/mb02.jpg",
-      "https://i.ibb.co/6gZ2sbM/mb03.jpg"
+      "https://loremflickr.com/640/480?lock=7599749194579968",
+      "https://loremflickr.com/640/480?lock=7871929249693696"
     ],
-    "code": "lGsm011",
-    "stock": 52,
-    "category": "monitors",
+    "code": "WXbTGu0H",
+    "stock": 8,
+    "category": "Electronics",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "LG Gamer 24'",
-    "description": "Size 23.8' - Panel IPS - Gamma NTSC 72% - Aspect 16:9 - Angle 178° - Response 5ms",
-    "price": 13,
+    "title": "Modern Cotton Chips",
+    "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+    "price": "570.00",
     "thumbnails": [
-      "https://i.ibb.co/cX8yTyG/mc01.jpg",
-      "https://i.ibb.co/nRvRP2G/mc02.jpg"
+      "https://loremflickr.com/640/480?lock=7707719748288512",
+      "https://loremflickr.com/640/480?lock=4255405268008960"
     ],
-    "code": "lGsm012",
-    "stock": 61,
-    "category": "monitors",
+    "code": "Yr4OZvQS",
+    "stock": 8,
+    "category": "Grocery",
+    "owner": "emanuelescudero.dev@gmail.com",
     "status": true
   },
   {
-    "title": "Hyperx Cloud Chat",
-    "description": "Controller Dinamic 40mm -  Response Frecuency 50Hz 10Hz - Longitude 130cm - Connection 3.5mm - Mic Response 50Hz - 18Hz",
-    "price": 120,
+    "title": "Handmade Frozen Shirt",
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "price": "826.00",
     "thumbnails": [
-      "https://i.ibb.co/sJq6g2c/a01.jpg",
-      "https://i.ibb.co/CzpvSTY/a02.jpg",
-      "https://i.ibb.co/FDWjmSL/a05.jpg",
-      "https://i.ibb.co/qJcsWJB/a04.jpg"
+      "https://loremflickr.com/640/480?lock=65193780445184",
+      "https://picsum.photos/seed/HSRkC59u5/640/480"
     ],
-    "code": "hCsm013",
-    "stock": 114,
-    "category": "headphones",
+    "code": "xmecvGMW",
+    "stock": 10,
+    "category": "Industrial",
+    "owner": "admin@admin.com",
     "status": true
   },
   {
-    "title": "Redragon Ares H120",
-    "description": "A robust headset, aimed at users with long sessions with its stereo sound. The Ares is the quality peripheral you are looking for. The microphone is arranged on a completely foldable boom arm and unidirectional sound pickup. Additionally, it is equipped with noise cancellation.",
-    "price": 30,
+    "title": "Ergonomic Bronze Table",
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "price": "10.00",
     "thumbnails": [
-      "https://i.ibb.co/rFpkFZD/b01.jpg",
-      "https://i.ibb.co/znhZksw/b02.jpg",
-      "https://i.ibb.co/JxPjYnB/b03.jpg",
-      "https://i.ibb.co/VD54nFk/b04.jpg"
+      "https://picsum.photos/seed/uBMWy9/640/480",
+      "https://picsum.photos/seed/4LMC1VMZ/640/480"
     ],
-    "code": "rGsm014",
-    "stock": 105,
-    "category": "headphones",
+    "code": "LG5zevY7",
+    "stock": 9,
+    "category": "Grocery",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "T-dagger T-tgk106",
-    "description": "The Tanker Rainbow is the perfect keyboard for those looking to take that difficult first step towards real gaming, where common equipment falters. It is designed to help you enhance your gaming skills and introduce you to the world of authentic gaming keyboard. So that you are the one who carries your companions and not the other way around.",
-    "price": 19,
+    "title": "Recycled Rubber Soap",
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "price": "670.00",
     "thumbnails": [
-      "https://i.ibb.co/ZJtrQQh/k01.jpg",
-      "https://i.ibb.co/8NJ4VF2/k02.jpg",
-      "https://i.ibb.co/JCF5wgH/k03.jpg",
-      "https://i.ibb.co/23rKfF4/k04.jpg"
+      "https://picsum.photos/seed/35Bc95qyl/640/480",
+      "https://picsum.photos/seed/Ur8n4N/640/480"
     ],
-    "code": "tGsm015",
-    "stock": 110,
-    "category": "keyboards",
+    "code": "f6PjNpy6",
+    "stock": 5,
+    "category": "Grocery",
+    "owner": "emanuelescudero.dev@gmail.com",
     "status": true
   },
   {
-    "title": " T-dagger T-tgk315w-rd",
-    "description": "The Bora is a TKL mechanical keyboard optimized for gaming. What does TKL mean? It eliminates the number pad, saving valuable mouse space. It is clear: it is not a keyboard to fill out forms and spreadsheets, but to start playing hard. This is its RGB version, with unmatched backlighting. Indulge yourself and know it.",
-    "price": 12,
+    "title": "Unbranded Metal Tuna",
+    "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+    "price": "843.00",
     "thumbnails": [
-      "https://i.ibb.co/J7MpXwF/ka01.jpg",
-      "https://i.ibb.co/0rNrqKm/ka02.jpg",
-      "https://i.ibb.co/mhC76Vw/ka03.jpg",
-      "https://i.ibb.co/4NhLKHb/ka04.jpg"
+      "https://picsum.photos/seed/NA5xSlhA/640/480",
+      "https://loremflickr.com/640/480?lock=5210432415465472"
     ],
-    "code": "tGsm016",
-    "stock": 78,
-    "category": "keyboards",
+    "code": "l89kFATZ",
+    "stock": 1,
+    "category": "Music",
+    "owner": "admin@admin.com",
     "status": true
   },
   {
-    "title": "Redragon Diti K585",
-    "description": "The construction of the keyboard is made of reinforced ABS and aluminum, combined with double-shot laser injection molded keys and subsequently engraved, generating a durable and excellent quality product, ideal for intensive use.",
-    "price": 40,
+    "title": "Rustic Wooden Hat",
+    "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+    "price": "612.00",
     "thumbnails": [
-      "https://i.ibb.co/XVhwfR6/kb01.jpg",
-      "https://i.ibb.co/qJ0KpXy/kb02.jpg",
-      "https://i.ibb.co/dGqQkHd/kb03.jpg",
-      "https://i.ibb.co/PM2nN96/kb04.jpg"
+      "https://picsum.photos/seed/nQmM3m/640/480",
+      "https://loremflickr.com/640/480?lock=6848310522413056"
     ],
-    "code": "rGsm017",
-    "stock": 88,
-    "category": "keyboards",
+    "code": "eLubD62x",
+    "stock": 6,
+    "category": "Industrial",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Mouse Pad T-dagger",
-    "description": "Size: 290 x 240mm. Thickness: 3mm. Sliding type: speed, optimized for all sensors. Construction: fabric intertwined with silk fibers that guarantees maximum sliding, rubber bottom, non-slip and adaptable to any surface. Waterproof and easy to clean. The edges are sewn with double stitches, to avoid unraveling.",
-    "price": 46,
+    "title": "Gorgeous Frozen Keyboard",
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "price": "107.00",
     "thumbnails": [
-      "https://i.ibb.co/sqgFNfg/pa01.jpg",
-      "https://i.ibb.co/HdtWkw9/1653408263410.jpg",
-      "https://i.ibb.co/mXjnLnc/1653408264565.jpg",
-      "https://i.ibb.co/VWRwYJy/pa02.jpg"
+      "https://picsum.photos/seed/rIc7FVF5/640/480",
+      "https://loremflickr.com/640/480?lock=6786208029999104"
     ],
-    "code": "tGsm018",
-    "stock": 54,
-    "category": "pads",
+    "code": "wzQUceeK",
+    "stock": 9,
+    "category": "Books",
+    "owner": "premium@premium.com",
     "status": true
   },
   {
-    "title": "Great Mousepad Xl",
-    "description": "The material is a combination of high-density foam rubber, a layer of non-slip rubber, and synthetic fabric on the surface, giving the pad a soft but not slippery texture. It is of very good quality and performance, it offers great performance and response, ideal for any type of gamer. Measurements: 117 x 60 cm.",
-    "price": 70,
+    "title": "Unbranded Plastic Keyboard",
+    "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+    "price": "508.00",
     "thumbnails": [
-      "https://i.ibb.co/chkdjjp/pb01.jpg",
-      "https://i.ibb.co/cQqLnN6/pb03.jpg",
-      "https://i.ibb.co/1ZgMNr5/pb04.jpg",
-      "https://i.ibb.co/7GrSgwg/pb05.jpg"
+      "https://loremflickr.com/640/480?lock=8225793215823872",
+      "https://loremflickr.com/640/480?lock=4912389103288320"
     ],
-    "code": "gGsm019",
-    "stock": 140,
-    "category": "pads",
+    "code": "x1iYrVmh",
+    "stock": 4,
+    "category": "Clothing",
+    "owner": "admin@admin.com",
+    "status": true
+  },
+  {
+    "title": "Incredible Cotton Bacon",
+    "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+    "price": "490.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/JO1fh/640/480",
+      "https://loremflickr.com/640/480?lock=2696240156377088"
+    ],
+    "code": "1NblE2pW",
+    "stock": 7,
+    "category": "Toys",
+    "owner": "emanuelescudero.dev@gmail.com",
+    "status": true
+  },
+  {
+    "title": "Gorgeous Soft Tuna",
+    "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+    "price": "317.00",
+    "thumbnails": [
+      "https://loremflickr.com/640/480?lock=8908683568218112",
+      "https://picsum.photos/seed/DQyHHGzp3/640/480"
+    ],
+    "code": "fWeEtm5n",
+    "stock": 3,
+    "category": "Toys",
+    "owner": "emanuelescudero.dev@gmail.com",
+    "status": true
+  },
+  {
+    "title": "Luxurious Concrete Ball",
+    "description": "The Football Is Good For Training And Recreational Purposes",
+    "price": "649.00",
+    "thumbnails": [
+      "https://loremflickr.com/640/480?lock=4263912658698240",
+      "https://loremflickr.com/640/480?lock=5944049141809152"
+    ],
+    "code": "GJDj7EPA",
+    "stock": 4,
+    "category": "Computers",
+    "owner": "admin@admin.com",
+    "status": true
+  },
+  {
+    "title": "Recycled Fresh Pizza",
+    "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+    "price": "266.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/p6g9w/640/480",
+      "https://picsum.photos/seed/JCDdE/640/480"
+    ],
+    "code": "A9TYcBcH",
+    "stock": 10,
+    "category": "Baby",
+    "owner": "admin@admin.com",
+    "status": true
+  },
+  {
+    "title": "Intelligent Plastic Chips",
+    "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+    "price": "375.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/Lt9V0/640/480",
+      "https://loremflickr.com/640/480?lock=7154638826504192"
+    ],
+    "code": "GFlTsVdp",
+    "stock": 4,
+    "category": "Industrial",
+    "owner": "premium@premium.com",
+    "status": true
+  },
+  {
+    "title": "Recycled Wooden Salad",
+    "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+    "price": "88.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/kaX7K/640/480",
+      "https://loremflickr.com/640/480?lock=3572573983997952"
+    ],
+    "code": "I934dLEi",
+    "stock": 1,
+    "category": "Music",
+    "owner": "admin@admin.com",
+    "status": true
+  },
+  {
+    "title": "Modern Plastic Tuna",
+    "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+    "price": "246.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/R7AWN/640/480",
+      "https://picsum.photos/seed/3g1cb/640/480"
+    ],
+    "code": "GDxD6J5f",
+    "stock": 7,
+    "category": "Tools",
+    "owner": "premium@premium.com",
+    "status": true
+  },
+  {
+    "title": "Fantastic Soft Cheese",
+    "description": "The Football Is Good For Training And Recreational Purposes",
+    "price": "358.00",
+    "thumbnails": [
+      "https://loremflickr.com/640/480?lock=5817730915631104",
+      "https://loremflickr.com/640/480?lock=2293278017847296"
+    ],
+    "code": "epGkjn3E",
+    "stock": 1,
+    "category": "Automotive",
+    "owner": "emanuelescudero.dev@gmail.com",
+    "status": true
+  },
+  {
+    "title": "Handmade Concrete Bacon",
+    "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+    "price": "569.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/SpghP2/640/480",
+      "https://loremflickr.com/640/480?lock=6671270674432000"
+    ],
+    "code": "kVEpZbAI",
+    "stock": 2,
+    "category": "Automotive",
+    "owner": "admin@admin.com",
+    "status": true
+  },
+  {
+    "title": "Ergonomic Granite Cheese",
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "price": "847.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/1XsVkl/640/480",
+      "https://loremflickr.com/640/480?lock=6258894913404928"
+    ],
+    "code": "33MUq6uJ",
+    "stock": 2,
+    "category": "Shoes",
+    "owner": "emanuelescudero.dev@gmail.com",
+    "status": true
+  },
+  {
+    "title": "Intelligent Plastic Computer",
+    "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+    "price": "313.00",
+    "thumbnails": [
+      "https://picsum.photos/seed/C7yQK6BX/640/480",
+      "https://picsum.photos/seed/6OgaNeP/640/480"
+    ],
+    "code": "qw0VDYEp",
+    "stock": 4,
+    "category": "Computers",
+    "owner": "premium@premium.com",
     "status": true
   }
 ]

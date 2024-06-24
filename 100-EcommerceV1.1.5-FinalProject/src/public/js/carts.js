@@ -22,9 +22,13 @@ const purchaseCart = (cid) => {
         });
       } else {
         Swal.fire({
-          icon: 'error',
+          color: "#eee",
+          position: 'center',
+          background: "#222",
+          icon: 'warning',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          position: 'center',
+          text: data.error,
           confirmButtonColor: "#43c09e",
         });
       }

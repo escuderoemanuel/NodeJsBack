@@ -17,10 +17,6 @@
 
 [x] Cambiar la forma en la que se muestran los mensajes de NO AUTH de algunas acciones al eliminar un producto que pertenece a otro user
 
-[x] Si hago un purchase de un carrito con un producto sin stock, debería darme un mensaje de error
-
-[x] Que el status sea true cuando se crea el producto y ya no cambie
-
 # !!!! ERRORS !!!
 
 

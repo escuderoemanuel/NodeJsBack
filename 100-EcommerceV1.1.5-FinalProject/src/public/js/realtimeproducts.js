@@ -54,10 +54,30 @@ productList.addEventListener('click', async (e) => {
       const { payload } = await response.json();
       // Aquí paso el producto al server
       socket.emit('delete-product', response);
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'success',
+        title: 'Success',
+        text: 'Product has been deleted',
+        showConfirmButton: false,
+        timer: 2500,
+      });
       // Recargar la página para actualizar la lista de productos
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } catch (error) {
-      alert('Error: ' + error.message);
+      Swal.fire({
+        color: "#eee",
+        position: 'center',
+        background: "#222",
+        icon: 'warning',
+        title: 'Oops...',
+        text: error.message,
+        confirmButtonColor: "#43c09e",
+      });
       console.error(`Error: ${error.message}`);
     }
   }
@@ -95,6 +115,16 @@ formAddProduct.addEventListener('submit', async (e) => {
     // Espera que el server responda con la lista actualizada.
     const { products } = await response.json()
     // Envía la lista actualizada al server.
+    Swal.fire({
+      color: "#eee",
+      position: 'center',
+      background: "#222",
+      icon: 'success',
+      title: 'Success',
+      text: 'Product has been deleted',
+      showConfirmButton: false,
+      timer: 2000,
+    });
     socket.emit('add-product', { newProduct, products });
   } catch (error) {
     console.errors(error)

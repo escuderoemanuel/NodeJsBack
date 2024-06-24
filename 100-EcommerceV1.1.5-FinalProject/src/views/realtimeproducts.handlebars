@@ -30,15 +30,11 @@
       <label for="category">Category: </label>
       <input type="text" name='category' id='category'>
     </div>
-    <div>
-      <label for="status">Status: </label>
-      <input type="text" name='status' id='status'>
-    </div>
     <button type='submit' id='btnCreateProduct'>
       Create Product
     </button>
     <div class='errorsContainer'>
-      <p class='errorMessage'>{{error}}</p>
+      <p class='errorMessage' id='errorMessage'>{{error}}</p>
     </div>
 
   </form>
@@ -86,6 +82,13 @@
   </div>
 
 </section>
+
+{{!-- Dependencies --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Include the Dark theme -->
+<link rel="stylesheet" href="@sweetalert2/theme-dark/dark.css">
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+
 
 {{!-- Para tener acceso a socket.io --}}
 <script src='/socket.io/socket.io.js'></script>

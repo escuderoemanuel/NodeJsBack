@@ -36,6 +36,8 @@ loginForm.addEventListener('submit', async (e) => {
         document.querySelector('.infoMessage').textContent = 'Error occurred while processing your request.';
       }
     })
+
+    document.querySelector('.infoMessage').textContent = 'Logging in...';
   } catch (error) {
     document.querySelector('.infoMessage').textContent = 'Login error occurred while processing your request.';
   }

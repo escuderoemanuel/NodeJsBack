@@ -137,9 +137,10 @@ button:active {
 }
 
 
-.errorMessage {
+#errorMessage {
   font-size: .9em;
   color: rgb(79, 152, 255);
   color: gainsboro;
+  color: red;
   text-align: center;
 }

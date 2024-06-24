@@ -58,6 +58,16 @@ class CartsController {
       }
 
       const product = await productsService.getById(pid);
+
+      if (product.stock < 1) {
+        throw new CustomErrors({
+          name: 'Product added error',
+          cause: 'Product adding error',
+          message: 'Product out of stock',
+          code: TypesOfErrors.INVALID_PARAM_ERROR
+        })
+      }
+
       if (req.user.role === 'premium' && product.owner === req.user.email) {
         throw new CustomErrors({
           name: 'Product added error',
@@ -128,6 +138,10 @@ class CartsController {
 
   static async purchase(req, res) {
     const { cid } = req.params;
+    const cart = await cartsService.getById(cid);
+    if (cart.products.length === 0) {
+      return res.status(400).send({ status: 'error', error: 'Cart is empty' })
+    }
     try {
       const remainderItems = await cartsService.purchase(cid, req.user.email)
 

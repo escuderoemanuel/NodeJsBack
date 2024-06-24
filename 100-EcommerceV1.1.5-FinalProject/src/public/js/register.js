@@ -53,7 +53,7 @@ registerForm.addEventListener('submit', async (e) => {
       document.querySelector('.infoMessage').textContent = responseData.error || 'An error occurred during registration';
       return;
     }
-
+    document.querySelector('.infoMessage').textContent = 'Successful registration';
     registerForm.reset();
     window.location.replace('/login');
   } catch (error) {

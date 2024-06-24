@@ -105,13 +105,13 @@ class ProductsController {
 
   static async create(req, res, next) {
     try {
-      const { title, description, code, price, stock, category, status } = req.body;
-      if (!title || !description || !code || !price || !stock || !category || !status)
+      const { title, description, code, price, stock, category } = req.body;
+      if (!title || !description || !code || !price || !stock || !category)
         // CUSTOM ERROR
         throw new CustomErrors({
           name: 'Product creation error',
-          cause: 'Product creation error',
-          message: 'Error creating product',
+          cause: 'All field are required',
+          message: 'All field are required',
           code: TypesOfErrors.INVALID_PARAM_ERROR
         })
 
@@ -126,6 +126,7 @@ class ProductsController {
       await productsService.create(newProduct);
       res.send({ status: 'success', message: 'Product created' });
     } catch (error) {
+      console.error(error);
       next(error)
     }
   }
@@ -219,7 +220,8 @@ class ProductsController {
           });
       }
 
-      res.json({ status: 'success', deletedProduct: productToDelete });
+      // res.json({ status: 'success', deletedProduct: productToDelete });
+      res.send({ status: 'success', deletedProduct: productToDelete });
     } catch (error) {
       next(error);
     }
