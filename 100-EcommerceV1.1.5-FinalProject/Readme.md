@@ -20,6 +20,11 @@
 [x] Si hago un purchase de un carrito con un producto sin stock, debería darme un mensaje de error
 
 [x] Que el status sea true cuando se crea el producto y ya no cambie
+
+# !!!! ERRORS !!!
+
+
+
 ## Aspectos a incluir
 
 1. Desde el router de /api/users, crear tres rutas:

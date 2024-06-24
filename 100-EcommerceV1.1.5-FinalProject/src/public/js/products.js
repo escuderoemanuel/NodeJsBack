@@ -31,9 +31,8 @@ const addToCart = async (cid, pid) => {
       window.location.reload();
     })
     .catch(error => {
-      // Aquí manejamos el error
-      alert('Error:', error.message);
-      console.error('Error:', error.message);
+      alert('Error: ' + error.message);
+      console.error(`Error: ${error.message}`);
     });
 };
 
@@ -78,22 +77,49 @@ productList.addEventListener('click', async (e) => {
       const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
       });
-
+      console.log('products.js response antes del if:', response);
       if (!response.ok) {
-        throw new Error('Error al eliminar el producto');
+        // Si la respuesta no es exitosa, extraemos el mensaje de error
+        console.log('products.js response:', response);
+        const errorData = await response.json();
+        console.log('products.js response.json:', errorData);
+        const errorMessage = errorData.message || errorData.error || 'Unknown error';
+        throw new Error(errorMessage);
       }
 
       // Este es el objeto del producto que estoy eliminando
       const { payload } = await response.json();
 
-      // Aqui paso el producto al server
+      // Aquí paso el producto al server
       socket.emit('delete-product', payload);
 
       // Recargar la página para actualizar la lista de productos
       window.location.reload();
-
     } catch (error) {
-      console.log('Error:', error);
+      alert('Error: ' + error.message);
+      console.error(`Error: ${error.message}`);
     }
   }
 });
+
+
+/*
+    if (!res.ok) {
+    // Si la respuesta no es exitosa, extraemos el mensaje de error
+    return res.json().then(errorData => {
+      throw new Error(errorData.error); // Lanzamos un error con el mensaje recibido
+    });
+  }
+  return res.json(); // Si la respuesta es exitosa, convertimos a JSON
+})
+  .then(data => {
+    // Aquí puedes manejar la respuesta exitosa si es necesario
+    window.location.reload();
+  })
+  .catch(error => {
+    alert('Error: ' + error.message);
+    console.error(`Error: ${error.message}`);
+  }); 
+     
+});
+*/

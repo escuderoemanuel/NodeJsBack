@@ -1,7 +1,6 @@
 const { productsService, usersService } = require('../repositories');
 const ProductsModel = require('../dao/models/products.model');
 const CustomErrors = require('../utils/errors/CustomErrors');
-const { getCreateProductErrorInfo } = require('../utils/errors/ErrorInfo');
 const TypesOfErrors = require('../utils/errors/TypesOfErrors');
 const MailingsService = require('../services/mailings.service');
 const mailingsService = new MailingsService();
@@ -159,25 +158,38 @@ class ProductsController {
   static async delete(req, res, next) {
     try {
       const pid = req.params.pid;
-      const productToDelete = await productsService.getById(pid);
 
-      if (!pid || !productToDelete) {
-        throw new CustomErrors({
-          name: 'Product delete error',
-          cause: 'Product deleting error',
-          message: 'Error deleting product, invalid pid or productToDelete not found',
-          code: TypesOfErrors.INVALID_PARAM_ERROR
-        })
+      // Validar si el pid es válido
+      if (!pid) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid product ID',
+        });
       }
 
-      // Los 'admin' pueden eliminar un producto, pero si el owner del producto es 'premium' debe enviarle un email
-      // Los 'premium' solamente pueden eliminar productos que ellos hayan creado
+      const productToDelete = await productsService.getById(pid);
 
-      const currentRole = req.user.role; // Role del usuario logeado
-      const currentEmail = req.user.email; // Email del usuario logeado
-      const ownerEmail = productToDelete.owner; // Email del owner del product
-      const owner = await usersService.getByEmail(ownerEmail); // Owner completo
-      const productOwnerRole = owner.role; // Role del owner del producto
+      // Validar si el producto existe
+      if (!productToDelete) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Product not found',
+        });
+      }
+
+      const currentRole = req.user.role;
+      const currentEmail = req.user.email;
+      const ownerEmail = productToDelete.owner;
+      const owner = await usersService.getByEmail(ownerEmail);
+
+      if (!owner) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Product owner not found',
+        });
+      }
+
+      const productOwnerRole = owner.role;
 
       switch (currentRole) {
         case 'admin':
@@ -193,21 +205,26 @@ class ProductsController {
           if (currentEmail === ownerEmail) {
             await productsService.delete(pid);
           } else {
-            throw new CustomErrors({
-              name: 'Product delete error',
-              cause: 'Product deleting error',
-              message: 'Only owners or @admin user can delete products',
-              code: TypesOfErrors.INVALID_PARAM_ERROR
+            return res.status(403).json({
+              status: 'error',
+              message: 'Only owners or can delete their products',
             });
           }
           break;
+
+        default:
+          return res.status(403).json({
+            status: 'error',
+            message: 'User not authorized to delete products',
+          });
       }
 
-      res.send({ status: 'success', deletedProduct: { productToDelete } });
+      res.json({ status: 'success', deletedProduct: productToDelete });
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
+
 }
 
 module.exports = ProductsController;

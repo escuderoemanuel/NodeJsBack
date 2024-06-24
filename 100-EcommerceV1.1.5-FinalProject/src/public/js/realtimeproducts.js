@@ -27,7 +27,6 @@ socket.on('update-products', products => {
         <p> <span>stock:</span> ${product.stock}</p>
         <p> <span>category:</span> ${product.category}</p>
         <p> <span>owner:</span> ${product.owner}</p>
-        <p> <span>status:</span> ${product.status}</p>
       </div>
       <button class='btnDelete' id="btnDelete${product._id}" data-id='btnDelete'>Delete Product</button>
     `;
@@ -44,18 +43,25 @@ productList.addEventListener('click', async (e) => {
     try {
       const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
-      })
-      if (response.status === 200) {
-        socket.emit('delete-product', response);
-      } else {
-        console.log('response', response);
-        alert(response.error);
+      });
+      if (!response.ok) {
+        // Si la respuesta no es exitosa, extraemos el mensaje de error
+        const errorData = await response.json();
+        const errorMessage = errorData.message || errorData.error || 'Unknown error';
+        throw new Error(errorMessage);
       }
+      // Este es el objeto del producto que estoy eliminando
+      const { payload } = await response.json();
+      // Aquí paso el producto al server
+      socket.emit('delete-product', response);
+      // Recargar la página para actualizar la lista de productos
+      window.location.reload();
     } catch (error) {
-      console.error(error);
+      alert('Error: ' + error.message);
+      console.error(`Error: ${error.message}`);
     }
   }
-});
+})
 
 //? Agrego un producto a la base de datos y lo envio a todos los clientes conectados.
 formAddProduct.addEventListener('submit', async (e) => {
@@ -83,19 +89,15 @@ formAddProduct.addEventListener('submit', async (e) => {
       document.querySelector('.errorMessage').textContent = errorMessage.error;
       return;
     }
-
     // Restablecer el formulario y eliminar el mensaje de error
     formAddProduct.reset();
     document.querySelector('.errorMessage').textContent = '';
-
     // Espera que el server responda con la lista actualizada.
     const { products } = await response.json()
-
     // Envía la lista actualizada al server.
     socket.emit('add-product', { newProduct, products });
   } catch (error) {
-    console.log(error)
-    // Mostrar el mensaje de error en el formulario
+    console.errors(error)
     document.querySelector('.errorMessage').textContent = errorMessage.error;
   }
 })

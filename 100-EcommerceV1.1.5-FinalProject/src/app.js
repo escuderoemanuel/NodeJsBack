@@ -79,6 +79,7 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Routes
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 app.use('/api/sessions', sessionRouter);
