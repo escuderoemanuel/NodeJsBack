@@ -1,5 +1,5 @@
 <section class="profile">
-  {{#if user.email}}
+  {{#if user}}
   <div class='userData'>
     <p><span>Name:</span> {{user.firstName}}</p>
     <p><span>LastName:</span> {{user.lastName}}</p>
@@ -11,7 +11,9 @@
     <p><span>Age:</span> N/A</p>
     {{/if}}
     <p><span>Role:</span> {{user.role}}</p>
+    {{#unlessEq user.role 'admin'}}
     <p><span>Cart:</span> {{user.cart}}</p>
+    {{/unlessEq}}
   </div>
   {{/if}}
 

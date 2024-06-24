@@ -48,13 +48,13 @@ class UsersService {
     return await this.update(uid, { lastConnection: new Date() });
   }
 
+
   async addDocuments(uid, files) {
     const user = await this.getById(uid);
     if (!user) {
       throw new Error(`User with id ${uid} not found`);
     }
     let documents = user.documents || [];
-
     documents = [
       ...documents,
       ...files.map(file => ({
@@ -62,14 +62,15 @@ class UsersService {
         reference: file.path.split('public')[1].replace(/\\/g, '/')
       }))
     ];
-
     return await this.update(uid, { documents });
   }
+
 
   async changeRole(uid) {
     const user = await this.getById(uid);
     return await this.update(uid, { role: user.role });
   }
+
 
   async deleteInactive() {
     const users = await this.getAll();
@@ -77,13 +78,10 @@ class UsersService {
       !user.lastConnection ||
       user.lastConnection < new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)); // 2 days
     // const inactiveUsers = users.filter(user => user.lastConnection < new Date(Date.now() - 1 * 60 * 1000)); // 30 minutes
-
-    console.log(inactiveUsers);
     for (const user of inactiveUsers) {
       await mailingsService.sendDeletedInactiveUserEmail(user.email)
       await this.delete(user._id);
     }
-
     const updatedUsers = await this.getAll();
     return updatedUsers;
   }

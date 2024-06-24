@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.reload();
       } else {
         const result = await response.json();
-        console.error(result.error);
+        console.log(result.error);
       }
     } catch (error) {
       console.error('Error uploading documents:', error);
