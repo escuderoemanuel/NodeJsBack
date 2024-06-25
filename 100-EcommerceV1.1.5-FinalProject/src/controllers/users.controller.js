@@ -87,7 +87,7 @@ class UsersController {
       proofOfAddress: 'proofOfAddress',
       proofOfAccountStatus: 'proofOfAccountStatus'
     }
-    
+
     try {
       const user = await usersService.getById(uid);
       if (!user) {
@@ -108,7 +108,7 @@ class UsersController {
 
       const result = await usersService.update(uid, user);
       // const result = await usersService.addDocuments(uid, documents);
-      res.send({ status: 'success',message: 'Documents uploaded successfully', payload: result });
+      res.send({ status: 'success', message: 'Documents uploaded successfully', payload: result });
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message });
     }

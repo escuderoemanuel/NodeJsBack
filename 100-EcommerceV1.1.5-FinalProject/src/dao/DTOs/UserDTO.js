@@ -9,7 +9,7 @@ class UserDTO {
     this.role = user.role;
     this.lastConnection = user.lastConnection;
     this.documents = user.documents;
-
+    this.documents.profilePicture = user.documents?.profilePicture;
   }
 }
 
