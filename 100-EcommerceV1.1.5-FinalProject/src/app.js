@@ -88,10 +88,10 @@ app.use((req, res, next) => {
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 app.use('/api/sessions', sessionRouter);
 app.use('/api/carts', cartsRouter);
-// app.use('/api/products', productsRouter);
+app.use('/api/products', productsRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/mockingProducts', mockingProducts);
-// app.use('/api/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.get('/api/testToken', getTestToken);
 app.use('/api/loggerTest', loggerTestRouter);
 app.use('/', viewsRouter);

@@ -4,7 +4,7 @@ const { productsService, usersService } = require('../repositories');
 class ViewsController {
 
   static async getHome(req, res) {
-    res.redirect('/products');
+    res.redirect('/api/products');
   }
 
   static async getProducts(req, res) {
@@ -23,7 +23,7 @@ class ViewsController {
       const user = await usersService.getById(req.user.id);
       const userDTO = new UserDTO(user);
       const users = await usersService.getAll();
-      res.render('users', { user: userDTO, users });
+      res.render('api/users', { user: userDTO, users });
     } catch (error) {
       res.status(error.status || 500).send({ status: 'error', message: error.message });
     }

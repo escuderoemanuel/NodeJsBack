@@ -12,8 +12,9 @@ usersRouter.delete('/', verifyToken, getRole('admin'), UsersController.deleteIna
 
 usersRouter.put('/:uid', verifyToken, UsersController.update);
 usersRouter.delete('/:uid', verifyToken, getRole('admin'), UsersController.delete)
+usersRouter.get('/:uid', verifyToken, getRole('admin'), UsersController.getById)
 
-usersRouter.get('/premium/:uid', verifyToken, UsersController.changeRole);
+usersRouter.get('/changeRole/:uid', verifyToken, UsersController.changeRole);
 
 usersRouter.post('/:uid/documents', verifyToken, upload.fields([
   { name: 'profilePicture', maxCount: 1 },

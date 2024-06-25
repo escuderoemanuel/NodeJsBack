@@ -121,7 +121,7 @@ formAddProduct.addEventListener('submit', async (e) => {
       background: "#222",
       icon: 'success',
       title: 'Success',
-      text: 'Product has been deleted',
+      text: 'Product has been created',
       showConfirmButton: false,
       timer: 2000,
     });

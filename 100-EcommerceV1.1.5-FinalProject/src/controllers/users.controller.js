@@ -42,6 +42,17 @@ class UsersController {
     }
   }
 
+  static async getById(req, res) {
+    const { uid } = req.params;
+    try {
+      const user = await usersService.getById(uid);
+      const userDTO = new UserDTO(user);
+      res.send({ status: 'success', payload: userDTO });
+    } catch (error) {
+      res.status(500).send({ status: 'error', error: error.message });
+    }
+  }
+
 
   static async handleRoleChange(user, userUpdates) {
     if (userUpdates.role && user.role === 'user' && (userUpdates.role === 'premium' || userUpdates.role === 'admin')) {
@@ -145,8 +156,6 @@ class UsersController {
     const userUpdates = req.body;
     try {
       const user = await usersService.getById(uid);
-      // console.log('user', user)
-      // console.log('user documents', user.documents)
       const updatedUser = await UsersController.handleRoleChange(user, userUpdates);
       const result = await usersService.update(uid, updatedUser);
       res.send({ status: 'success', message: 'User updated successfully', payload: result });

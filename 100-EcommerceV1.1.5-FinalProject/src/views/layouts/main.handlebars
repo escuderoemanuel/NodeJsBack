@@ -39,7 +39,7 @@
     {{#if user}}
     <nav class='navBar'>
       {{#ifEq user.role 'admin'}}
-      <a href="/products" class="{{#ifEq currentPath '/products'}}active{{/ifEq}}">
+      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
@@ -47,17 +47,12 @@
         <img class='iconNavBar' src='https://i.ibb.co/s5Y1QBy/add.png' alt="plus sign to add a product">
         Products Manager
       </a>
-      <a href="/users" class="{{#ifEq currentPath '/users'}}active{{/ifEq}}">
+      <a href="/api/users" class="{{#ifEq currentPath '/api/users'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/tLYgHcr/users.png' alt="users list icon">
         Users Manager
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
-        {{#if user.documents.profilePicture}}
-        <img class='iconNavBar' src="{{user.documents.profilePicture.reference}}"
-          alt="profile picture to link to user profile">
-        {{else}}
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
-        {{/if}}
         Profile
       </a>
       <a href="/api/sessions/logout">
@@ -66,7 +61,7 @@
       {{/ifEq}}
 
       {{#ifEq user.role 'user'}}
-      <a href="/products" class="{{#ifEq currentPath '/products'}}active{{/ifEq}}">
+      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
@@ -79,12 +74,7 @@
         Cart
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
-        {{#if user.documents.profilePicture}}
-        <img class='iconNavBar' src="{{user.documents.profilePicture.reference}}"
-          alt="profile picture to link to user profile">
-        {{else}}
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
-        {{/if}}
         Profile
       </a>
       <a href="/api/sessions/logout">
@@ -93,7 +83,7 @@
       {{/ifEq}}
 
       {{#ifEq user.role 'premium'}}
-      <a href="/products" class="{{#ifEq currentPath '/products'}}active{{/ifEq}}">
+      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
@@ -110,13 +100,9 @@
         Cart
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
-        {{#if user.documents.profilePicture}}
-        <img class='iconNavBar' src="{{user.documents.profilePicture.reference}}"
-          alt="profile picture to link to user profile">
-        {{else}}
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
-        {{/if}}
         Profile
+      </a>
       </a>
       <a href="/api/sessions/logout">
         <img class='iconNavBar' src='https://i.ibb.co/y6J6114/logout.png' alt="user logout icon">Exit
