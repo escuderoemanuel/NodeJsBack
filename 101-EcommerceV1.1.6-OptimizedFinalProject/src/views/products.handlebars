@@ -27,17 +27,7 @@
         onclick='addToCart("{{../user.cart}}", "{{this._id}}")'>
         Add to Cart
       </button>
-      {{!-- {{#ifEq ../user.role 'admin'}}
-      <button class='btnAddToCart disabled' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart'
-        cid='cid-{{../user.cart}}' onclick='addToCart("{{../user.cart}}", "{{this._id}}")'>
-        Add to Cart
-      </button>
-      {{else}}
-      <button class='btnAddToCart' id='btnAddToCart-{{this._id}}' data-id='btnAddToCart' cid='cid-{{../user.cart}}'
-        onclick='addToCart("{{../user.cart}}", "{{this._id}}")'>
-        Add to Cart
-      </button>
-      {{/ifEq}} --}}
+
     </li>
     {{/each}}
   </ul>

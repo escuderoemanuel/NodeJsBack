@@ -1,20 +1,5 @@
 const { usersService } = require('../repositories');
 const UserDTO = require('../dao/DTOs/UserDTO');
-// const path = require('path');
-// const multer = require('multer');
-// const { listeners } = require('../dao/models/products.model');
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'uploads/');
-//   },
-//   filename: function (req, file, cb) {
-//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//     cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-//   }
-// });
-
-// const upload = multer({ storage: storage }).array('document', 3);
 
 class UsersController {
   static async getAll(req, res) {
@@ -117,7 +102,6 @@ class UsersController {
       })
 
       const result = await usersService.update(uid, user);
-      // const result = await usersService.addDocuments(uid, documents);
       res.send({ status: 'success', message: 'Documents uploaded successfully', payload: result });
     } catch (error) {
       res.status(500).send({ status: 'error', error: error.message });

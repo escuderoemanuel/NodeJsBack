@@ -12,7 +12,7 @@ router.delete('/:cid', verifyToken, CartsController.emptyCartById)
 router.get('/:cid/purchase', verifyToken, CartsController.purchase)
 router.post('/:cid/product/:pid', verifyToken, getRole(['user', 'premium']), CartsController.addProductToCart)
 router.delete('/:cid/product/:pid', CartsController.deleteProductById)
-// Deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body
+// Actualizar la cantidad del producto por la cantidad pasada desde req.body
 router.put('/:cid/product/:pid', verifyToken, CartsController.updateProductQuantityById)
 
 module.exports = router;

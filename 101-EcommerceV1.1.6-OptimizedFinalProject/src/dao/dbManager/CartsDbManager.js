@@ -114,5 +114,4 @@ class CartManager {
   }
 }
 
-// Exportación para utilizar en el app.js
 module.exports = CartManager;
