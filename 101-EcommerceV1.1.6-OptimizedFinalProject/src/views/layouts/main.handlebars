@@ -39,7 +39,7 @@
     {{#if user}}
     <nav class='navBar'>
       {{#ifEq user.role 'admin'}}
-      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
+      <a href="/products" class="{{#ifEq currentPath '/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
@@ -47,7 +47,7 @@
         <img class='iconNavBar' src='https://i.ibb.co/s5Y1QBy/add.png' alt="plus sign to add a product">
         Products Manager
       </a>
-      <a href="/api/users" class="{{#ifEq currentPath '/api/users'}}active{{/ifEq}}">
+      <a href="/users" class="{{#ifEq currentPath '/users'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/tLYgHcr/users.png' alt="users list icon">
         Users Manager
       </a>
@@ -61,7 +61,7 @@
       {{/ifEq}}
 
       {{#ifEq user.role 'user'}}
-      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
+      <a href="/products" class="{{#ifEq currentPath '/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
@@ -69,7 +69,7 @@
         <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
         Chat
       </a>
-      <a href="/api/carts/{{user.cart}}" class="{{#ifContains currentPath '/api/carts'}}active{{/ifContains}}">
+      <a href="/carts/{{user.cart}}" class="{{#ifContains currentPath '/carts'}}active{{/ifContains}}">
         <img class='iconNavBar' src='https://i.ibb.co/Cbjwjkq/cart.png' alt="shopping cart icon">
         Cart
       </a>
@@ -83,7 +83,7 @@
       {{/ifEq}}
 
       {{#ifEq user.role 'premium'}}
-      <a href="/api/products" class="{{#ifEq currentPath '/api/products'}}active{{/ifEq}}">
+      <a href="/products" class="{{#ifEq currentPath '/products'}}active{{/ifEq}}">
         <img class='iconNavBar' src='https://i.ibb.co/BGWQKzd/product.png' alt="product bux icon">
         Products
       </a>
@@ -95,7 +95,7 @@
         <img class='iconNavBar' src='https://i.ibb.co/q0p7N6H/chatIcon.png' alt="chat buble icon">
         Chat
       </a>
-      <a href="/api/carts/{{user.cart}}" class="{{#ifContains currentPath '/api/carts'}}active{{/ifContains}}">
+      <a href="/carts/{{user.cart}}" class="{{#ifContains currentPath '/carts'}}active{{/ifContains}}">
         <img class='iconNavBar' src='https://i.ibb.co/Cbjwjkq/cart.png' alt="shopping cart icon">
         Cart
       </a>

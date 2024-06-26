@@ -41,7 +41,7 @@ productList.addEventListener('click', async (e) => {
   if (e.target.getAttribute('data-id') === 'btnDelete') {
     const productId = e.target.getAttribute('id').slice(9);
     try {
-      const response = await fetch(`/api/products/${productId}`, {
+      const response = await fetch(`/products/${productId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -95,7 +95,7 @@ formAddProduct.addEventListener('submit', async (e) => {
   });
 
   try {
-    const response = await fetch('/api/products', {
+    const response = await fetch('/products', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

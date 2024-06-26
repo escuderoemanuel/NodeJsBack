@@ -9,10 +9,6 @@ viewsRouter.get('/home', verifyToken, ViewsController.getHome)
 
 viewsRouter.get('/realtimeproducts', verifyToken, getRole(['admin', 'premium']), ViewsController.getRealTimeProducts)
 
-viewsRouter.get('/products', verifyToken, ViewsController.getProducts)
-
-viewsRouter.get('/users', verifyToken, ViewsController.getUsers)
-
 viewsRouter.get('/register', ViewsController.getRegister)
 
 viewsRouter.get('/login', ViewsController.getLogin)

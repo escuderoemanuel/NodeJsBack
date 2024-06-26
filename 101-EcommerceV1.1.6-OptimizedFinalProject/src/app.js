@@ -84,16 +84,17 @@ app.use((req, res, next) => {
 
 
 // Routes
+app.use('/users', usersRouter);
+app.use('/carts', cartsRouter);
+app.use('/products', productsRouter);
+app.use('/chat', chatRouter);
+
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 app.use('/api/sessions', sessionRouter);
-app.use('/api/carts', cartsRouter);
-app.use('/api/products', productsRouter);
-app.use('/api/chat', chatRouter);
-app.use('/api/users', usersRouter);
 app.get('/api/testToken', getTestToken);
 app.use('/api/loggerTest', loggerTestRouter);
-app.use('/', viewsRouter);
 
+app.use('/', viewsRouter);
 // Socket Setting
 const server = app.listen(PORT, () => {
   console.log(serverMessage);

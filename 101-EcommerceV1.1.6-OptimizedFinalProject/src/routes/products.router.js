@@ -2,7 +2,6 @@ const { Router } = require('express');
 const { verifyToken } = require('../middlewares/verifyToken.middleware');
 const ProductsController = require('../controllers/products.controller');
 const getRole = require('../middlewares/getRole.middleware');
-const generateFakerProducts = require('../utils/generateFakerProducts.utils');
 
 
 const router = Router();

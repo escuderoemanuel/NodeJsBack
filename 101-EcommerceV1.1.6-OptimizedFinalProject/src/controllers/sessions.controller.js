@@ -169,7 +169,7 @@ class SessionsController {
 
       await usersService.setLastConnection(_id);
 
-      res.redirect('/api/products');
+      res.redirect('/products');
     } catch (error) {
       res.status(error.status || 500).send({ status: 'error', message: error.message });
     }

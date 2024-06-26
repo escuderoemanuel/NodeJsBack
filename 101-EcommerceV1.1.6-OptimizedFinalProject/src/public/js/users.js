@@ -2,7 +2,7 @@ const socket = io();
 
 /* function updateUserRole(id) {
   const newRole = document.getElementById(`select-${id}`).value;
-  fetch(`/api/users/${id}`, {
+  fetch(`/users/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ function updateUserRole(uid) {
   const selectElement = document.getElementById(`select-${uid}`);
   const newRole = selectElement.value;
 
-  fetch(`/api/users/${uid}`, {
+  fetch(`/users/${uid}`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function updateUserRole(uid) {
 
 function deleteUser(id) {
   const uid = document.getElementById(`select-${id}`).value;
-  fetch(`/api/users/${id}`, {
+  fetch(`/users/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -122,7 +122,7 @@ function deleteUser(id) {
 }
 
 function deleteInactiveUsers() {
-  fetch('/api/users', {
+  fetch('/users', {
     method: 'DELETE'
   }).then(res => {
     if (res.status === 200) {

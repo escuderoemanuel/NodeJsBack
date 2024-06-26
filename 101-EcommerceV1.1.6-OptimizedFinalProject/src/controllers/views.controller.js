@@ -4,7 +4,7 @@ const { productsService, usersService } = require('../repositories');
 class ViewsController {
 
   static async getHome(req, res) {
-    res.redirect('/api/products');
+    res.redirect('/products');
   }
 
   static async getProducts(req, res) {

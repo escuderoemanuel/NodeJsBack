@@ -5,7 +5,7 @@ const btnPurchaseCart = document.getElementById('btnPurchaseCart');
 
 /* PURCHASE */
 const purchaseCart = (cid) => {
-  fetch(`/api/carts/${cid}/purchase`, {
+  fetch(`/carts/${cid}/purchase`, {
     method: "GET"
   }).then(res => res.json())
     .then(data => {
@@ -46,7 +46,7 @@ const purchaseCart = (cid) => {
 
 /* DELETE */
 const deleteFromCart = (cid, pid) => {
-  fetch(`/api/carts/${cid}/product/${pid}`, {
+  fetch(`/carts/${cid}/product/${pid}`, {
     method: "DELETE"
   }).then(res => res.json())
     .then(data => {

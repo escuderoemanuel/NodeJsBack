@@ -5,7 +5,7 @@ const productList = document.getElementById('products');
 const btnAddToCart = document.getElementById('btnAddToCart');
 
 const addToCart = async (cid, pid) => {
-  const res = await fetch(`/api/carts/${cid}/product/${pid}`, {
+  const res = await fetch(`/carts/${cid}/product/${pid}`, {
     method: "POST"
   }).then(res => {
     if (!res.ok) {
@@ -85,7 +85,7 @@ productList.addEventListener('click', async (e) => {
   if (e.target.getAttribute('data-id') === 'btnDelete') {
     const productId = e.target.getAttribute('id').slice(9);
     try {
-      const response = await fetch(`/api/products/${productId}`, {
+      const response = await fetch(`/products/${productId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
