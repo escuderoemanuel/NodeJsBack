@@ -1,4 +1,4 @@
-const { cartsService, productsService } = require('../repositories');
+const { cartsService, productsService, usersService } = require('../repositories');
 const { getAddProductToCartErrorInfo } = require('../utils/errors/ErrorInfo');
 const TypesOfErrors = require('../utils/errors/TypesOfErrors');
 const CustomErrors = require('../utils/errors/CustomErrors');
@@ -25,7 +25,7 @@ class CartsController {
 
   static async getById(req, res) {
     try {
-      const user = req.user;
+      const user = await usersService.getById(req.user.id);
       const cid = req.params.cid;
       const cart = await cartsService.getById(cid);
       if (!cart) {

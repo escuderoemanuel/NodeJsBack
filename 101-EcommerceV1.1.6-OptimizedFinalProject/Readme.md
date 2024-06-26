@@ -11,19 +11,6 @@
 
 # ============= WORK ON =============  #
 
-[x] Vista de Profile para subir archivos
-    - Subir img de perfil y que se muestre en el header junto con el btn de logout
-
-    <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
-        {{#if user.documents.profilePicture}}
-        <img class='iconNavBar profilePicture' src="{{user.documents.profilePicture.reference}}"
-          alt="profile picture to link to user profile">
-        {{else}}
-        <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
-        {{/if}}
-        Profile
-      </a>
-
 ## USER
 [x] getAll OK
 [x] deleteInactiveUsers OK
@@ -54,8 +41,9 @@
 [x] updateProductQuantityById OK
 
 # !!!! ERRORS !!!
-## realTimeProducts
-  - con premium no deja crear productos
+
+## ProfilePicture
+  - /products o /chat o /carts no muestra la imagen de perfil
 
 # TODO:
 

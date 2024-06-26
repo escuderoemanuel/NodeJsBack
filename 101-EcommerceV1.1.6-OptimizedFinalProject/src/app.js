@@ -76,6 +76,9 @@ app.engine('handlebars', hbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
+// Servir carpeta pública para imágenes
+app.use('/filesUploadedByUser', express.static(path.join(__dirname, 'public/filesUploadedByUser')));
+
 // Middleware to set currentPath
 app.use((req, res, next) => {
   res.locals.currentPath = req.path;

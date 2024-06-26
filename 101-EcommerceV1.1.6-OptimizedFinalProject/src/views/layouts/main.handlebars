@@ -52,7 +52,12 @@
         Users Manager
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
+        {{#if user.documents.profilePicture}}
+        <img class='iconNavBar profilePicture' src="{{user.documents.profilePicture.reference}}"
+          alt="profile picture to link to user profile">
+        {{else}}
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
+        {{/if}}
         Profile
       </a>
       <a href="/api/sessions/logout">
@@ -74,7 +79,12 @@
         Cart
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
+        {{#if user.documents.profilePicture}}
+        <img class='iconNavBar profilePicture' src="{{user.documents.profilePicture.reference}}"
+          alt="profile picture to link to user profile">
+        {{else}}
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
+        {{/if}}
         Profile
       </a>
       <a href="/api/sessions/logout">
@@ -100,7 +110,12 @@
         Cart
       </a>
       <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
+        {{#if user.documents.profilePicture}}
+        <img class='iconNavBar profilePicture' src="{{user.documents.profilePicture.reference}}"
+          alt="profile picture to link to user profile">
+        {{else}}
         <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
+        {{/if}}
         Profile
       </a>
       </a>

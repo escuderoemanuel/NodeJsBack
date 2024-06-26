@@ -68,7 +68,7 @@ class ProductsController {
         nextLink: products.hasNextPage ? urlNextLink : null,
       };
 
-      const user = req.user;
+      const user = await usersService.getById(req.user.id);
       const renderData = { paginateData, user: user, products: paginateData.payload };
 
       if (!user || !renderData) {

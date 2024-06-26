@@ -68,14 +68,9 @@ class ViewsController {
     try {
       const user = await usersService.getById(req.user.id);
       const userDTO = new UserDTO(user);
-      const acceptHeader = req.headers['accept'] || '';
-      if (acceptHeader.includes('text/html')) {
-        res.render('profile', { user: userDTO, currentPath: req.path });
-      } else {
-        res.send({ payload: userDTO });
-      }
+      res.render('profile', { user: userDTO, currentPath: req.path });
     } catch (error) {
-      res.status(error.status || 500).send({ status: 'error', message: error.message });
+      res.status(500).send({ status: 'error', message: error.message });
     }
   }
 

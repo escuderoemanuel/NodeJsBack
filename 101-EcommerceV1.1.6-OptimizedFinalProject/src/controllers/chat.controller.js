@@ -1,5 +1,6 @@
 const MessagesDao = require('../dao/daoManagers/messages.dao');
 const MessagesModel = require('../dao/models/messages.model');
+const { usersService } = require('../repositories');
 
 class ChatViewController {
 
@@ -7,6 +8,7 @@ class ChatViewController {
     try {
       await MessagesModel.create(req.body);
       const messages = await MessagesDao.getAll();
+      const user = await usersService.getById(req.user.id);
       res.status(201).send({ user, messages: messages });
     } catch (error) {
       res.status(400).send({ error: error.message });
@@ -16,7 +18,7 @@ class ChatViewController {
   static async getMessages(req, res) {
     try {
       const messages = await MessagesModel.find().lean();
-      const user = req.user;
+      const user = await usersService.getById(req.user.id);
 
       res.render('chat', {
         messages,

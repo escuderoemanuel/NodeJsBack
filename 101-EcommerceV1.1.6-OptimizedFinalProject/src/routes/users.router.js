@@ -24,5 +24,4 @@ usersRouter.post('/:uid/documents', verifyToken, upload.fields([
 ]), UsersController.uploadDocuments)
 
 
-
 module.exports = usersRouter
