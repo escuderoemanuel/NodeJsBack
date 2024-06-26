@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer');
 const { GMAIL_SERVICE, GMAIL_PORT, GMAIL_AUTH_USER, GMAIL_AUTH_KEY, JWT_PRIVATE_KEY } = require('../config/environment.config');
-const { usersService } = require('../repositories');
 
 const transporter = nodemailer.createTransport({
   service: GMAIL_SERVICE,

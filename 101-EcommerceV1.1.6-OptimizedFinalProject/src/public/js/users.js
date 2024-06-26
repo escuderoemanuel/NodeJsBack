@@ -1,20 +1,5 @@
 const socket = io();
 
-/* function updateUserRole(id) {
-  const newRole = document.getElementById(`select-${id}`).value;
-  fetch(`/users/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ role: newRole })
-  }).then(res => {
-    if (res.status === 200) {
-      window.location.reload();
-    }
-  });
-} */
-
 function updateUserRole(uid) {
   const selectElement = document.getElementById(`select-${uid}`);
   const newRole = selectElement.value;
@@ -114,9 +99,9 @@ function deleteUser(id) {
         showConfirmButton: false,
         timer: 3000
       })
-      /* setTimeout(() => {
+      setTimeout(() => {
         window.location.reload();
-      }, 3000); */
+      }, 3000);
     }
   });
 }

@@ -55,7 +55,7 @@ class UsersService {
       throw new Error(`User with id ${uid} not found`);
     }
 
-    // Definir un mapa para asociar los nombres de los archivos con los documentos correspondientes
+    // Define a map to associate file names with corresponding documents
     const documentMap = {
       profilePicture: 'profilePicture',
       identification: 'identification',
@@ -63,7 +63,7 @@ class UsersService {
       proofOfAccountStatus: 'proofOfAccountStatus',
     };
 
-    // Iterar sobre los archivos y actualizarlos en el usuario
+    // Iterate over files and update them on the user
     files.forEach(file => {
       const docType = documentMap[file.type];
       if (docType) {
@@ -73,12 +73,9 @@ class UsersService {
         };
       }
     });
-
-    // await user.save();
     const userUpdated = await this.update(uid, { documents });
     return userUpdated;
   }
-
 
 
   async changeRole(uid) {

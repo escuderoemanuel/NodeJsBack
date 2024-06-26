@@ -9,15 +9,15 @@ const addToCart = async (cid, pid) => {
     method: "POST"
   }).then(res => {
     if (!res.ok) {
-      // Respuesta no exitosa, extraigo el mensaje de error
+      // Unsuccessful response, extract the error message
       return res.json().then(errorData => {
-        throw new Error(errorData.error); // Disparo un error que recibe el catch
+        throw new Error(errorData.error); // Send the error to catch
       });
     }
-    return res.json(); // Respuesta exitosa, convierto a JSON
+    return res.json(); // Successful response, I convert to JSON
   })
     .then(data => {
-      // Acción luego de tener la res convertida a JSON
+      // Action after having the res converted to JSON
       Swal.fire({
         color: "#eee",
         position: 'center',
@@ -28,7 +28,7 @@ const addToCart = async (cid, pid) => {
         showConfirmButton: false,
         timer: 2500,
       });
-      // Recargar la página para actualizar la lista de productos
+      // Reload the page to update the product list
       setTimeout(() => {
         window.location.reload();
       }, 3000);
@@ -52,7 +52,7 @@ const addToCart = async (cid, pid) => {
 //? Recibo la lista actualizada de productos y la renderizo en el cliente.
 socket.on('update-products', products => {
   const productList = document.getElementById('products');
-  productList.innerHTML = ''; // Limpiar la lista antes de agregar productos actualizados
+  productList.innerHTML = ''; // Clear the list before adding updated products
   products.forEach(product => {
     const productItem = document.createElement('li');
     productItem.classList.add('product');
@@ -89,19 +89,19 @@ productList.addEventListener('click', async (e) => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        // Si la respuesta no es exitosa, extraemos el mensaje de error
+        // If the response is not successful, extract the error message
         const errorData = await response.json();
         const errorMessage = errorData.message || errorData.error || 'Unknown error';
         throw new Error(errorMessage);
       }
 
-      // Este es el objeto del producto que estoy eliminando
+      // Object of the product deleting
       const { payload } = await response.json();
 
-      // Aquí paso el producto al server
+      // Pass the product to the server
       socket.emit('delete-product', payload);
 
-      // Recargar la página para actualizar la lista de productos
+      // Reload the page to update the product list
       window.location.reload();
     } catch (error) {
       Swal.fire({

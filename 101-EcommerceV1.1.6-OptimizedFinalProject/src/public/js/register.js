@@ -3,16 +3,16 @@ const registerForm = document.getElementById('registerForm');
 registerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Obtengo los datos del formulario y los guardo en un objeto.
+  // Get the data from the form and save it to an object.
   const data = new FormData(registerForm);
   const payload = {};
 
   data.forEach((value, key) => (payload[key] = value));
 
-  // Limpiar el mensaje de error antes de hacer las validaciones nuevamente
+  // Clear the error message before running validations again
   document.querySelector('.infoMessage').textContent = '';
 
-  // Validaciones adicionales
+  // Aditional Validations
   if (!payload.firstName || !payload.lastName || !payload.email || !payload.age || !payload.password || !payload.confirmPassword) {
     document.querySelector('.infoMessage').textContent = 'All fields are required';
     return;

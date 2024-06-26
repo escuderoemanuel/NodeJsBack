@@ -9,7 +9,7 @@ const formAddProduct = document.getElementById('formAddProduct');
 //? Recibo la lista actualizada de productos y la renderizo en el cliente.
 socket.on('update-products', products => {
   const productList = document.getElementById('realtimeproducts');
-  productList.innerHTML = ''; // Limpiar la lista antes de agregar productos actualizados
+  productList.innerHTML = ''; // Clear the list before adding updated products
   products.forEach(product => {
     const productItem = document.createElement('li');
     productItem.classList.add('product');
@@ -45,14 +45,14 @@ productList.addEventListener('click', async (e) => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        // Si la respuesta no es exitosa, extraemos el mensaje de error
+        // If the response is not successful, extract the error message
         const errorData = await response.json();
         const errorMessage = errorData.message || errorData.error || 'Unknown error';
         throw new Error(errorMessage);
       }
-      // Este es el objeto del producto que estoy eliminando
+      // Product object to deleting
       const { payload } = await response.json();
-      // Aquí paso el producto al server
+      // Send the product to the server
       socket.emit('delete-product', response);
       Swal.fire({
         color: "#eee",
@@ -64,7 +64,7 @@ productList.addEventListener('click', async (e) => {
         showConfirmButton: false,
         timer: 2500,
       });
-      // Recargar la página para actualizar la lista de productos
+      // Reload the page to update the product list
       setTimeout(() => {
         window.location.reload();
       }, 3000);
@@ -83,7 +83,7 @@ productList.addEventListener('click', async (e) => {
   }
 })
 
-//? Agrego un producto a la base de datos y lo envio a todos los clientes conectados.
+//? Adds a product to the database and sends it to all connected customers.
 formAddProduct.addEventListener('submit', async (e) => {
   e.preventDefault()
 
@@ -105,16 +105,16 @@ formAddProduct.addEventListener('submit', async (e) => {
 
     if (!response.ok) {
       const errorMessage = await response.json();
-      // Mostrar el mensaje de error en el formulario
+      // Display error message on form
       document.querySelector('.errorMessage').textContent = errorMessage.error;
       return;
     }
-    // Restablecer el formulario y eliminar el mensaje de error
+    // Reset the form and remove the error message
     formAddProduct.reset();
     document.querySelector('.errorMessage').textContent = '';
-    // Espera que el server responda con la lista actualizada.
+    // Wait for the server to respond with the updated list.
     const { products } = await response.json()
-    // Envía la lista actualizada al server.
+    // Send the updated list to the server.
     Swal.fire({
       color: "#eee",
       position: 'center',

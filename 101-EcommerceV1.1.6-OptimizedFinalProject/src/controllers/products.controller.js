@@ -11,10 +11,10 @@ class ProductsController {
 
   static async getAll(req, res, next) {
     try {
-      // Obtengo los parámetros de consulta
+      // Gets the query parameters
       let { limit, page, filter, sort } = req.query;
 
-      // Filtros de búsqueda
+      // Search filters
       limit = parseInt(req.query.limit);
       page = parseInt(req.query.page);
       sort = req.query.sort === 'asc' ? 1 : req.query.sort === 'desc' ? -1 : null;
@@ -28,7 +28,7 @@ class ProductsController {
         };
       }
 
-      // Paginación
+      // Pagination
       let options = {
         limit: limit || 10,
         page: page || 1,
@@ -38,23 +38,23 @@ class ProductsController {
         options.sort = { price: sort, title: 1 };
       }
 
-      // Ejecutar consulta
+      // Execute the query
       let products = await ProductsModel.paginate(filter, options);
 
-      // Parámetros de consulta de la URL
+      // URL query parameters
       let urlQueryParams = {};
       if (req.query.filter) urlQueryParams.filter = req.query.filter;
       if (req.query.sort) urlQueryParams.sort = req.query.sort;
       if (req.query.limit) urlQueryParams.limit = req.query.limit;
 
-      // URL base
+      // Base URL
       const baseUrl = req.baseUrl;
 
-      // Links de paginación
+      // Pagination Links
       const urlPrevLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.prevPage}`;
       const urlNextLink = `${baseUrl}?${new URLSearchParams(urlQueryParams).toString()}&page=${products.nextPage}`;
 
-      // Datos de paginación
+      // Pagination Data
       let paginateData = {
         status: 'success',
         payload: products.docs,
@@ -80,12 +80,11 @@ class ProductsController {
         });
       }
 
-      // Verificar el encabezado 'Accept'para que si la consulta es desde el FRONT, haga un res.render pero sino, haga un res.json
+      // Verify headers 'Accept'. If the query is from the FRONT, make a res.render but if not, make a res.json
       const acceptHeader = req.headers['accept'] || '';
       if (acceptHeader.includes('text/html')) {
         res.render('products', renderData);
       } else {
-        // Si la solicitud es para JSON (por ejemplo, desde Postman)
         let products = await ProductsModel.find();
         res.send({ status: 'success', payload: products });
       }
@@ -123,7 +122,7 @@ class ProductsController {
 
       const newProduct = {
         ...req.body,
-        owner: req.user.email, // Agregar el owner del producto
+        owner: req.user.email, // Add the product owner
       }
       await productsService.create(newProduct);
       res.send({ status: 'success', message: 'Product created' });
@@ -162,7 +161,7 @@ class ProductsController {
     try {
       const pid = req.params.pid;
 
-      // Validar si el pid es válido
+      // Verify if the pid is valid
       if (!pid) {
         return res.status(400).json({
           status: 'error',
@@ -172,7 +171,7 @@ class ProductsController {
 
       const productToDelete = await productsService.getById(pid);
 
-      // Validar si el producto existe
+      // Verify if the product exists
       if (!productToDelete) {
         return res.status(404).json({
           status: 'error',
@@ -222,7 +221,6 @@ class ProductsController {
           });
       }
 
-      // res.json({ status: 'success', deletedProduct: productToDelete });
       res.send({ status: 'success', deletedProduct: productToDelete });
     } catch (error) {
       next(error);
