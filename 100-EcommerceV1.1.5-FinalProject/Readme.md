@@ -9,39 +9,6 @@
 - Conseguir una experiencia de compra completa.
 - Cerrar detalles administrativos con los roles.
 
-# ============= WORK ON =============  #
-
-[x] Vista de Profile para subir archivos
-    - Subir img de perfil y que se muestre en el header junto con el btn de logout
-
-    <a href="/profile" class="{{#ifEq currentPath '/profile'}}active{{/ifEq}}">
-        {{#if user.documents.profilePicture}}
-        <img class='iconNavBar profilePicture' src="{{user.documents.profilePicture.reference}}"
-          alt="profile picture to link to user profile">
-        {{else}}
-        <img class='iconNavBar' src='https://i.ibb.co/r4FwnKw/user.png' alt="user profile icon">
-        {{/if}}
-        Profile
-      </a>
-
-[x] create user OK
-[x] addDocuments OK
-[x] getById OK
-[x] getAll OK
-[x] Probando las consultas desde postman. ChangeRole da success pero no lo realiza correctamente
-
-# !!!! ERRORS !!!
-
-
-# TODO:
-
-- Readme con documentación
-- Revisar cada archivo para eliminar logs y comentarios innecesarios
-- Convertir los err en error
-- Convertir los res en response
-
-
-
 ## Aspectos a incluir
 
 1. Desde el router de /api/users, crear tres rutas:
