@@ -1,81 +1,117 @@
-# Backend de una aplicación ecommerce
+# NodeJs Ecommerce <img width='30' align='center' src='https://i.ibb.co/jZt5prG/node-js-icon-454x512-nztofx17.png'>
 
-## Objetivos generales
+Fullstack ecommerce project, built on NodeJs
 
-- Completar el proyecto final 
+## 🔍 About the project 
 
-## Objetivos específicos
+- URL: [NodeJsEcommerce](https://...)
+- Github Repository: [NodeJsEcommerce](https://github.com/escuderoemanuel/NodeJsEcommerce)
+- Developer: [Emanuel Escudero](https://emanuelescudero.ar)
 
-- Conseguir una experiencia de compra completa.
-- Cerrar detalles administrativos con los roles.
+## ⚙️ Features
 
-# ============= WORK ON =============  #
+- View to register a new user account
+- View to log in with an existing user account
+- It is also possible to log in with a github account
+- Method available to reset the password
+- Accounts have a type role 'user', 'premium' or 'admin'
+- All functions have authentication through jwt and cookies
+- The navbar, views, and functions available depend on the type of role that the account with which the user is logged in has
 
-## USER
-[x] getAll OK
-[x] deleteInactiveUsers OK
-[x] updateById OK
-[x] deleteById OK
-[x] getById OK
-[x] changeRole OK
-[x] addDocuments OK
-## SESSIONS
-[x] registerUser OK
-[x] loginUser OK
-[x] logoutUser OK
-## PRODUCTS
-[x] getAll OK
-[x] create OK
-[x] getById OK
-[x] updateById OK
-[x] deleteById OK
-[x] createMocking OK
-## CARTS
-[x] getAll OK
-[x] getById OK
-[x] create OK
-[x] emptyCartById OK
-[x] purchase OK
-[x] addProductToCart OK
-[x] deleteProductById OK
-[x] updateProductQuantityById OK
+### 🪪 Account with role of type 'user'
 
-# TODO:
+- Navbar with access to products, chat, cart, profile and exit
+- In the product view, can see the data of each product and add them to the cart
+- The user cannot add products without stock
+- In the chat view, the user can read and send messages to other connected users in real time
+- In the cart view you can see the products you have added, you can remove a product or make the purchase
+- If the purchase is made, the user receives the data generated in his email account
+- Cannot make a purchase from an empty cart
+- In the profile view, the user can see their account information and upload files such as their profile photo and the documentation required to be a premium role user
+- If the user has uploaded a profile picture, the default icon in their navbar will be replaced by that image
+- Access to the logout button
 
-- Revisar cada archivo para eliminar logs y comentarios innecesarios
-- Convertir los err en error
-- Convertir los res en response
-- Readme con documentación
+### 🪪 Account with role of type 'premium'
+
+- Navbar with access to products, products manager, chat, cart, profile and exit
+- In the product view, can see the data of each product and add them to the cart
+- The user cannot add products without stock
+- The user cannot add products created by himself to the cart
+- In the products manager view, the user can create new products that will be available to all users
+- The user can only delete products created by himself
+- In the chat view, the user can read and send messages to other connected users in real time
+- In the cart view you can see the products you have added, you can remove a product or make the purchase
+- If the purchase is made, the user receives the data generated in his email account
+- Cannot make a purchase from an empty cart
+- In the profile view, the user can see their account information and upload files such as their profile photo and the documentation required to be a premium role user
+- If the user has uploaded a profile picture, the default icon in their navbar will be replaced by that image
+- Access to the logout button
+
+### 🪪 Account with role of type 'admin'
+
+- Navbar with access to products, products manager, user manager, profile and exit
+- In the product view, can see the data of each product, but cannot add them to the cart
+- In the products manager view, the user can create new products that will be available to all users
+- The user can delete products created by himself or other users
+- In the users manager view the admin can change the role of a user
+- The admin will only be able to change the role of 'user' to another, if that user has uploaded the required documents
+- The admin will be able to delete user accounts manually
+- The admin will be able to delete all inactive accounts at once
+- The admin will not be able to delete his own account
+- In the profile view, the user can see their account information and upload files such as their profile photo and the documentation required
+- If the user has uploaded a profile picture, the default icon in their navbar will be replaced by that image
+- Access to the logout button
 
 
+### 📋 Technologies & Tools
 
-## Aspectos a incluir
+- NPM https://www.npmjs.com
+- NodeJs https://nodejs.org/en
+- ExpressJs https://expressjs.com/es
+- Handlebars https://handlebarsjs.com
+- MongoDB https://www.mongodb.com/es
+- Mongoose https://www.npmjs.com/package/mongoose
+- JWT https://jwt.io
+- NodeMailer https://www.npmjs.com/package/nodemailer
+- PassportAuth https://www.passportjs.org
+- BCrypt https://www.npmjs.com/package/bcrypt
+- DotEnv https://www.npmjs.com/package/dotenv
+- Faker https://fakerjs.dev
+- Luxon https://www.npmjs.com/package/luxon
+- Multer https://www.npmjs.com/package/multer
+- SocketIo https://socket.io
+- SwaggerJsDoc https://www.npmjs.com/package/swagger-jsdoc
+- SweetAlert https://sweetalert2.github.io
+- UUID https://www.npmjs.com/package/uuid
+- Winston https://www.npmjs.com/package/winston
+- Commander https://www.npmjs.com/package/commander
+- Cors https://www.npmjs.com/package/cors
+- VisualStudioCode https://code.visualstudio.com
+- CSS3 https://developer.mozilla.org/en-US/docs/Web/CSS
+- Javascript https://www.javascript.com
+- GoogleFonts https://fonts.google.com
+- Icons8 https://icons8.com
 
-1. Desde el router de /users, crear tres rutas:
-     * GET  /  deberá obtener todos los usuarios, éste sólo debe devolver los datos principales como nombre, correo, tipo de cuenta (rol)
-     * DELETE / deberá limpiar a todos los usuarios que no hayan tenido conexión en los últimos 2 días. (puedes hacer pruebas con los últimos 30 minutos, por ejemplo).
-       * Deberá enviarse un correo indicando al usuario que su cuenta ha sido eliminada por inactividad
+### 🚀 Execution
 
-2. Crear una vista para poder visualizar users
-    * Modificar el rol 
-    * Eliminar un usuario. 
-    * Esta vista únicamente será accesible para el administrador del ecommerce
+- Clone the repository
 
-3. Modificar el endpoint que elimina productos, para que:
-   * En caso de que el producto pertenezca a un usuario premium, le envíe un correo indicándole que el producto fue eliminado.
+  `git clone https://github.com/escuderoemanuel/NodeJsEcommerce`
 
-4. Finalizar las vistas pendientes para la realización de flujo completo de compra. 
-   * NO ES NECESARIO tener una estructura específica de vistas, sólo las que tú consideres necesarias para poder llevar a cabo el proceso de compra.
-   * No es necesario desarrollar vistas para módulos que no influyan en el proceso de compra (Como vistas de usuarios premium para crear productos, o vistas de panel de admin para updates de productos, etc)
+- Install the dependencies listed in the package.json file
+  
+  `npm i`
 
-5. Realizar el despliegue de tu aplicativo en la plataforma de tu elección (Preferentemente Railway.app, pues es la abarcada en el curso) y corroborar que se puede llevar a cabo un proceso de compra completo.
+- You will need to create your own .env file in the root of the project and set your own environment variables!
 
-## Formato
+- Run the project
 
-- Link al repositorio de GitHub con el proyecto completo (no incluir node_modules).
-- Link del proyecto desplegado.
+  `npm run dev`
 
-## Sugerencias
+- In the browser, go to the following path http://localhost:8080 or the port provided by the 'npm run dev' command
 
-- Presta especial atención a las rúbricas de Proyecto final. ¡Es crucial para alcanzar la nota que esperas!
-- Debido a la complejidad de frontend requerida para poder aplicar una pasarela de pago, el PF no evalúa la pasarela de pago.
+- You can access the documentation for the functions from http://localhost:8080/apidocs
+
+### 🌍 Deployment With
+
+- Netlify https://www.netlify.com
